@@ -107,7 +107,3 @@ Opens at `http://localhost:8501`.
 The Gemini free tier allows 15 requests per minute. The batched embedding client keeps most uploads within this limit, but uploading several large documents at once may still trigger a 429 error. If that happens, wait a minute and retry. Upgrading to the pay-as-you-go tier in Google AI Studio removes this constraint.
 
 ---
-
-## Contributors
-- [Rishi-verbose](https://github.com/Rishi-verbose)
-- [Swapnil Kumar](https://github.com/swapnilsk)
