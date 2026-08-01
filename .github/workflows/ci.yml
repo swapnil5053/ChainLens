@@ -1,0 +1,76 @@
+name: ci
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: pgvector/pgvector:pg16
+        env:
+          POSTGRES_USER: chainlens
+          POSTGRES_PASSWORD: chainlens
+          POSTGRES_DB: chainlens
+        options: >-
+          --health-cmd "pg_isready -U chainlens"
+          --health-interval 5s --health-timeout 3s --health-retries 20
+        ports: ["5432:5432"]
+    env:
+      CHAINLENS_DATABASE_URL: postgresql+psycopg://chainlens:chainlens@localhost:5432/chainlens
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+      - name: No emoji anywhere
+        run: python scripts/check_no_emoji.py
+      - name: Lint
+        run: ruff check . && ruff format --check .
+      - name: Types
+        run: mypy
+      - name: Migrate
+        run: python scripts/migrate.py
+      - name: Unit and integration tests
+        run: pytest apps/api/tests -q
+
+  eval-gate:
+    needs: quality
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: pgvector/pgvector:pg16
+        env:
+          POSTGRES_USER: chainlens
+          POSTGRES_PASSWORD: chainlens
+          POSTGRES_DB: chainlens
+        options: >-
+          --health-cmd "pg_isready -U chainlens"
+          --health-interval 5s --health-timeout 3s --health-retries 20
+        ports: ["5432:5432"]
+    env:
+      CHAINLENS_DATABASE_URL: postgresql+psycopg://chainlens:chainlens@localhost:5432/chainlens
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -e ".[dev]"
+      - run: python scripts/migrate.py
+      - name: Build indexes
+        run: python -m eval.build_index
+      - name: Run the golden set
+        run: python -m eval.run --force
+      - name: Regression gate
+        run: python -m eval.gate
+      - name: Fail if the committed tables are stale
+        run: |
+          python -m eval.report
+          git diff --exit-code -- README.md docs/RETRIEVAL.md eval/baseline.json

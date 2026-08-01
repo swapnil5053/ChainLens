@@ -1,0 +1,97 @@
+# The documented production path.
+#
+# Authored but not executed in the environment this repository was rebuilt in: that
+# sandbox had no Docker daemon, no root and no package manager. See ADR-0001 and the
+# status table in docs/HANDOFF.md. Everything the API needs from Postgres is exercised
+# against a real PostgreSQL 16 with pgvector, started by scripts/local_postgres.py.
+
+name: chainlens
+
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_USER: chainlens
+      POSTGRES_PASSWORD: chainlens
+      POSTGRES_DB: chainlens
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U chainlens -d chainlens"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    ports:
+      - "5432:5432"
+
+  redis:
+    image: redis:7-alpine
+    command: ["redis-server", "--save", "", "--appendonly", "no"]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    ports:
+      - "6379:6379"
+
+  migrate:
+    build:
+      context: ..
+      dockerfile: infra/Dockerfile.api
+    environment:
+      CHAINLENS_DATABASE_URL: postgresql+psycopg://chainlens:chainlens@postgres:5432/chainlens
+    depends_on:
+      postgres:
+        condition: service_healthy
+    command: ["python", "scripts/migrate.py"]
+    restart: "no"
+
+  api:
+    build:
+      context: ..
+      dockerfile: infra/Dockerfile.api
+    environment:
+      CHAINLENS_DATABASE_URL: postgresql+psycopg://chainlens:chainlens@postgres:5432/chainlens
+      CHAINLENS_REDIS_URL: redis://redis:6379/0
+      CHAINLENS_EMBEDDING_PROVIDER: ${CHAINLENS_EMBEDDING_PROVIDER:-lsa}
+      CHAINLENS_GOOGLE_API_KEY: ${CHAINLENS_GOOGLE_API_KEY:-}
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+      redis:
+        condition: service_healthy
+    ports:
+      - "8000:8000"
+    volumes:
+      - artifacts:/srv/var
+
+  worker:
+    build:
+      context: ..
+      dockerfile: infra/Dockerfile.api
+    environment:
+      CHAINLENS_DATABASE_URL: postgresql+psycopg://chainlens:chainlens@postgres:5432/chainlens
+      CHAINLENS_REDIS_URL: redis://redis:6379/0
+    depends_on:
+      api:
+        condition: service_started
+    command: ["arq", "chainlens.jobs.worker.WorkerSettings"]
+    volumes:
+      - artifacts:/srv/var
+
+  web:
+    build:
+      context: ..
+      dockerfile: infra/Dockerfile.web
+    environment:
+      NEXT_PUBLIC_API_BASE: http://localhost:8000
+    depends_on:
+      api:
+        condition: service_started
+    ports:
+      - "3000:3000"
+
+volumes:
+  pgdata:
+  artifacts:
