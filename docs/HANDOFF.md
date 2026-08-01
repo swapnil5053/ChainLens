@@ -15,7 +15,7 @@ did not happen, stated as not having happened.
 | 6. Streaming, observability, CI gate | DONE, CI unverified | SSE with real phase timings, JSON logs with request ids, per-query cost rows, `/metrics/summary`, and a workflow with the eval gate. The workflow has **never run**, because there is no CI in this environment. |
 | 7. Hardening | PARTIAL | Upload size cap, PDF magic-byte check, page-count bomb guard, reranker graceful degradation, and a `/readyz` that really connects to Postgres and Redis are all in. Rate limiting, retry with backoff and per-document access scoping are not. |
 | 8. Polish | NOT STARTED | No seed script, no `make demo` beyond an alias for `make up`. |
-| Frontend | PARTIAL | Token layer, computed contrast, full taste pass and a working Evaluation screen prototype. **The Next.js application does not exist.** No Analyse screen, no Compare screen, no Documents screen. |
+| Frontend | PARTIAL, substantially advanced | `apps/web` is a working React 19 + Vite + Tailwind v4 application with three views: Analyse (document-forward, citation chips, marks in the text), retrieval comparison (two arms plus the measured Recall@6 delta), and latency. Runs fully on a mock adapter over the real corpus; one line from live. Typechecks, builds, and passes a smoke test. **Never opened in a browser**, so nothing visual is verified. The Documents screen and the Next.js stack from the original brief were superseded by the later Vite brief. See `docs/PR-analyse-frontend.md`. |
 
 ### Blocking errors, verbatim
 
@@ -148,10 +148,16 @@ frontend performance budget (LCP, INP, CLS).
    result. Expect them to move, possibly a lot.
 3. **Provide `CHAINLENS_GOOGLE_API_KEY`** if you want any generation-side metric to exist.
    Nothing generation-related has been measured.
-4. **Decide whether the frontend is built in Next.js as specified or the prototype is
-   promoted.** The token layer and the taste pass are stack-independent and carry over
-   either way.
-5. **Confirm the CUAD redistribution is acceptable to you.** 1.6 MB of contract text is
+4. **Open the web application in a browser.** `cd apps/web && npm install && npm run dev`.
+   It has never been rendered. The keyboard walk, reduced-motion behaviour and screen
+   reader output are unverified, and one accessibility defect is open by design: the answer
+   record has no live region (WCAG 4.1.3). Everything else in
+   `docs/accessibility-audit-web.md` follows from readable code.
+5. **Implement `POST /analyse`, `POST /compare` and `GET /metrics/latency`.** The web
+   application's HTTP adapter expects them; the API does not have them yet. The shapes are
+   in `apps/web/src/api/contracts.ts` and the four additive changes to the brief's shapes
+   are justified in `docs/PR-analyse-frontend.md`.
+6. **Confirm the CUAD redistribution is acceptable to you.** 1.6 MB of contract text is
    committed under `eval/datasets/corpus/` with CC BY 4.0 attribution in the dataset
    README. It makes the eval reproducible offline. If you would rather not vendor it, the
    builder can fetch on demand instead.
@@ -202,10 +208,13 @@ agreements is materially harder and is not measured. If asked "would these numbe
 clips one character of an annotated answer counts as relevant. `span_coverage@6` was added
 precisely because Recall was flattering, and it is consistently lower. Quote both.
 
-**There is no frontend.** The taste pass is real, the token layer is real, and the
-Evaluation prototype renders real data, but the Analyse screen -- the screen the whole
-concept direction was written for, and the one with the citation mark that is supposed to
-be the memorable interaction -- does not exist. That is the largest gap against the brief.
+**The frontend has never been seen.** The Analyse screen now exists, the citation mark is
+implemented, and a smoke test proves the marks land on the right characters. But no browser
+was available in any session, so there is not one screenshot, and every claim about how it
+looks is a claim about markup and tokens rather than pixels. A reviewer should assume the
+layout has at least one embarrassing flaw that five minutes with a browser would find. The
+three self-critiques at the end of `docs/taste-pass-analyse.md` are the ones visible from
+the code; they are not the ones visible from the screen.
 
 **The worker, the compose stack and CI have never run.** Three significant artifacts that
 are authored and unverified. Each is individually plausible and collectively they are the
@@ -217,8 +226,8 @@ typeset PDFs it should be much better, but that is a prediction, not a measureme
 
 ### What another day would go on, in order
 
-1. The Analyse screen in Next.js, with the citation mark, done properly. It is the highest
-   value item remaining and the brief ranks it fourth overall.
+1. Open the web application, fix what a browser reveals, and take the two screenshots the
+   README has placeholders for. The code is written; nobody has looked at it.
 2. Re-run the whole sweep with `bge-small-en-v1.5` and republish. Cheap, and it is what
    makes the numbers mean what a reader will assume they mean.
 3. Corpus-wide retrieval as a second scope in the grid, so the harder setting has a number.
