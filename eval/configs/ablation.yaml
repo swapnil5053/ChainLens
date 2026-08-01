@@ -1,0 +1,44 @@
+# The ablation grid.
+#
+# Every row becomes one JSON file in eval/results/. Rows whose requirements are not
+# satisfiable in the current environment are still executed: they record status
+# "blocked" with the reason, so a missing number is visible rather than quietly absent.
+version: 1
+dataset: golden.jsonl
+scope: document          # retrieval is scoped to the document the question is about
+k_values: [3, 6, 10]
+fetch_k: 30
+rrf_k: 60
+mmr_lambda: 0.5
+
+chunking:
+  - recursive-512
+  - recursive-1024
+  - clause-aware
+
+retrieval:
+  - id: dense
+    strategy: dense
+    expansion: false
+  - id: mmr
+    strategy: mmr
+    expansion: false
+  - id: lexical
+    strategy: lexical
+    expansion: false
+  - id: rrf
+    strategy: rrf
+    expansion: false
+  - id: rrf_expansion
+    strategy: rrf
+    expansion: true
+  - id: rrf_rerank
+    strategy: rrf_rerank
+    expansion: false
+    requires: cross-encoder-weights
+
+# The headline table fixes chunking to the best performer and varies retrieval, because
+# that is the comparison the engineering decision actually turned on.
+headline:
+  chunking: clause-aware
+  k: 6

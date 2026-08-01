@@ -1,0 +1,32 @@
+# Natural-language question templates, one per CUAD clause category.
+#
+# CUAD ships a single boilerplate prompt for every category ("Highlight the parts (if
+# any) of this contract related to X ..."), which is a labelling instruction, not a
+# question an analyst would type. Retrieval measured against that phrasing measures the
+# wrong thing. These templates are the query surface; the answer spans they are scored
+# against are unchanged CUAD human annotations.
+#
+# Categories are restricted to the ones that matter in a supply-chain or logistics
+# review. Categories about IP escrow, licensing and solicitation are excluded.
+version: 1
+categories:
+  Governing Law: "Which law governs this agreement?"
+  Cap On Liability: "Is there a cap on liability, and what is the maximum amount either party can be held liable for?"
+  Uncapped Liability: "Are there any circumstances where liability is uncapped or unlimited?"
+  Insurance: "What insurance is the supplier required to carry?"
+  Warranty Duration: "How long does the warranty last?"
+  Notice Period To Terminate Renewal: "How much notice must be given to stop the agreement renewing?"
+  Renewal Term: "Does this agreement renew automatically, and for how long is each renewal term?"
+  Termination For Convenience: "Can either party terminate this agreement for convenience, and on what notice?"
+  Minimum Commitment: "Is there a minimum order quantity or minimum purchase commitment?"
+  Volume Restriction: "Are there any volume restrictions or caps on order quantities?"
+  Price Restrictions: "What restrictions apply to changing prices?"
+  Liquidated Damages: "What liquidated damages or penalties apply if a party fails to perform?"
+  Audit Rights: "What audit rights does the buyer have over the supplier's records?"
+  Anti-Assignment: "Can this agreement be assigned or transferred to another party?"
+  Exclusivity: "Is the supply or distribution arrangement exclusive?"
+  Post-Termination Services: "What obligations survive after the agreement terminates?"
+  Revenue/Profit Sharing: "How is revenue or profit shared between the parties?"
+  Expiration Date: "When does this agreement expire?"
+  Effective Date: "When does this agreement take effect?"
+  Parties: "Who are the parties to this agreement?"
