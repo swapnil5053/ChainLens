@@ -10,7 +10,7 @@ from fastapi import FastAPI, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
 
 from .api.deps import build_services
-from .api.routers import documents, health, jobs, metrics, query
+from .api.routers import documents, extraction, health, jobs, metrics, query
 from .config import get_settings
 from .logging import configure_logging, get_logger, request_id_var
 from .paths import ensure_runtime_dirs
@@ -58,7 +58,14 @@ def create_app() -> FastAPI:
         response.headers["x-request-id"] = request_id
         return response
 
-    for router in (health.router, documents.router, jobs.router, query.router, metrics.router):
+    for router in (
+        health.router,
+        documents.router,
+        jobs.router,
+        query.router,
+        extraction.router,
+        metrics.router,
+    ):
         app.include_router(router)
     return app
 
