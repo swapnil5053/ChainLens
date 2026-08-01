@@ -1,8 +1,8 @@
 {
   "run_id": "extraction__cuad",
-  "created_at": "2026-08-01T18:23:04+00:00",
-  "git_sha": "90c8a1802d67a7c99c3cf634d34119e8efc75a08",
-  "git_dirty": true,
+  "created_at": "2026-08-01T18:32:10+00:00",
+  "git_sha": "acedd2e34560753de46840581e8380cc66fe5191",
+  "git_dirty": false,
   "extractor": "deterministic-v1",
   "dataset": {
     "labels_path": "eval/datasets/extraction_labels.jsonl",
@@ -126,7 +126,7 @@
       "warranty_period_months": 7,
       "insurance_required": 13
     },
-    "mean_elapsed_ms": 31.32
+    "mean_elapsed_ms": 31.29
   },
   "risk": {
     "rules_evaluated": 10,
@@ -166,7 +166,7 @@
         "no-insurance-obligation",
         "force-majeure-no-epidemic"
       ],
-      "elapsed_ms": 30.4
+      "elapsed_ms": 30.81
     },
     {
       "document": "AgapeAtpCorp-20191202-10-KA-EX-10-1-11911128-EX-10-1-Supply-Agreement",
@@ -191,7 +191,7 @@
         "uncapped-liability",
         "force-majeure-no-epidemic"
       ],
-      "elapsed_ms": 11.57
+      "elapsed_ms": 11.88
     },
     {
       "document": "Apollo-Endosurgery-Manufacturing-and-Supply-Agreement",
@@ -216,7 +216,7 @@
         "liability-cap-language-only",
         "force-majeure-no-epidemic"
       ],
-      "elapsed_ms": 29.23
+      "elapsed_ms": 28.58
     },
     {
       "document": "BELLRINGBRANDS-INC-02-07-2020-EX-10-18-MASTER-SUPPLY-AGREEMENT",
@@ -241,7 +241,7 @@
         "auto-renew-short-notice",
         "liability-cap-language-only"
       ],
-      "elapsed_ms": 22.4
+      "elapsed_ms": 22.53
     },
     {
       "document": "BIOFRONTERAAG-04-29-2019-EX-4-17-SUPPLY-AGREEMENT",
@@ -267,7 +267,7 @@
         "no-insurance-obligation",
         "force-majeure-no-epidemic"
       ],
-      "elapsed_ms": 35.78
+      "elapsed_ms": 35.86
     },
     {
       "document": "BNLFINANCIALCORP-03-30-2007-EX-10-8-OUTSOURCING-AGREEMENT",
@@ -292,7 +292,7 @@
         "jurisdiction-mismatch",
         "force-majeure-no-epidemic"
       ],
-      "elapsed_ms": 22.17
+      "elapsed_ms": 22.12
     },
     {
       "document": "CCAINDUSTRIESINC-04-14-2014-EX-10-1-OUTSOURCING-AGREEMENT",
@@ -316,7 +316,7 @@
         "liability-cap-language-only",
         "force-majeure-no-epidemic"
       ],
-      "elapsed_ms": 19.65
+      "elapsed_ms": 19.32
     },
     {
       "document": "ELANDIAINTERNATIONALINC-04-25-2007-EX-10-21-Outsourcing-Agreement",
@@ -340,7 +340,7 @@
         "missing-force-majeure",
         "no-insurance-obligation"
       ],
-      "elapsed_ms": 51.18
+      "elapsed_ms": 50.45
     },
     {
       "document": "ENERGOUSCORP-03-16-2017-EX-10-24-STRATEGIC-ALLIANCE-AGREEMENT",
@@ -364,7 +364,7 @@
       "risk_flags": [
         "liability-cap-language-only"
       ],
-      "elapsed_ms": 45.58
+      "elapsed_ms": 45.68
     },
     {
       "document": "ENERGYXXILTD-05-08-2015-EX-10-13-Transportation-AGREEMENT",
@@ -389,7 +389,7 @@
         "no-insurance-obligation",
         "force-majeure-no-epidemic"
       ],
-      "elapsed_ms": 35.2
+      "elapsed_ms": 34.03
     },
     {
       "document": "EUROPEANMICROHOLDINGSINC-03-06-1998-EX-10-6-DISTRIBUTOR-AGREEMENT",
@@ -415,7 +415,7 @@
         "missing-force-majeure",
         "no-insurance-obligation"
       ],
-      "elapsed_ms": 32.56
+      "elapsed_ms": 32.67
     },
     {
       "document": "FTENETWORKS-INC-02-18-2016-EX-99-4-STRATEGIC-ALLIANCE-AGREEMENT",
@@ -440,7 +440,7 @@
         "liability-cap-language-only",
         "missing-force-majeure"
       ],
-      "elapsed_ms": 21.03
+      "elapsed_ms": 21.86
     },
     {
       "document": "GentechHoldingsInc-20190808-1-A-EX1A-6-MAT-CTRCT-11776814-EX1A-6-MAT-CTRCT-Distr",
@@ -464,7 +464,7 @@
         "no-insurance-obligation",
         "force-majeure-no-epidemic"
       ],
-      "elapsed_ms": 16.47
+      "elapsed_ms": 16.57
     },
     {
       "document": "ICORECONNECTINC-10-13-2010-EX-7-1-Strategic-Alliance-Agreement",
@@ -486,7 +486,7 @@
         "missing-force-majeure",
         "no-insurance-obligation"
       ],
-      "elapsed_ms": 15.34
+      "elapsed_ms": 15.28
     },
     {
       "document": "InmodeLtd-20190729-F-1A-EX-10-9-11743243-EX-10-9-Manufacturing-Agreement",
@@ -513,7 +513,7 @@
         "missing-force-majeure",
         "no-insurance-obligation"
       ],
-      "elapsed_ms": 24.16
+      "elapsed_ms": 24.48
     },
     {
       "document": "IpassInc-20181203-8-K-EX-99-1-11445874-EX-99-1-Reseller-Agreement",
@@ -537,7 +537,7 @@
         "liability-cap-language-only",
         "no-insurance-obligation"
       ],
-      "elapsed_ms": 45.69
+      "elapsed_ms": 46.17
     },
     {
       "document": "KALLOINC-11-03-2011-EX-10-1-STRATEGIC-ALLIANCE-AGREEMENT",
@@ -562,7 +562,7 @@
         "liability-cap-language-only",
         "missing-force-majeure"
       ],
-      "elapsed_ms": 46.86
+      "elapsed_ms": 46.28
     },
     {
       "document": "LIMEENERGYCO-09-09-1999-EX-10-DISTRIBUTOR-AGREEMENT",
@@ -585,7 +585,7 @@
         "liability-cap-language-only",
         "missing-force-majeure"
       ],
-      "elapsed_ms": 31.7
+      "elapsed_ms": 32.28
     },
     {
       "document": "MEDIWOUNDLTD-01-15-2014-EX-10-6-SUPPLY-AGREEMENT",
@@ -608,7 +608,7 @@
         "liability-cap-language-only",
         "missing-force-majeure"
       ],
-      "elapsed_ms": 29.88
+      "elapsed_ms": 29.55
     },
     {
       "document": "NEOMEDIATECHNOLOGIESINC-12-15-2005-EX-16-1-DISTRIBUTOR-AGREEMENT",
@@ -632,7 +632,7 @@
         "no-insurance-obligation",
         "force-majeure-no-epidemic"
       ],
-      "elapsed_ms": 20.77
+      "elapsed_ms": 20.22
     },
     {
       "document": "NEONSYSTEMSINC-03-01-1999-EX-10-5-DISTRIBUTOR-AGREEMENT-New",
@@ -655,7 +655,7 @@
         "missing-force-majeure",
         "no-insurance-obligation"
       ],
-      "elapsed_ms": 35.22
+      "elapsed_ms": 34.85
     },
     {
       "document": "OASYSMOBILE-INC-07-05-2001-EX-10-17-OUTSOURCING-AGREEMENT",
@@ -680,7 +680,7 @@
         "missing-force-majeure",
         "no-insurance-obligation"
       ],
-      "elapsed_ms": 35.26
+      "elapsed_ms": 34.53
     },
     {
       "document": "SEASPINEHOLDINGSCORP-10-10-2018-EX-10-1-SUPPLY-AGREEMENT",
@@ -702,7 +702,7 @@
         "liability-cap-language-only",
         "no-insurance-obligation"
       ],
-      "elapsed_ms": 38.89
+      "elapsed_ms": 38.83
     },
     {
       "document": "ScansourceInc-20190822-10-K-EX-10-38-11793958-EX-10-38-Distributor-Agreement1",
@@ -723,7 +723,7 @@
       "risk_flags": [
         "liability-cap-language-only"
       ],
-      "elapsed_ms": 50.01
+      "elapsed_ms": 51.34
     },
     {
       "document": "TodosMedicalLtd-20190328-20-F-EX-4-10-11587157-EX-4-10-Marketing-Agreement-Resel",
@@ -750,7 +750,7 @@
         "liability-cap-language-only",
         "missing-force-majeure"
       ],
-      "elapsed_ms": 17.88
+      "elapsed_ms": 17.75
     },
     {
       "document": "VAPOTHERM-INC-Manufacturing-and-Supply-Agreement",
@@ -775,7 +775,7 @@
         "no-insurance-obligation",
         "force-majeure-no-epidemic"
       ],
-      "elapsed_ms": 41.96
+      "elapsed_ms": 42.17
     },
     {
       "document": "VIRTUALSCOPICS-INC-11-12-2010-EX-10-1-STRATEGIC-ALLIANCE-AGREEMENT",
@@ -798,7 +798,7 @@
         "no-insurance-obligation",
         "force-majeure-no-epidemic"
       ],
-      "elapsed_ms": 25.19
+      "elapsed_ms": 25.55
     },
     {
       "document": "WORLDWIDESTRATEGIESINC-11-02-2005-EX-10-RESELLER-AGREEMENT",
@@ -822,7 +822,7 @@
         "liability-cap-language-only",
         "force-majeure-no-epidemic"
       ],
-      "elapsed_ms": 50.19
+      "elapsed_ms": 50.15
     },
     {
       "document": "Zounds-Hearing-Inc-MANUFACTURING-DESIGN-MARKETING-AGREEMENT",
@@ -849,7 +849,7 @@
         "no-insurance-obligation",
         "force-majeure-no-epidemic"
       ],
-      "elapsed_ms": 26.05
+      "elapsed_ms": 25.54
     }
   ]
 }
