@@ -172,3 +172,75 @@ $ python -m eval.datasets.build_golden
 Shipped: the Postgres FTS lexical arm, RRF fusion at k=60, glossary query expansion,
 and the cross-encoder rerank code path. Results, including the negative MMR result,
 are in `docs/RETRIEVAL.md`, every row backed by a file in `eval/results/`.
+
+## Phase 5: structured extraction, diff, and risk
+
+Shipped: a thirteen-field pydantic schema where every value carries its page, character
+span, clause id and the evidence string it was read from; deterministic span-grounded
+extractors; a YAML rule engine for risk flags; a field-level diff; and three endpoints.
+
+The acceptance criterion is field-level precision and recall against a hand-labelled
+subset of at least 15 documents. Rather than hand-label anything, the labels come from
+CUAD's lawyer annotations over all 29 corpus documents, which is both more labels and
+less of the author's own judgement.
+
+```
+$ python -m eval.datasets.build_extraction_labels
+{ "labels": 137, "documents": 29, "discarded_unlocatable": 0 }
+
+$ python -m eval.run_extraction
+micro: precision 0.7216  recall 0.5882  F1 0.6481
+macro: precision 0.6442  recall 0.5304
+```
+
+An earlier pass of the same extractors scored precision 0.833, recall 0.385, F1 0.526.
+Broadening the liability, notice-period and warranty patterns traded eleven points of
+precision for twenty of recall. Both runs are in `docs/EXTRACTION.md`; the trade is a
+judgement about which error costs a reviewer more, and it is written down as one.
+
+Three field-to-category mismatches that put a floor under the score are recorded in the
+result file as `known_mismatches` rather than dropped from the table.
+
+## Phase 6: streaming, observability, CI gate
+
+Shipped earlier alongside the API and unchanged here: SSE phase events driven by measured
+timings, JSON logs with a request id, a `queries` row per answered question, and a CI
+workflow whose last two steps are the eval gate and a `git diff --exit-code` on the
+generated tables. The workflow has still never executed, because there is no CI in this
+environment.
+
+## Phase 7: hardening
+
+Shipped: sliding-window rate limiting with a stricter bucket for retrieval and uploads and
+an exemption for the probes; per-document access scoping that returns 404 rather than 403;
+retry with exponential backoff on the generation provider, limited to transient failures
+and to the opening of the stream so yielded tokens are never duplicated. Upload size caps,
+the PDF magic-byte check, the page-count bomb guard and reranker degradation were already
+in place.
+
+```
+$ 25 consecutive calls to /documents
+{"429": 5, "500": 20}          # 20 allowed, then limited, with retry-after: 60
+$ 30 consecutive calls to /health
+[200]                          # probes are never limited
+```
+
+Two limits are reported by `/readyz` rather than left as silent defaults: the limiter is
+in-process and therefore per replica, and with no `CHAINLENS_DOCUMENT_SCOPES` configured
+every caller can read every document.
+
+## Phase 8: polish
+
+Shipped: `scripts/seed.py` indexes three real supply-chain agreements from the committed
+corpus, and `make demo` brings the compose stack up and seeds it. `make demo-local` is the
+Docker-free equivalent, which is the one that was actually run.
+
+```
+$ CHAINLENS_LOCAL_PG=1 python scripts/seed.py
+3 documents, 33 + 27 + 46 chunks indexed
+$ CHAINLENS_LOCAL_PG=1 python scripts/seed.py      # again
+deduplicated: [true, true, true]   chunks: [0, 0, 0]
+```
+
+The seeds are real contracts rather than invented ones, because fake demo data makes a
+real interface look fake.
