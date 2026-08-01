@@ -28,10 +28,27 @@ HIGH, MEDIUM, LOW = 0.9, 0.7, 0.5
 
 MONEY = r"(?:US\$|\$|USD|EUR|GBP|EUR|€|£)\s?[\d,]+(?:\.\d{2})?(?:\s?(?:million|billion|thousand))?"
 NUMBER_WORDS = {
-    "one": 1, "two": 2, "three": 3, "four": 4, "five": 5, "six": 6, "seven": 7,
-    "eight": 8, "nine": 9, "ten": 10, "eleven": 11, "twelve": 12, "fifteen": 15,
-    "twenty": 20, "thirty": 30, "forty": 40, "forty-five": 45, "sixty": 60, "ninety": 90,
-    "one hundred eighty": 180, "one hundred twenty": 120,
+    "one": 1,
+    "two": 2,
+    "three": 3,
+    "four": 4,
+    "five": 5,
+    "six": 6,
+    "seven": 7,
+    "eight": 8,
+    "nine": 9,
+    "ten": 10,
+    "eleven": 11,
+    "twelve": 12,
+    "fifteen": 15,
+    "twenty": 20,
+    "thirty": 30,
+    "forty": 40,
+    "forty-five": 45,
+    "sixty": 60,
+    "ninety": 90,
+    "one hundred eighty": 180,
+    "one hundred twenty": 120,
 }
 
 INCOTERMS = ("EXW", "FCA", "FAS", "FOB", "CFR", "CIF", "CPT", "CIP", "DAP", "DPU", "DDP")
@@ -162,8 +179,16 @@ def liability_cap(text: str) -> Iterable[Candidate]:
         yield Candidate(f"excluded: {body[:160]}", match.start(), match.end(), LOW)
 
 
-_UNIT_DAYS = {"day": 1, "days": 1, "week": 7, "weeks": 7, "month": 30, "months": 30,
-              "year": 365, "years": 365}
+_UNIT_DAYS = {
+    "day": 1,
+    "days": 1,
+    "week": 7,
+    "weeks": 7,
+    "month": 30,
+    "months": 30,
+    "year": 365,
+    "years": 365,
+}
 
 
 @extractor("termination_notice_days")
@@ -225,10 +250,31 @@ def auto_renew(text: str) -> Iterable[Candidate]:
 
 
 FORCE_MAJEURE_TERMS = (
-    "act of god", "acts of god", "war", "terrorism", "riot", "civil commotion", "fire",
-    "flood", "earthquake", "hurricane", "storm", "epidemic", "pandemic", "quarantine",
-    "strike", "lockout", "labor dispute", "labour dispute", "embargo", "government action",
-    "governmental action", "act of government", "explosion", "sabotage", "insurrection",
+    "act of god",
+    "acts of god",
+    "war",
+    "terrorism",
+    "riot",
+    "civil commotion",
+    "fire",
+    "flood",
+    "earthquake",
+    "hurricane",
+    "storm",
+    "epidemic",
+    "pandemic",
+    "quarantine",
+    "strike",
+    "lockout",
+    "labor dispute",
+    "labour dispute",
+    "embargo",
+    "government action",
+    "governmental action",
+    "act of government",
+    "explosion",
+    "sabotage",
+    "insurrection",
 )
 
 
@@ -292,7 +338,9 @@ def payment_terms_days(text: str) -> Iterable[Candidate]:
             if days is None or days > 365:
                 continue
             near = _window(text, match.start(), 200)
-            if index == 0 and not any(t in near for t in ("payment", "invoice", "payable", "terms")):
+            if index == 0 and not any(
+                t in near for t in ("payment", "invoice", "payable", "terms")
+            ):
                 continue
             yield Candidate(days, match.start(), match.end(), HIGH)
 
@@ -313,16 +361,15 @@ def warranty_period_months(text: str) -> Iterable[Candidate]:
         ),
     )
     for pattern in patterns:
-      for match in pattern.finditer(text):
-        amount = _to_int(match.group(1))
-        if amount is None:
-            continue
-        unit = match.group(2).lower()
-        months = amount * 12 if "year" in unit else (amount if "month" in unit else amount / 30)
-        if months <= 0 or months > 600:
-            continue
-        yield Candidate(round(months, 2), match.start(), match.end(), HIGH)
-
+        for match in pattern.finditer(text):
+            amount = _to_int(match.group(1))
+            if amount is None:
+                continue
+            unit = match.group(2).lower()
+            months = amount * 12 if "year" in unit else (amount if "month" in unit else amount / 30)
+            if months <= 0 or months > 600:
+                continue
+            yield Candidate(round(months, 2), match.start(), match.end(), HIGH)
 
 
 @extractor("insurance_required")
@@ -403,5 +450,5 @@ def extract_document(
     )
 
 
-__all__ = ["Candidate", "extract_document", "verify_span", "FIELD_NAMES_IMPLEMENTED"]
+__all__ = ["FIELD_NAMES_IMPLEMENTED", "Candidate", "extract_document", "verify_span"]
 FIELD_NAMES_IMPLEMENTED: tuple[str, ...] = tuple(_REGISTRY)

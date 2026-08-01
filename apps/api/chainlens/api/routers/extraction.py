@@ -6,6 +6,7 @@ import uuid
 
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field
+from sqlalchemy import select
 
 from ...db.models import Chunk, Document
 from ...db.session import session_scope
@@ -15,7 +16,6 @@ from ...extraction.risk import assess
 from ...extraction.schema import CompareReport, ContractExtraction, RiskReport
 from ...ingest.models import Page, ParsedDocument
 from ...logging import get_logger
-from sqlalchemy import select
 
 router = APIRouter(tags=["extraction"])
 logger = get_logger(__name__)

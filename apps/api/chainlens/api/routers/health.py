@@ -36,6 +36,19 @@ def readyz(request: Request) -> ReadyResponse:
         detail["redis"] = f"{type(exc).__name__}: {exc}"
         detail["redis_impact"] = "ingestion runs inline instead of on a worker"
 
+    scope = getattr(request.app.state, "document_scope", None)
+    if scope is not None and not scope.enforcing:
+        detail["document_scoping"] = (
+            "not enforced: no CHAINLENS_DOCUMENT_SCOPES configured, so every caller can "
+            "read every document"
+        )
+    limiter = getattr(request.app.state, "rate_limiter", None)
+    if limiter is not None:
+        detail["rate_limit"] = (
+            f"{limiter.default.limit}/min default, {limiter.expensive.limit}/min on "
+            "retrieval and uploads, in-process and therefore per replica"
+        )
+
     if services.embedder_error:
         detail["embedding"] = services.embedder_error
     if not services.generation.available:

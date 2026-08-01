@@ -56,6 +56,10 @@ ignore = [
   # datetime.UTC is 3.11+. The project targets 3.12, but the reference environment
   # for the committed eval runs was 3.10, so timezone.utc is used deliberately.
   "UP017",
+  # PEP 695 type parameters are 3.12 syntax. The project targets 3.12, but the reference
+  # environment that produced the committed eval results is 3.10, so TypeVar is used
+  # deliberately and the whole tree stays parseable there.
+  "UP047",
 ]
 
 [tool.ruff.lint.per-file-ignores]

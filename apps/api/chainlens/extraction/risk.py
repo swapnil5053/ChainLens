@@ -44,7 +44,7 @@ def _value(extraction: ContractExtraction, field: str) -> Any:
 def evaluate(clause: Any, extraction: ContractExtraction) -> bool:
     if not isinstance(clause, dict) or len(clause) != 1:
         raise RuleError(f"a condition must be a single-key mapping, got {clause!r}")
-    (operator, operand), = clause.items()
+    ((operator, operand),) = clause.items()
 
     if operator == "present":
         return operand in extraction.fields
@@ -98,7 +98,11 @@ def assess(extraction: ContractExtraction, path: Path = RULES_PATH) -> RiskRepor
         if not evaluate(rule["when"], extraction):
             continue
         anchor = next(
-            (extraction.fields[name] for name in rule.get("fields", []) if name in extraction.fields),
+            (
+                extraction.fields[name]
+                for name in rule.get("fields", [])
+                if name in extraction.fields
+            ),
             None,
         )
         flags.append(

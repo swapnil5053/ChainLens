@@ -82,7 +82,7 @@ def oklch_to_srgb(colour: Oklch) -> tuple[float, float, float]:
 
 def to_hex(colour: Oklch) -> str:
     r, g, b = oklch_to_srgb(colour)
-    return "#{:02X}{:02X}{:02X}".format(round(r * 255), round(g * 255), round(b * 255))
+    return f"#{round(r * 255):02X}{round(g * 255):02X}{round(b * 255):02X}"
 
 
 def _linear(channel: float) -> float:
@@ -132,9 +132,13 @@ def main() -> int:
         for name, theme in (("light", LIGHT), ("dark", DARK)):
             print(f"\n{name}")
             for token, colour in theme.items():
-                print(f"  --{token:14} oklch({colour[0]} {colour[1]} {colour[2]})  {to_hex(colour)}")
+                print(
+                    f"  --{token:14} oklch({colour[0]} {colour[1]} {colour[2]})  {to_hex(colour)}"
+                )
 
-    failures = report("Light theme", LIGHT, args.markdown) + report("Dark theme", DARK, args.markdown)
+    failures = report("Light theme", LIGHT, args.markdown) + report(
+        "Dark theme", DARK, args.markdown
+    )
     if failures:
         print(f"\n{failures} contrast failures")
     return 1 if failures else 0

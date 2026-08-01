@@ -189,7 +189,9 @@ def run_extraction_eval(
     macro_precision = sum(float(per_field[f]["precision"]) for f in labelled_fields) / len(
         labelled_fields
     )
-    macro_recall = sum(float(per_field[f]["recall"]) for f in labelled_fields) / len(labelled_fields)
+    macro_recall = sum(float(per_field[f]["recall"]) for f in labelled_fields) / len(
+        labelled_fields
+    )
 
     sha, dirty = git_sha()
     result: dict[str, Any] = {

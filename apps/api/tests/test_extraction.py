@@ -114,9 +114,7 @@ def test_risk_rules_fire_and_carry_a_span(extraction: ContractExtraction) -> Non
 
 
 def test_short_notice_auto_renewal_is_flagged() -> None:
-    document = parse_text(
-        CONTRACT.replace("ninety (90) days", "ten (10) days"), "short-notice.txt"
-    )
+    document = parse_text(CONTRACT.replace("ninety (90) days", "ten (10) days"), "short-notice.txt")
     report = assess(extract_document(document, document_id="short"))
     assert "auto-renew-short-notice" in {flag.rule_id for flag in report.flags}
 

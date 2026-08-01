@@ -21,8 +21,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "apps" / "api"))
 
-from chainlens.ingest.chunk import chunk_document  # noqa: E402
-from chainlens.ingest.parse import parse_text  # noqa: E402
+from chainlens.ingest.chunk import chunk_document
+from chainlens.ingest.parse import parse_text
 
 CORPUS = ROOT / "eval" / "datasets" / "corpus"
 OUT = ROOT / "apps" / "web" / "public" / "fixtures"
@@ -65,9 +65,7 @@ def kind_from_slug(slug: str) -> str:
 
 
 def _evidence(run_id: str) -> dict[str, object]:
-    payload = json.loads(
-        (ROOT / "eval" / "results" / f"{run_id}.json").read_text(encoding="utf-8")
-    )
+    payload = json.loads((ROOT / "eval" / "results" / f"{run_id}.json").read_text(encoding="utf-8"))
     metrics = payload["metrics"]
     return {
         "runId": run_id,

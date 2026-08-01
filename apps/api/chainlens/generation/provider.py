@@ -69,11 +69,15 @@ class GeminiGeneration(GenerationProvider):
         model: str = "gemini-2.5-flash",
         temperature: float = 0.2,
         timeout_seconds: float = 30.0,
+        retry_attempts: int = 3,
+        retry_max_seconds: float = 20.0,
     ) -> None:
         self.name = model
         self._key = api_key
         self._temperature = temperature
         self._usage = GenerationUsage()
+        self._retry_attempts = retry_attempts
+        self._retry_max_seconds = retry_max_seconds
         # Connect, read, write and pool timeouts are all bounded. A hung upstream cannot
         # hold a request open past this.
         self._timeout = httpx.Timeout(timeout_seconds, connect=min(10.0, timeout_seconds))

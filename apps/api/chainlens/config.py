@@ -59,9 +59,29 @@ class Settings(BaseSettings):
     generation_timeout_seconds: float = 30.0
     google_api_key: str | None = None
 
+    # Hardening
+    rate_limit_per_minute: int = 120
+    rate_limit_expensive_per_minute: int = 20
+    #: "key:doc-a,doc-b;key2:*". Empty means no scoping, which /readyz reports.
+    document_scopes: str = ""
+    generation_retry_attempts: int = 3
+    generation_retry_max_seconds: float = 20.0
+
     max_upload_bytes: int = 25 * 1024 * 1024
     max_pdf_pages: int = 1_500
     log_level: str = "INFO"
+
+    def parsed_document_scopes(self) -> dict[str, set[str]]:
+        """Parse the scope string into a mapping, tolerating an empty setting."""
+        scopes: dict[str, set[str]] = {}
+        for entry in self.document_scopes.split(";"):
+            if ":" not in entry:
+                continue
+            key, documents = entry.split(":", 1)
+            values = {item.strip() for item in documents.split(",") if item.strip()}
+            if key.strip() and values:
+                scopes[key.strip()] = values
+        return scopes
 
 
 @lru_cache(maxsize=1)

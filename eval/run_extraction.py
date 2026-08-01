@@ -13,8 +13,7 @@ import json
 from pathlib import Path
 
 from eval.bootstrap import ROOT
-
-from eval.runners.extraction import run_extraction_eval  # noqa: E402
+from eval.runners.extraction import run_extraction_eval
 
 
 def main() -> int:
