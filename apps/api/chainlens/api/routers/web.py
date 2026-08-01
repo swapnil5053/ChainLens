@@ -24,6 +24,7 @@ from sqlalchemy import func, select, text
 
 from ...db.models import Chunk, Document, Query
 from ...db.session import session_scope
+from ...generation.extractive import summarise
 from ...generation.prompt import SYSTEM_PROMPT, build_user_prompt
 from ...ingest.parse import parse_pdf_bytes
 from ...ingest.pipeline import index_parsed_document
@@ -312,34 +313,18 @@ def analyse(request: Request, body: AnalyseBody) -> dict[str, Any]:
             detail = f"{type(exc).__name__}: {exc}"
         generation_ms = (time.perf_counter() - started) * 1000
     elif chunks:
-        # No generation provider. Rather than an empty record, read the most relevant
-        # clauses back as continuous prose. The chips carry "where", so no "the passage
-        # most responsive to..." scaffolding and no "page N also bears on this". An
-        # extractive answer cannot hallucinate, which is why this is acceptable as a
-        # fallback rather than a stopgap that invents text.
-        def _trim(text: str) -> str:
-            flat = " ".join(text.split())
-            if len(flat) <= 360:
-                return flat
-            cut = flat[:360]
-            stop = max(cut.rfind(". "), cut.rfind("; "))
-            return (cut[: stop + 1] if stop > 140 else cut + "...").strip()
-
-        parts: list[str] = []
-        seen: set[str] = set()
-        for chunk in chunks[:3]:
-            text = _trim(chunk.text)
-            key = text[:48].lower()
-            if key in seen:
-                continue
-            seen.add(key)
-            parts.append(text)
-            if len(" ".join(parts)) > 620:
-                break
-        answer = " ".join(parts)
-        status = "ok"
+        # No generation provider. Rather than an empty record, select the sentences across
+        # the retrieved clauses that actually answer the question. See
+        # chainlens.generation.extractive: it discards redaction notices and page
+        # furniture, scores sentences against the question, and suppresses repetition.
+        # Every sentence returned appears verbatim in the contract, so this cannot
+        # hallucinate, which is what makes it acceptable as a fallback.
+        answer = summarise(body.query, [chunk.text for chunk in chunks])
+        status = "ok" if answer else "unavailable"
         detail = (
-            "Answer taken directly from the contract. Use the sources below to jump to each clause."
+            "Drawn from the contract itself. Use the sources to jump to each clause."
+            if answer
+            else "The retrieved clauses did not contain a passage that answers this question."
         )
     else:
         detail = "Retrieval returned nothing for this query in this contract."
