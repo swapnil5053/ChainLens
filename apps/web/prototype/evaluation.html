@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ChainLens evaluation</title>
+<link rel="stylesheet" href="../app/tokens.css">
+<style>
+/* Prototype-only layout. Every colour, size, space and duration below resolves to a
+   semantic token from tokens.css. There is no raw hex in this file. */
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--font-ui, ui-sans-serif, system-ui, sans-serif);
+  font-size: 0.9375rem;
+  line-height: 1.35;
+}
+.masthead {
+  display: flex; align-items: baseline; gap: 1rem;
+  padding: 1rem 1.5rem;
+  border-bottom: 2px solid var(--ink);
+}
+h1 { font-size: 0.9375rem; font-weight: 620; margin: 0; letter-spacing: 0.01em; }
+.masthead .stamp {
+  font-family: var(--font-identity, ui-monospace, monospace);
+  font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.08em;
+  color: var(--accent); border: 1px solid var(--accent);
+  padding: 2px 6px; border-radius: var(--radius-chip, 3px);
+}
+.masthead .spacer { margin-left: auto; }
+button.toggle {
+  font: inherit; font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.08em;
+  color: var(--ink-muted); background: transparent;
+  border: 1px solid var(--rule-control); border-radius: var(--radius-field, 2px);
+  min-height: 32px; padding: 0 0.75rem; cursor: pointer;
+  transition: background-color var(--duration-hover, 120ms) var(--ease-enter, ease-out),
+              border-color var(--duration-hover, 120ms) var(--ease-enter, ease-out),
+              transform var(--duration-hover, 120ms) var(--ease-enter, ease-out);
+}
+button.toggle:hover { background: var(--panel-raised); border-color: var(--ink-muted); }
+button.toggle:active { transform: translateY(1px); }
+main { padding: 1.5rem; max-width: 1440px; }
+.field-label {
+  font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.08em;
+  color: var(--ink-faint); font-family: var(--font-ui, sans-serif);
+}
+.figures { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem; }
+.figure {
+  border: 1px solid var(--rule); border-top: 2px solid var(--ink);
+  background: var(--panel); padding: 0.75rem 1rem; min-width: 13rem;
+}
+.figure .value {
+  font-family: var(--font-identity, ui-monospace, monospace);
+  font-variant-numeric: tabular-nums;
+  font-size: 1.5rem; margin-top: 0.25rem; display: block;
+}
+.figure .note { font-size: 0.8125rem; color: var(--ink-muted); margin-top: 0.25rem; }
+.table-wrap { overflow-x: auto; border: 1px solid var(--rule); background: var(--panel); }
+table { border-collapse: collapse; width: 100%; font-size: 0.8125rem; }
+caption {
+  text-align: left; padding: 0.75rem 1rem; color: var(--ink-muted);
+  border-bottom: 1px solid var(--rule); font-size: 0.8125rem;
+}
+th, td { padding: 0.5rem 0.75rem; text-align: right; border-bottom: 1px solid var(--rule); }
+th[scope="col"] {
+  font-weight: 620; font-size: 0.6875rem; text-transform: uppercase;
+  letter-spacing: 0.08em; color: var(--ink-faint); white-space: nowrap;
+  border-bottom: 2px solid var(--ink);
+}
+th[scope="row"], td.label { text-align: left; font-weight: 380; white-space: nowrap; }
+td.num {
+  font-family: var(--font-identity, ui-monospace, monospace);
+  font-variant-numeric: tabular-nums;
+}
+tbody tr {
+  transition: background-color var(--duration-hover, 120ms) var(--ease-enter, ease-out);
+}
+tbody tr:hover { background: var(--panel-raised); }
+tbody tr.best td.num.lead { color: var(--accent); font-weight: 600; }
+tbody tr.blocked td { color: var(--ink-faint); }
+tbody tr.group th {
+  text-align: left; padding-top: 1rem;
+  font-family: var(--font-identity, ui-monospace, monospace);
+  font-size: 0.6875rem; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--ink-faint); border-bottom: 1px solid var(--rule-control);
+}
+.footnote { margin-top: 0.75rem; font-size: 0.8125rem; color: var(--ink-muted); max-width: 70ch; }
+.provenance {
+  margin-top: 1.5rem; padding-top: 0.75rem; border-top: 1px solid var(--rule);
+  font-size: 0.8125rem; color: var(--ink-muted); max-width: 80ch;
+}
+.provenance code, .mono {
+  font-family: var(--font-identity, ui-monospace, monospace); font-size: 0.8125rem;
+}
+.empty {
+  border: 1px dashed var(--rule-control); padding: 1.5rem; color: var(--ink-muted);
+}
+</style>
+</head>
+<body>
+<header class="masthead">
+  <h1>ChainLens</h1>
+  <span class="stamp">Evaluation</span>
+  <span class="spacer"></span>
+  <button class="toggle" id="theme" aria-pressed="false">Dark</button>
+</header>
+<main>
+  <section class="figures" aria-label="Headline measurements">
+    <div class="figure"><span class="field-label">Best Recall@6</span><span class="value">0.676</span><span class="note">clause-aware__rrf_expansion</span></div><div class="figure"><span class="field-label">Query embedding share of latency</span><span class="value">95%</span><span class="note">99.8 ms of 105.17 ms at p50</span></div><div class="figure"><span class="field-label">Postgres search p50</span><span class="value">5.04 ms</span><span class="note">dense plus lexical, both arms</span></div><div class="figure"><span class="field-label">Questions scored</span><span class="value">110</span><span class="note">29 documents, 20 clause categories</span></div>
+  </section>
+
+  <div class="table-wrap">
+  <table>
+    <caption>Retrieval ablation, 110 questions over 29 supply-chain contracts. Recall@6 leads because it is the column the configuration decision turned on.</caption>
+    <thead>
+      <tr>
+        <th scope="col">retrieval</th>
+        <th scope="col">Recall@3</th>
+        <th scope="col">Recall@6</th>
+        <th scope="col">Recall@10</th>
+        <th scope="col">MRR</th>
+        <th scope="col">nDCG@10</th>
+        <th scope="col">hit@6</th>
+        <th scope="col">answer chars @6</th>
+        <th scope="col">p50 ms</th>
+        <th scope="col">p95 ms</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="group"><th scope="rowgroup" colspan="10">chunking: recursive-512</th></tr>
+      <tr><th scope="row">dense</th><td class="num">0.389</td><td class="num lead">0.529</td><td class="num">0.606</td><td class="num">0.563</td><td class="num">0.511</td><td class="num">0.718</td><td class="num">0.633</td><td class="num">80.9</td><td class="num">85.4</td></tr>
+      <tr><th scope="row">MMR, lambda 0.5</th><td class="num">0.239</td><td class="num lead">0.284</td><td class="num">0.338</td><td class="num">0.544</td><td class="num">0.328</td><td class="num">0.664</td><td class="num">0.456</td><td class="num">84.6</td><td class="num">88.8</td></tr>
+      <tr><th scope="row">lexical, Postgres FTS</th><td class="num">0.291</td><td class="num lead">0.427</td><td class="num">0.515</td><td class="num">0.467</td><td class="num">0.407</td><td class="num">0.682</td><td class="num">0.550</td><td class="num">1.8</td><td class="num">3.5</td></tr>
+      <tr><th scope="row">RRF fusion, k=60</th><td class="num">0.365</td><td class="num lead">0.489</td><td class="num">0.590</td><td class="num">0.560</td><td class="num">0.493</td><td class="num">0.700</td><td class="num">0.614</td><td class="num">84.5</td><td class="num">88.9</td></tr>
+      <tr><th scope="row">RRF fusion + expansion</th><td class="num">0.383</td><td class="num lead">0.514</td><td class="num">0.618</td><td class="num">0.580</td><td class="num">0.519</td><td class="num">0.700</td><td class="num">0.617</td><td class="num">83.8</td><td class="num">90.4</td></tr>
+      <tr class="blocked"><th scope="row">RRF fusion + cross-encoder</th><td class="num">--</td><td class="num lead">--</td><td class="num">--</td><td class="num">--</td><td class="num">--</td><td class="num">--</td><td class="num">--</td><td class="num">--</td><td class="num">--</td></tr>
+      <tr class="group"><th scope="rowgroup" colspan="10">chunking: recursive-1024</th></tr>
+      <tr><th scope="row">dense</th><td class="num">0.524</td><td class="num lead">0.634</td><td class="num">0.732</td><td class="num">0.569</td><td class="num">0.574</td><td class="num">0.736</td><td class="num">0.686</td><td class="num">81.8</td><td class="num">87.3</td></tr>
+      <tr><th scope="row">MMR, lambda 0.5</th><td class="num">0.357</td><td class="num lead">0.404</td><td class="num">0.517</td><td class="num">0.529</td><td class="num">0.425</td><td class="num">0.618</td><td class="num">0.486</td><td class="num">82.3</td><td class="num">87.5</td></tr>
+      <tr><th scope="row">lexical, Postgres FTS</th><td class="num">0.409</td><td class="num lead">0.567</td><td class="num">0.677</td><td class="num">0.503</td><td class="num">0.506</td><td class="num">0.691</td><td class="num">0.626</td><td class="num">1.6</td><td class="num">2.4</td></tr>
+      <tr><th scope="row">RRF fusion, k=60</th><td class="num">0.514</td><td class="num lead">0.620</td><td class="num">0.750</td><td class="num">0.575</td><td class="num">0.582</td><td class="num">0.736</td><td class="num">0.680</td><td class="num">84.3</td><td class="num">93.2</td></tr>
+      <tr><th scope="row">RRF fusion + expansion</th><td class="num">0.551</td><td class="num lead">0.645</td><td class="num">0.773</td><td class="num">0.628</td><td class="num">0.625</td><td class="num">0.727</td><td class="num">0.685</td><td class="num">83.5</td><td class="num">99.1</td></tr>
+      <tr class="blocked"><th scope="row">RRF fusion + cross-encoder</th><td class="num">--</td><td class="num lead">--</td><td class="num">--</td><td class="num">--</td><td class="num">--</td><td class="num">--</td><td class="num">--</td><td class="num">--</td><td class="num">--</td></tr>
+      <tr class="group"><th scope="rowgroup" colspan="10">chunking: clause-aware</th></tr>
+      <tr><th scope="row">dense</th><td class="num">0.520</td><td class="num lead">0.636</td><td class="num">0.740</td><td class="num">0.588</td><td class="num">0.583</td><td class="num">0.754</td><td class="num">0.719</td><td class="num">80.6</td><td class="num">95.0</td></tr>
+      <tr><th scope="row">MMR, lambda 0.5</th><td class="num">0.356</td><td class="num lead">0.461</td><td class="num">0.562</td><td class="num">0.557</td><td class="num">0.465</td><td class="num">0.664</td><td class="num">0.558</td><td class="num">82.1</td><td class="num">86.8</td></tr>
+      <tr><th scope="row">lexical, Postgres FTS</th><td class="num">0.446</td><td class="num lead">0.642</td><td class="num">0.712</td><td class="num">0.517</td><td class="num">0.531</td><td class="num">0.764</td><td class="num">0.717</td><td class="num">1.7</td><td class="num">2.3</td></tr>
+      <tr><th scope="row">RRF fusion, k=60</th><td class="num">0.514</td><td class="num lead">0.648</td><td class="num">0.741</td><td class="num">0.578</td><td class="num">0.586</td><td class="num">0.736</td><td class="num">0.719</td><td class="num">80.4</td><td class="num">90.9</td></tr>
+      <tr class="best"><th scope="row">RRF fusion + expansion</th><td class="num">0.523</td><td class="num lead">0.676</td><td class="num">0.760</td><td class="num">0.610</td><td class="num">0.612</td><td class="num">0.773</td><td class="num">0.744</td><td class="num">105.2</td><td class="num">117.2</td></tr>
+      <tr class="blocked"><th scope="row">RRF fusion + cross-encoder</th><td class="num">--</td><td class="num lead">--</td><td class="num">--</td><td class="num">--</td><td class="num">--</td><td class="num">--</td><td class="num">--</td><td class="num">--</td><td class="num">--</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="footnote">Cells marked -- were not measured. cross-encoder weights could not be loaded: ModuleNotFoundError: No module named 'sentence_transformers'</p>
+  <div class="provenance">Generated from 18 artifacts in eval/results/ at commit <code>10c722dbe189</code> on 2026-08-01T07:07:13+00:00. Dataset <code>eval/datasets/golden.jsonl</code>, sha256 <code>4ac8d01460a836c4</code>. Embedding provider <code>lsa-tfidf-svd-384</code>, dimension 384. Postgres 16.2. Retrieval is scoped to the document the question is about. The embedding provider is not bge-small-en-v1.5: the model hub was unreachable when these numbers were produced, so these values are a floor for the architecture rather than a claim about a modern encoder. See ADR-0003.</div>
+</main>
+<script>
+  const button = document.getElementById("theme");
+  button.addEventListener("click", () => {
+    const root = document.documentElement;
+    const dark = root.dataset.theme === "dark";
+    root.dataset.theme = dark ? "light" : "dark";
+    button.textContent = dark ? "Dark" : "Light";
+    button.setAttribute("aria-pressed", String(!dark));
+  });
+</script>
+</body>
+</html>
