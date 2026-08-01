@@ -29,13 +29,14 @@ def _summaries(session: Session) -> list[DocumentSummary]:
         .group_by(Document.id)
         .order_by(Document.created_at.desc())
     ).all()
-    providers = dict(
-        session.execute(
+    providers: dict[uuid.UUID, str] = {
+        row[0]: row[1]
+        for row in session.execute(
             select(Chunk.document_id, func.min(Embedding.provider))
             .join(Embedding, Embedding.chunk_id == Chunk.id)
             .group_by(Chunk.document_id)
         ).all()
-    )
+    }
     return [
         DocumentSummary(
             id=row[0].id,

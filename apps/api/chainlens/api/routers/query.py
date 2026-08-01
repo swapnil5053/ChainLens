@@ -23,7 +23,7 @@ from ...generation.provider import GenerationUnavailable
 from ...logging import get_logger, request_id_var
 from ...retrieval.service import RetrievalConfig
 from ...retrieval.types import RetrievedChunk
-from ..schemas import CitationModel, QueryRequest, QueryResponse
+from ..schemas import CitationModel, PageSpanModel, QueryRequest, QueryResponse
 
 router = APIRouter(tags=["query"])
 logger = get_logger(__name__)
@@ -41,7 +41,7 @@ def _citations(chunks: list[RetrievedChunk]) -> list[CitationModel]:
             char_end=chunk.char_end,
             page_char_start=chunk.page_char_start,
             page_char_end=chunk.page_char_end,
-            page_spans=[dict(span) for span in chunk.page_spans],  # type: ignore[arg-type]
+            page_spans=[PageSpanModel(**span) for span in chunk.page_spans],
             clause_id=chunk.clause_id,
             clause_title=chunk.clause_title,
             score=round(chunk.score, 6),
@@ -54,7 +54,7 @@ def _citations(chunks: list[RetrievedChunk]) -> list[CitationModel]:
 
 def _config(request: Request, body: QueryRequest) -> RetrievalConfig:
     base = RetrievalConfig.from_settings(request.app.state.services.settings)
-    overrides = {}
+    overrides: dict[str, object] = {}
     if body.k is not None:
         overrides["k"] = body.k
     if body.strategy is not None:

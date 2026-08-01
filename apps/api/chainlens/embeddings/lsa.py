@@ -97,7 +97,8 @@ class LsaEmbeddings(EmbeddingProvider):
         if not texts:
             return []
         matrix: Any = self._require().transform(list(texts))
-        return np.asarray(matrix, dtype=np.float32).tolist()
+        rows: list[list[float]] = np.asarray(matrix, dtype=np.float32).tolist()
+        return rows
 
     def embed_query(self, text: str) -> list[float]:
         return self.embed_documents([text])[0]

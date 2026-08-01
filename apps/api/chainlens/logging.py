@@ -5,6 +5,7 @@ from __future__ import annotations
 import logging
 import sys
 from contextvars import ContextVar
+from collections.abc import MutableMapping
 from typing import Any
 
 import structlog
@@ -12,7 +13,9 @@ import structlog
 request_id_var: ContextVar[str] = ContextVar("request_id", default="-")
 
 
-def _add_request_id(_logger: Any, _method: str, event_dict: dict[str, Any]) -> dict[str, Any]:
+def _add_request_id(
+    _logger: Any, _method: str, event_dict: MutableMapping[str, Any]
+) -> MutableMapping[str, Any]:
     event_dict["request_id"] = request_id_var.get()
     return event_dict
 

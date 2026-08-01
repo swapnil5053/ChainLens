@@ -48,4 +48,4 @@ def ensure_extensions(engine: Engine | None = None) -> None:
 
 def ping(engine: Engine | None = None) -> bool:
     with (engine or get_engine()).connect() as connection:
-        return connection.execute(text("SELECT 1")).scalar_one() == 1
+        return bool(connection.execute(text("SELECT 1")).scalar_one() == 1)

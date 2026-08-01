@@ -32,7 +32,7 @@ def ensure_database() -> str:
         import pgserver
 
         LOCAL_PGDATA.mkdir(parents=True, exist_ok=True)
-        server = pgserver.get_server(LOCAL_PGDATA, cleanup_mode=None)
+        server = pgserver.get_server(LOCAL_PGDATA, cleanup_mode=None)  # type: ignore[attr-defined]
         server.psql("CREATE EXTENSION IF NOT EXISTS vector;")
         dsn = server.get_uri().replace("postgresql://", "postgresql+psycopg://")
         os.environ["CHAINLENS_DATABASE_URL"] = dsn
