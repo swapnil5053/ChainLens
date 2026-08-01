@@ -20,12 +20,12 @@ from eval.bootstrap import ROOT, ensure_database
 
 ensure_database()
 
-from chainlens.db.session import session_scope  # noqa: E402
-from chainlens.embeddings.lsa import LsaEmbeddings  # noqa: E402
-from chainlens.embeddings.registry import DEFAULT_LSA_ARTIFACT  # noqa: E402
-from chainlens.retrieval.rerank import CrossEncoderReranker  # noqa: E402
-from chainlens.retrieval.service import RetrievalConfig  # noqa: E402
-from eval.runners.retrieval import load_golden, run_retrieval_eval, write_result  # noqa: E402
+from chainlens.db.session import session_scope
+from chainlens.embeddings.lsa import LsaEmbeddings
+from chainlens.embeddings.registry import DEFAULT_LSA_ARTIFACT
+from chainlens.retrieval.rerank import CrossEncoderReranker
+from chainlens.retrieval.service import RetrievalConfig
+from eval.runners.retrieval import load_golden, run_retrieval_eval, write_result
 
 RESULTS_DIR = ROOT / "eval" / "results"
 DATASET_DIR = ROOT / "eval" / "datasets"
@@ -33,9 +33,7 @@ DATASET_DIR = ROOT / "eval" / "datasets"
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "--sweep", type=Path, default=ROOT / "eval" / "configs" / "ablation.yaml"
-    )
+    parser.add_argument("--sweep", type=Path, default=ROOT / "eval" / "configs" / "ablation.yaml")
     parser.add_argument("--only", action="append", help="run only these retrieval ids")
     parser.add_argument("--chunking", action="append", help="run only these chunkings")
     parser.add_argument("--k", action="append", type=int)
@@ -76,8 +74,7 @@ def main() -> int:
             blocked = None
             if retrieval.get("requires") == "cross-encoder-weights" and not reranker.available:
                 blocked = (
-                    "cross-encoder weights could not be loaded: "
-                    f"{rerank_error or 'unknown error'}"
+                    f"cross-encoder weights could not be loaded: {rerank_error or 'unknown error'}"
                 )
             with session_scope() as session:
                 result = run_retrieval_eval(

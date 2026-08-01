@@ -213,17 +213,12 @@ def run_retrieval_eval(
         "metrics": {
             "n_evaluated": len(per_query),
             "n_skipped": len(skipped),
-            **{
-                f"recall@{k}": mean([row["recall"][str(k)] for row in per_query])
-                for k in k_values
-            },
+            **{f"recall@{k}": mean([row["recall"][str(k)] for row in per_query]) for k in k_values},
             **{f"hit@{k}": mean([row["hit"][str(k)] for row in per_query]) for k in k_values},
             "mrr": mean([row["reciprocal_rank"] for row in per_query]),
             "ndcg@10": mean([row["ndcg_10"] for row in per_query]),
             **{
-                f"span_coverage@{k}": mean(
-                    [row["span_coverage"][str(k)] for row in per_query]
-                )
+                f"span_coverage@{k}": mean([row["span_coverage"][str(k)] for row in per_query])
                 for k in k_values
             },
             "latency_ms_p50": round(percentile(latencies, 0.5), 2),

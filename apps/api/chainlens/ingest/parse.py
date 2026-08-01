@@ -40,8 +40,7 @@ def _assemble(filename: str, sha256: str, page_texts: list[str]) -> ParsedDocume
 def _read(reader: PdfReader, max_pages: int | None) -> list[str]:
     if max_pages is not None and len(reader.pages) > max_pages:
         raise ValueError(
-            f"document has {len(reader.pages)} pages, above the configured limit "
-            f"of {max_pages}"
+            f"document has {len(reader.pages)} pages, above the configured limit of {max_pages}"
         )
     return [page.extract_text() or "" for page in reader.pages]
 
@@ -74,6 +73,4 @@ def parse_text(text: str, filename: str, *, page_chars: int = 3_000) -> ParsedDo
         size += len(paragraph) + 2
     if current:
         page_texts.append("\n\n".join(current))
-    return _assemble(
-        filename, sha256_bytes(normalised.encode("utf-8")), page_texts or [""]
-    )
+    return _assemble(filename, sha256_bytes(normalised.encode("utf-8")), page_texts or [""])

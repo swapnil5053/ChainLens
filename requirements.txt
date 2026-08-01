@@ -1,8 +1,0 @@
-streamlit==1.32.2
-pypdf
-langchain
-langchain-community
-python-dotenv
-chromadb
-langchain-google-genai
-google-generativeai

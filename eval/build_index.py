@@ -19,12 +19,12 @@ from eval.bootstrap import ROOT, ensure_database
 
 ensure_database()
 
-from chainlens.db.session import session_scope  # noqa: E402
-from chainlens.embeddings.lsa import LsaEmbeddings  # noqa: E402
-from chainlens.embeddings.registry import DEFAULT_LSA_ARTIFACT  # noqa: E402
-from chainlens.ingest.chunk import chunk_document  # noqa: E402
-from chainlens.ingest.parse import parse_text  # noqa: E402
-from chainlens.ingest.pipeline import index_parsed_document  # noqa: E402
+from chainlens.db.session import session_scope
+from chainlens.embeddings.lsa import LsaEmbeddings
+from chainlens.embeddings.registry import DEFAULT_LSA_ARTIFACT
+from chainlens.ingest.chunk import chunk_document
+from chainlens.ingest.parse import parse_text
+from chainlens.ingest.pipeline import index_parsed_document
 
 CORPUS_DIR = ROOT / "eval" / "datasets" / "corpus"
 STRATEGIES = ("recursive-512", "recursive-1024", "clause-aware")

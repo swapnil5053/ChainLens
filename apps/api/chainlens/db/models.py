@@ -52,9 +52,7 @@ class Document(Base):
     full_text: Mapped[str] = mapped_column(Text, default="")
     pages: Mapped[dict[str, Any]] = mapped_column(JSONB, default=dict)
     meta: Mapped[dict[str, Any]] = mapped_column(JSONB, default=dict)
-    created_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), server_default=func.now()
-    )
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
 
     chunks: Mapped[list[Chunk]] = relationship(
         back_populates="document", cascade="all, delete-orphan"
@@ -99,9 +97,7 @@ class Chunk(Base):
 
 class Embedding(Base):
     __tablename__ = "embeddings"
-    __table_args__ = (
-        UniqueConstraint("chunk_id", "provider", name="uq_embedding_chunk_provider"),
-    )
+    __table_args__ = (UniqueConstraint("chunk_id", "provider", name="uq_embedding_chunk_provider"),)
 
     id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=_uuid)
     chunk_id: Mapped[uuid.UUID] = mapped_column(
@@ -110,9 +106,7 @@ class Embedding(Base):
     provider: Mapped[str] = mapped_column(String(64))
     dim: Mapped[int] = mapped_column(Integer)
     vector: Mapped[Any] = mapped_column(Vector(EMBEDDING_DIM))
-    created_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), server_default=func.now()
-    )
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
 
     chunk: Mapped[Chunk] = relationship(back_populates="embedding")
 
@@ -130,9 +124,7 @@ class Job(Base):
     detail: Mapped[str] = mapped_column(String(256), default="")
     error: Mapped[str | None] = mapped_column(Text, nullable=True)
     timings_ms: Mapped[dict[str, Any]] = mapped_column(JSONB, default=dict)
-    created_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), server_default=func.now()
-    )
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
     updated_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now(), onupdate=func.now()
     )
@@ -154,9 +146,7 @@ class Query(Base):
     prompt_tokens: Mapped[int] = mapped_column(Integer, default=0)
     completion_tokens: Mapped[int] = mapped_column(Integer, default=0)
     cost_usd: Mapped[float] = mapped_column(Float, default=0.0)
-    created_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), server_default=func.now()
-    )
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
 
 
 class EvalRun(Base):
@@ -169,6 +159,4 @@ class EvalRun(Base):
     config: Mapped[dict[str, Any]] = mapped_column(JSONB, default=dict)
     metrics: Mapped[dict[str, Any]] = mapped_column(JSONB, default=dict)
     status: Mapped[str] = mapped_column(String(16), default="ok")
-    created_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), server_default=func.now()
-    )
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())

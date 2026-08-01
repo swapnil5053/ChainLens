@@ -39,7 +39,8 @@ class IngestResult:
     timings_ms: dict[str, float] = field(default_factory=dict)
 
 
-def _noop(state: str, progress: float, detail: str) -> None:  # pragma: no cover
+def _noop(state: str, progress: float, detail: str) -> None:  # noqa: ARG001
+    """Default progress hook. Ignores its arguments by design."""
     return None
 
 
@@ -112,9 +113,7 @@ def index_parsed_document(
 
     start = time.perf_counter()
     on_progress("chunking", 0.2, f"strategy {chunk_strategy}")
-    chunks = chunk_document(
-        parsed, chunk_strategy, overlap=chunk_overlap, ceiling=clause_ceiling
-    )
+    chunks = chunk_document(parsed, chunk_strategy, overlap=chunk_overlap, ceiling=clause_ceiling)
     timings["chunking"] = (time.perf_counter() - start) * 1000
 
     rows = [
@@ -154,9 +153,7 @@ def index_parsed_document(
     start = time.perf_counter()
     session.add_all(
         [
-            EmbeddingRow(
-                chunk_id=row.id, provider=embedder.name, dim=embedder.dim, vector=vector
-            )
+            EmbeddingRow(chunk_id=row.id, provider=embedder.name, dim=embedder.dim, vector=vector)
             for row, vector in zip(rows, vectors, strict=True)
         ]
     )

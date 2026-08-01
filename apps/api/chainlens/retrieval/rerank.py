@@ -92,6 +92,10 @@ class NullReranker(Reranker):
         return False
 
     def rerank(
-        self, query: str, candidates: Sequence[RetrievedChunk], *, k: int
+        self,
+        query: str,  # noqa: ARG002 - signature is fixed by the Reranker interface
+        candidates: Sequence[RetrievedChunk],  # noqa: ARG002
+        *,
+        k: int,  # noqa: ARG002
     ) -> list[RetrievedChunk]:
         raise RerankerUnavailable(self.reason)

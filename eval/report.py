@@ -91,9 +91,7 @@ def headline_table(results: dict[str, dict[str, Any]], chunking: str) -> str:
         "answer chars shown @6 | p50 ms | p95 ms |",
         "|---|---|---|---|---|---|---|---|---|---|",
     ]
-    lines += [
-        _row(RETRIEVAL_LABELS[key], results.get(f"{chunking}__{key}"), keys) for key in ORDER
-    ]
+    lines += [_row(RETRIEVAL_LABELS[key], results.get(f"{chunking}__{key}"), keys) for key in ORDER]
     return "\n".join(lines) + footnotes(results)
 
 
@@ -141,9 +139,7 @@ def latency_table(results: dict[str, dict[str, Any]], chunking: str) -> str:
         "total p95 ms |",
         "|---|---|---|---|---|",
     ]
-    lines += [
-        _row(RETRIEVAL_LABELS[key], results.get(f"{chunking}__{key}"), keys) for key in ORDER
-    ]
+    lines += [_row(RETRIEVAL_LABELS[key], results.get(f"{chunking}__{key}"), keys) for key in ORDER]
     return "\n".join(lines) + footnotes(results)
 
 

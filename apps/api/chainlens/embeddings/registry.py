@@ -24,8 +24,7 @@ def build_provider(
         if path.exists():
             return LsaEmbeddings.load(path)
         raise EmbeddingError(
-            f"no fitted LSA artifact at {path}. Run 'python -m eval.build_index' before "
-            "serving."
+            f"no fitted LSA artifact at {path}. Run 'python -m eval.build_index' before serving."
         )
     if choice == "sentence-transformers":
         return SentenceTransformerEmbeddings(settings.sentence_transformer_model)

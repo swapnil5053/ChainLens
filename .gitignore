@@ -128,9 +128,15 @@ ENV/
 env.bak/
 venv.bak/
 
-# Project-specific: Vector database and user documents
+# Project-specific
+# Legacy Chroma store from v1. Removed in v2; kept ignored so stale copies stay untracked.
 Vector_DB - Documents/
-docs/
+.vector_store/
+# Runtime data: uploaded PDFs, the CUAD clone, the local Postgres data directory.
+var/
+# Model artifacts are never committed.
+*.pkl
+*.joblib
 *.pdf
 
 # Spyder project settings

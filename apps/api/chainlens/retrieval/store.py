@@ -26,9 +26,52 @@ _SELECT = """
 """
 
 _STOPWORDS = frozenset(
-    """a an the of for to in on at by is are was were be been and or not what which who
-    whom this that these those with as from it its if any does do did shall will under
-    over about into per""".split()
+    [
+        "a",
+        "an",
+        "the",
+        "of",
+        "for",
+        "to",
+        "in",
+        "on",
+        "at",
+        "by",
+        "is",
+        "are",
+        "was",
+        "were",
+        "be",
+        "been",
+        "and",
+        "or",
+        "not",
+        "what",
+        "which",
+        "who",
+        "whom",
+        "this",
+        "that",
+        "these",
+        "those",
+        "with",
+        "as",
+        "from",
+        "it",
+        "its",
+        "if",
+        "any",
+        "does",
+        "do",
+        "did",
+        "shall",
+        "will",
+        "under",
+        "over",
+        "about",
+        "into",
+        "per",
+    ]
 )
 
 

@@ -188,9 +188,7 @@ def build(
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "--cuad", type=Path, default=ROOT / "var" / "cuad" / "data" / "CUADv1.json"
-    )
+    parser.add_argument("--cuad", type=Path, default=ROOT / "var" / "cuad" / "data" / "CUADv1.json")
     parser.add_argument("--max-documents", type=int, default=30)
     parser.add_argument("--target-pairs", type=int, default=110)
     parser.add_argument("--min-chars", type=int, default=20_000)

@@ -64,11 +64,10 @@ def span_coverage(
         total += gold_end - gold_start
         marks = [False] * (gold_end - gold_start)
         for span_start, span_end in retrieved[:k]:
-            for offset in range(
-                max(span_start, gold_start) - gold_start, max(0, min(span_end, gold_end) - gold_start)
-            ):
-                if offset >= 0:
-                    marks[offset] = True
+            lower = max(span_start, gold_start) - gold_start
+            upper = min(span_end, gold_end) - gold_start
+            for offset in range(max(0, lower), max(0, upper)):
+                marks[offset] = True
         covered += sum(marks)
     return covered / total if total else 0.0
 

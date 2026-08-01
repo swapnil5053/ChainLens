@@ -1,0 +1,80 @@
+[project]
+name = "chainlens"
+version = "2.0.0"
+description = "Clause-level contract analysis for supply chain and logistics documents"
+requires-python = ">=3.12"
+dependencies = [
+  "fastapi>=0.115",
+  "uvicorn[standard]>=0.30",
+  "sqlalchemy>=2.0",
+  "alembic>=1.13",
+  "psycopg[binary]>=3.2",
+  "pgvector>=0.3",
+  "pydantic>=2.8",
+  "pydantic-settings>=2.4",
+  "pypdf>=4.3",
+  "numpy>=1.26",
+  "scikit-learn>=1.5",
+  "arq>=0.26",
+  "redis>=5.0",
+  "httpx>=0.27",
+  "pyyaml>=6.0",
+  "sse-starlette>=2.1",
+  "python-multipart>=0.0.9",
+  "tenacity>=9.0",
+  "structlog>=24.4",
+]
+
+[project.optional-dependencies]
+# Not installable in the environment this was rebuilt in: the model hub is blocked by
+# the egress proxy. Declared so the intended default provider is one pip install away.
+# See ADR-0003.
+encoders = ["sentence-transformers>=3.0"]
+dev = ["pytest>=8.3", "pytest-asyncio>=0.24", "ruff>=0.6", "mypy>=1.11", "types-PyYAML"]
+# Runs a real PostgreSQL 16 with pgvector without Docker. See ADR-0001.
+localpg = ["pgserver>=0.1.4"]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["apps/api"]
+include = ["chainlens*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+src = ["apps/api", "eval", "scripts"]
+extend-exclude = ["apps/api/alembic/versions", "apps/web", "var"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "C4", "RUF", "PTH", "ARG"]
+ignore = [
+  "B008",
+  "RUF012",
+  # datetime.UTC is 3.11+. The project targets 3.12, but the reference environment
+  # for the committed eval runs was 3.10, so timezone.utc is used deliberately.
+  "UP017",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"eval/*" = ["E402"]
+"scripts/*" = ["E402"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+mypy_path = "apps/api"
+files = ["apps/api/chainlens", "eval", "scripts"]
+exclude = "(apps/api/alembic|apps/web|var)"
+warn_unused_ignores = false
+
+[[tool.mypy.overrides]]
+module = ["pgserver.*", "sklearn.*", "sentence_transformers.*", "pgvector.*", "arq.*", "yaml.*"]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["apps/api/tests"]
+pythonpath = ["apps/api", "."]
+filterwarnings = ["ignore::DeprecationWarning"]

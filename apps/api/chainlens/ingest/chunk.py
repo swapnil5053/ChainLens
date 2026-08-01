@@ -29,13 +29,13 @@ HEADING_PATTERNS: tuple[re.Pattern[str], ...] = (
     # ARTICLE VII - INDEMNIFICATION
     re.compile(
         rf"^[ \t]*(?P<id>ARTICLE[ \t]+(?:[{_ROMAN}]+|\d+))"
-        r"(?:[ \t]*[-–:.][ \t]*(?P<title>[^\n]{2,80}))?[ \t]*$",
+        r"(?:[ \t]*[-\u2013:.][ \t]*(?P<title>[^\n]{2,80}))?[ \t]*$",
         re.MULTILINE | re.IGNORECASE,
     ),
     # Section 4(b) Payment Terms
     re.compile(
         r"^[ \t]*(?P<id>Section[ \t]+\d{1,3}(?:\.\d{1,3})*(?:\([a-z]\))?)"
-        r"(?:[ \t]*[-–:.]?[ \t]*(?P<title>[^\n]{2,80}))?[ \t]*$",
+        r"(?:[ \t]*[-\u2013:.]?[ \t]*(?P<title>[^\n]{2,80}))?[ \t]*$",
         re.MULTILINE | re.IGNORECASE,
     ),
     # 7. TERMINATION
