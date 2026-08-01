@@ -147,6 +147,10 @@ intuition that vector search is the expensive part. Backed by the `embed_ms_p50`
 
 ## Quickstart
 
+Step-by-step instructions, including what to click and what will not work, are in
+[`RUNNING.md`](RUNNING.md). The shortest path to seeing something is to open
+`apps/web/prototype/evaluation.html`, which needs no install at all.
+
 ```bash
 docker compose -f infra/docker-compose.yml up --build
 curl localhost:8000/health

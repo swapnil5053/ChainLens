@@ -33,7 +33,9 @@ TEMPLATE = """<!doctype html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ChainLens evaluation</title>
-<link rel="stylesheet" href="../app/tokens.css">
+<style>
+{tokens}
+</style>
 <style>
 /* Prototype-only layout. Every colour, size, space and duration below resolves to a
    semantic token from tokens.css. There is no raw hex in this file. */
@@ -181,9 +183,19 @@ tbody tr.group th {{
 
 
 def load() -> dict[str, dict[str, object]]:
+    """Retrieval runs only.
+
+    eval/results/ also holds the extraction evaluation, which has a different metric set.
+    Selecting on the presence of recall@6 rather than on the filename means a new
+    retrieval run is picked up automatically and a new kind of run is not mistaken for one.
+    """
     results: dict[str, dict[str, object]] = {}
     for path in sorted(RESULTS.glob("*.json")):
         payload = json.loads(path.read_text(encoding="utf-8"))
+        metrics = payload.get("metrics") or {}
+        is_retrieval = "recall@6" in metrics or payload.get("status") != "ok"
+        if not is_retrieval or "config" not in payload:
+            continue
         payload.pop("per_query", None)
         results[str(payload["run_id"])] = payload
     return results
@@ -200,11 +212,25 @@ def cell(result: dict[str, object] | None, key: str, digits: int = 3, lead: bool
     return f'<td class="{classes}">{float(value):.{digits}f}</td>'
 
 
+def read_tokens() -> str:
+    """Inline the token layer.
+
+    The prototype is meant to open by double-clicking it, which rules out a stylesheet
+    link with a relative path and rules out the Tailwind @import. Only the plain-CSS parts
+    are inlined; the @import line is dropped because a browser opening this from disk has
+    nothing to resolve it against.
+    """
+    source = (ROOT / "apps" / "web" / "app" / "tokens.css").read_text(encoding="utf-8")
+    return "\n".join(line for line in source.splitlines() if not line.strip().startswith("@import"))
+
+
 def build() -> str:
     results = load()
     ok = [item for item in results.values() if item.get("status") == "ok"]
+    tokens = read_tokens()
     if not ok:
         return TEMPLATE.format(
+            tokens=tokens,
             figures='<div class="empty">No evaluation runs are present in '
             'eval/results/. Run <span class="mono">python -m eval.run</span> to '
             "produce them, then regenerate this page.</div>",
@@ -310,6 +336,7 @@ def build() -> str:
         "the column the configuration decision turned on."
     )
     return TEMPLATE.format(
+        tokens=tokens,
         figures=figures,
         caption=caption,
         rows="\n".join(rows),

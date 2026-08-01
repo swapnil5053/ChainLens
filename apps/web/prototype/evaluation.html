@@ -4,7 +4,187 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ChainLens evaluation</title>
-<link rel="stylesheet" href="../app/tokens.css">
+<style>
+/* ChainLens semantic token layer.
+ *
+ * Tailwind CSS v4, CSS-first. There is no tailwind.config.js by design.
+ *
+ * Two tiers. The first is a private palette: raw values, referenced by nothing outside
+ * this file. The second is the semantic layer: the only names component markup is
+ * allowed to use. Re-skinning is editing the values in :root and [data-theme="dark"],
+ * and nothing else. If a component ever needs a raw hex or a palette utility class, the
+ * token layer is missing a name and the fix is to add one here.
+ *
+ * Every colour pair that carries meaning has a measured contrast ratio. The numbers are
+ * produced by scripts/contrast.py and recorded in docs/taste-pass.md. They are not
+ * eyeballed.
+ */
+
+
+/* ---- tier 1: private palette. Do not reference these outside this file. ---- */
+:root {
+  --paper-00: #fbfaf7;
+  --paper-10: #f4f2ec;
+  --paper-20: #eae7de;
+  --graphite-90: #1a1815;
+  --graphite-70: #55514a;
+  --graphite-60: #6e695f;
+  --graphite-40: #999180;
+  --graphite-30: #c9c3b6;
+
+  --ink-00: #141311;
+  --ink-10: #1d1b18;
+  --ink-20: #262320;
+  --bone-90: #edeae3;
+  --bone-70: #a9a399;
+  --bone-60: #8b857a;
+  --bone-40: #666158;
+  --bone-30: #3a3733;
+
+  --oxide-60: #a3341a;
+  --oxide-40: #e2704b;
+  --amber-90: #f0d9a8;
+  --amber-20: #4a3a15;
+  --umber-60: #8a5b00;
+  --umber-40: #d9a441;
+}
+
+/* ---- tier 2: semantic tokens. These are the only names markup may use. ----
+ *
+ * Declared in :root as ordinary custom properties so they resolve in a plain browser as
+ * well as through Tailwind, then mapped into @theme below so Tailwind generates
+ * utilities from the same values. One source, two consumers, no drift. */
+:root {
+  --ground: var(--paper-00);
+  --panel: var(--paper-10);
+  --panel-raised: var(--paper-20);
+  --ink: var(--graphite-90);
+  --ink-muted: var(--graphite-70);
+  --ink-faint: var(--graphite-60);
+  --rule: var(--graphite-30);
+  --rule-control: var(--graphite-40);
+  --accent: var(--oxide-60);
+  --mark: var(--amber-90);
+  --flag: var(--umber-60);
+}
+
+@theme {
+  --color-ground: var(--ground);
+  --color-panel: var(--panel);
+  --color-panel-raised: var(--panel-raised);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-faint: var(--ink-faint);
+  --color-rule: var(--rule);
+  --color-rule-control: var(--rule-control);
+  --color-accent: var(--accent);
+  --color-mark: var(--mark);
+  --color-flag: var(--flag);
+
+  /* Type. Three roles, three families, deliberately distinct.
+   * ui        interface chrome, labels, tables
+   * document  contract prose in the reader pane
+   * identity  clause numbers, dates, hashes, money, latency. Tabular figures. */
+  --font-ui: "Public Sans Variable", "Public Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-document: "Source Serif 4 Variable", "Source Serif 4", Georgia, serif;
+  --font-identity: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --text-micro: 0.6875rem;   /* 11px, letterspaced uppercase field labels */
+  --text-small: 0.8125rem;   /* 13px, table cells and metadata */
+  --text-body: 0.9375rem;    /* 15px, interface body */
+  --text-reading: 1.0625rem; /* 17px, contract prose only */
+  --text-figure: 1.5rem;     /* 24px, a single measured number */
+
+  --tracking-label: 0.08em;
+  --leading-dense: 1.35;
+  --leading-reading: 1.6;
+
+  /* Space. 4px base, no half steps, no arbitrary values in markup. */
+  --spacing-1: 0.25rem;
+  --spacing-2: 0.5rem;
+  --spacing-3: 0.75rem;
+  --spacing-4: 1rem;
+  --spacing-6: 1.5rem;
+  --spacing-8: 2rem;
+  --spacing-12: 3rem;
+  --spacing-16: 4rem;
+
+  /* Radius. This is printed paperwork: corners are square or nearly so.
+   * There is deliberately no value above 3px in the scale. */
+  --radius-none: 0px;
+  --radius-hair: 1px;
+  --radius-field: 2px;
+  --radius-chip: 3px;
+
+  /* Rules, not shadows. There is exactly one shadow token and it is for the one
+   * element that genuinely floats: the citation hover preview. */
+  --rule-hair: 1px;
+  --rule-section: 2px;
+  --shadow-float: 0 1px 2px rgb(26 24 21 / 0.16), 0 4px 12px rgb(26 24 21 / 0.10);
+
+  /* Motion. Enter cheap, exit instant. Tokenised so no component types a duration. */
+  --duration-enter: 160ms;
+  --duration-exit: 90ms;
+  --duration-hover: 120ms;
+  --ease-enter: cubic-bezier(0.2, 0, 0, 1);
+  --ease-exit: cubic-bezier(0.4, 0, 1, 1);
+}
+
+/* Dark is a variable swap. Nothing below this line is a dark: utility in markup. */
+[data-theme="dark"] {
+  --ground: var(--ink-00);
+  --panel: var(--ink-10);
+  --panel-raised: var(--ink-20);
+  --ink: var(--bone-90);
+  --ink-muted: var(--bone-70);
+  --ink-faint: var(--bone-60);
+  --rule: var(--bone-30);
+  --rule-control: var(--bone-40);
+  --accent: var(--oxide-40);
+  --mark: var(--amber-20);
+  --flag: var(--umber-40);
+  --shadow-float: 0 1px 2px rgb(0 0 0 / 0.5), 0 4px 12px rgb(0 0 0 / 0.4);
+}
+
+/* Reduced motion is handled once, at the token layer, not per component.
+ * Durations collapse to a value the browser treats as instant, so every transition and
+ * every Motion tween that reads these tokens stops moving without any component
+ * needing to know the preference exists. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-enter: 1ms;
+    --duration-exit: 1ms;
+    --duration-hover: 1ms;
+  }
+}
+
+/* The signature element: the citation mark.
+ *
+ * Not a soft glow and not a rounded pill. A redline: a flat amber ground with a 2px
+ * accent bar on the leading edge, the way a clause gets marked up on paper. The
+ * leading-edge bar is what makes it read as a deliberate mark rather than a highlight
+ * that a mouse dragged across the text. */
+.citation-mark {
+  background-color: var(--mark);
+  box-shadow: inset 2px 0 0 0 var(--accent);
+  color: var(--ink);
+  padding-block: 1px;
+}
+
+.citation-mark[data-active="true"] {
+  box-shadow:
+    inset 2px 0 0 0 var(--accent),
+    inset -2px 0 0 0 var(--accent);
+}
+
+/* Focus rings are designed, not defaulted, and use the accent so they are legible on
+ * both grounds at 3:1 or better. */
+:where(a, button, [role="button"], input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: var(--radius-hair);
+}
+</style>
 <style>
 /* Prototype-only layout. Every colour, size, space and duration below resolves to a
    semantic token from tokens.css. There is no raw hex in this file. */
