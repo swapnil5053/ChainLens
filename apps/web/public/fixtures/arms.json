@@ -1,0 +1,38 @@
+{
+  "mmr": {
+    "runId": "clause-aware__mmr",
+    "recallAt6": 0.4606,
+    "mrr": 0.5567,
+    "ndcgAt10": 0.4646,
+    "latencyMsP50": 82.11,
+    "embedMsP50": 76.79,
+    "searchMsP50": 4.78,
+    "questions": 110,
+    "datasetSha256": "4ac8d01460a836c4",
+    "embeddingProvider": "lsa-tfidf-svd-384"
+  },
+  "clause-rrf-expansion": {
+    "runId": "clause-aware__rrf_expansion",
+    "recallAt6": 0.6765,
+    "mrr": 0.6104,
+    "ndcgAt10": 0.6119,
+    "latencyMsP50": 105.17,
+    "embedMsP50": 99.8,
+    "searchMsP50": 5.04,
+    "questions": 110,
+    "datasetSha256": "4ac8d01460a836c4",
+    "embeddingProvider": "lsa-tfidf-svd-384"
+  },
+  "v1-equivalent": {
+    "runId": "recursive-512__mmr",
+    "recallAt6": 0.2839,
+    "mrr": 0.5441,
+    "ndcgAt10": 0.3283,
+    "latencyMsP50": 84.59,
+    "embedMsP50": 78.83,
+    "searchMsP50": 5.1,
+    "questions": 110,
+    "datasetSha256": "4ac8d01460a836c4",
+    "embeddingProvider": "lsa-tfidf-svd-384"
+  }
+}

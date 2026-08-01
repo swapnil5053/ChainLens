@@ -17,7 +17,42 @@ RANGES = (
     (0xFE0F, 0xFE0F),
 )
 SKIP_SUFFIXES = {".png", ".jpg", ".jpeg", ".gif", ".pdf", ".ico", ".woff", ".woff2", ".pkl"}
-SKIP_PARTS = {".git", "node_modules", "var", ".next", "corpus"}
+SKIP_PARTS = {
+    ".git",
+    "node_modules",
+    "var",
+    ".next",
+    "dist",
+    "corpus",
+    "fixtures",
+    ".mypy_cache",
+    ".ruff_cache",
+    ".pytest_cache",
+}
+
+
+def iter_files(root: Path) -> list[Path]:
+    """Walk the tree, pruning skip directories instead of filtering after the fact.
+
+    rglob descends into node_modules before discarding it, which turns a pre-commit hook
+    into a several-second pause. Pruning during the walk keeps it instant.
+    """
+    found: list[Path] = []
+    stack = [root]
+    while stack:
+        current = stack.pop()
+        try:
+            entries = list(current.iterdir())
+        except OSError:
+            continue
+        for entry in entries:
+            if entry.name in SKIP_PARTS:
+                continue
+            if entry.is_dir():
+                stack.append(entry)
+            elif entry.is_file():
+                found.append(entry)
+    return found
 
 
 def is_emoji(char: str) -> bool:
@@ -42,9 +77,7 @@ def check(path: Path) -> list[str]:
 
 
 def main(argv: list[str]) -> int:
-    targets = [Path(arg) for arg in argv[1:]] or [
-        path for path in Path().rglob("*") if path.is_file()
-    ]
+    targets = [Path(arg) for arg in argv[1:]] or iter_files(Path())
     problems = [problem for target in targets if target.is_file() for problem in check(target)]
     for problem in problems:
         print(problem)

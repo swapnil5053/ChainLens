@@ -128,6 +128,11 @@ ENV/
 env.bak/
 venv.bak/
 
+# Web application build output and dependencies.
+node_modules/
+apps/web/dist/
+apps/web/test/*.mjs
+
 # Project-specific
 # Legacy Chroma store from v1. Removed in v2; kept ignored so stale copies stay untracked.
 Vector_DB - Documents/

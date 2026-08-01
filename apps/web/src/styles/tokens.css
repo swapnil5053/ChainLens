@@ -1,0 +1,179 @@
+/* ChainLens token layer. Tailwind v4, CSS-first, no config file.
+ *
+ * Two tiers. Tier 1 is a private OKLCH ramp: one neutral hue with lightness stepping, one
+ * accent hue. Tier 2 is the semantic layer, and it is the only set of names component
+ * markup may use. Dark mode is a variable swap on [data-theme="dark"]; there is not one
+ * dark: utility anywhere in src/, and the verification step greps to prove it.
+ *
+ * OKLCH is not decoration here. Because the neutral ramp is a single hue with lightness
+ * varying, re-skinning is editing --hue-neutral, not hand-picking ten hex codes that
+ * happen to sit on a curve. Every ratio is computed by scripts/contrast.py and recorded
+ * in docs/accessibility-audit-web.md.
+ */
+
+@import "tailwindcss";
+
+:root {
+  --hue-neutral: 85;
+  --hue-accent: 42;
+  --hue-mark: 92;
+  --hue-flag: 75;
+
+  --ground: oklch(0.985 0.004 var(--hue-neutral));
+  --panel: oklch(0.962 0.008 var(--hue-neutral));
+  --panel-raised: oklch(0.935 0.01 var(--hue-neutral));
+  --ink: oklch(0.205 0.01 var(--hue-neutral));
+  --ink-muted: oklch(0.455 0.012 var(--hue-neutral));
+  --ink-faint: oklch(0.545 0.014 var(--hue-neutral));
+  --rule: oklch(0.845 0.014 var(--hue-neutral));
+  --rule-control: oklch(0.654 0.018 var(--hue-neutral));
+  --accent: oklch(0.48 0.14 var(--hue-accent));
+  --mark: oklch(0.9 0.062 var(--hue-mark));
+  --mark-soft: oklch(0.945 0.032 var(--hue-mark));
+  --flag: oklch(0.5 0.09 var(--hue-flag));
+}
+
+/* Dark is a palette, not an inversion: near-black tinted with the same neutral hue,
+ * elevation by lightness, the accent desaturated so it does not vibrate on black. */
+[data-theme="dark"] {
+  --ground: oklch(0.185 0.008 var(--hue-neutral));
+  --panel: oklch(0.228 0.01 var(--hue-neutral));
+  --panel-raised: oklch(0.272 0.011 var(--hue-neutral));
+  --ink: oklch(0.93 0.01 var(--hue-neutral));
+  --ink-muted: oklch(0.72 0.012 var(--hue-neutral));
+  --ink-faint: oklch(0.625 0.013 var(--hue-neutral));
+  --rule: oklch(0.33 0.012 var(--hue-neutral));
+  --rule-control: oklch(0.496 0.014 var(--hue-neutral));
+  --accent: oklch(0.7 0.13 var(--hue-accent));
+  --mark: oklch(0.33 0.055 var(--hue-mark));
+  --mark-soft: oklch(0.27 0.03 var(--hue-mark));
+  --flag: oklch(0.78 0.11 80);
+}
+
+@theme inline {
+  --color-ground: var(--ground);
+  --color-panel: var(--panel);
+  --color-panel-raised: var(--panel-raised);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-faint: var(--ink-faint);
+  --color-rule: var(--rule);
+  --color-rule-control: var(--rule-control);
+  --color-accent: var(--accent);
+  --color-mark: var(--mark);
+  --color-mark-soft: var(--mark-soft);
+  --color-flag: var(--flag);
+
+  /* Three families, three jobs. ui is interface chrome, document is contract prose,
+   * identity is anything a reader compares down a column and therefore needs tabular
+   * figures: clause numbers, pages, milliseconds, scores. */
+  --font-ui: "Public Sans Variable", "Public Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-document: "Source Serif 4 Variable", "Source Serif 4", Georgia, serif;
+  --font-identity: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --text-micro: 0.6875rem;
+  --text-small: 0.8125rem;
+  --text-body: 0.9375rem;
+  --text-reading: 1.0625rem;
+  --text-figure: 1.75rem;
+
+  --tracking-label: 0.08em;
+
+  /* Printed paperwork: nothing in the scale can produce a pillowy card. */
+  --radius-none: 0px;
+  --radius-hair: 1px;
+  --radius-field: 2px;
+  --radius-chip: 3px;
+
+  --shadow-float: 0 1px 2px oklch(0.205 0.01 85 / 0.16), 0 4px 12px oklch(0.205 0.01 85 / 0.1);
+
+  --duration-hover: 120ms;
+  --duration-enter: 180ms;
+  --duration-exit: 90ms;
+  --ease-enter: cubic-bezier(0.2, 0, 0, 1);
+  --ease-exit: cubic-bezier(0.4, 0, 1, 1);
+}
+
+/* Reduced motion is handled once, here. Durations collapse so every transition and every
+ * Motion tween that reads a token stops moving; the state changes themselves are kept,
+ * which is what the guidance asks for. No component checks the preference itself. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-hover: 1ms;
+    --duration-enter: 1ms;
+    --duration-exit: 1ms;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@layer base {
+  html { color-scheme: light; }
+  [data-theme="dark"] { color-scheme: dark; }
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--font-ui);
+    font-size: var(--text-body);
+    line-height: 1.4;
+    -webkit-font-smoothing: antialiased;
+  }
+  /* Focus rings are designed, not defaulted, and are as considered as hover. */
+  :where(a, button, [role="button"], input, select, textarea, [tabindex]):focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: var(--radius-hair);
+  }
+  ::selection { background: var(--mark); color: var(--ink); }
+}
+
+@layer components {
+  /* The signature element. A redline, not a highlight: flat amber ground with a 2px accent
+   * bar on the leading edge, the way a clause is marked on paper. The active citation
+   * closes the bracket on the trailing edge too. */
+  .citation-mark {
+    background-color: var(--mark-soft);
+    box-shadow: inset 2px 0 0 0 var(--accent);
+    color: var(--ink);
+    padding-block: 1px;
+    transition:
+      background-color var(--duration-hover) var(--ease-enter),
+      box-shadow var(--duration-hover) var(--ease-enter);
+  }
+  .citation-mark[data-state="active"] {
+    background-color: var(--mark);
+    box-shadow: inset 2px 0 0 0 var(--accent), inset -2px 0 0 0 var(--accent);
+  }
+  .citation-mark[data-state="hover"] { background-color: var(--mark); }
+
+  /* A boxed field with its label sitting on the top rule, as a printed form does it. */
+  .field { border: 1px solid var(--rule); border-top: 2px solid var(--ink); background: var(--panel); }
+
+  .field-label {
+    font-size: var(--text-micro);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-label);
+    color: var(--ink-faint);
+  }
+
+  .numeric { font-family: var(--font-identity); font-variant-numeric: tabular-nums; }
+
+  /* Links: a hairline underline that grows from the leading edge, not a colour flip. */
+  .link {
+    color: var(--ink);
+    text-decoration: none;
+    background-image: linear-gradient(var(--accent), var(--accent));
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    background-size: 0% 1px;
+    transition: background-size var(--duration-hover) var(--ease-enter);
+  }
+  .link:hover, .link:focus-visible { background-size: 100% 1px; }
+}
