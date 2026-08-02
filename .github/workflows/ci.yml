@@ -70,7 +70,19 @@ jobs:
         run: python -m eval.run --force
       - name: Regression gate
         run: python -m eval.gate
+      # Two different questions, so two different sets of inputs.
+      #
+      # The gate above asks "has retrieval quality regressed?" and must run against results
+      # measured here, on this runner. This step asks a narrower question: "did someone edit
+      # eval/results without regenerating the tables that quote it?" That has to be checked
+      # against the committed artifacts, because the tables carry latency figures and a
+      # Postgres version string, and both are properties of the machine that produced them.
+      # A runner is faster than a laptop (about 50 ms against 81 ms) and ships a different
+      # Postgres, whose full-text ranking moves the lexical numbers a little, so comparing
+      # freshly measured timings against committed ones fails every time and says nothing
+      # about correctness. Restoring the committed results first makes the check honest.
       - name: Fail if the committed tables are stale
         run: |
+          git checkout -- eval/results
           python -m eval.report
           git diff --exit-code -- README.md docs/RETRIEVAL.md eval/baseline.json
