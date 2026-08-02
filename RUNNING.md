@@ -73,7 +73,62 @@ npm run verify     # typecheck, then the smoke test, then a production build
 
 ---
 
-## 3. The backend, Python and a local Postgres, no Docker
+## 3. The whole thing, front and back, talking to each other
+
+Two shells. This is the one that shows the system rather than either half of it.
+
+**Shell A, the API and its data:**
+
+```bash
+cd ChainLens
+pip install -e ".[dev,localpg]"
+
+export CHAINLENS_LOCAL_PG=1              # PowerShell: $env:CHAINLENS_LOCAL_PG = "1"
+python scripts/migrate.py                # PostgreSQL 16 with pgvector, in-process
+python -m eval.build_index --strategy clause-aware   # ~30s: fits the model, indexes 29 contracts
+python -m uvicorn chainlens.main:app --app-dir apps/api --port 8000
+```
+
+`build_index` rather than `seed`, because it indexes all 29 contracts instead of three and
+fits the embedding model the retrieval needs. Watch for `"embedding": "lsa-tfidf-svd-384"`
+in the startup line; if it says `null`, the index step did not finish.
+
+**Shell B, the interface pointed at it:**
+
+```bash
+cd ChainLens/apps/web
+npm install
+VITE_ADAPTER=http VITE_API_BASE=http://localhost:8000/web npm run dev
+```
+
+Or leave the environment alone and append `?adapter=http` to the URL. Either way the
+footer flips from `MOCK` to `LIVE` and names the API. That footer is the check: if it
+still says MOCK, the swap did not take.
+
+What you should see, and what it means:
+
+- **29 contracts** in the list, typed by kind: Supply, Distribution, Manufacturing,
+  Outsourcing, Reseller, Transportation, Strategic alliance.
+- **Open `Apollo Endosurgery Manufacturing and Supply Agreement`** (19 pages, 33 detected
+  clauses) and ask `What is the cap on liability?`. Six citations come back and the first
+  is clause 8, INDEMNIFICATION, LIMITATION OF LIABILITY AND INSURANCE. Ask
+  `How much notice is needed to stop it renewing?` and the first citation is clause 2,
+  TERM AND TERMINATION. Those clause numbers are read out of the contract, not guessed.
+- **Click a citation.** The pane scrolls and marks the exact character span. This is now
+  running against Postgres: the span came from the `chunks` table, not from a fixture.
+- **Latency** now shows numbers measured from your own requests. Expect roughly 75 ms
+  embedding against 7 ms retrieval, which is the finding the panel exists to show, observed
+  live rather than replayed.
+- **Retrieval comparison** runs both arms against Postgres. The per-query chunk lists are
+  computed now; the Recall@6 figures beside them, 0.476 and 0.690, are read from the
+  committed evaluation artifacts and are labelled as corpus aggregates.
+
+If the browser console shows a CORS error, the API is not on port 8000 or the base URL is
+missing the `/web` suffix.
+
+---
+
+## 4. The backend on its own, Python and a local Postgres, no Docker
 
 ```bash
 pip install -e ".[dev,localpg]"
