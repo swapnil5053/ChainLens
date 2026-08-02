@@ -16,46 +16,46 @@ import math
 
 Oklch = tuple[float, float, float]
 
-NEUTRAL_HUE = 85.0
-ACCENT_HUE = 42.0
+NEUTRAL_HUE = 262.0
+ACCENT_HUE = 256.0
 
 LIGHT: dict[str, Oklch] = {
-    "ground": (0.985, 0.004, NEUTRAL_HUE),
-    "panel": (0.962, 0.008, NEUTRAL_HUE),
-    "panel-raised": (0.935, 0.010, NEUTRAL_HUE),
-    "ink": (0.205, 0.010, NEUTRAL_HUE),
-    "ink-muted": (0.455, 0.012, NEUTRAL_HUE),
-    "ink-faint": (0.545, 0.014, NEUTRAL_HUE),
-    "rule": (0.845, 0.014, NEUTRAL_HUE),
-    "rule-control": (0.654, 0.018, NEUTRAL_HUE),
-    "accent": (0.480, 0.140, ACCENT_HUE),
-    "mark": (0.900, 0.062, 92.0),
-    "flag": (0.500, 0.090, 75.0),
+    "ground": (0.994, 0.0015, NEUTRAL_HUE),
+    "panel": (0.972, 0.004, NEUTRAL_HUE),
+    "panel-raised": (0.948, 0.006, NEUTRAL_HUE),
+    "ink": (0.24, 0.015, NEUTRAL_HUE),
+    "ink-muted": (0.455, 0.02, NEUTRAL_HUE),
+    "ink-faint": (0.55, 0.022, NEUTRAL_HUE),
+    "line": (0.905, 0.008, NEUTRAL_HUE),
+    "line-strong": (0.66, 0.02, NEUTRAL_HUE),
+    "accent": (0.46, 0.15, ACCENT_HUE),
+    "accent-weak": (0.93, 0.045, ACCENT_HUE),
+    "flag": (0.52, 0.15, 32.0),
 }
 
 DARK: dict[str, Oklch] = {
-    "ground": (0.185, 0.008, NEUTRAL_HUE),
-    "panel": (0.228, 0.010, NEUTRAL_HUE),
-    "panel-raised": (0.272, 0.011, NEUTRAL_HUE),
-    "ink": (0.930, 0.010, NEUTRAL_HUE),
-    "ink-muted": (0.720, 0.012, NEUTRAL_HUE),
-    "ink-faint": (0.625, 0.013, NEUTRAL_HUE),
-    "rule": (0.330, 0.012, NEUTRAL_HUE),
-    "rule-control": (0.496, 0.014, NEUTRAL_HUE),
-    "accent": (0.700, 0.130, ACCENT_HUE),
-    "mark": (0.330, 0.055, 92.0),
-    "flag": (0.780, 0.110, 80.0),
+    "ground": (0.155, 0.012, NEUTRAL_HUE),
+    "panel": (0.195, 0.014, NEUTRAL_HUE),
+    "panel-raised": (0.24, 0.016, NEUTRAL_HUE),
+    "ink": (0.95, 0.008, NEUTRAL_HUE),
+    "ink-muted": (0.73, 0.016, NEUTRAL_HUE),
+    "ink-faint": (0.63, 0.018, NEUTRAL_HUE),
+    "line": (0.3, 0.014, NEUTRAL_HUE),
+    "line-strong": (0.485, 0.02, NEUTRAL_HUE),
+    "accent": (0.72, 0.13, ACCENT_HUE),
+    "accent-weak": (0.3, 0.05, ACCENT_HUE),
+    "flag": (0.74, 0.15, 42.0),
 }
 
 PAIRS: list[tuple[str, str, str, float, str]] = [
     ("body text", "ink", "ground", 4.5, "WCAG 1.4.3"),
     ("secondary text", "ink-muted", "ground", 4.5, "WCAG 1.4.3"),
-    ("field label, 11px", "ink-faint", "ground", 4.5, "WCAG 1.4.3, held to AA not large-text"),
-    ("citation accent on page", "accent", "ground", 4.5, "WCAG 1.4.3"),
-    ("citation accent on panel", "accent", "panel", 4.5, "WCAG 1.4.3"),
+    ("faint text", "ink-faint", "ground", 4.5, "WCAG 1.4.3"),
+    ("accent on ground", "accent", "ground", 4.5, "WCAG 1.4.3"),
+    ("accent on panel", "accent", "panel", 4.5, "WCAG 1.4.3"),
+    ("ink on citation mark", "ink", "accent-weak", 4.5, "the mark must stay readable"),
     ("risk flag text", "flag", "ground", 4.5, "WCAG 1.4.3"),
-    ("marked span text", "ink", "mark", 4.5, "the citation mark must stay readable"),
-    ("control boundary", "rule-control", "ground", 3.0, "WCAG 1.4.11"),
+    ("meaningful boundary", "line-strong", "ground", 3.0, "WCAG 1.4.11"),
     ("focus ring", "accent", "ground", 3.0, "WCAG 1.4.11"),
 ]
 

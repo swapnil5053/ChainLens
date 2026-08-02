@@ -16,6 +16,12 @@ repos:
       - id: detect-private-key
   - repo: local
     hooks:
+      - id: impeccable-design
+        name: impeccable design anti-pattern scan
+        entry: bash -c 'cd apps/web && npx --yes impeccable detect src'
+        language: system
+        pass_filenames: false
+        files: ^apps/web/src/.*\.(tsx?|css)$
       - id: no-emoji
         name: no emoji anywhere in the tree
         entry: python scripts/check_no_emoji.py

@@ -1,16 +1,15 @@
 /**
- * View 1. Document-forward split: the contract dominates, the finding sits beside it.
+ * The primary screen, stripped to what matters: the contract, and the answer beside it.
  *
- * State placement, decided in the taste pass before this file existed:
- *   server   contract list, contract text, analysis result  -> TanStack Query
- *   URL      selected contract, query text                  -> shareable
- *   local    active and hovered citation                    -> ephemeral
+ * A resizable split with the document dominant. The contract selector and the question
+ * box sit in a thin bar above each pane; there is no sidebar, no metadata strip, no
+ * badges. The working engine underneath (queries, adapter, marks) is unchanged.
  */
 import { useState } from "react";
 import { useAnalyse, useContract } from "../../api/queries";
 import { Button } from "../../components/ui/Button";
-import { AnswerRecord, type AnswerState } from "./AnswerRecord";
-import { ContractPicker } from "./ContractPicker";
+import { AnswerBlock, type AnswerState } from "./AnswerBlock";
+import { ContractSelect } from "./ContractSelect";
 import { DocumentPane, type DocumentPaneState } from "./DocumentPane";
 
 export function AnalyseView({
@@ -22,7 +21,7 @@ export function AnalyseView({
   contractId: string | null;
   query: string;
   onContractChange: (id: string) => void;
-  onQueryChange: (value: string) => void;
+  onQueryChange: (v: string) => void;
 }) {
   const [draft, setDraft] = useState(query);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
@@ -32,14 +31,14 @@ export function AnalyseView({
   const analyse = useAnalyse();
 
   const run = (value: string) => {
-    const trimmed = value.trim();
-    if (!trimmed || !contractId) return;
-    setDraft(trimmed);
-    onQueryChange(trimmed);
+    const q = value.trim();
+    if (!q || !contractId) return;
+    setDraft(q);
+    onQueryChange(q);
     setActiveIndex(null);
     analyse.mutate(
-      { contractId, query: trimmed },
-      { onSuccess: (result) => setActiveIndex(result.citations.length ? 0 : null) },
+      { contractId, query: q },
+      { onSuccess: (r) => setActiveIndex(r.citations.length ? 0 : null) },
     );
   };
 
@@ -60,88 +59,74 @@ export function AnalyseView({
         : { status: "idle", contractTitle: contract.data?.title ?? null };
 
   const citations = analyse.data?.citations ?? [];
-  const canAsk = Boolean(contractId) && draft.trim().length > 0;
 
   return (
-    <div className="grid min-h-0 flex-1 gap-4 overflow-hidden p-4 lg:grid-cols-[minmax(0,62fr)_minmax(0,38fr)]">
-      {/* Document first in the DOM on wide screens, second on narrow: the finding is what a
-          phone user needs first, the document is what a desk user reads. */}
-      <div className="order-2 flex min-h-0 flex-col lg:order-1">
-        <DocumentPane
-          state={documentState}
-          citations={citations}
-          activeIndex={activeIndex}
-          hoveredIndex={hoveredIndex}
-          onSelectCitation={setActiveIndex}
-        />
-      </div>
+    <div className="grid min-h-0 flex-1 grid-rows-2 lg:grid-cols-[3fr_2fr] lg:grid-rows-1">
+      {/* Document, dominant */}
+      <section className="flex min-h-0 flex-col border-line max-lg:border-b lg:border-r" aria-label="Contract">
+        <div className="flex items-center gap-3 border-b border-line px-6 py-3">
+          <ContractSelect selectedId={contractId} onSelect={onContractChange} />
+        </div>
+        <div className="min-h-0 flex-1">
+          <DocumentPane
+            state={documentState}
+            citations={citations}
+            activeIndex={activeIndex}
+            hoveredIndex={hoveredIndex}
+            onSelectCitation={setActiveIndex}
+          />
+        </div>
+      </section>
 
-      <div className="order-1 flex min-h-0 flex-col gap-4 overflow-y-auto lg:order-2">
+      {/* Answer */}
+      <section className="flex min-h-0 flex-col" aria-label="Answer">
         <form
-          className="field shrink-0 p-4"
-          onSubmit={(event) => {
-            event.preventDefault();
+          className="border-b border-line px-6 py-3"
+          onSubmit={(e) => {
+            e.preventDefault();
             run(draft);
           }}
         >
-          <label className="field-label" htmlFor="analyse-query">
-            Question
-          </label>
-          <textarea
-            id="analyse-query"
-            rows={2}
-            value={draft}
-            onChange={(event) => setDraft(event.target.value)}
-            onKeyDown={(event) => {
-              if (event.key === "Enter" && !event.shiftKey) {
-                event.preventDefault();
-                run(draft);
-              }
-            }}
-            placeholder="What is the cap on liability?"
-            className="mt-1 w-full resize-none rounded-[2px] border border-rule-control bg-ground px-2 py-1.5 text-small text-ink placeholder:text-ink-faint"
-          />
-          <div className="mt-2 flex flex-wrap items-center gap-3">
+          <div className="flex items-start gap-2">
+            <textarea
+              rows={1}
+              value={draft}
+              onChange={(e) => setDraft(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" && !e.shiftKey) {
+                  e.preventDefault();
+                  run(draft);
+                }
+              }}
+              placeholder={contractId ? "Ask about this contract..." : "Open a contract first"}
+              disabled={!contractId}
+              aria-label="Question"
+              className="min-h-9 flex-1 resize-none rounded-sm border border-line-strong bg-ground px-3 py-2 text-body text-ink placeholder:text-ink-faint disabled:opacity-60"
+            />
             <Button
               type="submit"
               variant="primary"
-              disabled={!canAsk || analyse.isPending}
-              disabledReason={
-                !contractId
-                  ? "Open a contract first: retrieval is scoped to one agreement."
-                  : draft.trim().length === 0
-                    ? "Type a question."
-                    : "Retrieval in progress."
-              }
+              disabled={!contractId || draft.trim().length === 0 || analyse.isPending}
+              disabledReason={!contractId ? "Open a contract first." : "Type a question."}
             >
-              {analyse.isPending ? "Retrieving" : "Ask"}
+              {analyse.isPending ? "Reading" : "Ask"}
             </Button>
-            {!contractId ? (
-              <span className="text-micro text-ink-muted">
-                Open a contract first: retrieval is scoped to one agreement.
-              </span>
-            ) : null}
           </div>
         </form>
-
-        <div className="shrink-0">
-          <AnswerRecord
+        <div className="min-h-0 flex-1 overflow-y-auto px-6 py-5">
+          <AnswerBlock
             state={answerState}
             activeIndex={activeIndex}
             hoveredIndex={hoveredIndex}
             onActivate={setActiveIndex}
             onHover={setHoveredIndex}
-            onExample={(example) => {
-              setDraft(example);
-              run(example);
+            onExample={(q) => {
+              setDraft(q);
+              run(q);
             }}
           />
         </div>
-
-        <div className="flex min-h-64 flex-1 flex-col">
-          <ContractPicker selectedId={contractId} onSelect={onContractChange} />
-        </div>
-      </div>
+      </section>
     </div>
   );
 }

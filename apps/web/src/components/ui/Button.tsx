@@ -1,10 +1,4 @@
-/**
- * A press is acknowledged by a 1px translate, not a scale bounce.
- *
- * Disabled buttons say why: `disabledReason` becomes the title, and callers with room
- * render it as adjacent text too, because a greyed control with no explanation is a dead
- * end.
- */
+/** Primary (filled accent) or quiet (text). Press nudges 1px; no scale bounce. */
 import type { ButtonHTMLAttributes } from "react";
 
 export function Button({
@@ -17,13 +11,13 @@ export function Button({
   disabledReason?: string;
 }) {
   const base =
-    "inline-flex min-h-8 items-center gap-2 rounded-[2px] border px-3 text-small " +
-    "transition-[background-color,border-color,transform] duration-(--duration-hover) " +
-    "ease-(--ease-enter) active:translate-y-px disabled:cursor-not-allowed disabled:opacity-60";
+    "inline-flex min-h-9 items-center justify-center gap-2 rounded-sm px-3.5 text-body " +
+    "font-medium transition-[background-color,color,transform] duration-(--duration) ease-(--ease) " +
+    "active:translate-y-px disabled:cursor-not-allowed disabled:opacity-45";
   const skin =
     variant === "primary"
-      ? "border-ink bg-ink text-ground hover:bg-ink-muted"
-      : "border-rule-control bg-transparent text-ink hover:bg-panel-raised";
+      ? "bg-accent text-ground hover:bg-accent-strong"
+      : "text-accent hover:bg-panel";
   return (
     <button
       type="button"

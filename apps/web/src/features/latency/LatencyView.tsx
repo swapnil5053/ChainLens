@@ -1,143 +1,94 @@
 /**
- * View 3. The latency finding, made legible.
- *
- * The finding this screen exists to state: the vector search is not the expensive part.
- * Postgres serves both retrieval arms in single-digit milliseconds while the query
- * embedding takes almost all of the budget. That is the opposite of the usual intuition,
- * so it gets the largest elements on the screen rather than a column in a table.
+ * The latency finding, stated plainly: the vector search is not the expensive part. The
+ * query embedding is almost all of it. One headline number, one bar, one small table.
  */
 import { useLatency } from "../../api/queries";
 import { Delayed } from "../../components/ui/Delayed";
-import { SkeletonParagraph } from "../../components/ui/Skeleton";
+import { SkeletonText } from "../../components/ui/Skeleton";
 import { EmptyState, ErrorRegion } from "../../components/ui/StateRegion";
 import { ms, percent } from "../../lib/format";
-import { StackedBar } from "./StackedBar";
+
+const FILL: Record<string, string> = {
+  embed: "bg-accent",
+  retrieve: "bg-line-strong",
+  generate: "bg-line",
+};
 
 export function LatencyView() {
   const latency = useLatency();
 
-  if (latency.isError) {
+  if (latency.isError)
     return (
-      <div className="p-4">
-        <ErrorRegion
-          title="Latency summary unavailable"
-          error={latency.error}
-          onRetry={() => void latency.refetch()}
-          hint="Retrieval itself is unaffected; this panel reads an aggregate endpoint."
-        />
+      <div className="mx-auto max-w-3xl px-6 py-8">
+        <ErrorRegion message="The latency summary could not be loaded." onRetry={() => void latency.refetch()} />
       </div>
     );
-  }
-
-  if (latency.isPending) {
+  if (latency.isPending)
     return (
-      <div className="p-4" aria-busy="true">
+      <div className="mx-auto max-w-3xl px-6 py-8" aria-busy>
         <Delayed>
-          <div className="field p-4">
-            {/* Reserves the final height so the bar does not shift in when it arrives. */}
-            <div className="h-8 w-full rounded-[2px] border border-rule bg-panel-raised" />
-            <div className="mt-4">
-              <SkeletonParagraph lines={4} />
-            </div>
-          </div>
+          <SkeletonText lines={5} />
         </Delayed>
       </div>
     );
-  }
 
-  const data = latency.data;
-  if (!data || data.samples === 0) {
+  const d = latency.data;
+  if (!d || d.samples === 0)
     return (
-      <div className="p-4">
+      <div className="mx-auto max-w-3xl px-6 py-8">
         <EmptyState
-          title="No latency samples yet"
-          cause="Latency is aggregated from answered questions. Ask something on the Analyse view and this fills in."
+          title="No queries measured yet"
+          cause="Latency is aggregated from answered questions. Ask something on the Analyse screen and it fills in here."
         />
       </div>
     );
-  }
 
-  const embed = data.buckets.find((bucket) => bucket.phase === "embed");
-  const retrieve = data.buckets.find((bucket) => bucket.phase === "retrieve");
+  const embed = d.buckets.find((b) => b.phase === "embed");
+  const retrieve = d.buckets.find((b) => b.phase === "retrieve");
 
   return (
-    <div className="flex flex-col gap-4 overflow-y-auto p-4">
-      <section className="field p-4" aria-label="Latency breakdown">
-        <div className="flex flex-wrap items-baseline gap-x-8 gap-y-3">
-          <div>
-            <p className="field-label">Total p50</p>
-            <p className="numeric text-figure text-ink">{ms(data.totalP50Ms)} ms</p>
-          </div>
-          <div>
-            <p className="field-label">Query embedding share</p>
-            <p className="numeric text-figure text-accent">
-              {percent(embed?.p50Ms ?? 0, data.totalP50Ms)}%
-            </p>
-          </div>
-          <div>
-            <p className="field-label">Postgres search p50</p>
-            <p className="numeric text-figure text-ink">{ms(retrieve?.p50Ms ?? 0)} ms</p>
-          </div>
-          <div>
-            <p className="field-label">Total p95</p>
-            <p className="numeric text-figure text-ink">{ms(data.totalP95Ms)} ms</p>
-          </div>
-        </div>
-
-        <div className="mt-5">
-          <StackedBar buckets={data.buckets} total={data.totalP50Ms} />
-        </div>
-
-        <p className="mt-5 max-w-[76ch] text-small leading-[1.55] text-ink-muted">
-          The dense search, the lexical search and the fusion together account for{" "}
-          <span className="numeric text-ink">{ms(retrieve?.p50Ms ?? 0)} ms</span>. The query
-          embedding accounts for{" "}
-          <span className="numeric text-ink">{ms(embed?.p50Ms ?? 0)} ms</span>. A latency budget
-          spent on index tuning would be spent in the wrong place; caching or batching query
-          embeddings is where the time is.
+    <div className="mx-auto flex w-full max-w-3xl flex-col gap-8 overflow-y-auto px-6 py-8">
+      <div>
+        <p className="eyebrow">Where the time goes, p50</p>
+        <p className="num mt-1 text-display font-semibold text-ink">
+          {percent(embed?.p50Ms ?? 0, d.totalP50Ms)}%
         </p>
-      </section>
+        <p className="mt-1 max-w-[68ch] text-meta text-ink-muted">
+          of a {ms(d.totalP50Ms)} ms query is spent embedding the question. Postgres does both
+          searches and the fusion in {ms(retrieve?.p50Ms ?? 0)} ms. A latency budget belongs on
+          caching query embeddings, not on tuning the index.
+        </p>
+      </div>
 
-      <section className="field p-4" aria-label="Per phase">
-        <p className="field-label">Per phase</p>
-        <table className="mt-3 w-full border-collapse text-small">
-          <caption className="sr-only">Latency by phase, p50 and p95, in milliseconds</caption>
-          <thead>
-            <tr>
-              <th scope="col" className="field-label border-b-2 border-ink py-2 text-left">
-                phase
-              </th>
-              <th scope="col" className="field-label border-b-2 border-ink py-2 text-right">
-                p50 ms
-              </th>
-              <th scope="col" className="field-label border-b-2 border-ink py-2 text-right">
-                p95 ms
-              </th>
-              <th scope="col" className="field-label border-b-2 border-ink py-2 text-right">
-                share of p50
-              </th>
+      <div className="flex h-7 overflow-hidden rounded-sm" role="img" aria-label={d.buckets.map((b) => `${b.phase} ${ms(b.p50Ms)} ms`).join(", ")}>
+        {d.buckets.map((b) => {
+          const w = percent(b.p50Ms, d.totalP50Ms);
+          return w > 0 ? <div key={b.phase} className={FILL[b.phase]} style={{ width: `${w}%` }} /> : null;
+        })}
+      </div>
+
+      <table className="w-full text-body">
+        <caption className="sr-only">Latency by phase, p50 and p95, milliseconds</caption>
+        <thead>
+          <tr className="border-b border-line text-meta text-ink-faint">
+            <th scope="col" className="py-2 text-left font-medium">phase</th>
+            <th scope="col" className="py-2 text-right font-medium">p50 ms</th>
+            <th scope="col" className="py-2 text-right font-medium">p95 ms</th>
+            <th scope="col" className="py-2 text-right font-medium">share</th>
+          </tr>
+        </thead>
+        <tbody>
+          {d.buckets.map((b) => (
+            <tr key={b.phase} className="border-b border-line">
+              <th scope="row" className="py-2 text-left font-normal text-ink">{b.phase}</th>
+              <td className="num py-2 text-right text-ink">{ms(b.p50Ms)}</td>
+              <td className="num py-2 text-right text-ink">{ms(b.p95Ms)}</td>
+              <td className="num py-2 text-right text-ink-muted">{percent(b.p50Ms, d.totalP50Ms)}%</td>
             </tr>
-          </thead>
-          <tbody>
-            {data.buckets.map((bucket) => (
-              <tr key={bucket.phase} className="border-b border-rule">
-                <th scope="row" className="py-2 text-left font-normal text-ink">
-                  {bucket.phase}
-                </th>
-                <td className="numeric py-2 text-right text-ink">{ms(bucket.p50Ms)}</td>
-                <td className="numeric py-2 text-right text-ink">{ms(bucket.p95Ms)}</td>
-                <td className="numeric py-2 text-right text-ink-muted">
-                  {percent(bucket.p50Ms, data.totalP50Ms)}%
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        <p className="mt-3 max-w-[76ch] text-micro text-ink-muted">
-          {data.note} Source run <span className="numeric">{data.runId ?? "unknown"}</span>,{" "}
-          {data.samples} samples.
-        </p>
-      </section>
+          ))}
+        </tbody>
+      </table>
+      <p className="text-meta text-ink-faint">{d.note}</p>
     </div>
   );
 }

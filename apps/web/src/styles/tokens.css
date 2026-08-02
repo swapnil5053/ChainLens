@@ -1,53 +1,57 @@
-/* ChainLens token layer. Tailwind v4, CSS-first, no config file.
+/* ChainLens token layer, v2 of the design (revamp).
  *
- * Two tiers. Tier 1 is a private OKLCH ramp: one neutral hue with lightness stepping, one
- * accent hue. Tier 2 is the semantic layer, and it is the only set of names component
- * markup may use. Dark mode is a variable swap on [data-theme="dark"]; there is not one
- * dark: utility anywhere in src/, and the verification step greps to prove it.
+ * Tailwind v4, CSS-first, no config file. Two tiers: a private OKLCH ramp, then a
+ * semantic layer that is the only set of names markup may use. Dark mode is a variable
+ * swap; there is not one dark: utility in src/.
  *
- * OKLCH is not decoration here. Because the neutral ramp is a single hue with lightness
- * varying, re-skinning is editing --hue-neutral, not hand-picking ten hex codes that
- * happen to sit on a curve. Every ratio is computed by scripts/contrast.py and recorded
- * in docs/accessibility-audit-web.md.
+ * Direction, changed from the first build:
+ *   - No cream. The old paper-warm ground was the "default tasteful AI surface" Impeccable
+ *     flags by name; the new ground is a clean, faintly cool near-white.
+ *   - One accent, a deep blue. Not purple, indigo, violet or cyan (all AI-slop tells).
+ *   - Real type hierarchy: four steps with >=1.25 ratio between them, not a flat ramp.
+ *   - Flatter. Whitespace and a single hairline do the work the boxed ledger fields used
+ *     to do, so the screen breathes instead of gridding everything.
+ *
+ * Every colour pair that carries meaning is verified by scripts/contrast.py.
  */
 
 @import "tailwindcss";
 
 :root {
-  --hue-neutral: 85;
-  --hue-accent: 42;
-  --hue-mark: 92;
-  --hue-flag: 75;
+  --hue-neutral: 262;
+  --hue-accent: 256;
 
-  --ground: oklch(0.985 0.004 var(--hue-neutral));
-  --panel: oklch(0.962 0.008 var(--hue-neutral));
-  --panel-raised: oklch(0.935 0.01 var(--hue-neutral));
-  --ink: oklch(0.205 0.01 var(--hue-neutral));
-  --ink-muted: oklch(0.455 0.012 var(--hue-neutral));
-  --ink-faint: oklch(0.545 0.014 var(--hue-neutral));
-  --rule: oklch(0.845 0.014 var(--hue-neutral));
-  --rule-control: oklch(0.654 0.018 var(--hue-neutral));
-  --accent: oklch(0.48 0.14 var(--hue-accent));
-  --mark: oklch(0.9 0.062 var(--hue-mark));
-  --mark-soft: oklch(0.945 0.032 var(--hue-mark));
-  --flag: oklch(0.5 0.09 var(--hue-flag));
+  --ground: oklch(0.994 0.0015 var(--hue-neutral));
+  --panel: oklch(0.972 0.004 var(--hue-neutral));
+  --panel-raised: oklch(0.948 0.006 var(--hue-neutral));
+  --ink: oklch(0.24 0.015 var(--hue-neutral));
+  --ink-muted: oklch(0.455 0.02 var(--hue-neutral));
+  --ink-faint: oklch(0.55 0.022 var(--hue-neutral));
+  --line: oklch(0.905 0.008 var(--hue-neutral));
+  --line-strong: oklch(0.66 0.02 var(--hue-neutral));
+  --accent: oklch(0.46 0.15 var(--hue-accent));
+  --accent-strong: oklch(0.4 0.16 var(--hue-accent));
+  --accent-weak: oklch(0.93 0.045 var(--hue-accent));
+  --flag: oklch(0.52 0.15 32);
+  --flag-weak: oklch(0.94 0.04 40);
 }
 
-/* Dark is a palette, not an inversion: near-black tinted with the same neutral hue,
- * elevation by lightness, the accent desaturated so it does not vibrate on black. */
+/* Dark is a deliberate palette: cool near-black, elevation by lightness, the accent
+ * lifted so it reads on a dark ground without glowing. */
 [data-theme="dark"] {
-  --ground: oklch(0.185 0.008 var(--hue-neutral));
-  --panel: oklch(0.228 0.01 var(--hue-neutral));
-  --panel-raised: oklch(0.272 0.011 var(--hue-neutral));
-  --ink: oklch(0.93 0.01 var(--hue-neutral));
-  --ink-muted: oklch(0.72 0.012 var(--hue-neutral));
-  --ink-faint: oklch(0.625 0.013 var(--hue-neutral));
-  --rule: oklch(0.33 0.012 var(--hue-neutral));
-  --rule-control: oklch(0.496 0.014 var(--hue-neutral));
-  --accent: oklch(0.7 0.13 var(--hue-accent));
-  --mark: oklch(0.33 0.055 var(--hue-mark));
-  --mark-soft: oklch(0.27 0.03 var(--hue-mark));
-  --flag: oklch(0.78 0.11 80);
+  --ground: oklch(0.155 0.012 var(--hue-neutral));
+  --panel: oklch(0.195 0.014 var(--hue-neutral));
+  --panel-raised: oklch(0.24 0.016 var(--hue-neutral));
+  --ink: oklch(0.95 0.008 var(--hue-neutral));
+  --ink-muted: oklch(0.73 0.016 var(--hue-neutral));
+  --ink-faint: oklch(0.63 0.018 var(--hue-neutral));
+  --line: oklch(0.3 0.014 var(--hue-neutral));
+  --line-strong: oklch(0.485 0.02 var(--hue-neutral));
+  --accent: oklch(0.72 0.13 var(--hue-accent));
+  --accent-strong: oklch(0.8 0.12 var(--hue-accent));
+  --accent-weak: oklch(0.3 0.05 var(--hue-accent));
+  --flag: oklch(0.74 0.15 42);
+  --flag-weak: oklch(0.3 0.06 40);
 }
 
 @theme inline {
@@ -57,123 +61,124 @@
   --color-ink: var(--ink);
   --color-ink-muted: var(--ink-muted);
   --color-ink-faint: var(--ink-faint);
-  --color-rule: var(--rule);
-  --color-rule-control: var(--rule-control);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
   --color-accent: var(--accent);
-  --color-mark: var(--mark);
-  --color-mark-soft: var(--mark-soft);
+  --color-accent-strong: var(--accent-strong);
+  --color-accent-weak: var(--accent-weak);
   --color-flag: var(--flag);
+  --color-flag-weak: var(--flag-weak);
 
-  /* Three families, three jobs. ui is interface chrome, document is contract prose,
-   * identity is anything a reader compares down a column and therefore needs tabular
-   * figures: clause numbers, pages, milliseconds, scores. */
-  --font-ui: "Public Sans Variable", "Public Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-document: "Source Serif 4 Variable", "Source Serif 4", Georgia, serif;
-  --font-identity: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  /* System fonts. Deliberate rather than lazy: it sidesteps the overused-webfont tell
+   * (Inter, Roboto, Geist and friends), needs no network, and never flashes an unstyled
+   * or broken face. Numbers use the platform monospace so figures align in a column. */
+  --font-sans:
+    ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Menlo, monospace;
 
-  --text-micro: 0.6875rem;
-  --text-small: 0.8125rem;
+  /* Four steps, each at least 1.25x the last: a real hierarchy, not a flat ramp.
+   * 13 -> 15 -> 19 -> 30. Body is 15; nothing interactive falls below 13. */
+  --text-meta: 0.8125rem;
   --text-body: 0.9375rem;
-  --text-reading: 1.0625rem;
-  --text-figure: 1.75rem;
+  --text-lead: 1.1875rem;
+  --text-display: 1.875rem;
 
-  --tracking-label: 0.08em;
+  /* Spacing with rhythm: tight within a group, generous between sections. */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-10: 2.5rem;
 
-  /* Printed paperwork: nothing in the scale can produce a pillowy card. */
-  --radius-none: 0px;
-  --radius-hair: 1px;
-  --radius-field: 2px;
-  --radius-chip: 3px;
+  --radius-sm: 4px;
+  --radius: 8px;
 
-  --shadow-float: 0 1px 2px oklch(0.205 0.01 85 / 0.16), 0 4px 12px oklch(0.205 0.01 85 / 0.1);
-
-  --duration-hover: 120ms;
-  --duration-enter: 180ms;
-  --duration-exit: 90ms;
-  --ease-enter: cubic-bezier(0.2, 0, 0, 1);
-  --ease-exit: cubic-bezier(0.4, 0, 1, 1);
+  --duration: 140ms;
+  --ease: cubic-bezier(0.2, 0, 0, 1);
 }
 
-/* Reduced motion is handled once, here. Durations collapse so every transition and every
- * Motion tween that reads a token stops moving; the state changes themselves are kept,
- * which is what the guidance asks for. No component checks the preference itself. */
 @media (prefers-reduced-motion: reduce) {
   :root {
-    --duration-hover: 1ms;
-    --duration-enter: 1ms;
-    --duration-exit: 1ms;
+    --duration: 1ms;
   }
   *,
   *::before,
   *::after {
     animation-duration: 1ms !important;
-    animation-iteration-count: 1 !important;
     transition-duration: 1ms !important;
     scroll-behavior: auto !important;
   }
 }
 
 @layer base {
-  html { color-scheme: light; }
-  [data-theme="dark"] { color-scheme: dark; }
+  html {
+    color-scheme: light;
+  }
+  [data-theme="dark"] {
+    color-scheme: dark;
+  }
   body {
     margin: 0;
     background: var(--ground);
     color: var(--ink);
-    font-family: var(--font-ui);
+    font-family: var(--font-sans);
     font-size: var(--text-body);
-    line-height: 1.4;
+    line-height: 1.5;
     -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
-  /* Focus rings are designed, not defaulted, and are as considered as hover. */
+  /* One designed focus ring, on the accent, legible on both grounds. */
   :where(a, button, [role="button"], input, select, textarea, [tabindex]):focus-visible {
     outline: 2px solid var(--accent);
     outline-offset: 2px;
-    border-radius: var(--radius-hair);
+    border-radius: var(--radius-sm);
   }
-  ::selection { background: var(--mark); color: var(--ink); }
+  ::selection {
+    background: var(--accent-weak);
+    color: var(--ink);
+  }
 }
 
 @layer components {
-  /* The signature element. A redline, not a highlight: flat amber ground with a 2px accent
-   * bar on the leading edge, the way a clause is marked on paper. The active citation
-   * closes the bracket on the trailing edge too. */
-  .citation-mark {
-    background-color: var(--mark-soft);
-    box-shadow: inset 2px 0 0 0 var(--accent);
-    color: var(--ink);
+  /* The citation, reworked. Not a side-accent bar any more (that is the single most
+   * recognisable AI-UI tell, and it is what the first design leaned on). A citation is
+   * now a quiet tint under the cited words with a 2px accent underline; the active one
+   * deepens the tint. It reads as a highlight a person made, not a widget. */
+  .cite {
+    background-color: color-mix(in oklch, var(--accent-weak) 55%, transparent);
+    box-shadow: inset 0 -2px 0 0 color-mix(in oklch, var(--accent) 45%, transparent);
+    color: inherit;
+    border-radius: 2px;
     padding-block: 1px;
+    cursor: pointer;
     transition:
-      background-color var(--duration-hover) var(--ease-enter),
-      box-shadow var(--duration-hover) var(--ease-enter);
+      background-color var(--duration) var(--ease),
+      box-shadow var(--duration) var(--ease);
   }
-  .citation-mark[data-state="active"] {
-    background-color: var(--mark);
-    box-shadow: inset 2px 0 0 0 var(--accent), inset -2px 0 0 0 var(--accent);
+  .cite[data-state="hover"] {
+    background-color: var(--accent-weak);
   }
-  .citation-mark[data-state="hover"] { background-color: var(--mark); }
-
-  /* A boxed field with its label sitting on the top rule, as a printed form does it. */
-  .field { border: 1px solid var(--rule); border-top: 2px solid var(--ink); background: var(--panel); }
-
-  .field-label {
-    font-size: var(--text-micro);
-    text-transform: uppercase;
-    letter-spacing: var(--tracking-label);
-    color: var(--ink-faint);
+  .cite[data-state="active"] {
+    background-color: var(--accent-weak);
+    box-shadow: inset 0 -2px 0 0 var(--accent);
   }
 
-  .numeric { font-family: var(--font-identity); font-variant-numeric: tabular-nums; }
-
-  /* Links: a hairline underline that grows from the leading edge, not a colour flip. */
-  .link {
-    color: var(--ink);
-    text-decoration: none;
-    background-image: linear-gradient(var(--accent), var(--accent));
-    background-repeat: no-repeat;
-    background-position: 0 100%;
-    background-size: 0% 1px;
-    transition: background-size var(--duration-hover) var(--ease-enter);
+  /* Reading measure: prose is capped near 72ch so lines do not run too wide to track. */
+  .prose {
+    max-width: 72ch;
   }
-  .link:hover, .link:focus-visible { background-size: 100% 1px; }
+
+  /* One short uppercase label style, the only place wide tracking is allowed. */
+  .eyebrow {
+    font-size: var(--text-meta);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--ink-muted);
+  }
+
+  .num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+  }
 }

@@ -1,188 +1,123 @@
 /**
- * View 2. The same query through two retrieval configurations, side by side.
- *
- * The point of this screen is that the evaluation becomes visible. Two things with
- * different epistemic status appear here and the view is required to keep them apart:
- *
- *   per-query chunks    computed now, from this query, against this contract
- *   Recall@6 and MRR    corpus aggregates over 110 lawyer-annotated questions, read from
- *                       the committed artifacts, true of the configuration rather than of
- *                       this query
- *
- * That distinction is carried in the markup, not left to the reader to infer.
+ * The same query through two retrieval configurations, side by side. Simplified: the
+ * corpus Recall@6 delta stated once at the top, then two lean lists of what each arm
+ * returned, with shared vs unique marked in text. The evaluation numbers are corpus
+ * aggregates from the committed artifacts and are labelled as such, not as properties of
+ * this query.
  */
 import { useState } from "react";
 import type { ArmResult, Citation, CompareResponse } from "../../api/contracts";
 import { useCompare } from "../../api/queries";
 import { Button } from "../../components/ui/Button";
 import { Delayed } from "../../components/ui/Delayed";
-import { SkeletonParagraph } from "../../components/ui/Skeleton";
+import { SkeletonText } from "../../components/ui/Skeleton";
 import { EmptyState, ErrorRegion } from "../../components/ui/StateRegion";
 import { clauseLabel, oneLine } from "../../lib/format";
 
 export function CompareView({ contractId, query }: { contractId: string | null; query: string }) {
   const [draft, setDraft] = useState(query);
   const compare = useCompare();
-
-  const run = (value: string) => {
-    const trimmed = value.trim();
-    if (!trimmed || !contractId) return;
-    compare.mutate({ contractId, query: trimmed, configs: ["mmr", "clause-rrf-expansion"] });
+  const run = (v: string) => {
+    const q = v.trim();
+    if (q && contractId) compare.mutate({ contractId, query: q, configs: ["mmr", "clause-rrf-expansion"] });
   };
 
   return (
-    <div className="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto p-4">
+    <div className="mx-auto flex min-h-0 w-full max-w-5xl flex-1 flex-col gap-6 overflow-y-auto px-6 py-6">
       <form
-        className="field shrink-0 p-4"
-        onSubmit={(event) => {
-          event.preventDefault();
+        className="flex items-start gap-2"
+        onSubmit={(e) => {
+          e.preventDefault();
           run(draft);
         }}
       >
-        <label className="field-label" htmlFor="compare-query">
-          Question, run through both configurations
-        </label>
-        <div className="mt-1 flex flex-wrap gap-2">
-          <input
-            id="compare-query"
-            value={draft}
-            onChange={(event) => setDraft(event.target.value)}
-            placeholder="What is the cap on liability?"
-            className="min-w-0 flex-1 rounded-[2px] border border-rule-control bg-ground px-2 py-1.5 text-small text-ink placeholder:text-ink-faint"
-          />
-          <Button
-            type="submit"
-            variant="primary"
-            disabled={!contractId || draft.trim().length === 0 || compare.isPending}
-            disabledReason={
-              !contractId
-                ? "Open a contract on the Analyse view first."
-                : "Type a question to compare."
-            }
-          >
-            {compare.isPending ? "Running both" : "Compare"}
-          </Button>
-        </div>
-        {!contractId ? (
-          <p className="mt-2 text-micro text-ink-muted">
-            Open a contract on the Analyse view first. Both arms search the same agreement,
-            which is what makes the comparison fair.
-          </p>
-        ) : null}
+        <input
+          value={draft}
+          onChange={(e) => setDraft(e.target.value)}
+          placeholder={contractId ? "Ask both configurations the same thing..." : "Open a contract on Analyse first"}
+          disabled={!contractId}
+          aria-label="Question"
+          className="min-h-9 flex-1 rounded-sm border border-line-strong bg-ground px-3 text-body text-ink placeholder:text-ink-faint disabled:opacity-60"
+        />
+        <Button
+          type="submit"
+          variant="primary"
+          disabled={!contractId || draft.trim().length === 0 || compare.isPending}
+          disabledReason={!contractId ? "Open a contract first." : "Type a question."}
+        >
+          {compare.isPending ? "Running" : "Compare"}
+        </Button>
       </form>
 
       {compare.isError ? (
-        <ErrorRegion
-          title="Comparison failed"
-          error={compare.error}
-          onRetry={() => run(draft)}
-          hint="Your question is preserved. The Analyse view is unaffected."
-        />
+        <ErrorRegion message="The comparison failed." onRetry={() => run(draft)} />
       ) : null}
 
       {compare.isPending ? (
         <Delayed>
-          <div className="grid gap-4 md:grid-cols-2" aria-busy="true">
-            {["MMR baseline", "RRF fusion + expansion"].map((label) => (
-              <div key={label} className="field p-4">
-                <p className="field-label">{label}</p>
-                <div className="mt-3">
-                  <SkeletonParagraph lines={7} />
-                </div>
-              </div>
-            ))}
+          <div className="grid gap-8 md:grid-cols-2" aria-busy>
+            <SkeletonText lines={7} />
+            <SkeletonText lines={7} />
           </div>
         </Delayed>
       ) : null}
 
       {!compare.isPending && !compare.data && !compare.isError ? (
         <EmptyState
-          title="No comparison run yet"
-          cause="Ask the same question of both configurations. The left arm is the retrieval strategy this project shipped first; the right arm is what replaced it, and the grid figures beside each say by how much."
+          title="Compare two retrieval strategies"
+          cause="The left is the strategy this project first shipped; the right is what replaced it. Ask the same question and see both what they return now and how they score across the whole test set."
         />
       ) : null}
 
-      {compare.data ? <Arms response={compare.data} /> : null}
+      {compare.data ? <Result data={compare.data} /> : null}
     </div>
   );
 }
 
-function Arms({ response }: { response: CompareResponse }) {
-  const overlap = new Set(response.overlapChunkIds);
-  const [left, right] = response.arms;
+function Result({ data }: { data: CompareResponse }) {
+  const overlap = new Set(data.overlapChunkIds);
+  const [left, right] = data.arms;
   const delta = left && right ? right.evidence.recallAt6 - left.evidence.recallAt6 : null;
 
   return (
-    <div className="flex min-h-0 flex-col gap-3">
-      <div className="field flex flex-wrap items-baseline gap-x-6 gap-y-2 p-4">
-        <div>
-          <p className="field-label">Recall@6 delta, corpus</p>
-          <p className="numeric text-figure text-accent">
-            {delta === null ? "--" : `${delta > 0 ? "+" : ""}${delta.toFixed(3)}`}
-          </p>
-        </div>
-        <p className="max-w-[64ch] text-micro leading-[1.5] text-ink-muted">
-          Measured over {left?.evidence.questions ?? 0} lawyer-annotated questions in the
-          committed golden set, <strong className="text-ink">not over the query above</strong>.
-          Runs <span className="numeric">{left?.evidence.runId}</span> and{" "}
-          <span className="numeric">{right?.evidence.runId}</span>, embedding provider{" "}
-          <span className="numeric">{left?.evidence.embeddingProvider}</span>.
-          {response.reference ? (
-            <>
-              {" "}
-              The configuration this project originally shipped combined MMR with recursive
-              chunking and scored{" "}
-              <span className="numeric">{response.reference.recallAt6.toFixed(3)}</span>, worse
-              still.
-            </>
-          ) : null}
+    <div className="flex flex-col gap-8">
+      <div>
+        <p className="eyebrow">Recall@6 across the test set</p>
+        <p className="num mt-1 text-display font-semibold text-accent">
+          {delta === null ? "--" : `+${delta.toFixed(3)}`}
         </p>
-        <span className="numeric ml-auto rounded-[3px] border border-rule-control px-2 py-1 text-micro text-ink-muted">
-          {overlap.size} of {left?.chunks.length ?? 0} chunks shared
-        </span>
+        <p className="mt-1 max-w-[70ch] text-meta text-ink-muted">
+          Measured over {left?.evidence.questions ?? 0} lawyer-annotated questions, not the query
+          above. {right?.config.label} scores {right?.evidence.recallAt6.toFixed(3)} against{" "}
+          {left?.evidence.recallAt6.toFixed(3)} for {left?.config.label}.
+          {data.reference
+            ? ` The original default scored ${data.reference.recallAt6.toFixed(3)}, lower still.`
+            : ""}
+        </p>
       </div>
 
-      <div className="grid min-h-0 gap-4 md:grid-cols-2">
-        {response.arms.map((arm) => (
-          <ArmColumn key={arm.config.id} arm={arm} overlap={overlap} />
+      <div className="grid gap-8 md:grid-cols-2">
+        {data.arms.map((arm) => (
+          <Arm key={arm.config.id} arm={arm} overlap={overlap} />
         ))}
       </div>
     </div>
   );
 }
 
-function ArmColumn({ arm, overlap }: { arm: ArmResult; overlap: ReadonlySet<string> }) {
+function Arm({ arm, overlap }: { arm: ArmResult; overlap: ReadonlySet<string> }) {
   return (
-    <section className="field flex min-h-0 flex-col" aria-label={arm.config.label}>
-      <header className="border-b border-rule px-4 py-3">
-        <div className="flex items-baseline gap-3">
-          <h3 className="field-label">{arm.config.label}</h3>
-          <span className="numeric ml-auto text-micro text-ink-faint">
-            R@6 {arm.evidence.recallAt6.toFixed(3)}
-          </span>
-        </div>
-        <p className="numeric mt-1 text-micro text-ink-muted">
-          {arm.config.chunking} - {arm.config.strategy}
-          {arm.config.expansion ? " - glossary expansion" : ""}
-        </p>
-      </header>
-
+    <section aria-label={arm.config.label}>
+      <div className="flex items-baseline justify-between border-b border-line pb-2">
+        <h3 className="text-body font-semibold text-ink">{arm.config.label}</h3>
+        <span className="num text-meta text-ink-faint">R@6 {arm.evidence.recallAt6.toFixed(3)}</span>
+      </div>
       {arm.chunks.length === 0 ? (
-        <div className="p-4">
-          <EmptyState
-            title="This arm returned nothing"
-            cause="No chunk scored above zero under this configuration. The other column may still have results, which is itself the comparison."
-          />
-        </div>
+        <p className="mt-3 text-meta text-ink-muted">This configuration returned nothing.</p>
       ) : (
-        <ol className="m-0 flex min-h-0 list-none flex-col overflow-y-auto p-0">
-          {arm.chunks.map((chunk, index) => (
-            <ChunkRow
-              key={chunk.chunkId}
-              index={index}
-              chunk={chunk}
-              shared={overlap.has(chunk.chunkId)}
-            />
+        <ol className="mt-1">
+          {arm.chunks.map((c, i) => (
+            <Row key={c.chunkId} index={i} chunk={c} shared={overlap.has(c.chunkId)} />
           ))}
         </ol>
       )}
@@ -190,27 +125,17 @@ function ArmColumn({ arm, overlap }: { arm: ArmResult; overlap: ReadonlySet<stri
   );
 }
 
-function ChunkRow({ index, chunk, shared }: { index: number; chunk: Citation; shared: boolean }) {
+function Row({ index, chunk, shared }: { index: number; chunk: Citation; shared: boolean }) {
   return (
-    <li
-      className={
-        "border-b border-rule px-4 py-3 transition-colors duration-(--duration-hover) " +
-        "ease-(--ease-enter) hover:bg-panel-raised " +
-        (shared ? "" : "shadow-[inset_2px_0_0_0_var(--accent)]")
-      }
-    >
+    <li className="border-b border-line py-3">
       <div className="flex items-baseline gap-2">
-        <span className="numeric text-micro text-ink-faint">{index + 1}</span>
-        <span className="numeric text-micro text-ink">{clauseLabel(chunk.clauseId, chunk.page)}</span>
-        <span
-          className="numeric ml-auto text-micro text-ink-faint"
-          title={shared ? "returned by both arms" : "returned by this arm only"}
-        >
+        <span className="num text-meta text-ink-faint">{index + 1}</span>
+        <span className="num text-meta text-ink">{clauseLabel(chunk.clauseId, chunk.page)}</span>
+        <span className={`ml-auto text-meta ${shared ? "text-ink-faint" : "text-accent"}`}>
           {shared ? "shared" : "unique"}
         </span>
       </div>
-      {chunk.clauseTitle ? <p className="mt-1 text-small text-ink">{chunk.clauseTitle}</p> : null}
-      <p className="mt-1 text-small leading-[1.5] text-ink-muted">{oneLine(chunk.text, 220)}</p>
+      <p className="mt-1 text-meta leading-[1.6] text-ink-muted">{oneLine(chunk.text, 200)}</p>
     </li>
   );
 }
