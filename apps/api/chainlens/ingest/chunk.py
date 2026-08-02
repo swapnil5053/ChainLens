@@ -90,7 +90,13 @@ def _split_recursive(text: str, offset: int, size: int, overlap: int) -> list[tu
             piece_len = len(piece) + (len(separator) if index < len(pieces) - 1 else 0)
             if buffer_len and buffer_len + piece_len > size:
                 spans.append((offset + buffer_start, offset + cursor))
+                # Rewind for the overlap, then move forward to the next whitespace so the
+                # overlapping chunk does not begin in the middle of a word.
                 back = max(buffer_start, cursor - overlap)
+                while back < cursor and not text[back].isspace():
+                    back += 1
+                while back < cursor and text[back].isspace():
+                    back += 1
                 buffer_start = back
                 buffer_len = cursor - back
             if not buffer_len:
@@ -104,11 +110,29 @@ def _split_recursive(text: str, offset: int, size: int, overlap: int) -> list[tu
             return merged
         break
 
-    return [
-        (offset + start, offset + min(start + size, len(text)))
-        for start in range(0, len(text), max(1, size - overlap))
-        if text[start : start + size].strip()
-    ]
+    # Last resort: fixed-width slicing. Snap each boundary forward to the next whitespace
+    # so a chunk never begins or ends mid-word. Without this a citation can render as
+    # "ndemnifying Party ...", which reads as a bug even though the offsets are correct.
+    def snap(position: int, limit: int) -> int:
+        if position <= 0 or position >= len(text):
+            return max(0, min(position, len(text)))
+        cursor = position
+        while cursor < len(text) and cursor - position < limit and not text[cursor].isspace():
+            cursor += 1
+        return cursor
+
+    spans: list[tuple[int, int]] = []
+    stride = max(1, size - overlap)
+    cursor = 0
+    while cursor < len(text):
+        start = snap(cursor, 60) if cursor else 0
+        end = snap(min(start + size, len(text)), 60)
+        if end <= start:
+            break
+        if text[start:end].strip():
+            spans.append((offset + start, offset + end))
+        cursor = start + stride
+    return spans
 
 
 def _finalise(

@@ -1,7 +1,7 @@
 {
   "note": "CI fails if recall@6 for this configuration drops more than 2 points.",
   "run_id": "clause-aware__rrf_expansion",
-  "recall@6": 0.6765,
+  "recall@6": 0.6898,
   "tolerance": 0.02,
   "source": "eval/results/clause-aware__rrf_expansion.json"
 }

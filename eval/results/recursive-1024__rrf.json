@@ -1,7 +1,7 @@
 {
   "run_id": "recursive-1024__rrf",
-  "created_at": "2026-08-01T07:09:23+00:00",
-  "git_sha": "10c722dbe189b0f88c6604bf0cca5c3aec554ead",
+  "created_at": "2026-08-02T08:16:47+00:00",
+  "git_sha": "b48878f962e766d888d877ecf0638d3518407259",
   "git_dirty": true,
   "dataset": {
     "path": "eval/datasets/golden.jsonl",
@@ -41,63 +41,63 @@
   "metrics": {
     "n_evaluated": 110,
     "n_skipped": 0,
-    "recall@3": 0.5139,
-    "recall@6": 0.6198,
-    "recall@10": 0.75,
-    "hit@3": 0.6455,
-    "hit@6": 0.7364,
-    "hit@10": 0.8091,
-    "mrr": 0.575,
-    "ndcg@10": 0.5816,
-    "span_coverage@3": 0.5802,
-    "span_coverage@6": 0.6799,
-    "span_coverage@10": 0.7777,
-    "latency_ms_p50": 84.28,
-    "latency_ms_p95": 93.22,
-    "embed_ms_p50": 79.72,
-    "search_ms_p50": 4.54,
-    "context_tokens_p50": 2556.0,
+    "recall@3": 0.5066,
+    "recall@6": 0.6377,
+    "recall@10": 0.7384,
+    "hit@3": 0.6273,
+    "hit@6": 0.7273,
+    "hit@10": 0.8,
+    "mrr": 0.5664,
+    "ndcg@10": 0.5733,
+    "span_coverage@3": 0.57,
+    "span_coverage@6": 0.6879,
+    "span_coverage@10": 0.7686,
+    "latency_ms_p50": 84.1,
+    "latency_ms_p95": 87.21,
+    "embed_ms_p50": 79.33,
+    "search_ms_p50": 4.65,
+    "context_tokens_p50": 2561.0,
     "generation_cost_usd": null
   },
   "per_query": [
     {
       "qa_id": "AURASYSTEMSINC-06-16-2010-EX-10-25-STRATEGIC-ALLIANCE-AGREEMENT__Exclusivity",
       "category": "Exclusivity",
-      "relevant_total": 3,
+      "relevant_total": 4,
       "ranks_hit": [
         1,
-        2,
-        4
+        4,
+        7
       ],
       "reciprocal_rank": 1.0,
       "recall": {
-        "3": 0.6667,
-        "6": 1.0,
-        "10": 1.0
+        "3": 0.25,
+        "6": 0.5,
+        "10": 0.75
       },
       "hit": {
         "3": 1.0,
         "6": 1.0,
         "10": 1.0
       },
-      "ndcg_10": 0.9675,
+      "ndcg_10": 0.6886,
       "span_coverage": {
-        "3": 0.6879,
-        "6": 1.0,
+        "3": 0.5273,
+        "6": 0.6879,
         "10": 1.0
       },
-      "latency_ms": 80.3,
+      "latency_ms": 84.42,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 76.097,
-        "dense_ms": 2.512,
-        "lexical_ms": 1.497,
-        "fusion_ms": 0.145,
+        "embed_ms": 80.094,
+        "dense_ms": 2.52,
+        "lexical_ms": 1.669,
+        "fusion_ms": 0.09,
         "rerank_ms": 0.0,
-        "total_ms": 80.251,
+        "total_ms": 84.372,
         "reranker_available": false
       }
     },
@@ -125,18 +125,18 @@
         "6": 1.0,
         "10": 1.0
       },
-      "latency_ms": 83.7,
+      "latency_ms": 83.53,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 78.876,
-        "dense_ms": 2.648,
-        "lexical_ms": 2.021,
-        "fusion_ms": 0.11,
+        "embed_ms": 79.024,
+        "dense_ms": 2.475,
+        "lexical_ms": 1.879,
+        "fusion_ms": 0.103,
         "rerank_ms": 0.0,
-        "total_ms": 83.654,
+        "total_ms": 83.481,
         "reranker_available": false
       }
     },
@@ -145,81 +145,78 @@
       "category": "Insurance",
       "relevant_total": 3,
       "ranks_hit": [
-        1,
-        10
+        1
       ],
       "reciprocal_rank": 1.0,
       "recall": {
         "3": 0.3333,
         "6": 0.3333,
-        "10": 0.6667
+        "10": 0.3333
       },
       "hit": {
         "3": 1.0,
         "6": 1.0,
         "10": 1.0
       },
-      "ndcg_10": 0.6049,
+      "ndcg_10": 0.4693,
       "span_coverage": {
-        "3": 0.9217,
-        "6": 0.9217,
-        "10": 1.0
+        "3": 0.9541,
+        "6": 0.9541,
+        "10": 0.9541
       },
-      "latency_ms": 84.1,
+      "latency_ms": 85.08,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 79.879,
-        "dense_ms": 2.379,
-        "lexical_ms": 1.684,
-        "fusion_ms": 0.104,
+        "embed_ms": 80.918,
+        "dense_ms": 2.416,
+        "lexical_ms": 1.601,
+        "fusion_ms": 0.092,
         "rerank_ms": 0.0,
-        "total_ms": 84.045,
+        "total_ms": 85.027,
         "reranker_available": false
       }
     },
     {
       "qa_id": "AURASYSTEMSINC-06-16-2010-EX-10-25-STRATEGIC-ALLIANCE-AGREEMENT__Minimum Commitment",
       "category": "Minimum Commitment",
-      "relevant_total": 5,
+      "relevant_total": 4,
       "ranks_hit": [
         1,
         2,
-        3,
-        4,
-        7
+        4
       ],
       "reciprocal_rank": 1.0,
       "recall": {
-        "3": 0.6,
-        "6": 0.8,
-        "10": 1.0
+        "3": 0.5,
+        "6": 0.75,
+        "10": 0.75
       },
       "hit": {
         "3": 1.0,
         "6": 1.0,
         "10": 1.0
       },
-      "ndcg_10": 0.9818,
+      "ndcg_10": 0.8048,
       "span_coverage": {
         "3": 0.721,
-        "6": 0.9068,
-        "10": 1.0
+        "6": 0.9732,
+        "10": 0.9732
       },
-      "latency_ms": 84.52,
+      "latency_ms": 83.15,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 79.992,
-        "dense_ms": 2.561,
-        "lexical_ms": 1.795,
-        "fusion_ms": 0.103,
+        "embed_ms": 78.945,
+        "dense_ms": 2.505,
+        "lexical_ms": 1.554,
+        "fusion_ms": 0.092,
         "rerank_ms": 0.0,
-        "total_ms": 84.452,
+        "total_ms": 83.096,
         "reranker_available": false
       }
     },
@@ -229,11 +226,11 @@
       "relevant_total": 2,
       "ranks_hit": [
         1,
-        4
+        3
       ],
       "reciprocal_rank": 1.0,
       "recall": {
-        "3": 0.5,
+        "3": 1.0,
         "6": 1.0,
         "10": 1.0
       },
@@ -242,24 +239,24 @@
         "6": 1.0,
         "10": 1.0
       },
-      "ndcg_10": 0.8772,
+      "ndcg_10": 0.9197,
       "span_coverage": {
         "3": 1.0,
         "6": 1.0,
         "10": 1.0
       },
-      "latency_ms": 82.7,
+      "latency_ms": 84.58,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 77.949,
-        "dense_ms": 2.481,
-        "lexical_ms": 2.063,
-        "fusion_ms": 0.148,
+        "embed_ms": 79.534,
+        "dense_ms": 2.764,
+        "lexical_ms": 2.117,
+        "fusion_ms": 0.103,
         "rerank_ms": 0.0,
-        "total_ms": 82.641,
+        "total_ms": 84.518,
         "reranker_available": false
       }
     },
@@ -268,9 +265,9 @@
       "category": "Effective Date",
       "relevant_total": 1,
       "ranks_hit": [
-        2
+        3
       ],
-      "reciprocal_rank": 0.5,
+      "reciprocal_rank": 0.3333,
       "recall": {
         "3": 1.0,
         "6": 1.0,
@@ -281,24 +278,24 @@
         "6": 1.0,
         "10": 1.0
       },
-      "ndcg_10": 0.6309,
+      "ndcg_10": 0.5,
       "span_coverage": {
         "3": 1.0,
         "6": 1.0,
         "10": 1.0
       },
-      "latency_ms": 82.35,
+      "latency_ms": 85.83,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 77.935,
-        "dense_ms": 2.342,
-        "lexical_ms": 1.913,
-        "fusion_ms": 0.108,
+        "embed_ms": 81.164,
+        "dense_ms": 2.589,
+        "lexical_ms": 1.939,
+        "fusion_ms": 0.083,
         "rerank_ms": 0.0,
-        "total_ms": 82.298,
+        "total_ms": 85.775,
         "reranker_available": false
       }
     },
@@ -326,18 +323,18 @@
         "6": 1.0,
         "10": 1.0
       },
-      "latency_ms": 81.34,
+      "latency_ms": 84.12,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 77.415,
-        "dense_ms": 2.246,
-        "lexical_ms": 1.556,
-        "fusion_ms": 0.082,
+        "embed_ms": 80.172,
+        "dense_ms": 2.244,
+        "lexical_ms": 1.562,
+        "fusion_ms": 0.091,
         "rerank_ms": 0.0,
-        "total_ms": 81.298,
+        "total_ms": 84.07,
         "reranker_available": false
       }
     },
@@ -365,18 +362,18 @@
         "6": 1.0,
         "10": 1.0
       },
-      "latency_ms": 80.88,
+      "latency_ms": 84.71,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 76.412,
-        "dense_ms": 2.274,
-        "lexical_ms": 2.013,
-        "fusion_ms": 0.13,
+        "embed_ms": 80.219,
+        "dense_ms": 2.502,
+        "lexical_ms": 1.852,
+        "fusion_ms": 0.091,
         "rerank_ms": 0.0,
-        "total_ms": 80.829,
+        "total_ms": 84.664,
         "reranker_available": false
       }
     },
@@ -404,18 +401,18 @@
         "6": 1.0,
         "10": 1.0
       },
-      "latency_ms": 81.56,
+      "latency_ms": 85.46,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 77.224,
-        "dense_ms": 2.381,
-        "lexical_ms": 1.831,
+        "embed_ms": 81.013,
+        "dense_ms": 2.36,
+        "lexical_ms": 1.953,
         "fusion_ms": 0.082,
         "rerank_ms": 0.0,
-        "total_ms": 81.518,
+        "total_ms": 85.409,
         "reranker_available": false
       }
     },
@@ -443,18 +440,18 @@
         "6": 1.0,
         "10": 1.0
       },
-      "latency_ms": 111.28,
+      "latency_ms": 85.98,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 105.841,
-        "dense_ms": 2.72,
-        "lexical_ms": 2.569,
-        "fusion_ms": 0.098,
+        "embed_ms": 80.729,
+        "dense_ms": 2.468,
+        "lexical_ms": 2.609,
+        "fusion_ms": 0.104,
         "rerank_ms": 0.0,
-        "total_ms": 111.228,
+        "total_ms": 85.91,
         "reranker_available": false
       }
     },
@@ -482,18 +479,18 @@
         "6": 1.0,
         "10": 1.0
       },
-      "latency_ms": 85.61,
+      "latency_ms": 84.56,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 80.318,
-        "dense_ms": 2.716,
-        "lexical_ms": 2.366,
-        "fusion_ms": 0.111,
+        "embed_ms": 79.359,
+        "dense_ms": 2.685,
+        "lexical_ms": 2.342,
+        "fusion_ms": 0.114,
         "rerank_ms": 0.0,
-        "total_ms": 85.51,
+        "total_ms": 84.5,
         "reranker_available": false
       }
     },
@@ -503,37 +500,38 @@
       "relevant_total": 3,
       "ranks_hit": [
         1,
-        3
+        4,
+        5
       ],
       "reciprocal_rank": 1.0,
       "recall": {
-        "3": 0.6667,
-        "6": 0.6667,
-        "10": 0.6667
+        "3": 0.3333,
+        "6": 1.0,
+        "10": 1.0
       },
       "hit": {
         "3": 1.0,
         "6": 1.0,
         "10": 1.0
       },
-      "ndcg_10": 0.7039,
+      "ndcg_10": 0.8529,
       "span_coverage": {
-        "3": 1.0,
+        "3": 0.6623,
         "6": 1.0,
         "10": 1.0
       },
-      "latency_ms": 117.26,
+      "latency_ms": 84.84,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 111.43,
-        "dense_ms": 2.952,
-        "lexical_ms": 2.701,
-        "fusion_ms": 0.115,
+        "embed_ms": 78.852,
+        "dense_ms": 2.937,
+        "lexical_ms": 2.876,
+        "fusion_ms": 0.118,
         "rerank_ms": 0.0,
-        "total_ms": 117.199,
+        "total_ms": 84.782,
         "reranker_available": false
       }
     },
@@ -542,9 +540,9 @@
       "category": "Effective Date",
       "relevant_total": 1,
       "ranks_hit": [
-        9
+        8
       ],
-      "reciprocal_rank": 0.1111,
+      "reciprocal_rank": 0.125,
       "recall": {
         "3": 0.0,
         "6": 0.0,
@@ -555,24 +553,24 @@
         "6": 0.0,
         "10": 1.0
       },
-      "ndcg_10": 0.301,
+      "ndcg_10": 0.3155,
       "span_coverage": {
         "3": 0.0,
         "6": 0.0,
         "10": 1.0
       },
-      "latency_ms": 89.37,
+      "latency_ms": 81.15,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 84.783,
-        "dense_ms": 2.443,
-        "lexical_ms": 1.976,
-        "fusion_ms": 0.11,
+        "embed_ms": 76.631,
+        "dense_ms": 2.571,
+        "lexical_ms": 1.794,
+        "fusion_ms": 0.099,
         "rerank_ms": 0.0,
-        "total_ms": 89.312,
+        "total_ms": 81.095,
         "reranker_available": false
       }
     },
@@ -583,11 +581,11 @@
       "ranks_hit": [
         1,
         2,
-        3
+        4
       ],
       "reciprocal_rank": 1.0,
       "recall": {
-        "3": 1.0,
+        "3": 0.6667,
         "6": 1.0,
         "10": 1.0
       },
@@ -596,24 +594,24 @@
         "6": 1.0,
         "10": 1.0
       },
-      "ndcg_10": 1.0,
+      "ndcg_10": 0.9675,
       "span_coverage": {
-        "3": 1.0,
+        "3": 0.6235,
         "6": 1.0,
         "10": 1.0
       },
-      "latency_ms": 93.11,
+      "latency_ms": 80.8,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 88.397,
-        "dense_ms": 2.498,
-        "lexical_ms": 2.05,
-        "fusion_ms": 0.107,
+        "embed_ms": 76.129,
+        "dense_ms": 2.489,
+        "lexical_ms": 2.024,
+        "fusion_ms": 0.106,
         "rerank_ms": 0.0,
-        "total_ms": 93.053,
+        "total_ms": 80.748,
         "reranker_available": false
       }
     },
@@ -639,18 +637,18 @@
         "6": 0.0,
         "10": 0.0
       },
-      "latency_ms": 93.31,
+      "latency_ms": 83.88,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 88.746,
-        "dense_ms": 2.499,
-        "lexical_ms": 1.902,
-        "fusion_ms": 0.108,
+        "embed_ms": 79.212,
+        "dense_ms": 2.568,
+        "lexical_ms": 1.941,
+        "fusion_ms": 0.102,
         "rerank_ms": 0.0,
-        "total_ms": 93.254,
+        "total_ms": 83.824,
         "reranker_available": false
       }
     },
@@ -659,10 +657,10 @@
       "category": "Uncapped Liability",
       "relevant_total": 2,
       "ranks_hit": [
-        1,
-        8
+        2,
+        7
       ],
-      "reciprocal_rank": 1.0,
+      "reciprocal_rank": 0.5,
       "recall": {
         "3": 0.5,
         "6": 0.5,
@@ -673,78 +671,78 @@
         "6": 1.0,
         "10": 1.0
       },
-      "ndcg_10": 0.8066,
+      "ndcg_10": 0.5912,
       "span_coverage": {
         "3": 1.0,
         "6": 1.0,
         "10": 1.0
       },
-      "latency_ms": 87.25,
+      "latency_ms": 83.43,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 83.286,
-        "dense_ms": 2.31,
-        "lexical_ms": 1.514,
-        "fusion_ms": 0.086,
+        "embed_ms": 79.071,
+        "dense_ms": 2.705,
+        "lexical_ms": 1.485,
+        "fusion_ms": 0.118,
         "rerank_ms": 0.0,
-        "total_ms": 87.196,
+        "total_ms": 83.379,
         "reranker_available": false
       }
     },
     {
       "qa_id": "BIOFRONTERAAG-04-29-2019-EX-4-17-SUPPLY-AGREEMENT__Cap On Liability",
       "category": "Cap On Liability",
-      "relevant_total": 4,
+      "relevant_total": 3,
       "ranks_hit": [
         1,
-        5,
-        9
+        6
       ],
       "reciprocal_rank": 1.0,
       "recall": {
-        "3": 0.25,
-        "6": 0.5,
-        "10": 0.75
+        "3": 0.3333,
+        "6": 0.6667,
+        "10": 0.6667
       },
       "hit": {
         "3": 1.0,
         "6": 1.0,
         "10": 1.0
       },
-      "ndcg_10": 0.6589,
+      "ndcg_10": 0.6364,
       "span_coverage": {
-        "3": 0.5083,
-        "6": 0.611,
+        "3": 0.611,
+        "6": 1.0,
         "10": 1.0
       },
-      "latency_ms": 87.86,
+      "latency_ms": 83.28,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 82.113,
-        "dense_ms": 2.638,
-        "lexical_ms": 2.954,
-        "fusion_ms": 0.1,
+        "embed_ms": 77.622,
+        "dense_ms": 2.749,
+        "lexical_ms": 2.757,
+        "fusion_ms": 0.101,
         "rerank_ms": 0.0,
-        "total_ms": 87.805,
+        "total_ms": 83.229,
         "reranker_available": false
       }
     },
     {
       "qa_id": "BIOFRONTERAAG-04-29-2019-EX-4-17-SUPPLY-AGREEMENT__Exclusivity",
       "category": "Exclusivity",
-      "relevant_total": 1,
+      "relevant_total": 2,
       "ranks_hit": [
-        1
+        1,
+        6
       ],
       "reciprocal_rank": 1.0,
       "recall": {
-        "3": 1.0,
+        "3": 0.5,
         "6": 1.0,
         "10": 1.0
       },
@@ -753,24 +751,24 @@
         "6": 1.0,
         "10": 1.0
       },
-      "ndcg_10": 1.0,
+      "ndcg_10": 0.8316,
       "span_coverage": {
         "3": 1.0,
         "6": 1.0,
         "10": 1.0
       },
-      "latency_ms": 82.53,
+      "latency_ms": 82.25,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 77.878,
-        "dense_ms": 2.588,
-        "lexical_ms": 1.911,
-        "fusion_ms": 0.099,
+        "embed_ms": 77.518,
+        "dense_ms": 2.69,
+        "lexical_ms": 1.897,
+        "fusion_ms": 0.09,
         "rerank_ms": 0.0,
-        "total_ms": 82.476,
+        "total_ms": 82.194,
         "reranker_available": false
       }
     },
@@ -798,18 +796,18 @@
         "6": 1.0,
         "10": 1.0
       },
-      "latency_ms": 82.68,
+      "latency_ms": 83.07,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 77.967,
-        "dense_ms": 2.756,
-        "lexical_ms": 1.806,
-        "fusion_ms": 0.092,
+        "embed_ms": 78.29,
+        "dense_ms": 2.543,
+        "lexical_ms": 2.083,
+        "fusion_ms": 0.098,
         "rerank_ms": 0.0,
-        "total_ms": 82.621,
+        "total_ms": 83.013,
         "reranker_available": false
       }
     },
@@ -818,13 +816,13 @@
       "category": "Anti-Assignment",
       "relevant_total": 2,
       "ranks_hit": [
-        1,
-        7
+        2,
+        5
       ],
-      "reciprocal_rank": 1.0,
+      "reciprocal_rank": 0.5,
       "recall": {
         "3": 0.5,
-        "6": 0.5,
+        "6": 1.0,
         "10": 1.0
       },
       "hit": {
@@ -832,24 +830,24 @@
         "6": 1.0,
         "10": 1.0
       },
-      "ndcg_10": 0.8175,
+      "ndcg_10": 0.6241,
       "span_coverage": {
-        "3": 1.0,
+        "3": 0.7602,
         "6": 1.0,
         "10": 1.0
       },
-      "latency_ms": 84.87,
+      "latency_ms": 83.34,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 79.894,
-        "dense_ms": 2.677,
-        "lexical_ms": 2.132,
-        "fusion_ms": 0.115,
+        "embed_ms": 78.591,
+        "dense_ms": 2.418,
+        "lexical_ms": 2.184,
+        "fusion_ms": 0.096,
         "rerank_ms": 0.0,
-        "total_ms": 84.817,
+        "total_ms": 83.288,
         "reranker_available": false
       }
     },
@@ -859,40 +857,41 @@
       "relevant_total": 7,
       "ranks_hit": [
         2,
-        4,
         5,
+        7,
         8,
-        9
+        9,
+        10
       ],
       "reciprocal_rank": 0.5,
       "recall": {
         "3": 0.1429,
-        "6": 0.4286,
-        "10": 0.7143
+        "6": 0.2857,
+        "10": 0.8571
       },
       "hit": {
         "3": 1.0,
         "6": 1.0,
         "10": 1.0
       },
-      "ndcg_10": 0.5676,
+      "ndcg_10": 0.6203,
       "span_coverage": {
-        "3": 0.3782,
-        "6": 0.3818,
-        "10": 0.8055
+        "3": 0.3017,
+        "6": 0.4747,
+        "10": 0.9338
       },
-      "latency_ms": 83.52,
+      "latency_ms": 85.51,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 78.53,
-        "dense_ms": 2.432,
-        "lexical_ms": 2.399,
-        "fusion_ms": 0.098,
+        "embed_ms": 80.571,
+        "dense_ms": 2.378,
+        "lexical_ms": 2.397,
+        "fusion_ms": 0.103,
         "rerank_ms": 0.0,
-        "total_ms": 83.46,
+        "total_ms": 85.45,
         "reranker_available": false
       }
     },
@@ -920,18 +919,18 @@
         "6": 1.0,
         "10": 1.0
       },
-      "latency_ms": 84.26,
+      "latency_ms": 85.15,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 79.647,
-        "dense_ms": 2.489,
-        "lexical_ms": 1.961,
-        "fusion_ms": 0.103,
+        "embed_ms": 80.529,
+        "dense_ms": 2.51,
+        "lexical_ms": 1.956,
+        "fusion_ms": 0.097,
         "rerank_ms": 0.0,
-        "total_ms": 84.2,
+        "total_ms": 85.092,
         "reranker_available": false
       }
     },
@@ -941,7 +940,7 @@
       "relevant_total": 3,
       "ranks_hit": [
         6,
-        8
+        9
       ],
       "reciprocal_rank": 0.1667,
       "recall": {
@@ -954,24 +953,24 @@
         "6": 1.0,
         "10": 1.0
       },
-      "ndcg_10": 0.3152,
+      "ndcg_10": 0.3084,
       "span_coverage": {
         "3": 0.0,
-        "6": 0.7135,
-        "10": 1.0
+        "6": 0.6433,
+        "10": 0.9298
       },
-      "latency_ms": 83.73,
+      "latency_ms": 83.79,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 79.395,
-        "dense_ms": 2.612,
-        "lexical_ms": 1.59,
-        "fusion_ms": 0.079,
+        "embed_ms": 79.55,
+        "dense_ms": 2.484,
+        "lexical_ms": 1.616,
+        "fusion_ms": 0.09,
         "rerank_ms": 0.0,
-        "total_ms": 83.675,
+        "total_ms": 83.74,
         "reranker_available": false
       }
     },
@@ -997,18 +996,18 @@
         "6": 0.0,
         "10": 0.0
       },
-      "latency_ms": 84.75,
+      "latency_ms": 85.49,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 79.434,
-        "dense_ms": 2.619,
-        "lexical_ms": 2.471,
-        "fusion_ms": 0.168,
+        "embed_ms": 80.226,
+        "dense_ms": 2.49,
+        "lexical_ms": 2.598,
+        "fusion_ms": 0.121,
         "rerank_ms": 0.0,
-        "total_ms": 84.692,
+        "total_ms": 85.435,
         "reranker_available": false
       }
     },
@@ -1017,37 +1016,37 @@
       "category": "Price Restrictions",
       "relevant_total": 2,
       "ranks_hit": [
-        6
+        3
       ],
-      "reciprocal_rank": 0.1667,
+      "reciprocal_rank": 0.3333,
       "recall": {
-        "3": 0.0,
+        "3": 0.5,
         "6": 0.5,
         "10": 0.5
       },
       "hit": {
-        "3": 0.0,
+        "3": 1.0,
         "6": 1.0,
         "10": 1.0
       },
-      "ndcg_10": 0.2184,
+      "ndcg_10": 0.3066,
       "span_coverage": {
-        "3": 0.0,
-        "6": 0.762,
-        "10": 0.762
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
       },
-      "latency_ms": 84.29,
+      "latency_ms": 83.54,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 80.222,
-        "dense_ms": 2.516,
-        "lexical_ms": 1.401,
-        "fusion_ms": 0.095,
+        "embed_ms": 79.483,
+        "dense_ms": 2.396,
+        "lexical_ms": 1.537,
+        "fusion_ms": 0.073,
         "rerank_ms": 0.0,
-        "total_ms": 84.234,
+        "total_ms": 83.488,
         "reranker_available": false
       }
     },
@@ -1073,18 +1072,18 @@
         "6": 0.0,
         "10": 0.0
       },
-      "latency_ms": 83.73,
+      "latency_ms": 84.53,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 79.302,
-        "dense_ms": 2.82,
-        "lexical_ms": 1.461,
-        "fusion_ms": 0.08,
+        "embed_ms": 80.243,
+        "dense_ms": 2.738,
+        "lexical_ms": 1.43,
+        "fusion_ms": 0.073,
         "rerank_ms": 0.0,
-        "total_ms": 83.664,
+        "total_ms": 84.485,
         "reranker_available": false
       }
     },
@@ -1093,37 +1092,38 @@
       "category": "Liquidated Damages",
       "relevant_total": 3,
       "ranks_hit": [
-        2
+        2,
+        4
       ],
       "reciprocal_rank": 0.5,
       "recall": {
         "3": 0.3333,
-        "6": 0.3333,
-        "10": 0.3333
+        "6": 0.6667,
+        "10": 0.6667
       },
       "hit": {
         "3": 1.0,
         "6": 1.0,
         "10": 1.0
       },
-      "ndcg_10": 0.2961,
+      "ndcg_10": 0.4982,
       "span_coverage": {
-        "3": 0.3899,
-        "6": 0.3899,
-        "10": 0.3899
+        "3": 0.5344,
+        "6": 0.5905,
+        "10": 0.5905
       },
-      "latency_ms": 83.02,
+      "latency_ms": 85.78,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 78.147,
-        "dense_ms": 2.577,
-        "lexical_ms": 2.128,
-        "fusion_ms": 0.111,
+        "embed_ms": 80.463,
+        "dense_ms": 2.635,
+        "lexical_ms": 2.462,
+        "fusion_ms": 0.109,
         "rerank_ms": 0.0,
-        "total_ms": 82.963,
+        "total_ms": 85.669,
         "reranker_available": false
       }
     },
@@ -1151,18 +1151,18 @@
         "6": 1.0,
         "10": 1.0
       },
-      "latency_ms": 82.82,
+      "latency_ms": 86.3,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 77.87,
-        "dense_ms": 2.622,
-        "lexical_ms": 2.172,
-        "fusion_ms": 0.099,
+        "embed_ms": 81.247,
+        "dense_ms": 2.637,
+        "lexical_ms": 2.245,
+        "fusion_ms": 0.116,
         "rerank_ms": 0.0,
-        "total_ms": 82.763,
+        "total_ms": 86.245,
         "reranker_available": false
       }
     },
@@ -1188,18 +1188,18 @@
         "6": 0.0,
         "10": 0.0
       },
-      "latency_ms": 85.59,
+      "latency_ms": 85.11,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 81.2,
-        "dense_ms": 2.47,
-        "lexical_ms": 1.77,
-        "fusion_ms": 0.091,
+        "embed_ms": 80.202,
+        "dense_ms": 2.667,
+        "lexical_ms": 2.098,
+        "fusion_ms": 0.092,
         "rerank_ms": 0.0,
-        "total_ms": 85.531,
+        "total_ms": 85.058,
         "reranker_available": false
       }
     },
@@ -1227,18 +1227,18 @@
         "6": 1.0,
         "10": 1.0
       },
-      "latency_ms": 86.65,
+      "latency_ms": 85.99,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 80.902,
-        "dense_ms": 3.104,
-        "lexical_ms": 2.45,
-        "fusion_ms": 0.099,
+        "embed_ms": 80.428,
+        "dense_ms": 2.882,
+        "lexical_ms": 2.524,
+        "fusion_ms": 0.102,
         "rerank_ms": 0.0,
-        "total_ms": 86.555,
+        "total_ms": 85.936,
         "reranker_available": false
       }
     },
@@ -1264,18 +1264,18 @@
         "6": 0.0,
         "10": 0.0
       },
-      "latency_ms": 90.15,
+      "latency_ms": 84.32,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 84.254,
-        "dense_ms": 2.789,
-        "lexical_ms": 2.938,
-        "fusion_ms": 0.111,
+        "embed_ms": 77.915,
+        "dense_ms": 2.803,
+        "lexical_ms": 3.317,
+        "fusion_ms": 0.188,
         "rerank_ms": 0.0,
-        "total_ms": 90.092,
+        "total_ms": 84.222,
         "reranker_available": false
       }
     },
@@ -1283,48 +1283,45 @@
       "qa_id": "ELANDIAINTERNATIONALINC-04-25-2007-EX-10-21-Outsourcing-Agreement__Price Restrictions",
       "category": "Price Restrictions",
       "relevant_total": 1,
-      "ranks_hit": [
-        7
-      ],
-      "reciprocal_rank": 0.1429,
+      "ranks_hit": [],
+      "reciprocal_rank": 0.0,
       "recall": {
         "3": 0.0,
         "6": 0.0,
-        "10": 1.0
+        "10": 0.0
       },
       "hit": {
         "3": 0.0,
         "6": 0.0,
-        "10": 1.0
+        "10": 0.0
       },
-      "ndcg_10": 0.3333,
+      "ndcg_10": 0.0,
       "span_coverage": {
         "3": 0.0,
         "6": 0.0,
-        "10": 1.0
+        "10": 0.0
       },
-      "latency_ms": 89.96,
+      "latency_ms": 84.62,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 84.195,
-        "dense_ms": 2.991,
-        "lexical_ms": 2.535,
-        "fusion_ms": 0.168,
+        "embed_ms": 79.892,
+        "dense_ms": 2.557,
+        "lexical_ms": 2.012,
+        "fusion_ms": 0.105,
         "rerank_ms": 0.0,
-        "total_ms": 89.89,
+        "total_ms": 84.567,
         "reranker_available": false
       }
     },
     {
       "qa_id": "ELANDIAINTERNATIONALINC-04-25-2007-EX-10-21-Outsourcing-Agreement__Termination For Convenience",
       "category": "Termination For Convenience",
-      "relevant_total": 2,
+      "relevant_total": 1,
       "ranks_hit": [
-        1,
-        2
+        1
       ],
       "reciprocal_rank": 1.0,
       "recall": {
@@ -1343,18 +1340,18 @@
         "6": 1.0,
         "10": 1.0
       },
-      "latency_ms": 87.61,
+      "latency_ms": 85.47,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 81.505,
-        "dense_ms": 2.829,
-        "lexical_ms": 3.113,
-        "fusion_ms": 0.106,
+        "embed_ms": 79.372,
+        "dense_ms": 2.779,
+        "lexical_ms": 3.152,
+        "fusion_ms": 0.103,
         "rerank_ms": 0.0,
-        "total_ms": 87.553,
+        "total_ms": 85.407,
         "reranker_available": false
       }
     },
@@ -1383,18 +1380,18 @@
         "6": 1.0,
         "10": 1.0
       },
-      "latency_ms": 83.09,
+      "latency_ms": 86.28,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 77.733,
-        "dense_ms": 2.788,
-        "lexical_ms": 2.35,
-        "fusion_ms": 0.152,
+        "embed_ms": 80.842,
+        "dense_ms": 2.976,
+        "lexical_ms": 2.308,
+        "fusion_ms": 0.099,
         "rerank_ms": 0.0,
-        "total_ms": 83.024,
+        "total_ms": 86.224,
         "reranker_available": false
       }
     },
@@ -1402,36 +1399,38 @@
       "qa_id": "ENERGOUSCORP-03-16-2017-EX-10-24-STRATEGIC-ALLIANCE-AGREEMENT__Expiration Date",
       "category": "Expiration Date",
       "relevant_total": 1,
-      "ranks_hit": [],
-      "reciprocal_rank": 0.0,
+      "ranks_hit": [
+        10
+      ],
+      "reciprocal_rank": 0.1,
       "recall": {
         "3": 0.0,
         "6": 0.0,
-        "10": 0.0
+        "10": 1.0
       },
       "hit": {
         "3": 0.0,
         "6": 0.0,
-        "10": 0.0
+        "10": 1.0
       },
-      "ndcg_10": 0.0,
+      "ndcg_10": 0.2891,
       "span_coverage": {
         "3": 0.0,
         "6": 0.0,
-        "10": 0.0
+        "10": 1.0
       },
-      "latency_ms": 92.51,
+      "latency_ms": 84.25,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 84.91,
-        "dense_ms": 3.679,
-        "lexical_ms": 3.759,
-        "fusion_ms": 0.099,
+        "embed_ms": 79.307,
+        "dense_ms": 2.752,
+        "lexical_ms": 1.966,
+        "fusion_ms": 0.167,
         "rerank_ms": 0.0,
-        "total_ms": 92.447,
+        "total_ms": 84.192,
         "reranker_available": false
       }
     },
@@ -1459,18 +1458,18 @@
         "6": 1.0,
         "10": 1.0
       },
-      "latency_ms": 92.63,
+      "latency_ms": 82.18,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 87.499,
-        "dense_ms": 2.7,
-        "lexical_ms": 2.291,
-        "fusion_ms": 0.095,
+        "embed_ms": 77.314,
+        "dense_ms": 2.654,
+        "lexical_ms": 2.061,
+        "fusion_ms": 0.1,
         "rerank_ms": 0.0,
-        "total_ms": 92.586,
+        "total_ms": 82.129,
         "reranker_available": false
       }
     },
@@ -1499,18 +1498,18 @@
         "6": 1.0,
         "10": 1.0
       },
-      "latency_ms": 85.24,
+      "latency_ms": 82.47,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 80.326,
-        "dense_ms": 2.735,
-        "lexical_ms": 2.026,
-        "fusion_ms": 0.098,
+        "embed_ms": 77.733,
+        "dense_ms": 2.553,
+        "lexical_ms": 2.027,
+        "fusion_ms": 0.096,
         "rerank_ms": 0.0,
-        "total_ms": 85.185,
+        "total_ms": 82.41,
         "reranker_available": false
       }
     },
@@ -1538,25 +1537,25 @@
         "6": 1.0,
         "10": 1.0
       },
-      "latency_ms": 85.96,
+      "latency_ms": 83.44,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 81.487,
-        "dense_ms": 2.698,
-        "lexical_ms": 1.633,
-        "fusion_ms": 0.09,
+        "embed_ms": 78.221,
+        "dense_ms": 2.739,
+        "lexical_ms": 2.262,
+        "fusion_ms": 0.129,
         "rerank_ms": 0.0,
-        "total_ms": 85.908,
+        "total_ms": 83.352,
         "reranker_available": false
       }
     },
     {
       "qa_id": "ENERGYXXILTD-05-08-2015-EX-10-13-Transportation-AGREEMENT__Volume Restriction",
       "category": "Volume Restriction",
-      "relevant_total": 6,
+      "relevant_total": 7,
       "ranks_hit": [],
       "reciprocal_rank": 0.0,
       "recall": {
@@ -1575,18 +1574,18 @@
         "6": 0.0,
         "10": 0.0
       },
-      "latency_ms": 81.24,
+      "latency_ms": 83.68,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 76.496,
-        "dense_ms": 2.674,
-        "lexical_ms": 1.916,
-        "fusion_ms": 0.097,
+        "embed_ms": 78.96,
+        "dense_ms": 2.677,
+        "lexical_ms": 1.89,
+        "fusion_ms": 0.093,
         "rerank_ms": 0.0,
-        "total_ms": 81.182,
+        "total_ms": 83.621,
         "reranker_available": false
       }
     },
@@ -1598,7 +1597,7 @@
         1,
         2,
         5,
-        8
+        7
       ],
       "reciprocal_rank": 1.0,
       "recall": {
@@ -1611,30 +1610,70 @@
         "6": 1.0,
         "10": 1.0
       },
-      "ndcg_10": 0.9109,
+      "ndcg_10": 0.9178,
       "span_coverage": {
-        "3": 0.8726,
-        "6": 0.8726,
+        "3": 0.9808,
+        "6": 0.9808,
         "10": 1.0
       },
-      "latency_ms": 84.23,
+      "latency_ms": 87.78,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 79.164,
-        "dense_ms": 2.668,
-        "lexical_ms": 2.243,
-        "fusion_ms": 0.098,
+        "embed_ms": 82.47,
+        "dense_ms": 2.746,
+        "lexical_ms": 2.402,
+        "fusion_ms": 0.1,
         "rerank_ms": 0.0,
-        "total_ms": 84.173,
+        "total_ms": 87.718,
         "reranker_available": false
       }
     },
     {
       "qa_id": "EUROPEANMICROHOLDINGSINC-03-06-1998-EX-10-6-DISTRIBUTOR-AGREEMENT__Liquidated Damages",
       "category": "Liquidated Damages",
+      "relevant_total": 2,
+      "ranks_hit": [
+        1,
+        2
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 1.0,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 87.14,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 81.749,
+        "dense_ms": 2.929,
+        "lexical_ms": 2.304,
+        "fusion_ms": 0.099,
+        "rerank_ms": 0.0,
+        "total_ms": 87.081,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "EUROPEANMICROHOLDINGSINC-03-06-1998-EX-10-6-DISTRIBUTOR-AGREEMENT__Uncapped Liability",
+      "category": "Uncapped Liability",
       "relevant_total": 2,
       "ranks_hit": [
         1,
@@ -1657,57 +1696,18 @@
         "6": 1.0,
         "10": 1.0
       },
-      "latency_ms": 84.12,
+      "latency_ms": 85.23,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 79.033,
-        "dense_ms": 2.651,
-        "lexical_ms": 2.284,
-        "fusion_ms": 0.101,
+        "embed_ms": 80.98,
+        "dense_ms": 2.72,
+        "lexical_ms": 1.376,
+        "fusion_ms": 0.109,
         "rerank_ms": 0.0,
-        "total_ms": 84.07,
-        "reranker_available": false
-      }
-    },
-    {
-      "qa_id": "EUROPEANMICROHOLDINGSINC-03-06-1998-EX-10-6-DISTRIBUTOR-AGREEMENT__Uncapped Liability",
-      "category": "Uncapped Liability",
-      "relevant_total": 1,
-      "ranks_hit": [
-        1
-      ],
-      "reciprocal_rank": 1.0,
-      "recall": {
-        "3": 1.0,
-        "6": 1.0,
-        "10": 1.0
-      },
-      "hit": {
-        "3": 1.0,
-        "6": 1.0,
-        "10": 1.0
-      },
-      "ndcg_10": 1.0,
-      "span_coverage": {
-        "3": 1.0,
-        "6": 1.0,
-        "10": 1.0
-      },
-      "latency_ms": 82.84,
-      "trace": {
-        "strategy": "rrf",
-        "k": 10,
-        "fetch_k": 30,
-        "expanded_query": null,
-        "embed_ms": 78.765,
-        "dense_ms": 2.469,
-        "lexical_ms": 1.471,
-        "fusion_ms": 0.081,
-        "rerank_ms": 0.0,
-        "total_ms": 82.786,
+        "total_ms": 85.185,
         "reranker_available": false
       }
     },
@@ -1735,18 +1735,18 @@
         "6": 1.0,
         "10": 1.0
       },
-      "latency_ms": 87.55,
+      "latency_ms": 87.1,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 82.174,
-        "dense_ms": 2.689,
-        "lexical_ms": 2.515,
-        "fusion_ms": 0.123,
+        "embed_ms": 81.766,
+        "dense_ms": 2.547,
+        "lexical_ms": 2.614,
+        "fusion_ms": 0.126,
         "rerank_ms": 0.0,
-        "total_ms": 87.5,
+        "total_ms": 87.053,
         "reranker_available": false
       }
     },
@@ -1775,28 +1775,29 @@
         "6": 1.0,
         "10": 1.0
       },
-      "latency_ms": 88.97,
+      "latency_ms": 95.15,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 83.727,
-        "dense_ms": 2.681,
-        "lexical_ms": 2.408,
-        "fusion_ms": 0.098,
+        "embed_ms": 88.453,
+        "dense_ms": 3.223,
+        "lexical_ms": 3.223,
+        "fusion_ms": 0.154,
         "rerank_ms": 0.0,
-        "total_ms": 88.914,
+        "total_ms": 95.053,
         "reranker_available": false
       }
     },
     {
       "qa_id": "GentechHoldingsInc-20190808-1-A-EX1A-6-MAT-CTRCT-11776814-EX1A-6-MAT-CTRCT-Distr__Price Restrictions",
       "category": "Price Restrictions",
-      "relevant_total": 2,
+      "relevant_total": 3,
       "ranks_hit": [
         1,
-        2
+        2,
+        3
       ],
       "reciprocal_rank": 1.0,
       "recall": {
@@ -1815,18 +1816,18 @@
         "6": 1.0,
         "10": 1.0
       },
-      "latency_ms": 86.17,
+      "latency_ms": 87.52,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 82.375,
-        "dense_ms": 2.361,
-        "lexical_ms": 1.304,
-        "fusion_ms": 0.076,
+        "embed_ms": 83.577,
+        "dense_ms": 2.481,
+        "lexical_ms": 1.333,
+        "fusion_ms": 0.073,
         "rerank_ms": 0.0,
-        "total_ms": 86.116,
+        "total_ms": 87.463,
         "reranker_available": false
       }
     },
@@ -1852,18 +1853,18 @@
         "6": 0.0,
         "10": 0.0
       },
-      "latency_ms": 87.32,
+      "latency_ms": 84.36,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 83.378,
-        "dense_ms": 2.461,
-        "lexical_ms": 1.339,
+        "embed_ms": 80.309,
+        "dense_ms": 2.574,
+        "lexical_ms": 1.34,
         "fusion_ms": 0.081,
         "rerank_ms": 0.0,
-        "total_ms": 87.259,
+        "total_ms": 84.305,
         "reranker_available": false
       }
     },
@@ -1872,38 +1873,38 @@
       "category": "Notice Period To Terminate Renewal",
       "relevant_total": 2,
       "ranks_hit": [
-        2,
-        7
+        4,
+        6
       ],
-      "reciprocal_rank": 0.5,
+      "reciprocal_rank": 0.25,
       "recall": {
-        "3": 0.5,
-        "6": 0.5,
-        "10": 1.0
-      },
-      "hit": {
-        "3": 1.0,
+        "3": 0.0,
         "6": 1.0,
         "10": 1.0
       },
-      "ndcg_10": 0.5912,
-      "span_coverage": {
-        "3": 0.9195,
-        "6": 0.9195,
+      "hit": {
+        "3": 0.0,
+        "6": 1.0,
         "10": 1.0
       },
-      "latency_ms": 88.87,
+      "ndcg_10": 0.4825,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 84.73,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 84.291,
-        "dense_ms": 2.342,
-        "lexical_ms": 2.044,
-        "fusion_ms": 0.094,
+        "embed_ms": 79.763,
+        "dense_ms": 2.649,
+        "lexical_ms": 2.181,
+        "fusion_ms": 0.087,
         "rerank_ms": 0.0,
-        "total_ms": 88.771,
+        "total_ms": 84.68,
         "reranker_available": false
       }
     },
@@ -1912,37 +1913,37 @@
       "category": "Revenue/Profit Sharing",
       "relevant_total": 5,
       "ranks_hit": [
-        2
+        5
       ],
-      "reciprocal_rank": 0.5,
+      "reciprocal_rank": 0.2,
       "recall": {
-        "3": 0.2,
+        "3": 0.0,
         "6": 0.2,
         "10": 0.2
       },
       "hit": {
-        "3": 1.0,
+        "3": 0.0,
         "6": 1.0,
         "10": 1.0
       },
-      "ndcg_10": 0.214,
+      "ndcg_10": 0.1312,
       "span_coverage": {
-        "3": 0.1745,
-        "6": 0.1745,
-        "10": 0.1745
+        "3": 0.0,
+        "6": 0.1262,
+        "10": 0.1262
       },
-      "latency_ms": 85.72,
+      "latency_ms": 86.35,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 81.176,
-        "dense_ms": 2.446,
-        "lexical_ms": 1.957,
-        "fusion_ms": 0.092,
+        "embed_ms": 81.941,
+        "dense_ms": 2.537,
+        "lexical_ms": 1.734,
+        "fusion_ms": 0.088,
         "rerank_ms": 0.0,
-        "total_ms": 85.67,
+        "total_ms": 86.3,
         "reranker_available": false
       }
     },
@@ -1970,57 +1971,57 @@
         "6": 1.0,
         "10": 1.0
       },
-      "latency_ms": 82.51,
+      "latency_ms": 84.97,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 77.817,
-        "dense_ms": 2.552,
-        "lexical_ms": 2.0,
-        "fusion_ms": 0.09,
+        "embed_ms": 80.321,
+        "dense_ms": 2.409,
+        "lexical_ms": 2.09,
+        "fusion_ms": 0.087,
         "rerank_ms": 0.0,
-        "total_ms": 82.458,
+        "total_ms": 84.907,
         "reranker_available": false
       }
     },
     {
       "qa_id": "InmodeLtd-20190729-F-1A-EX-10-9-11743243-EX-10-9-Manufacturing-Agreement__Insurance",
       "category": "Insurance",
-      "relevant_total": 2,
+      "relevant_total": 1,
       "ranks_hit": [
-        4
+        3
       ],
-      "reciprocal_rank": 0.25,
+      "reciprocal_rank": 0.3333,
       "recall": {
-        "3": 0.0,
-        "6": 0.5,
-        "10": 0.5
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
       },
       "hit": {
-        "3": 0.0,
+        "3": 1.0,
         "6": 1.0,
         "10": 1.0
       },
-      "ndcg_10": 0.2641,
+      "ndcg_10": 0.5,
       "span_coverage": {
-        "3": 0.0,
+        "3": 1.0,
         "6": 1.0,
         "10": 1.0
       },
-      "latency_ms": 82.55,
+      "latency_ms": 84.29,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 77.95,
-        "dense_ms": 2.663,
-        "lexical_ms": 1.76,
-        "fusion_ms": 0.124,
+        "embed_ms": 79.873,
+        "dense_ms": 2.568,
+        "lexical_ms": 1.714,
+        "fusion_ms": 0.079,
         "rerank_ms": 0.0,
-        "total_ms": 82.498,
+        "total_ms": 84.233,
         "reranker_available": false
       }
     },
@@ -2045,22 +2046,22 @@
       },
       "ndcg_10": 0.8772,
       "span_coverage": {
-        "3": 0.5165,
+        "3": 0.6044,
         "6": 1.0,
         "10": 1.0
       },
-      "latency_ms": 84.97,
+      "latency_ms": 84.08,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 80.331,
-        "dense_ms": 2.549,
-        "lexical_ms": 1.942,
-        "fusion_ms": 0.1,
+        "embed_ms": 79.547,
+        "dense_ms": 2.463,
+        "lexical_ms": 1.953,
+        "fusion_ms": 0.076,
         "rerank_ms": 0.0,
-        "total_ms": 84.923,
+        "total_ms": 84.038,
         "reranker_available": false
       }
     },
@@ -2069,38 +2070,38 @@
       "category": "Notice Period To Terminate Renewal",
       "relevant_total": 2,
       "ranks_hit": [
-        3,
-        9
+        4,
+        7
       ],
-      "reciprocal_rank": 0.3333,
+      "reciprocal_rank": 0.25,
       "recall": {
-        "3": 0.5,
+        "3": 0.0,
         "6": 0.5,
         "10": 1.0
       },
       "hit": {
-        "3": 1.0,
+        "3": 0.0,
         "6": 1.0,
         "10": 1.0
       },
-      "ndcg_10": 0.4911,
+      "ndcg_10": 0.4685,
       "span_coverage": {
-        "3": 1.0,
+        "3": 0.0,
         "6": 1.0,
         "10": 1.0
       },
-      "latency_ms": 84.69,
+      "latency_ms": 87.84,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 79.65,
-        "dense_ms": 2.489,
-        "lexical_ms": 2.385,
-        "fusion_ms": 0.107,
+        "embed_ms": 82.749,
+        "dense_ms": 2.499,
+        "lexical_ms": 2.383,
+        "fusion_ms": 0.12,
         "rerank_ms": 0.0,
-        "total_ms": 84.63,
+        "total_ms": 87.75,
         "reranker_available": false
       }
     },
@@ -2126,18 +2127,18 @@
         "6": 0.0,
         "10": 0.0
       },
-      "latency_ms": 83.45,
+      "latency_ms": 84.81,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 78.93,
-        "dense_ms": 2.458,
-        "lexical_ms": 1.908,
-        "fusion_ms": 0.1,
+        "embed_ms": 80.064,
+        "dense_ms": 2.475,
+        "lexical_ms": 2.113,
+        "fusion_ms": 0.101,
         "rerank_ms": 0.0,
-        "total_ms": 83.396,
+        "total_ms": 84.753,
         "reranker_available": false
       }
     },
@@ -2163,18 +2164,18 @@
         "6": 0.0,
         "10": 0.0
       },
-      "latency_ms": 85.65,
+      "latency_ms": 85.45,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 80.907,
-        "dense_ms": 2.526,
-        "lexical_ms": 2.064,
-        "fusion_ms": 0.098,
+        "embed_ms": 80.445,
+        "dense_ms": 2.662,
+        "lexical_ms": 2.111,
+        "fusion_ms": 0.17,
         "rerank_ms": 0.0,
-        "total_ms": 85.595,
+        "total_ms": 85.388,
         "reranker_available": false
       }
     },
@@ -2202,18 +2203,18 @@
         "6": 1.0,
         "10": 1.0
       },
-      "latency_ms": 89.57,
+      "latency_ms": 86.01,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 84.508,
-        "dense_ms": 2.564,
-        "lexical_ms": 2.332,
-        "fusion_ms": 0.113,
+        "embed_ms": 81.057,
+        "dense_ms": 2.586,
+        "lexical_ms": 2.145,
+        "fusion_ms": 0.153,
         "rerank_ms": 0.0,
-        "total_ms": 89.517,
+        "total_ms": 85.942,
         "reranker_available": false
       }
     },
@@ -2222,9 +2223,9 @@
       "category": "Exclusivity",
       "relevant_total": 2,
       "ranks_hit": [
-        5
+        6
       ],
-      "reciprocal_rank": 0.2,
+      "reciprocal_rank": 0.1667,
       "recall": {
         "3": 0.0,
         "6": 0.5,
@@ -2235,24 +2236,24 @@
         "6": 1.0,
         "10": 1.0
       },
-      "ndcg_10": 0.2372,
+      "ndcg_10": 0.2184,
       "span_coverage": {
         "3": 0.0,
-        "6": 0.9903,
-        "10": 0.9903
+        "6": 1.0,
+        "10": 1.0
       },
-      "latency_ms": 84.91,
+      "latency_ms": 85.34,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 80.311,
-        "dense_ms": 2.746,
-        "lexical_ms": 1.668,
-        "fusion_ms": 0.134,
+        "embed_ms": 80.768,
+        "dense_ms": 2.685,
+        "lexical_ms": 1.738,
+        "fusion_ms": 0.079,
         "rerank_ms": 0.0,
-        "total_ms": 84.859,
+        "total_ms": 85.27,
         "reranker_available": false
       }
     },
@@ -2261,37 +2262,37 @@
       "category": "Uncapped Liability",
       "relevant_total": 1,
       "ranks_hit": [
-        3
+        4
       ],
-      "reciprocal_rank": 0.3333,
+      "reciprocal_rank": 0.25,
       "recall": {
-        "3": 1.0,
+        "3": 0.0,
         "6": 1.0,
         "10": 1.0
       },
       "hit": {
-        "3": 1.0,
+        "3": 0.0,
         "6": 1.0,
         "10": 1.0
       },
-      "ndcg_10": 0.5,
+      "ndcg_10": 0.4307,
       "span_coverage": {
-        "3": 1.0,
+        "3": 0.0,
         "6": 1.0,
         "10": 1.0
       },
-      "latency_ms": 84.74,
+      "latency_ms": 86.26,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 80.105,
-        "dense_ms": 3.004,
-        "lexical_ms": 1.507,
+        "embed_ms": 81.595,
+        "dense_ms": 2.842,
+        "lexical_ms": 1.694,
         "fusion_ms": 0.075,
         "rerank_ms": 0.0,
-        "total_ms": 84.69,
+        "total_ms": 86.206,
         "reranker_available": false
       }
     },
@@ -2300,9 +2301,9 @@
       "category": "Volume Restriction",
       "relevant_total": 1,
       "ranks_hit": [
-        7
+        8
       ],
-      "reciprocal_rank": 0.1429,
+      "reciprocal_rank": 0.125,
       "recall": {
         "3": 0.0,
         "6": 0.0,
@@ -2313,39 +2314,38 @@
         "6": 0.0,
         "10": 1.0
       },
-      "ndcg_10": 0.3333,
+      "ndcg_10": 0.3155,
       "span_coverage": {
         "3": 0.0,
         "6": 0.0,
         "10": 1.0
       },
-      "latency_ms": 85.22,
+      "latency_ms": 85.4,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 80.212,
-        "dense_ms": 2.738,
-        "lexical_ms": 2.127,
-        "fusion_ms": 0.092,
+        "embed_ms": 80.318,
+        "dense_ms": 2.828,
+        "lexical_ms": 2.114,
+        "fusion_ms": 0.09,
         "rerank_ms": 0.0,
-        "total_ms": 85.168,
+        "total_ms": 85.35,
         "reranker_available": false
       }
     },
     {
       "qa_id": "KALLOINC-11-03-2011-EX-10-1-STRATEGIC-ALLIANCE-AGREEMENT__Cap On Liability",
       "category": "Cap On Liability",
-      "relevant_total": 2,
+      "relevant_total": 1,
       "ranks_hit": [
-        2,
-        7
+        2
       ],
       "reciprocal_rank": 0.5,
       "recall": {
-        "3": 0.5,
-        "6": 0.5,
+        "3": 1.0,
+        "6": 1.0,
         "10": 1.0
       },
       "hit": {
@@ -2353,24 +2353,24 @@
         "6": 1.0,
         "10": 1.0
       },
-      "ndcg_10": 0.5912,
+      "ndcg_10": 0.6309,
       "span_coverage": {
         "3": 1.0,
         "6": 1.0,
         "10": 1.0
       },
-      "latency_ms": 82.45,
+      "latency_ms": 85.82,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 76.945,
-        "dense_ms": 2.597,
-        "lexical_ms": 2.707,
-        "fusion_ms": 0.133,
+        "embed_ms": 80.195,
+        "dense_ms": 2.856,
+        "lexical_ms": 2.606,
+        "fusion_ms": 0.105,
         "rerank_ms": 0.0,
-        "total_ms": 82.382,
+        "total_ms": 85.761,
         "reranker_available": false
       }
     },
@@ -2398,18 +2398,18 @@
         "6": 1.0,
         "10": 1.0
       },
-      "latency_ms": 84.27,
+      "latency_ms": 87.07,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 79.648,
-        "dense_ms": 2.573,
-        "lexical_ms": 1.874,
-        "fusion_ms": 0.125,
+        "embed_ms": 82.337,
+        "dense_ms": 2.801,
+        "lexical_ms": 1.785,
+        "fusion_ms": 0.092,
         "rerank_ms": 0.0,
-        "total_ms": 84.22,
+        "total_ms": 87.015,
         "reranker_available": false
       }
     },
@@ -2437,18 +2437,18 @@
         "6": 1.0,
         "10": 1.0
       },
-      "latency_ms": 82.07,
+      "latency_ms": 88.39,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 76.852,
+        "embed_ms": 83.3,
         "dense_ms": 2.795,
-        "lexical_ms": 2.251,
-        "fusion_ms": 0.111,
+        "lexical_ms": 2.133,
+        "fusion_ms": 0.102,
         "rerank_ms": 0.0,
-        "total_ms": 82.009,
+        "total_ms": 88.331,
         "reranker_available": false
       }
     },
@@ -2476,18 +2476,18 @@
         "6": 1.0,
         "10": 1.0
       },
-      "latency_ms": 85.88,
+      "latency_ms": 84.32,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 81.118,
-        "dense_ms": 2.692,
-        "lexical_ms": 1.923,
-        "fusion_ms": 0.092,
+        "embed_ms": 79.458,
+        "dense_ms": 2.71,
+        "lexical_ms": 2.0,
+        "fusion_ms": 0.095,
         "rerank_ms": 0.0,
-        "total_ms": 85.826,
+        "total_ms": 84.261,
         "reranker_available": false
       }
     },
@@ -2496,38 +2496,37 @@
       "category": "Post-Termination Services",
       "relevant_total": 3,
       "ranks_hit": [
-        1,
-        6
+        1
       ],
       "reciprocal_rank": 1.0,
       "recall": {
         "3": 0.3333,
-        "6": 0.6667,
-        "10": 0.6667
+        "6": 0.3333,
+        "10": 0.3333
       },
       "hit": {
         "3": 1.0,
         "6": 1.0,
         "10": 1.0
       },
-      "ndcg_10": 0.6364,
+      "ndcg_10": 0.4693,
       "span_coverage": {
-        "3": 0.2858,
-        "6": 0.8226,
-        "10": 0.8226
+        "3": 0.35,
+        "6": 0.35,
+        "10": 0.35
       },
-      "latency_ms": 85.0,
+      "latency_ms": 85.14,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 80.133,
-        "dense_ms": 2.646,
-        "lexical_ms": 2.061,
-        "fusion_ms": 0.102,
+        "embed_ms": 80.15,
+        "dense_ms": 2.702,
+        "lexical_ms": 2.117,
+        "fusion_ms": 0.112,
         "rerank_ms": 0.0,
-        "total_ms": 84.942,
+        "total_ms": 85.082,
         "reranker_available": false
       }
     },
@@ -2537,13 +2536,13 @@
       "relevant_total": 3,
       "ranks_hit": [
         1,
-        2,
-        8
+        3,
+        4
       ],
       "reciprocal_rank": 1.0,
       "recall": {
         "3": 0.6667,
-        "6": 0.6667,
+        "6": 1.0,
         "10": 1.0
       },
       "hit": {
@@ -2551,34 +2550,33 @@
         "6": 1.0,
         "10": 1.0
       },
-      "ndcg_10": 0.9134,
+      "ndcg_10": 0.906,
       "span_coverage": {
-        "3": 0.8418,
-        "6": 0.8418,
+        "3": 0.8776,
+        "6": 1.0,
         "10": 1.0
       },
-      "latency_ms": 83.17,
+      "latency_ms": 85.68,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 78.665,
-        "dense_ms": 2.591,
-        "lexical_ms": 1.77,
-        "fusion_ms": 0.092,
+        "embed_ms": 81.459,
+        "dense_ms": 2.541,
+        "lexical_ms": 1.531,
+        "fusion_ms": 0.09,
         "rerank_ms": 0.0,
-        "total_ms": 83.118,
+        "total_ms": 85.622,
         "reranker_available": false
       }
     },
     {
       "qa_id": "MEDIWOUNDLTD-01-15-2014-EX-10-6-SUPPLY-AGREEMENT__Anti-Assignment",
       "category": "Anti-Assignment",
-      "relevant_total": 2,
+      "relevant_total": 1,
       "ranks_hit": [
-        1,
-        2
+        1
       ],
       "reciprocal_rank": 1.0,
       "recall": {
@@ -2597,18 +2595,18 @@
         "6": 1.0,
         "10": 1.0
       },
-      "latency_ms": 87.93,
+      "latency_ms": 87.22,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 82.805,
-        "dense_ms": 2.701,
-        "lexical_ms": 2.277,
-        "fusion_ms": 0.098,
+        "embed_ms": 81.849,
+        "dense_ms": 2.8,
+        "lexical_ms": 2.416,
+        "fusion_ms": 0.105,
         "rerank_ms": 0.0,
-        "total_ms": 87.881,
+        "total_ms": 87.169,
         "reranker_available": false
       }
     },
@@ -2617,9 +2615,9 @@
       "category": "Governing Law",
       "relevant_total": 1,
       "ranks_hit": [
-        2
+        3
       ],
-      "reciprocal_rank": 0.5,
+      "reciprocal_rank": 0.3333,
       "recall": {
         "3": 1.0,
         "6": 1.0,
@@ -2630,24 +2628,24 @@
         "6": 1.0,
         "10": 1.0
       },
-      "ndcg_10": 0.6309,
+      "ndcg_10": 0.5,
       "span_coverage": {
         "3": 1.0,
         "6": 1.0,
         "10": 1.0
       },
-      "latency_ms": 88.61,
+      "latency_ms": 87.18,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 83.906,
-        "dense_ms": 2.543,
-        "lexical_ms": 1.96,
-        "fusion_ms": 0.099,
+        "embed_ms": 82.239,
+        "dense_ms": 2.609,
+        "lexical_ms": 2.049,
+        "fusion_ms": 0.107,
         "rerank_ms": 0.0,
-        "total_ms": 88.508,
+        "total_ms": 87.003,
         "reranker_available": false
       }
     },
@@ -2657,7 +2655,7 @@
       "relevant_total": 2,
       "ranks_hit": [
         1,
-        2
+        3
       ],
       "reciprocal_rank": 1.0,
       "recall": {
@@ -2670,24 +2668,24 @@
         "6": 1.0,
         "10": 1.0
       },
-      "ndcg_10": 1.0,
+      "ndcg_10": 0.9197,
       "span_coverage": {
         "3": 1.0,
         "6": 1.0,
         "10": 1.0
       },
-      "latency_ms": 88.83,
+      "latency_ms": 84.6,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 84.191,
-        "dense_ms": 2.682,
-        "lexical_ms": 1.758,
-        "fusion_ms": 0.141,
+        "embed_ms": 80.131,
+        "dense_ms": 2.521,
+        "lexical_ms": 1.797,
+        "fusion_ms": 0.088,
         "rerank_ms": 0.0,
-        "total_ms": 88.772,
+        "total_ms": 84.537,
         "reranker_available": false
       }
     },
@@ -2713,57 +2711,58 @@
         "6": 0.0,
         "10": 0.0
       },
-      "latency_ms": 88.07,
+      "latency_ms": 84.7,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 84.032,
-        "dense_ms": 2.721,
-        "lexical_ms": 1.203,
-        "fusion_ms": 0.066,
+        "embed_ms": 80.781,
+        "dense_ms": 2.563,
+        "lexical_ms": 1.246,
+        "fusion_ms": 0.067,
         "rerank_ms": 0.0,
-        "total_ms": 88.022,
+        "total_ms": 84.657,
         "reranker_available": false
       }
     },
     {
       "qa_id": "NEOMEDIATECHNOLOGIESINC-12-15-2005-EX-16-1-DISTRIBUTOR-AGREEMENT__Cap On Liability",
       "category": "Cap On Liability",
-      "relevant_total": 3,
+      "relevant_total": 4,
       "ranks_hit": [
-        6
+        7,
+        8
       ],
-      "reciprocal_rank": 0.1667,
+      "reciprocal_rank": 0.1429,
       "recall": {
         "3": 0.0,
-        "6": 0.3333,
-        "10": 0.3333
+        "6": 0.0,
+        "10": 0.5
       },
       "hit": {
         "3": 0.0,
-        "6": 1.0,
+        "6": 0.0,
         "10": 1.0
       },
-      "ndcg_10": 0.1672,
+      "ndcg_10": 0.2533,
       "span_coverage": {
         "3": 0.0,
-        "6": 0.3816,
-        "10": 0.3816
+        "6": 0.0,
+        "10": 0.4682
       },
-      "latency_ms": 83.34,
+      "latency_ms": 82.96,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 78.693,
-        "dense_ms": 2.442,
-        "lexical_ms": 2.01,
-        "fusion_ms": 0.144,
+        "embed_ms": 78.368,
+        "dense_ms": 2.524,
+        "lexical_ms": 1.921,
+        "fusion_ms": 0.095,
         "rerank_ms": 0.0,
-        "total_ms": 83.289,
+        "total_ms": 82.907,
         "reranker_available": false
       }
     },
@@ -2772,9 +2771,9 @@
       "category": "Exclusivity",
       "relevant_total": 1,
       "ranks_hit": [
-        8
+        10
       ],
-      "reciprocal_rank": 0.125,
+      "reciprocal_rank": 0.1,
       "recall": {
         "3": 0.0,
         "6": 0.0,
@@ -2785,24 +2784,24 @@
         "6": 0.0,
         "10": 1.0
       },
-      "ndcg_10": 0.3155,
+      "ndcg_10": 0.2891,
       "span_coverage": {
         "3": 0.0,
         "6": 0.0,
         "10": 1.0
       },
-      "latency_ms": 84.2,
+      "latency_ms": 84.01,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 80.078,
-        "dense_ms": 2.501,
-        "lexical_ms": 1.481,
-        "fusion_ms": 0.078,
+        "embed_ms": 79.67,
+        "dense_ms": 2.496,
+        "lexical_ms": 1.712,
+        "fusion_ms": 0.08,
         "rerank_ms": 0.0,
-        "total_ms": 84.139,
+        "total_ms": 83.959,
         "reranker_available": false
       }
     },
@@ -2828,18 +2827,18 @@
         "6": 0.0,
         "10": 0.0
       },
-      "latency_ms": 85.55,
+      "latency_ms": 81.19,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 81.122,
-        "dense_ms": 2.585,
-        "lexical_ms": 1.712,
-        "fusion_ms": 0.081,
+        "embed_ms": 77.012,
+        "dense_ms": 2.479,
+        "lexical_ms": 1.504,
+        "fusion_ms": 0.132,
         "rerank_ms": 0.0,
-        "total_ms": 85.5,
+        "total_ms": 81.127,
         "reranker_available": false
       }
     },
@@ -2865,31 +2864,32 @@
         "6": 0.0,
         "10": 0.0
       },
-      "latency_ms": 88.19,
+      "latency_ms": 81.27,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 83.634,
-        "dense_ms": 2.508,
-        "lexical_ms": 1.908,
-        "fusion_ms": 0.089,
+        "embed_ms": 76.615,
+        "dense_ms": 2.546,
+        "lexical_ms": 1.97,
+        "fusion_ms": 0.093,
         "rerank_ms": 0.0,
-        "total_ms": 88.14,
+        "total_ms": 81.223,
         "reranker_available": false
       }
     },
     {
       "qa_id": "NEONSYSTEMSINC-03-01-1999-EX-10-5-DISTRIBUTOR-AGREEMENT-New__Anti-Assignment",
       "category": "Anti-Assignment",
-      "relevant_total": 1,
+      "relevant_total": 2,
       "ranks_hit": [
-        3
+        1,
+        5
       ],
-      "reciprocal_rank": 0.3333,
+      "reciprocal_rank": 1.0,
       "recall": {
-        "3": 1.0,
+        "3": 0.5,
         "6": 1.0,
         "10": 1.0
       },
@@ -2898,24 +2898,24 @@
         "6": 1.0,
         "10": 1.0
       },
-      "ndcg_10": 0.5,
+      "ndcg_10": 0.8503,
       "span_coverage": {
-        "3": 1.0,
+        "3": 0.4371,
         "6": 1.0,
         "10": 1.0
       },
-      "latency_ms": 84.9,
+      "latency_ms": 81.93,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 79.784,
-        "dense_ms": 2.482,
-        "lexical_ms": 2.468,
-        "fusion_ms": 0.105,
+        "embed_ms": 76.205,
+        "dense_ms": 3.152,
+        "lexical_ms": 2.334,
+        "fusion_ms": 0.114,
         "rerank_ms": 0.0,
-        "total_ms": 84.84,
+        "total_ms": 81.805,
         "reranker_available": false
       }
     },
@@ -2925,7 +2925,7 @@
       "relevant_total": 2,
       "ranks_hit": [
         1,
-        3
+        2
       ],
       "reciprocal_rank": 1.0,
       "recall": {
@@ -2938,24 +2938,24 @@
         "6": 1.0,
         "10": 1.0
       },
-      "ndcg_10": 0.9197,
+      "ndcg_10": 1.0,
       "span_coverage": {
         "3": 1.0,
         "6": 1.0,
         "10": 1.0
       },
-      "latency_ms": 85.13,
+      "latency_ms": 82.09,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 80.323,
-        "dense_ms": 2.697,
-        "lexical_ms": 1.958,
-        "fusion_ms": 0.098,
+        "embed_ms": 77.477,
+        "dense_ms": 2.588,
+        "lexical_ms": 1.873,
+        "fusion_ms": 0.096,
         "rerank_ms": 0.0,
-        "total_ms": 85.075,
+        "total_ms": 82.033,
         "reranker_available": false
       }
     },
@@ -2963,38 +2963,36 @@
       "qa_id": "NEONSYSTEMSINC-03-01-1999-EX-10-5-DISTRIBUTOR-AGREEMENT-New__Revenue/Profit Sharing",
       "category": "Revenue/Profit Sharing",
       "relevant_total": 2,
-      "ranks_hit": [
-        9
-      ],
-      "reciprocal_rank": 0.1111,
+      "ranks_hit": [],
+      "reciprocal_rank": 0.0,
       "recall": {
         "3": 0.0,
         "6": 0.0,
-        "10": 0.5
+        "10": 0.0
       },
       "hit": {
         "3": 0.0,
         "6": 0.0,
-        "10": 1.0
+        "10": 0.0
       },
-      "ndcg_10": 0.1846,
+      "ndcg_10": 0.0,
       "span_coverage": {
         "3": 0.0,
         "6": 0.0,
-        "10": 0.4594
+        "10": 0.0
       },
-      "latency_ms": 85.88,
+      "latency_ms": 82.43,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 80.953,
-        "dense_ms": 2.712,
-        "lexical_ms": 2.05,
-        "fusion_ms": 0.105,
+        "embed_ms": 77.48,
+        "dense_ms": 2.762,
+        "lexical_ms": 2.017,
+        "fusion_ms": 0.115,
         "rerank_ms": 0.0,
-        "total_ms": 85.819,
+        "total_ms": 82.374,
         "reranker_available": false
       }
     },
@@ -3020,18 +3018,18 @@
         "6": 0.0,
         "10": 0.0
       },
-      "latency_ms": 86.0,
+      "latency_ms": 83.02,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 81.209,
-        "dense_ms": 2.705,
-        "lexical_ms": 1.936,
-        "fusion_ms": 0.096,
+        "embed_ms": 78.073,
+        "dense_ms": 2.753,
+        "lexical_ms": 2.047,
+        "fusion_ms": 0.1,
         "rerank_ms": 0.0,
-        "total_ms": 85.947,
+        "total_ms": 82.973,
         "reranker_available": false
       }
     },
@@ -3057,18 +3055,18 @@
         "6": 0.0,
         "10": 0.0
       },
-      "latency_ms": 86.95,
+      "latency_ms": 84.02,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 81.847,
-        "dense_ms": 2.642,
-        "lexical_ms": 2.299,
-        "fusion_ms": 0.105,
+        "embed_ms": 79.113,
+        "dense_ms": 2.659,
+        "lexical_ms": 2.091,
+        "fusion_ms": 0.099,
         "rerank_ms": 0.0,
-        "total_ms": 86.895,
+        "total_ms": 83.962,
         "reranker_available": false
       }
     },
@@ -3077,38 +3075,37 @@
       "category": "Exclusivity",
       "relevant_total": 2,
       "ranks_hit": [
-        1,
-        8
+        1
       ],
       "reciprocal_rank": 1.0,
       "recall": {
         "3": 0.5,
         "6": 0.5,
-        "10": 1.0
+        "10": 0.5
       },
       "hit": {
         "3": 1.0,
         "6": 1.0,
         "10": 1.0
       },
-      "ndcg_10": 0.8066,
+      "ndcg_10": 0.6131,
       "span_coverage": {
-        "3": 0.3123,
-        "6": 0.3123,
-        "10": 1.0
+        "3": 0.6348,
+        "6": 0.6348,
+        "10": 0.6348
       },
-      "latency_ms": 83.3,
+      "latency_ms": 82.31,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 78.893,
-        "dense_ms": 2.645,
-        "lexical_ms": 1.626,
-        "fusion_ms": 0.081,
+        "embed_ms": 77.433,
+        "dense_ms": 2.923,
+        "lexical_ms": 1.794,
+        "fusion_ms": 0.101,
         "rerank_ms": 0.0,
-        "total_ms": 83.244,
+        "total_ms": 82.252,
         "reranker_available": false
       }
     },
@@ -3117,37 +3114,37 @@
       "category": "Expiration Date",
       "relevant_total": 1,
       "ranks_hit": [
-        9
+        5
       ],
-      "reciprocal_rank": 0.1111,
+      "reciprocal_rank": 0.2,
       "recall": {
         "3": 0.0,
-        "6": 0.0,
+        "6": 1.0,
         "10": 1.0
       },
       "hit": {
         "3": 0.0,
-        "6": 0.0,
+        "6": 1.0,
         "10": 1.0
       },
-      "ndcg_10": 0.301,
+      "ndcg_10": 0.3869,
       "span_coverage": {
         "3": 0.0,
-        "6": 0.0,
+        "6": 1.0,
         "10": 1.0
       },
-      "latency_ms": 86.61,
+      "latency_ms": 82.57,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 81.707,
-        "dense_ms": 2.703,
-        "lexical_ms": 2.053,
-        "fusion_ms": 0.097,
+        "embed_ms": 77.707,
+        "dense_ms": 2.679,
+        "lexical_ms": 2.038,
+        "fusion_ms": 0.094,
         "rerank_ms": 0.0,
-        "total_ms": 86.561,
+        "total_ms": 82.517,
         "reranker_available": false
       }
     },
@@ -3173,18 +3170,18 @@
         "6": 0.0,
         "10": 0.0
       },
-      "latency_ms": 86.44,
+      "latency_ms": 83.77,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 81.548,
-        "dense_ms": 2.646,
-        "lexical_ms": 2.098,
-        "fusion_ms": 0.095,
+        "embed_ms": 78.538,
+        "dense_ms": 2.714,
+        "lexical_ms": 2.346,
+        "fusion_ms": 0.108,
         "rerank_ms": 0.0,
-        "total_ms": 86.387,
+        "total_ms": 83.705,
         "reranker_available": false
       }
     },
@@ -3212,18 +3209,18 @@
         "6": 1.0,
         "10": 1.0
       },
-      "latency_ms": 89.08,
+      "latency_ms": 83.51,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 83.889,
-        "dense_ms": 2.846,
-        "lexical_ms": 2.189,
-        "fusion_ms": 0.1,
+        "embed_ms": 78.231,
+        "dense_ms": 2.765,
+        "lexical_ms": 2.336,
+        "fusion_ms": 0.108,
         "rerank_ms": 0.0,
-        "total_ms": 89.024,
+        "total_ms": 83.44,
         "reranker_available": false
       }
     },
@@ -3232,9 +3229,9 @@
       "category": "Effective Date",
       "relevant_total": 2,
       "ranks_hit": [
-        7
+        8
       ],
-      "reciprocal_rank": 0.1429,
+      "reciprocal_rank": 0.125,
       "recall": {
         "3": 0.0,
         "6": 0.0,
@@ -3245,24 +3242,24 @@
         "6": 0.0,
         "10": 1.0
       },
-      "ndcg_10": 0.2044,
+      "ndcg_10": 0.1934,
       "span_coverage": {
         "3": 0.0,
         "6": 0.0,
         "10": 0.7576
       },
-      "latency_ms": 89.12,
+      "latency_ms": 83.27,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 83.914,
-        "dense_ms": 2.837,
-        "lexical_ms": 2.216,
-        "fusion_ms": 0.097,
+        "embed_ms": 77.789,
+        "dense_ms": 2.85,
+        "lexical_ms": 2.477,
+        "fusion_ms": 0.099,
         "rerank_ms": 0.0,
-        "total_ms": 89.064,
+        "total_ms": 83.215,
         "reranker_available": false
       }
     },
@@ -3290,18 +3287,18 @@
         "6": 1.0,
         "10": 1.0
       },
-      "latency_ms": 84.69,
+      "latency_ms": 84.97,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 78.747,
-        "dense_ms": 2.894,
-        "lexical_ms": 2.897,
-        "fusion_ms": 0.099,
+        "embed_ms": 78.941,
+        "dense_ms": 2.966,
+        "lexical_ms": 2.891,
+        "fusion_ms": 0.11,
         "rerank_ms": 0.0,
-        "total_ms": 84.637,
+        "total_ms": 84.907,
         "reranker_available": false
       }
     },
@@ -3311,12 +3308,12 @@
       "relevant_total": 3,
       "ranks_hit": [
         1,
-        3,
+        4,
         8
       ],
       "reciprocal_rank": 1.0,
       "recall": {
-        "3": 0.6667,
+        "3": 0.3333,
         "6": 0.6667,
         "10": 1.0
       },
@@ -3325,34 +3322,33 @@
         "6": 1.0,
         "10": 1.0
       },
-      "ndcg_10": 0.852,
+      "ndcg_10": 0.8194,
       "span_coverage": {
-        "3": 1.0,
+        "3": 0.6047,
         "6": 1.0,
         "10": 1.0
       },
-      "latency_ms": 83.43,
+      "latency_ms": 83.15,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 79.039,
-        "dense_ms": 2.649,
-        "lexical_ms": 1.608,
-        "fusion_ms": 0.078,
+        "embed_ms": 78.441,
+        "dense_ms": 2.789,
+        "lexical_ms": 1.778,
+        "fusion_ms": 0.086,
         "rerank_ms": 0.0,
-        "total_ms": 83.375,
+        "total_ms": 83.094,
         "reranker_available": false
       }
     },
     {
       "qa_id": "TodosMedicalLtd-20190328-20-F-EX-4-10-11587157-EX-4-10-Marketing-Agreement-Resel__Anti-Assignment",
       "category": "Anti-Assignment",
-      "relevant_total": 2,
+      "relevant_total": 1,
       "ranks_hit": [
-        1,
-        2
+        1
       ],
       "reciprocal_rank": 1.0,
       "recall": {
@@ -3371,18 +3367,18 @@
         "6": 1.0,
         "10": 1.0
       },
-      "latency_ms": 81.73,
+      "latency_ms": 82.09,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 77.241,
-        "dense_ms": 2.225,
-        "lexical_ms": 2.119,
-        "fusion_ms": 0.094,
+        "embed_ms": 77.301,
+        "dense_ms": 2.515,
+        "lexical_ms": 2.143,
+        "fusion_ms": 0.09,
         "rerank_ms": 0.0,
-        "total_ms": 81.679,
+        "total_ms": 82.048,
         "reranker_available": false
       }
     },
@@ -3407,22 +3403,22 @@
       },
       "ndcg_10": 0.8175,
       "span_coverage": {
-        "3": 0.7287,
-        "6": 0.7287,
+        "3": 0.8346,
+        "6": 0.8346,
         "10": 1.0
       },
-      "latency_ms": 81.97,
+      "latency_ms": 82.9,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 77.698,
-        "dense_ms": 2.46,
-        "lexical_ms": 1.662,
-        "fusion_ms": 0.086,
+        "embed_ms": 78.559,
+        "dense_ms": 2.539,
+        "lexical_ms": 1.667,
+        "fusion_ms": 0.087,
         "rerank_ms": 0.0,
-        "total_ms": 81.905,
+        "total_ms": 82.852,
         "reranker_available": false
       }
     },
@@ -3433,11 +3429,11 @@
       "ranks_hit": [
         1,
         2,
-        3
+        6
       ],
       "reciprocal_rank": 1.0,
       "recall": {
-        "3": 1.0,
+        "3": 0.6667,
         "6": 1.0,
         "10": 1.0
       },
@@ -3446,24 +3442,24 @@
         "6": 1.0,
         "10": 1.0
       },
-      "ndcg_10": 1.0,
+      "ndcg_10": 0.9325,
       "span_coverage": {
         "3": 1.0,
         "6": 1.0,
         "10": 1.0
       },
-      "latency_ms": 82.16,
+      "latency_ms": 82.4,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 77.5,
-        "dense_ms": 2.493,
-        "lexical_ms": 2.023,
-        "fusion_ms": 0.09,
+        "embed_ms": 77.645,
+        "dense_ms": 2.522,
+        "lexical_ms": 2.092,
+        "fusion_ms": 0.089,
         "rerank_ms": 0.0,
-        "total_ms": 82.106,
+        "total_ms": 82.347,
         "reranker_available": false
       }
     },
@@ -3489,28 +3485,27 @@
         "6": 0.0,
         "10": 0.0
       },
-      "latency_ms": 82.46,
+      "latency_ms": 82.02,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 78.232,
-        "dense_ms": 2.532,
-        "lexical_ms": 1.574,
-        "fusion_ms": 0.074,
+        "embed_ms": 77.292,
+        "dense_ms": 2.713,
+        "lexical_ms": 1.888,
+        "fusion_ms": 0.079,
         "rerank_ms": 0.0,
-        "total_ms": 82.412,
+        "total_ms": 81.971,
         "reranker_available": false
       }
     },
     {
       "qa_id": "TodosMedicalLtd-20190328-20-F-EX-4-10-11587157-EX-4-10-Marketing-Agreement-Resel__Notice Period To Terminate Renewal",
       "category": "Notice Period To Terminate Renewal",
-      "relevant_total": 2,
+      "relevant_total": 1,
       "ranks_hit": [
-        1,
-        2
+        1
       ],
       "reciprocal_rank": 1.0,
       "recall": {
@@ -3529,18 +3524,18 @@
         "6": 1.0,
         "10": 1.0
       },
-      "latency_ms": 81.37,
+      "latency_ms": 83.03,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 76.735,
-        "dense_ms": 2.465,
-        "lexical_ms": 2.004,
-        "fusion_ms": 0.11,
+        "embed_ms": 78.146,
+        "dense_ms": 2.469,
+        "lexical_ms": 2.26,
+        "fusion_ms": 0.102,
         "rerank_ms": 0.0,
-        "total_ms": 81.315,
+        "total_ms": 82.977,
         "reranker_available": false
       }
     },
@@ -3566,68 +3561,27 @@
         "6": 0.0,
         "10": 0.0
       },
-      "latency_ms": 80.32,
+      "latency_ms": 82.47,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 75.752,
-        "dense_ms": 2.487,
-        "lexical_ms": 1.935,
-        "fusion_ms": 0.095,
+        "embed_ms": 77.912,
+        "dense_ms": 2.529,
+        "lexical_ms": 1.881,
+        "fusion_ms": 0.097,
         "rerank_ms": 0.0,
-        "total_ms": 80.269,
+        "total_ms": 82.418,
         "reranker_available": false
       }
     },
     {
       "qa_id": "TodosMedicalLtd-20190328-20-F-EX-4-10-11587157-EX-4-10-Marketing-Agreement-Resel__Renewal Term",
       "category": "Renewal Term",
-      "relevant_total": 2,
+      "relevant_total": 1,
       "ranks_hit": [
-        1,
-        6
-      ],
-      "reciprocal_rank": 1.0,
-      "recall": {
-        "3": 0.5,
-        "6": 1.0,
-        "10": 1.0
-      },
-      "hit": {
-        "3": 1.0,
-        "6": 1.0,
-        "10": 1.0
-      },
-      "ndcg_10": 0.8316,
-      "span_coverage": {
-        "3": 1.0,
-        "6": 1.0,
-        "10": 1.0
-      },
-      "latency_ms": 83.53,
-      "trace": {
-        "strategy": "rrf",
-        "k": 10,
-        "fetch_k": 30,
-        "expanded_query": null,
-        "embed_ms": 78.613,
-        "dense_ms": 2.49,
-        "lexical_ms": 2.289,
-        "fusion_ms": 0.094,
-        "rerank_ms": 0.0,
-        "total_ms": 83.486,
-        "reranker_available": false
-      }
-    },
-    {
-      "qa_id": "TodosMedicalLtd-20190328-20-F-EX-4-10-11587157-EX-4-10-Marketing-Agreement-Resel__Warranty Duration",
-      "category": "Warranty Duration",
-      "relevant_total": 2,
-      "ranks_hit": [
-        1,
-        2
+        1
       ],
       "reciprocal_rank": 1.0,
       "recall": {
@@ -3646,18 +3600,57 @@
         "6": 1.0,
         "10": 1.0
       },
-      "latency_ms": 84.1,
+      "latency_ms": 82.76,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 80.274,
-        "dense_ms": 2.401,
-        "lexical_ms": 1.296,
-        "fusion_ms": 0.075,
+        "embed_ms": 77.861,
+        "dense_ms": 2.559,
+        "lexical_ms": 2.149,
+        "fusion_ms": 0.148,
         "rerank_ms": 0.0,
-        "total_ms": 84.046,
+        "total_ms": 82.717,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "TodosMedicalLtd-20190328-20-F-EX-4-10-11587157-EX-4-10-Marketing-Agreement-Resel__Warranty Duration",
+      "category": "Warranty Duration",
+      "relevant_total": 1,
+      "ranks_hit": [
+        2
+      ],
+      "reciprocal_rank": 0.5,
+      "recall": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.6309,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 83.24,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 79.251,
+        "dense_ms": 2.45,
+        "lexical_ms": 1.409,
+        "fusion_ms": 0.081,
+        "rerank_ms": 0.0,
+        "total_ms": 83.191,
         "reranker_available": false
       }
     },
@@ -3685,18 +3678,18 @@
         "6": 1.0,
         "10": 1.0
       },
-      "latency_ms": 79.75,
+      "latency_ms": 83.19,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 75.028,
-        "dense_ms": 2.614,
-        "lexical_ms": 1.959,
-        "fusion_ms": 0.095,
+        "embed_ms": 77.756,
+        "dense_ms": 2.816,
+        "lexical_ms": 2.454,
+        "fusion_ms": 0.103,
         "rerank_ms": 0.0,
-        "total_ms": 79.696,
+        "total_ms": 83.128,
         "reranker_available": false
       }
     },
@@ -3706,7 +3699,7 @@
       "relevant_total": 3,
       "ranks_hit": [
         1,
-        2,
+        3,
         5
       ],
       "reciprocal_rank": 1.0,
@@ -3720,24 +3713,24 @@
         "6": 1.0,
         "10": 1.0
       },
-      "ndcg_10": 0.9469,
+      "ndcg_10": 0.8855,
       "span_coverage": {
-        "3": 0.8514,
+        "3": 0.8452,
         "6": 1.0,
         "10": 1.0
       },
-      "latency_ms": 104.28,
+      "latency_ms": 83.51,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 99.46,
-        "dense_ms": 2.605,
-        "lexical_ms": 2.008,
-        "fusion_ms": 0.156,
+        "embed_ms": 77.969,
+        "dense_ms": 2.804,
+        "lexical_ms": 2.513,
+        "fusion_ms": 0.147,
         "rerank_ms": 0.0,
-        "total_ms": 104.229,
+        "total_ms": 83.433,
         "reranker_available": false
       }
     },
@@ -3763,28 +3756,27 @@
         "6": 0.0,
         "10": 0.0
       },
-      "latency_ms": 79.62,
+      "latency_ms": 86.26,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 74.803,
-        "dense_ms": 2.508,
-        "lexical_ms": 2.031,
-        "fusion_ms": 0.184,
+        "embed_ms": 81.072,
+        "dense_ms": 2.771,
+        "lexical_ms": 2.244,
+        "fusion_ms": 0.108,
         "rerank_ms": 0.0,
-        "total_ms": 79.526,
+        "total_ms": 86.195,
         "reranker_available": false
       }
     },
     {
       "qa_id": "VAPOTHERM-INC-Manufacturing-and-Supply-Agreement__Uncapped Liability",
       "category": "Uncapped Liability",
-      "relevant_total": 2,
+      "relevant_total": 1,
       "ranks_hit": [
-        1,
-        2
+        1
       ],
       "reciprocal_rank": 1.0,
       "recall": {
@@ -3803,33 +3795,34 @@
         "6": 1.0,
         "10": 1.0
       },
-      "latency_ms": 78.25,
+      "latency_ms": 85.79,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 73.997,
-        "dense_ms": 2.602,
-        "lexical_ms": 1.518,
-        "fusion_ms": 0.084,
+        "embed_ms": 80.781,
+        "dense_ms": 2.974,
+        "lexical_ms": 1.896,
+        "fusion_ms": 0.086,
         "rerank_ms": 0.0,
-        "total_ms": 78.201,
+        "total_ms": 85.738,
         "reranker_available": false
       }
     },
     {
       "qa_id": "VIRTUALSCOPICS-INC-11-12-2010-EX-10-1-STRATEGIC-ALLIANCE-AGREEMENT__Anti-Assignment",
       "category": "Anti-Assignment",
-      "relevant_total": 2,
+      "relevant_total": 3,
       "ranks_hit": [
         1,
-        5
+        3,
+        8
       ],
       "reciprocal_rank": 1.0,
       "recall": {
-        "3": 0.5,
-        "6": 1.0,
+        "3": 0.6667,
+        "6": 0.6667,
         "10": 1.0
       },
       "hit": {
@@ -3837,24 +3830,24 @@
         "6": 1.0,
         "10": 1.0
       },
-      "ndcg_10": 0.8503,
+      "ndcg_10": 0.852,
       "span_coverage": {
-        "3": 0.6036,
+        "3": 1.0,
         "6": 1.0,
         "10": 1.0
       },
-      "latency_ms": 78.94,
+      "latency_ms": 84.65,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 73.917,
-        "dense_ms": 2.523,
-        "lexical_ms": 2.341,
-        "fusion_ms": 0.107,
+        "embed_ms": 79.398,
+        "dense_ms": 2.592,
+        "lexical_ms": 2.461,
+        "fusion_ms": 0.099,
         "rerank_ms": 0.0,
-        "total_ms": 78.888,
+        "total_ms": 84.551,
         "reranker_available": false
       }
     },
@@ -3882,18 +3875,18 @@
         "6": 1.0,
         "10": 1.0
       },
-      "latency_ms": 78.19,
+      "latency_ms": 82.62,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 74.173,
-        "dense_ms": 2.242,
-        "lexical_ms": 1.638,
-        "fusion_ms": 0.081,
+        "embed_ms": 78.141,
+        "dense_ms": 2.491,
+        "lexical_ms": 1.847,
+        "fusion_ms": 0.085,
         "rerank_ms": 0.0,
-        "total_ms": 78.134,
+        "total_ms": 82.565,
         "reranker_available": false
       }
     },
@@ -3902,9 +3895,9 @@
       "category": "Notice Period To Terminate Renewal",
       "relevant_total": 1,
       "ranks_hit": [
-        2
+        1
       ],
-      "reciprocal_rank": 0.5,
+      "reciprocal_rank": 1.0,
       "recall": {
         "3": 1.0,
         "6": 1.0,
@@ -3915,24 +3908,24 @@
         "6": 1.0,
         "10": 1.0
       },
-      "ndcg_10": 0.6309,
+      "ndcg_10": 1.0,
       "span_coverage": {
         "3": 1.0,
         "6": 1.0,
         "10": 1.0
       },
-      "latency_ms": 79.93,
+      "latency_ms": 81.06,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 74.751,
-        "dense_ms": 2.609,
-        "lexical_ms": 2.405,
-        "fusion_ms": 0.108,
+        "embed_ms": 75.66,
+        "dense_ms": 2.636,
+        "lexical_ms": 2.602,
+        "fusion_ms": 0.103,
         "rerank_ms": 0.0,
-        "total_ms": 79.873,
+        "total_ms": 81.001,
         "reranker_available": false
       }
     },
@@ -3942,12 +3935,12 @@
       "relevant_total": 2,
       "ranks_hit": [
         1,
-        8
+        6
       ],
       "reciprocal_rank": 1.0,
       "recall": {
         "3": 0.5,
-        "6": 0.5,
+        "6": 1.0,
         "10": 1.0
       },
       "hit": {
@@ -3955,24 +3948,24 @@
         "6": 1.0,
         "10": 1.0
       },
-      "ndcg_10": 0.8066,
+      "ndcg_10": 0.8316,
       "span_coverage": {
         "3": 1.0,
         "6": 1.0,
         "10": 1.0
       },
-      "latency_ms": 83.91,
+      "latency_ms": 80.96,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 78.668,
-        "dense_ms": 2.598,
-        "lexical_ms": 2.467,
-        "fusion_ms": 0.112,
+        "embed_ms": 75.861,
+        "dense_ms": 2.565,
+        "lexical_ms": 2.366,
+        "fusion_ms": 0.11,
         "rerank_ms": 0.0,
-        "total_ms": 83.844,
+        "total_ms": 80.903,
         "reranker_available": false
       }
     },
@@ -4000,18 +3993,18 @@
         "6": 1.0,
         "10": 1.0
       },
-      "latency_ms": 81.6,
+      "latency_ms": 81.86,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 76.056,
-        "dense_ms": 2.499,
-        "lexical_ms": 2.847,
-        "fusion_ms": 0.104,
+        "embed_ms": 76.205,
+        "dense_ms": 2.683,
+        "lexical_ms": 2.822,
+        "fusion_ms": 0.097,
         "rerank_ms": 0.0,
-        "total_ms": 81.505,
+        "total_ms": 81.808,
         "reranker_available": false
       }
     },
@@ -4037,18 +4030,18 @@
         "6": 0.0,
         "10": 0.0
       },
-      "latency_ms": 79.46,
+      "latency_ms": 80.0,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 75.174,
-        "dense_ms": 2.596,
-        "lexical_ms": 1.54,
-        "fusion_ms": 0.095,
+        "embed_ms": 75.48,
+        "dense_ms": 2.685,
+        "lexical_ms": 1.703,
+        "fusion_ms": 0.081,
         "rerank_ms": 0.0,
-        "total_ms": 79.405,
+        "total_ms": 79.948,
         "reranker_available": false
       }
     },
@@ -4077,18 +4070,18 @@
         "6": 1.0,
         "10": 1.0
       },
-      "latency_ms": 80.69,
+      "latency_ms": 79.25,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 76.417,
-        "dense_ms": 2.717,
-        "lexical_ms": 1.429,
-        "fusion_ms": 0.074,
+        "embed_ms": 74.885,
+        "dense_ms": 2.815,
+        "lexical_ms": 1.435,
+        "fusion_ms": 0.072,
         "rerank_ms": 0.0,
-        "total_ms": 80.638,
+        "total_ms": 79.207,
         "reranker_available": false
       }
     },
@@ -4116,18 +4109,18 @@
         "6": 0.0,
         "10": 1.0
       },
-      "latency_ms": 79.57,
+      "latency_ms": 80.04,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 74.798,
-        "dense_ms": 2.513,
-        "lexical_ms": 2.108,
+        "embed_ms": 75.251,
+        "dense_ms": 2.463,
+        "lexical_ms": 2.176,
         "fusion_ms": 0.099,
         "rerank_ms": 0.0,
-        "total_ms": 79.518,
+        "total_ms": 79.989,
         "reranker_available": false
       }
     },
@@ -4136,38 +4129,38 @@
       "category": "Expiration Date",
       "relevant_total": 2,
       "ranks_hit": [
-        3,
-        4
+        6,
+        7
       ],
-      "reciprocal_rank": 0.3333,
+      "reciprocal_rank": 0.1667,
       "recall": {
-        "3": 0.5,
-        "6": 1.0,
+        "3": 0.0,
+        "6": 0.5,
         "10": 1.0
       },
       "hit": {
-        "3": 1.0,
+        "3": 0.0,
         "6": 1.0,
         "10": 1.0
       },
-      "ndcg_10": 0.5706,
+      "ndcg_10": 0.4228,
       "span_coverage": {
-        "3": 0.6135,
-        "6": 1.0,
+        "3": 0.0,
+        "6": 0.5896,
         "10": 1.0
       },
-      "latency_ms": 79.05,
+      "latency_ms": 82.38,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 74.857,
-        "dense_ms": 2.282,
-        "lexical_ms": 1.767,
-        "fusion_ms": 0.092,
+        "embed_ms": 77.869,
+        "dense_ms": 2.516,
+        "lexical_ms": 1.826,
+        "fusion_ms": 0.116,
         "rerank_ms": 0.0,
-        "total_ms": 78.998,
+        "total_ms": 82.326,
         "reranker_available": false
       }
     },
@@ -4177,12 +4170,12 @@
       "relevant_total": 2,
       "ranks_hit": [
         1,
-        9
+        3
       ],
       "reciprocal_rank": 1.0,
       "recall": {
-        "3": 0.5,
-        "6": 0.5,
+        "3": 1.0,
+        "6": 1.0,
         "10": 1.0
       },
       "hit": {
@@ -4190,24 +4183,24 @@
         "6": 1.0,
         "10": 1.0
       },
-      "ndcg_10": 0.7977,
+      "ndcg_10": 0.9197,
       "span_coverage": {
         "3": 1.0,
         "6": 1.0,
         "10": 1.0
       },
-      "latency_ms": 80.21,
+      "latency_ms": 80.08,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 75.766,
-        "dense_ms": 2.431,
-        "lexical_ms": 1.85,
-        "fusion_ms": 0.107,
+        "embed_ms": 75.162,
+        "dense_ms": 2.681,
+        "lexical_ms": 2.081,
+        "fusion_ms": 0.098,
         "rerank_ms": 0.0,
-        "total_ms": 80.154,
+        "total_ms": 80.021,
         "reranker_available": false
       }
     },
@@ -4216,51 +4209,11 @@
       "category": "Liquidated Damages",
       "relevant_total": 1,
       "ranks_hit": [
-        4
+        1
       ],
-      "reciprocal_rank": 0.25,
+      "reciprocal_rank": 1.0,
       "recall": {
-        "3": 0.0,
-        "6": 1.0,
-        "10": 1.0
-      },
-      "hit": {
-        "3": 0.0,
-        "6": 1.0,
-        "10": 1.0
-      },
-      "ndcg_10": 0.4307,
-      "span_coverage": {
-        "3": 0.0,
-        "6": 1.0,
-        "10": 1.0
-      },
-      "latency_ms": 95.86,
-      "trace": {
-        "strategy": "rrf",
-        "k": 10,
-        "fetch_k": 30,
-        "expanded_query": null,
-        "embed_ms": 90.699,
-        "dense_ms": 2.437,
-        "lexical_ms": 2.511,
-        "fusion_ms": 0.117,
-        "rerank_ms": 0.0,
-        "total_ms": 95.764,
-        "reranker_available": false
-      }
-    },
-    {
-      "qa_id": "Zounds-Hearing-Inc-MANUFACTURING-DESIGN-MARKETING-AGREEMENT__Post-Termination Services",
-      "category": "Post-Termination Services",
-      "relevant_total": 2,
-      "ranks_hit": [
-        2,
-        6
-      ],
-      "reciprocal_rank": 0.5,
-      "recall": {
-        "3": 0.5,
+        "3": 1.0,
         "6": 1.0,
         "10": 1.0
       },
@@ -4269,24 +4222,63 @@
         "6": 1.0,
         "10": 1.0
       },
-      "ndcg_10": 0.6053,
+      "ndcg_10": 1.0,
       "span_coverage": {
-        "3": 0.4966,
+        "3": 1.0,
         "6": 1.0,
         "10": 1.0
       },
-      "latency_ms": 79.42,
+      "latency_ms": 81.12,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 74.819,
-        "dense_ms": 2.487,
-        "lexical_ms": 1.967,
-        "fusion_ms": 0.095,
+        "embed_ms": 76.037,
+        "dense_ms": 2.532,
+        "lexical_ms": 2.399,
+        "fusion_ms": 0.101,
         "rerank_ms": 0.0,
-        "total_ms": 79.368,
+        "total_ms": 81.07,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "Zounds-Hearing-Inc-MANUFACTURING-DESIGN-MARKETING-AGREEMENT__Post-Termination Services",
+      "category": "Post-Termination Services",
+      "relevant_total": 2,
+      "ranks_hit": [
+        3
+      ],
+      "reciprocal_rank": 0.3333,
+      "recall": {
+        "3": 0.5,
+        "6": 0.5,
+        "10": 0.5
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.3066,
+      "span_coverage": {
+        "3": 0.8333,
+        "6": 0.8333,
+        "10": 0.8333
+      },
+      "latency_ms": 81.54,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 76.708,
+        "dense_ms": 2.482,
+        "lexical_ms": 2.15,
+        "fusion_ms": 0.102,
+        "rerank_ms": 0.0,
+        "total_ms": 81.442,
         "reranker_available": false
       }
     },
@@ -4312,58 +4304,57 @@
         "6": 0.0,
         "10": 0.0
       },
-      "latency_ms": 80.77,
+      "latency_ms": 79.99,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 76.063,
-        "dense_ms": 2.466,
-        "lexical_ms": 2.036,
-        "fusion_ms": 0.15,
+        "embed_ms": 75.342,
+        "dense_ms": 2.539,
+        "lexical_ms": 1.958,
+        "fusion_ms": 0.099,
         "rerank_ms": 0.0,
-        "total_ms": 80.714,
+        "total_ms": 79.938,
         "reranker_available": false
       }
     },
     {
       "qa_id": "Zounds-Hearing-Inc-MANUFACTURING-DESIGN-MARKETING-AGREEMENT__Warranty Duration",
       "category": "Warranty Duration",
-      "relevant_total": 2,
+      "relevant_total": 1,
       "ranks_hit": [
-        5,
-        8
+        7
       ],
-      "reciprocal_rank": 0.2,
+      "reciprocal_rank": 0.1429,
       "recall": {
         "3": 0.0,
-        "6": 0.5,
+        "6": 0.0,
         "10": 1.0
       },
       "hit": {
         "3": 0.0,
-        "6": 1.0,
+        "6": 0.0,
         "10": 1.0
       },
-      "ndcg_10": 0.4306,
+      "ndcg_10": 0.3333,
       "span_coverage": {
         "3": 0.0,
-        "6": 0.0613,
+        "6": 0.0,
         "10": 1.0
       },
-      "latency_ms": 106.6,
+      "latency_ms": 80.9,
       "trace": {
         "strategy": "rrf",
         "k": 10,
         "fetch_k": 30,
         "expanded_query": null,
-        "embed_ms": 102.697,
-        "dense_ms": 2.462,
-        "lexical_ms": 1.321,
+        "embed_ms": 76.72,
+        "dense_ms": 2.487,
+        "lexical_ms": 1.576,
         "fusion_ms": 0.075,
         "rerank_ms": 0.0,
-        "total_ms": 106.555,
+        "total_ms": 80.857,
         "reranker_available": false
       }
     }

@@ -57,12 +57,20 @@ Requiring those to be string-equal would measure formatting, not extraction.
 
 **Micro precision 0.722, recall 0.588, F1 0.648. Macro precision 0.644, recall 0.530.**
 
-### The first pass, kept
+### The first pass, and a caveat about it
 
 The first version of these patterns scored **micro precision 0.833, recall 0.385, F1
-0.526**. Broadening the liability, notice-period and warranty patterns raised recall from
-0.385 to 0.588 and F1 from 0.526 to 0.648, at the cost of eleven points of precision.
-Both runs are recorded here because the trade is the interesting part: for a review tool
+0.526**. Broadening the liability, notice-period and warranty patterns raised recall to
+0.588 and F1 to 0.648, at the cost of eleven points of precision.
+
+**Those first-pass figures are not reproducible from this tree.** They came from a run
+whose artifact was overwritten when the improved extractors replaced it, and the patterns
+that produced them no longer exist in the source. They are reported here because the
+direction of the trade is the point, but they do not meet the standard every other number
+in this repository meets, and they should be read as a note rather than as evidence. Only
+`eval/results/extraction__cuad.json` is regenerable.
+
+The trade itself is the interesting part: for a review tool
 that shows its evidence, a false positive costs a reader one glance at a span, while a
 false negative costs them a clause they never saw. That asymmetry is why the trade was
 taken, and it is a judgement rather than a fact.

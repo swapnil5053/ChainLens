@@ -153,7 +153,7 @@ resolves. Reserved space is also what stops the hover affordance shifting layout
 
 **2. The comparison view shows per-query chunks from the mock adapter and a corpus-level
 Recall@6 from the real evaluation.** Those have different epistemic status, and putting
-them in one column invites a reader to think 0.461 was computed from the query they just
+them in one column invites a reader to think 0.475 was computed from the query they just
 typed. Resolved: the Recall@6 figure carries its run id, the question count, and the phrase
 "not over the query above" in bold. If that could not be made unambiguous the number would
 come out of the view entirely.

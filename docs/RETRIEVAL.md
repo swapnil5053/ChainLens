@@ -43,11 +43,11 @@ Chunking fixed at `clause-aware`. Retrieval is scoped to the document the questi
 
 | retrieval | Recall@3 | Recall@6 | Recall@10 | MRR | nDCG@10 | hit@6 | answer chars shown @6 | p50 ms | p95 ms |
 |---|---|---|---|---|---|---|---|---|---|
-| dense (pgvector cosine) | 0.520 | 0.636 | 0.740 | 0.588 | 0.583 | 0.754 | 0.719 | 80.6 | 95.0 |
-| MMR (lambda 0.5) | 0.356 | 0.461 | 0.562 | 0.557 | 0.465 | 0.664 | 0.558 | 82.1 | 86.8 |
-| lexical (Postgres FTS, ts_rank_cd) | 0.446 | 0.642 | 0.712 | 0.517 | 0.531 | 0.764 | 0.717 | 1.7 | 2.3 |
-| RRF fusion (dense + lexical, k=60) | 0.514 | 0.648 | 0.741 | 0.578 | 0.586 | 0.736 | 0.719 | 80.4 | 90.9 |
-| RRF fusion + glossary query expansion | 0.523 | 0.676 | 0.760 | 0.610 | 0.612 | 0.773 | 0.744 | 105.2 | 117.2 |
+| dense (pgvector cosine) | 0.565 | 0.673 | 0.728 | 0.604 | 0.601 | 0.764 | 0.725 | 81.8 | 89.7 |
+| MMR (lambda 0.5) | 0.395 | 0.475 | 0.587 | 0.573 | 0.486 | 0.664 | 0.542 | 82.3 | 85.5 |
+| lexical (Postgres FTS, ts_rank_cd) | 0.489 | 0.663 | 0.726 | 0.528 | 0.546 | 0.764 | 0.725 | 1.7 | 2.4 |
+| RRF fusion (dense + lexical, k=60) | 0.582 | 0.677 | 0.756 | 0.601 | 0.614 | 0.754 | 0.730 | 81.1 | 85.9 |
+| RRF fusion + glossary query expansion | 0.586 | 0.690 | 0.770 | 0.624 | 0.629 | 0.782 | 0.760 | 81.2 | 86.3 |
 | RRF fusion + cross-encoder rerank | -- | -- | -- | -- | -- | -- | -- | -- | -- |
 Cells marked `--` were not measured:
 - cross-encoder weights could not be loaded: ModuleNotFoundError: No module named 'sentence_transformers' (3 configurations: `clause-aware__rrf_rerank`, `recursive-1024__rrf_rerank`, `recursive-512__rrf_rerank`)
@@ -58,23 +58,23 @@ Cells marked `--` were not measured:
 <!-- eval:full:start -->
 | chunking | retrieval | Recall@3 | Recall@6 | Recall@10 | MRR | nDCG@10 | p50 ms | p95 ms |
 |---|---|---|---|---|---|---|---|---|
-| `recursive-512` | dense (pgvector cosine) | 0.389 | 0.529 | 0.606 | 0.563 | 0.511 | 80.9 | 85.4 |
-| `recursive-512` | MMR (lambda 0.5) | 0.239 | 0.284 | 0.338 | 0.544 | 0.328 | 84.6 | 88.8 |
-| `recursive-512` | lexical (Postgres FTS, ts_rank_cd) | 0.291 | 0.427 | 0.515 | 0.467 | 0.407 | 1.8 | 3.5 |
-| `recursive-512` | RRF fusion (dense + lexical, k=60) | 0.365 | 0.489 | 0.590 | 0.560 | 0.493 | 84.5 | 88.9 |
-| `recursive-512` | RRF fusion + glossary query expansion | 0.383 | 0.514 | 0.618 | 0.580 | 0.519 | 83.8 | 90.4 |
+| `recursive-512` | dense (pgvector cosine) | 0.383 | 0.498 | 0.570 | 0.547 | 0.489 | 79.6 | 85.5 |
+| `recursive-512` | MMR (lambda 0.5) | 0.232 | 0.279 | 0.356 | 0.519 | 0.327 | 86.3 | 100.5 |
+| `recursive-512` | lexical (Postgres FTS, ts_rank_cd) | 0.316 | 0.474 | 0.554 | 0.494 | 0.441 | 1.9 | 2.9 |
+| `recursive-512` | RRF fusion (dense + lexical, k=60) | 0.381 | 0.519 | 0.604 | 0.556 | 0.501 | 81.7 | 95.4 |
+| `recursive-512` | RRF fusion + glossary query expansion | 0.401 | 0.551 | 0.625 | 0.596 | 0.535 | 82.8 | 91.4 |
 | `recursive-512` | RRF fusion + cross-encoder rerank | -- | -- | -- | -- | -- | -- | -- |
-| `recursive-1024` | dense (pgvector cosine) | 0.524 | 0.634 | 0.732 | 0.569 | 0.574 | 81.8 | 87.3 |
-| `recursive-1024` | MMR (lambda 0.5) | 0.357 | 0.404 | 0.517 | 0.529 | 0.425 | 82.3 | 87.5 |
-| `recursive-1024` | lexical (Postgres FTS, ts_rank_cd) | 0.409 | 0.567 | 0.677 | 0.503 | 0.506 | 1.6 | 2.4 |
-| `recursive-1024` | RRF fusion (dense + lexical, k=60) | 0.514 | 0.620 | 0.750 | 0.575 | 0.582 | 84.3 | 93.2 |
-| `recursive-1024` | RRF fusion + glossary query expansion | 0.551 | 0.645 | 0.773 | 0.628 | 0.625 | 83.5 | 99.1 |
+| `recursive-1024` | dense (pgvector cosine) | 0.498 | 0.631 | 0.713 | 0.556 | 0.566 | 80.5 | 84.2 |
+| `recursive-1024` | MMR (lambda 0.5) | 0.388 | 0.425 | 0.526 | 0.526 | 0.440 | 83.3 | 85.3 |
+| `recursive-1024` | lexical (Postgres FTS, ts_rank_cd) | 0.428 | 0.603 | 0.681 | 0.500 | 0.506 | 1.7 | 2.5 |
+| `recursive-1024` | RRF fusion (dense + lexical, k=60) | 0.507 | 0.638 | 0.738 | 0.566 | 0.573 | 84.1 | 87.2 |
+| `recursive-1024` | RRF fusion + glossary query expansion | 0.534 | 0.659 | 0.760 | 0.617 | 0.614 | 82.4 | 86.6 |
 | `recursive-1024` | RRF fusion + cross-encoder rerank | -- | -- | -- | -- | -- | -- | -- |
-| `clause-aware` | dense (pgvector cosine) | 0.520 | 0.636 | 0.740 | 0.588 | 0.583 | 80.6 | 95.0 |
-| `clause-aware` | MMR (lambda 0.5) | 0.356 | 0.461 | 0.562 | 0.557 | 0.465 | 82.1 | 86.8 |
-| `clause-aware` | lexical (Postgres FTS, ts_rank_cd) | 0.446 | 0.642 | 0.712 | 0.517 | 0.531 | 1.7 | 2.3 |
-| `clause-aware` | RRF fusion (dense + lexical, k=60) | 0.514 | 0.648 | 0.741 | 0.578 | 0.586 | 80.4 | 90.9 |
-| `clause-aware` | RRF fusion + glossary query expansion | 0.523 | 0.676 | 0.760 | 0.610 | 0.612 | 105.2 | 117.2 |
+| `clause-aware` | dense (pgvector cosine) | 0.565 | 0.673 | 0.728 | 0.604 | 0.601 | 81.8 | 89.7 |
+| `clause-aware` | MMR (lambda 0.5) | 0.395 | 0.475 | 0.587 | 0.573 | 0.486 | 82.3 | 85.5 |
+| `clause-aware` | lexical (Postgres FTS, ts_rank_cd) | 0.489 | 0.663 | 0.726 | 0.528 | 0.546 | 1.7 | 2.4 |
+| `clause-aware` | RRF fusion (dense + lexical, k=60) | 0.582 | 0.677 | 0.756 | 0.601 | 0.614 | 81.1 | 85.9 |
+| `clause-aware` | RRF fusion + glossary query expansion | 0.586 | 0.690 | 0.770 | 0.624 | 0.629 | 81.2 | 86.3 |
 | `clause-aware` | RRF fusion + cross-encoder rerank | -- | -- | -- | -- | -- | -- | -- |
 Cells marked `--` were not measured:
 - cross-encoder weights could not be loaded: ModuleNotFoundError: No module named 'sentence_transformers' (3 configurations: `clause-aware__rrf_rerank`, `recursive-1024__rrf_rerank`, `recursive-512__rrf_rerank`)
@@ -128,11 +128,11 @@ exists and degrades to fusion-only, and the trace records that no rerank happene
 <!-- eval:latency:start -->
 | retrieval | total p50 ms | query embedding p50 ms | Postgres search p50 ms | total p95 ms |
 |---|---|---|---|---|
-| dense (pgvector cosine) | 80.6 | 77.9 | 2.6 | 95.0 |
-| MMR (lambda 0.5) | 82.1 | 76.8 | 4.8 | 86.8 |
-| lexical (Postgres FTS, ts_rank_cd) | 1.7 | 0.0 | 1.7 | 2.3 |
-| RRF fusion (dense + lexical, k=60) | 80.4 | 75.5 | 4.6 | 90.9 |
-| RRF fusion + glossary query expansion | 105.2 | 99.8 | 5.0 | 117.2 |
+| dense (pgvector cosine) | 81.8 | 79.2 | 2.6 | 89.7 |
+| MMR (lambda 0.5) | 82.3 | 76.9 | 4.9 | 85.5 |
+| lexical (Postgres FTS, ts_rank_cd) | 1.7 | 0.0 | 1.7 | 2.4 |
+| RRF fusion (dense + lexical, k=60) | 81.1 | 76.2 | 4.6 | 85.9 |
+| RRF fusion + glossary query expansion | 81.2 | 76.2 | 4.8 | 86.3 |
 | RRF fusion + cross-encoder rerank | -- | -- | -- | -- |
 Cells marked `--` were not measured:
 - cross-encoder weights could not be loaded: ModuleNotFoundError: No module named 'sentence_transformers' (3 configurations: `clause-aware__rrf_rerank`, `recursive-1024__rrf_rerank`, `recursive-512__rrf_rerank`)
@@ -149,7 +149,7 @@ spent on caching or batching query embeddings, not on index tuning.
 ## Provenance
 
 <!-- eval:provenance:start -->
-Generated by `python -m eval.report` from 19 files in `eval/results/`. Runs produced at commit `10c722dbe189` (working tree dirty at run time) on 2026-08-01T07:07:13+00:00.
+Generated by `python -m eval.report` from 19 files in `eval/results/`. Runs produced at commit `b48878f962e7` (working tree dirty at run time) on 2026-08-02T08:14:54+00:00.
 
 Dataset `eval/datasets/golden.jsonl`, sha256 `4ac8d01460a836c4`, 110 questions across 29 documents and 20 clause categories. Embedding provider `lsa-tfidf-svd-384` (dim 384); Postgres 16.2.
 

@@ -140,6 +140,9 @@ class Query(Base):
     )
     question: Mapped[str] = mapped_column(Text)
     config_hash: Mapped[str] = mapped_column(String(16), index=True)
+    #: Kept apart from retrieval_ms because the split is the finding: the query embedding
+    #: dominates, and folding it into the search hides that.
+    embed_ms: Mapped[float] = mapped_column(Float, default=0.0)
     retrieval_ms: Mapped[float] = mapped_column(Float, default=0.0)
     rerank_ms: Mapped[float] = mapped_column(Float, default=0.0)
     generation_ms: Mapped[float] = mapped_column(Float, default=0.0)

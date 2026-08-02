@@ -12,7 +12,7 @@ from fastapi.responses import JSONResponse
 
 from .api.deps import build_services
 from .api.limits import DocumentScope, RateLimiter
-from .api.routers import documents, extraction, health, jobs, metrics, query
+from .api.routers import documents, extraction, health, jobs, metrics, query, web
 from .config import get_settings
 from .logging import configure_logging, get_logger, request_id_var
 from .paths import ensure_runtime_dirs
@@ -50,7 +50,12 @@ def create_app() -> FastAPI:
     )
     app.add_middleware(
         CORSMiddleware,
-        allow_origins=["http://localhost:3000"],
+        # Vite dev server, the Next-style port, and the compose web service.
+        allow_origins=[
+            "http://localhost:5173",
+            "http://127.0.0.1:5173",
+            "http://localhost:3000",
+        ],
         allow_methods=["*"],
         allow_headers=["*"],
     )
@@ -96,6 +101,7 @@ def create_app() -> FastAPI:
         query.router,
         extraction.router,
         metrics.router,
+        web.router,
     ):
         app.include_router(router)
     return app
