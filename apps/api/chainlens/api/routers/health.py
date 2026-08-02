@@ -8,6 +8,21 @@ from ..schemas import HealthResponse, ReadyResponse
 router = APIRouter(tags=["health"])
 
 
+@router.get("/")
+def root() -> dict[str, str]:
+    """A signpost, so opening the API in a browser is not a blank 404.
+
+    The API has no interface of its own; the web app is a separate dev server. People
+    reliably open the API port by reflex, so it answers with where to actually go.
+    """
+    return {
+        "service": "ChainLens API",
+        "interface": "the web app runs separately, usually at http://localhost:5173",
+        "docs": "/docs",
+        "health": "/health",
+    }
+
+
 @router.get("/health", response_model=HealthResponse)
 def health() -> HealthResponse:
     """Liveness. Deliberately checks nothing external."""
