@@ -233,6 +233,16 @@ export function createMockAdapter(latencyMs = 260): ChainLensAdapter {
       );
     },
 
+    async uploadContract(): Promise<never> {
+      // The mock has no server: reading a PDF, detecting clauses and fitting the
+      // embedding all happen in Python. Rather than fake it, say so plainly.
+      throw new Error(
+        "Uploading a contract needs the backend running. This no-setup demo serves a " +
+          "fixed set of already-processed contracts. Start the API and reload with " +
+          "?adapter=http to add your own.",
+      );
+    },
+
     async latency(signal): Promise<LatencySummary> {
       await pause(signal);
       const evidence = await loadEvidence(signal);

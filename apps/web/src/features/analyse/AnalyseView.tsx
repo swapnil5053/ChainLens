@@ -10,6 +10,7 @@ import { useAnalyse, useContract } from "../../api/queries";
 import { Button } from "../../components/ui/Button";
 import { AnswerBlock, type AnswerState } from "./AnswerBlock";
 import { ContractSelect } from "./ContractSelect";
+import { UploadContract } from "./UploadContract";
 import { DocumentPane, type DocumentPaneState } from "./DocumentPane";
 
 export function AnalyseView({
@@ -66,6 +67,9 @@ export function AnalyseView({
       <section className="flex min-h-0 flex-col border-line max-lg:border-b lg:border-r" aria-label="Contract">
         <div className="flex items-center gap-3 border-b border-line px-6 py-3">
           <ContractSelect selectedId={contractId} onSelect={onContractChange} />
+          <div className="ml-auto">
+            <UploadContract onUploaded={onContractChange} />
+          </div>
         </div>
         <div className="min-h-0 flex-1">
           <DocumentPane

@@ -42,6 +42,13 @@ export const ContractListSchema = z.object({
 });
 export type ContractList = z.infer<typeof ContractListSchema>;
 
+export const UploadResultSchema = z.object({
+  source: SourceSchema,
+  deduplicated: z.boolean(),
+  contract: ContractSummarySchema,
+});
+export type UploadResult = z.infer<typeof UploadResultSchema>;
+
 export const ChunkRefSchema = z.object({
   id: z.string().min(1),
   ordinal: z.number().int().nonnegative(),

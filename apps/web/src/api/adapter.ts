@@ -12,6 +12,7 @@ import type {
   CompareResponse,
   ContractDocument,
   ContractList,
+  UploadResult,
   LatencySummary,
   Source,
 } from "./contracts";
@@ -25,6 +26,8 @@ export interface ChainLensAdapter {
   analyse(request: AnalyseRequest, signal?: AbortSignal): Promise<AnalyseResponse>;
   compare(request: CompareRequest, signal?: AbortSignal): Promise<CompareResponse>;
   latency(signal?: AbortSignal): Promise<LatencySummary>;
+  /** Present only on adapters backed by a real server. undefined on the mock. */
+  uploadContract?(file: File, signal?: AbortSignal): Promise<UploadResult>;
 }
 
 export type AdapterMode = "mock" | "http";

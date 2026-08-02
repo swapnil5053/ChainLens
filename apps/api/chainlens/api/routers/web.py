@@ -18,13 +18,15 @@ import time
 import uuid
 from typing import Any
 
-from fastapi import APIRouter, HTTPException, Request
+from fastapi import APIRouter, HTTPException, Request, UploadFile
 from pydantic import BaseModel, Field
 from sqlalchemy import func, select, text
 
 from ...db.models import Chunk, Document, Query
 from ...db.session import session_scope
 from ...generation.prompt import SYSTEM_PROMPT, build_user_prompt
+from ...ingest.parse import parse_pdf_bytes
+from ...ingest.pipeline import index_parsed_document
 from ...logging import get_logger, request_id_var
 from ...retrieval.service import RetrievalConfig
 from ...retrieval.types import RetrievedChunk
@@ -165,6 +167,75 @@ def list_documents() -> dict[str, Any]:
                 }
                 for row in rows
             ],
+        }
+
+
+@router.post("/documents", status_code=201)
+async def upload_contract(request: Request, file: UploadFile) -> dict[str, Any]:
+    """Accept a PDF, ingest it, and return it in the same shape the list uses.
+
+    Ingestion runs inline in this request (there is no Redis worker in the default
+    deployment). It is the same parse, clause-aware chunk, hash and embed path the
+    evaluation and the seed script use, so an uploaded contract is indistinguishable from
+    a seeded one the moment it returns. Re-uploading identical content is a no-op through
+    the SHA-256 hash, and the response says so.
+    """
+    services = _services(request)
+    settings = services.settings
+
+    payload = await file.read(settings.max_upload_bytes + 1)
+    if len(payload) > settings.max_upload_bytes:
+        raise HTTPException(
+            status_code=413, detail=f"file exceeds the {settings.max_upload_bytes} byte limit"
+        )
+    if not payload.startswith(b"%PDF"):
+        raise HTTPException(status_code=415, detail="only PDF uploads are accepted")
+
+    try:
+        parsed = parse_pdf_bytes(
+            payload, file.filename or "upload.pdf", max_pages=settings.max_pdf_pages
+        )
+    except ValueError as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from exc
+
+    with session_scope() as session:
+        result = index_parsed_document(
+            session,
+            parsed,
+            embedder=services.embedder,
+            chunk_strategy=settings.chunk_strategy,
+            index_name=settings.chunk_strategy,
+            chunk_overlap=settings.chunk_overlap,
+            clause_ceiling=settings.clause_chunk_ceiling,
+            byte_size=len(payload),
+        )
+        document = session.get(Document, result.document_id)
+        assert document is not None
+        clause_count = session.execute(
+            select(func.count(Chunk.clause_id)).where(Chunk.document_id == document.id)
+        ).scalar_one()
+        chunk_count = session.execute(
+            select(func.count(Chunk.id)).where(Chunk.document_id == document.id)
+        ).scalar_one()
+        logger.info(
+            "web_upload",
+            document_id=str(document.id),
+            chunks=result.chunk_count,
+            deduplicated=result.deduplicated,
+        )
+        return {
+            "source": "http",
+            "deduplicated": result.deduplicated,
+            "contract": {
+                "id": str(document.id),
+                "title": _title(document.filename),
+                "party": _title(document.filename).split(" ")[0] or "Unknown",
+                "kind": _kind(document),
+                "pageCount": max(1, document.page_count),
+                "charCount": max(1, document.char_count),
+                "clauseCount": int(clause_count),
+                "chunkCount": int(chunk_count),
+            },
         }
 
 

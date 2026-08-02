@@ -14,6 +14,7 @@ import {
   ContractDocumentSchema,
   ContractListSchema,
   LatencySummarySchema,
+  UploadResultSchema,
   parseOrThrow,
   type AnalyseRequest,
   type CompareRequest,
@@ -78,6 +79,20 @@ export function createHttpAdapter(baseUrl: string): ChainLensAdapter {
         await request("/compare", { method: "POST", body: JSON.stringify(payload) }, signal),
         "POST /compare",
       );
+    },
+    async uploadContract(file: File, signal?: AbortSignal) {
+      const form = new FormData();
+      form.append("file", file);
+      const response = await fetch(`${baseUrl}/documents`, {
+        method: "POST",
+        body: form,
+        signal: signal ?? null,
+      });
+      if (!response.ok) {
+        const detail = await response.text().catch(() => "");
+        throw new HttpError(response.status, "/documents", detail.slice(0, 300) || `upload returned ${response.status}`);
+      }
+      return parseOrThrow(UploadResultSchema, await response.json(), "POST /documents");
     },
     async latency(signal) {
       return parseOrThrow(

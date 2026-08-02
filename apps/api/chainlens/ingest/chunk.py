@@ -121,18 +121,18 @@ def _split_recursive(text: str, offset: int, size: int, overlap: int) -> list[tu
             cursor += 1
         return cursor
 
-    spans: list[tuple[int, int]] = []
+    fixed: list[tuple[int, int]] = []
     stride = max(1, size - overlap)
-    cursor = 0
-    while cursor < len(text):
-        start = snap(cursor, 60) if cursor else 0
+    pos = 0
+    while pos < len(text):
+        start = snap(pos, 60) if pos else 0
         end = snap(min(start + size, len(text)), 60)
         if end <= start:
             break
         if text[start:end].strip():
-            spans.append((offset + start, offset + end))
-        cursor = start + stride
-    return spans
+            fixed.append((offset + start, offset + end))
+        pos = start + stride
+    return fixed
 
 
 def _finalise(
