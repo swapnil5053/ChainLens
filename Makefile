@@ -21,6 +21,10 @@ demo: up
 	@echo "open http://localhost:3000"
 
 # The Docker-free equivalent, verified.
+# One command: start the embedded Postgres, migrate, index if needed, and serve.
+serve:
+	CHAINLENS_LOCAL_PG=1 python scripts/serve.py
+
 demo-local: migrate seed
 	@echo "starting the API on http://localhost:8000"
 	CHAINLENS_LOCAL_PG=1 python -m uvicorn chainlens.main:app --app-dir apps/api --port 8000
