@@ -4,9 +4,11 @@ import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
   plugins: [
-    // React Compiler v1. Memoisation is the compiler's job; there is no manual useMemo or
-    // useCallback in src/ for that purpose, and the verification step greps to keep it so.
-    react({ babel: { plugins: [["babel-plugin-react-compiler", {}]] } }),
+    // Plain React plugin. The React Compiler was removed from the dev/build path: it is an
+    // optimisation, not a correctness feature, and on Node versions below Vite's minimum it
+    // could emit transformed code that failed silently in the browser. The app has no manual
+    // useMemo/useCallback either way, so nothing depends on it.
+    react(),
     tailwindcss(),
   ],
   build: {
