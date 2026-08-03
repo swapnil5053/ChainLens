@@ -23,6 +23,8 @@ const EXAMPLES = [
   "What is the cap on liability?",
   "How much notice stops it renewing?",
   "What insurance must the supplier carry?",
+  "What are the payment terms?",
+  "Who is responsible for damaged or lost goods?",
 ];
 
 export function AnswerBlock({
@@ -41,31 +43,36 @@ export function AnswerBlock({
   onExample: (q: string) => void;
 }) {
   if (state.status === "idle") {
+    if (!state.contractTitle) {
+      return (
+        <EmptyState
+          title="No contract open"
+          cause="Choose an agreement above, or upload a PDF."
+        />
+      );
+    }
     return (
-      <EmptyState
-        title={state.contractTitle ? "Ask about this contract" : "Open a contract to begin"}
-        cause={
-          state.contractTitle
-            ? "Answers quote the contract and mark the exact clause they came from."
-            : "Retrieval is scoped to one agreement at a time."
-        }
-        action={
-          state.contractTitle ? (
-            <div className="flex flex-col items-start gap-1.5">
-              {EXAMPLES.map((q) => (
-                <button
-                  key={q}
-                  type="button"
-                  onClick={() => onExample(q)}
-                  className="text-meta text-accent transition-colors duration-(--duration) hover:text-accent-strong"
-                >
-                  {q}
-                </button>
-              ))}
-            </div>
-          ) : undefined
-        }
-      />
+      <div className="flex flex-col gap-3.5 pt-2">
+        <h2 className="text-[19px] font-semibold tracking-tight text-ink">Start with a question</h2>
+        <p className="max-w-[40ch] text-meta leading-relaxed text-ink-muted">
+          Answers quote the contract and mark the exact clause they came from.
+        </p>
+        <div className="mt-1 flex flex-col">
+          {EXAMPLES.map((q, i) => (
+            <button
+              key={q}
+              type="button"
+              onClick={() => onExample(q)}
+              className={
+                "wipe cursor-pointer bg-transparent px-0.5 py-2.5 text-left text-meta text-ink-muted " +
+                (i < EXAMPLES.length - 1 ? "border-b border-line" : "")
+              }
+            >
+              {q}
+            </button>
+          ))}
+        </div>
+      </div>
     );
   }
   if (state.status === "loading") {
@@ -108,10 +115,8 @@ export function AnswerBlock({
       <p className="text-body leading-[1.6] text-ink">
         <Inline answer={result.answer} citations={result.citations} />
       </p>
-      {result.answerDetail ? (
-        <p className="mt-3 text-meta text-ink-faint">{result.answerDetail}</p>
-      ) : null}
-      <div className="mt-4 flex flex-wrap items-center gap-1.5">
+      <div className="mt-4 flex flex-wrap items-center gap-2">
+        <span className="eyebrow mr-0.5">Sources</span>
         {result.citations.map((c, i) => (
           <CitationChip
             key={c.chunkId}
@@ -123,6 +128,11 @@ export function AnswerBlock({
           />
         ))}
       </div>
+      {result.answerDetail ? (
+        <p className="mt-4 border-t border-line pt-3 text-[12px] leading-relaxed text-ink-faint">
+          {result.answerDetail}
+        </p>
+      ) : null}
     </>
   );
 

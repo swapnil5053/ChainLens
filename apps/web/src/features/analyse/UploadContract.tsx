@@ -55,9 +55,22 @@ export function UploadContract({ onUploaded }: { onUploaded: (id: string) => voi
         type="button"
         onClick={pick}
         disabled={busy}
-        className="min-h-9 rounded-sm px-3 text-meta font-medium text-accent transition-colors duration-(--duration) hover:bg-panel disabled:opacity-60"
+        className="inline-flex min-h-9 items-center gap-2 rounded-[9px] bg-accent px-3.5 text-meta font-bold text-[#06180F] transition-colors duration-(--duration) hover:bg-accent-strong disabled:opacity-60"
       >
-        {busy ? "Adding..." : "Add PDF"}
+        <svg
+          viewBox="0 0 16 16"
+          width="13"
+          height="13"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.9"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M8 12.5V3.5M4.5 7 8 3.5 11.5 7" />
+        </svg>
+        {busy ? "Adding" : "Upload PDF"}
       </button>
       {error ? (
         <span role="alert" className="max-w-[40ch] text-meta text-flag">

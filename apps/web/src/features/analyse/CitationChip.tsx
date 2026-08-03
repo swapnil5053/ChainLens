@@ -29,15 +29,18 @@ export function CitationChip({
       aria-pressed={state === "active"}
       aria-label={`Citation ${index + 1}, ${clauseLabel(citation.clauseId, citation.page)}. Show it in the contract.`}
       className={
-        "inline-flex min-h-8 items-center gap-1.5 rounded-sm px-2.5 text-meta " +
-        "transition-[background-color,color] duration-(--duration) ease-(--ease) " +
+        "inline-flex min-h-8 items-center gap-[7px] rounded-sm border px-2.5 text-[12.5px] font-semibold " +
+        "transition-[background-color,border-color,transform,color] duration-(--duration) ease-(--ease) " +
+        "hover:-translate-y-px " +
         (state === "active"
-          ? "bg-accent-weak text-accent"
-          : "text-ink-muted hover:bg-panel hover:text-accent")
+          ? "border-lime bg-accent-weak text-[#C6F5AC]"
+          : "border-[#3C6B32] bg-accent-weak text-[#A9E88F] hover:border-lime hover:text-[#C6F5AC]")
       }
     >
-      <span className="num font-semibold text-accent">{index + 1}</span>
-      <span className="num">{clauseLabel(citation.clauseId, citation.page)}</span>
+      <span className="num">{index + 1}</span>
+      <span className="font-normal text-ink-muted">
+        {clauseLabel(citation.clauseId, citation.page)}
+      </span>
     </button>
   );
 }

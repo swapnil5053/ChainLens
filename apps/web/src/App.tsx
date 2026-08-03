@@ -1,57 +1,56 @@
 /**
- * The shell. One screen: read a contract, ask about it. The retrieval-comparison and
- * latency views were engineering demonstrations, not things a user of a logistics
- * document tool needs, so they are not in the interface. The header is just the name and
- * a theme toggle.
+ * The reader shell. One screen: read a contract, ask about it.
+ *
+ * The chrome is deliberately quieter than the landing page. There is one faint arc behind
+ * the header and nothing else moves: this is a working surface, and density and legibility
+ * matter more here than atmosphere. The wordmark goes back to the landing page.
  */
-import { useState } from "react";
-import { getAdapter } from "./api";
 import { AnalyseView } from "./features/analyse/AnalyseView";
 import { useAppState } from "./lib/url";
 
-function useTheme() {
-  const [theme, setTheme] = useState<"light" | "dark">(
-    () => (document.documentElement.dataset["theme"] as "light" | "dark") ?? "light",
+function HeaderArc() {
+  return (
+    <svg
+      viewBox="0 0 1440 420"
+      preserveAspectRatio="none"
+      aria-hidden="true"
+      className="pointer-events-none absolute left-0 top-0 h-[300px] w-full opacity-55"
+    >
+      <defs>
+        <linearGradient id="rdFade" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stopColor="#6FBE8F" stopOpacity="0" />
+          <stop offset="50%" stopColor="#8CF0B8" stopOpacity=".8" />
+          <stop offset="100%" stopColor="#6FBE8F" stopOpacity="0" />
+        </linearGradient>
+        <filter id="rdBlurL" x="-40%" y="-40%" width="180%" height="180%">
+          <feGaussianBlur stdDeviation="34" />
+        </filter>
+        <filter id="rdBlurS" x="-40%" y="-40%" width="180%" height="180%">
+          <feGaussianBlur stdDeviation="2.4" />
+        </filter>
+      </defs>
+      <g fill="none" stroke="url(#rdFade)">
+        <path d="M -200 40 Q 720 460 1640 40" strokeWidth="60" opacity=".08" filter="url(#rdBlurL)" />
+        <path d="M -200 40 Q 720 460 1640 40" strokeWidth="1.4" opacity=".3" filter="url(#rdBlurS)" />
+      </g>
+    </svg>
   );
-  return {
-    theme,
-    toggle: () => {
-      const next = theme === "dark" ? "light" : "dark";
-      document.documentElement.dataset["theme"] = next;
-      setTheme(next);
-    },
-  };
 }
 
 export function App() {
   const [state, update] = useAppState();
-  const { theme, toggle } = useTheme();
-  const live = getAdapter().source === "http";
 
   return (
-    <div className="flex h-dvh flex-col">
+    <div className="relative flex h-dvh flex-col overflow-hidden bg-ground">
+      <HeaderArc />
       <a
         href="#main"
-        className="sr-only focus:not-sr-only focus:absolute focus:left-3 focus:top-3 focus:z-10 focus:bg-ground focus:px-3 focus:py-2 focus:text-accent"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-3 focus:top-3 focus:z-20 focus:bg-panel-raised focus:px-3 focus:py-2 focus:text-accent"
       >
         Skip to content
       </a>
 
-      <header className="flex items-center gap-3 border-b border-line px-6 py-3">
-        <span className="text-lead font-semibold tracking-tight text-ink">ChainLens</span>
-        <span className="text-meta text-ink-faint">contract reader</span>
-        {live ? <span className="text-meta text-accent">live</span> : null}
-        <button
-          type="button"
-          onClick={toggle}
-          aria-pressed={theme === "dark"}
-          className="ml-auto min-h-9 rounded-sm px-3 text-meta text-ink-muted transition-colors duration-(--duration) hover:text-ink"
-        >
-          {theme === "dark" ? "Light" : "Dark"}
-        </button>
-      </header>
-
-      <main id="main" className="flex min-h-0 flex-1 flex-col overflow-hidden">
+      <main id="main" className="relative z-10 flex min-h-0 flex-1 flex-col overflow-hidden">
         <AnalyseView
           contractId={state.contractId}
           query={state.query}

@@ -1,57 +1,56 @@
-/* ChainLens token layer, v2 of the design (revamp).
+/* ChainLens token layer, v3.
  *
- * Tailwind v4, CSS-first, no config file. Two tiers: a private OKLCH ramp, then a
- * semantic layer that is the only set of names markup may use. Dark mode is a variable
- * swap; there is not one dark: utility in src/.
+ * Tailwind v4, CSS-first, no config file. Two tiers: raw values here, then a semantic layer
+ * that is the only set of names markup may use. The reader ships dark; light is kept as a
+ * working fallback rather than a supported second skin.
  *
- * Direction, changed from the first build:
- *   - No cream. The old paper-warm ground was the "default tasteful AI surface" Impeccable
- *     flags by name; the new ground is a clean, faintly cool near-white.
- *   - One accent, a deep blue. Not purple, indigo, violet or cyan (all AI-slop tells).
- *   - Real type hierarchy: four steps with >=1.25 ratio between them, not a flat ramp.
- *   - Flatter. Whitespace and a single hairline do the work the boxed ledger fields used
- *     to do, so the screen breathes instead of gridding everything.
- *
- * Every colour pair that carries meaning is verified by scripts/contrast.py.
+ * The palette matches the landing page exactly, and follows the two-green rule taken from
+ * the reference: a saturated lime is technical detail (the active citation, the numbered
+ * chips) and a muted sage is interface (buttons, focus, idle highlights). Nothing sits in
+ * the cyan-emerald band above hue 165, which is the tint that reads as generated.
  */
 
 @import "tailwindcss";
 
+/* Light: a working fallback. The product is designed dark. */
 :root {
-  --hue-neutral: 262;
-  --hue-accent: 256;
-
-  --ground: oklch(0.994 0.0015 var(--hue-neutral));
-  --panel: oklch(0.972 0.004 var(--hue-neutral));
-  --panel-raised: oklch(0.948 0.006 var(--hue-neutral));
-  --ink: oklch(0.24 0.015 var(--hue-neutral));
-  --ink-muted: oklch(0.455 0.02 var(--hue-neutral));
-  --ink-faint: oklch(0.55 0.022 var(--hue-neutral));
-  --line: oklch(0.905 0.008 var(--hue-neutral));
-  --line-strong: oklch(0.66 0.02 var(--hue-neutral));
-  --accent: oklch(0.46 0.15 var(--hue-accent));
-  --accent-strong: oklch(0.4 0.16 var(--hue-accent));
-  --accent-weak: oklch(0.93 0.045 var(--hue-accent));
-  --flag: oklch(0.52 0.15 32);
-  --flag-weak: oklch(0.94 0.04 40);
+  --ground: #f7faf8;
+  --panel: #ffffff;
+  --panel-raised: #eef4f0;
+  --ink: #0b1a12;
+  --ink-muted: #4c5c53;
+  --ink-faint: #6b7c72;
+  --ink-read: #26302b;
+  --line: #dde7e1;
+  --line-strong: #c2dbcc;
+  --accent: #1e7a45;
+  --accent-strong: #12492f;
+  --accent-weak: #dff3e6;
+  --lime: #2f7a1f;
+  --flag: #a33a3a;
+  --flag-weak: #f7e4e4;
 }
 
-/* Dark is a deliberate palette: cool near-black, elevation by lightness, the accent
- * lifted so it reads on a dark ground without glowing. */
 [data-theme="dark"] {
-  --ground: oklch(0.155 0.012 var(--hue-neutral));
-  --panel: oklch(0.195 0.014 var(--hue-neutral));
-  --panel-raised: oklch(0.24 0.016 var(--hue-neutral));
-  --ink: oklch(0.95 0.008 var(--hue-neutral));
-  --ink-muted: oklch(0.73 0.016 var(--hue-neutral));
-  --ink-faint: oklch(0.63 0.018 var(--hue-neutral));
-  --line: oklch(0.3 0.014 var(--hue-neutral));
-  --line-strong: oklch(0.485 0.02 var(--hue-neutral));
-  --accent: oklch(0.72 0.13 var(--hue-accent));
-  --accent-strong: oklch(0.8 0.12 var(--hue-accent));
-  --accent-weak: oklch(0.3 0.05 var(--hue-accent));
-  --flag: oklch(0.74 0.15 42);
-  --flag-weak: oklch(0.3 0.06 40);
+  --ground: #050706;
+  --panel: #070a09;
+  --panel-raised: #0c1410;
+  --ink: #eaf0ec;
+  --ink-muted: #93a79a;
+  --ink-faint: #6e8177;
+  /* Long-form contract text gets its own colour: brighter than the muted UI grey and
+   * almost free of the green cast, because a page of tinted body copy is tiring to read
+   * and the tint competes with the citation highlights that are supposed to stand out. */
+  --ink-read: #ccd2cf;
+  --line: #16211c;
+  --line-strong: #22322a;
+  --accent: #6fbe8f;
+  --accent-strong: #8fd3a9;
+  --accent-weak: #101a0d;
+  /* Saturated lime: technical detail only. */
+  --lime: #5bcf3f;
+  --flag: #ffc9c9;
+  --flag-weak: #180e0e;
 }
 
 @theme inline {
@@ -61,29 +60,27 @@
   --color-ink: var(--ink);
   --color-ink-muted: var(--ink-muted);
   --color-ink-faint: var(--ink-faint);
+  --color-ink-read: var(--ink-read);
   --color-line: var(--line);
   --color-line-strong: var(--line-strong);
   --color-accent: var(--accent);
   --color-accent-strong: var(--accent-strong);
   --color-accent-weak: var(--accent-weak);
+  --color-lime: var(--lime);
   --color-flag: var(--flag);
   --color-flag-weak: var(--flag-weak);
 
-  /* System fonts. Deliberate rather than lazy: it sidesteps the overused-webfont tell
-   * (Inter, Roboto, Geist and friends), needs no network, and never flashes an unstyled
-   * or broken face. Numbers use the platform monospace so figures align in a column. */
-  --font-sans:
-    ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  /* Manrope, shared with the landing page so the two halves are one product. The stack
+   * degrades to the platform sans if the webfont never arrives. */
+  --font-sans: Manrope, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --font-mono: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Menlo, monospace;
 
-  /* Four steps, each at least 1.25x the last: a real hierarchy, not a flat ramp.
-   * 13 -> 15 -> 19 -> 30. Body is 15; nothing interactive falls below 13. */
+  /* Four steps, each at least 1.25x the last. Body is 15; nothing interactive is below 13. */
   --text-meta: 0.8125rem;
   --text-body: 0.9375rem;
   --text-lead: 1.1875rem;
   --text-display: 1.875rem;
 
-  /* Spacing with rhythm: tight within a group, generous between sections. */
   --space-1: 0.25rem;
   --space-2: 0.5rem;
   --space-3: 0.75rem;
@@ -91,10 +88,13 @@
   --space-6: 1.5rem;
   --space-10: 2.5rem;
 
-  --radius-sm: 4px;
-  --radius: 8px;
+  /* Two radii with distinct jobs: tight for dense controls, larger for panels. A single
+   * radius everywhere is a template signature. */
+  --radius-sm: 5px;
+  --radius: 10px;
+  --radius-lg: 14px;
 
-  --duration: 140ms;
+  --duration: 160ms;
   --ease: cubic-bezier(0.2, 0, 0, 1);
 }
 
@@ -128,26 +128,33 @@
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
-  /* One designed focus ring, on the accent, legible on both grounds. */
   :where(a, button, [role="button"], input, select, textarea, [tabindex]):focus-visible {
     outline: 2px solid var(--accent);
     outline-offset: 2px;
     border-radius: var(--radius-sm);
   }
   ::selection {
-    background: var(--accent-weak);
+    background: color-mix(in srgb, var(--accent) 30%, transparent);
     color: var(--ink);
+  }
+  ::placeholder {
+    color: var(--ink-faint);
   }
 }
 
 @layer components {
-  /* The citation, reworked. Not a side-accent bar any more (that is the single most
-   * recognisable AI-UI tell, and it is what the first design leaned on). A citation is
-   * now a quiet tint under the cited words with a 2px accent underline; the active one
-   * deepens the tint. It reads as a highlight a person made, not a widget. */
+  /* The citation highlight.
+   *
+   * An answer commonly cites six clauses, and a clause can run for a paragraph. Filling
+   * every one of them tinted most of the page green and made the contract hard to read --
+   * which defeats the point, because the document is the thing being read. So the idle
+   * state marks rather than fills: an underline only, no background. Hover adds a faint
+   * wash, and only the *active* citation takes a real fill, in the technical lime. The
+   * clause you are looking at is then the single brightest thing on the page, and nothing
+   * else competes with it. */
   .cite {
-    background-color: color-mix(in oklch, var(--accent-weak) 55%, transparent);
-    box-shadow: inset 0 -2px 0 0 color-mix(in oklch, var(--accent) 45%, transparent);
+    background-color: transparent;
+    box-shadow: inset 0 -1.5px 0 0 color-mix(in srgb, var(--accent) 55%, transparent);
     color: inherit;
     border-radius: 2px;
     padding-block: 1px;
@@ -157,28 +164,44 @@
       box-shadow var(--duration) var(--ease);
   }
   .cite[data-state="hover"] {
-    background-color: var(--accent-weak);
+    background-color: color-mix(in srgb, var(--accent) 13%, transparent);
+    box-shadow: inset 0 -1.5px 0 0 var(--accent);
   }
   .cite[data-state="active"] {
-    background-color: var(--accent-weak);
-    box-shadow: inset 0 -2px 0 0 var(--accent);
+    background-color: color-mix(in srgb, var(--lime) 17%, transparent);
+    box-shadow: inset 0 -2px 0 0 var(--lime);
   }
 
-  /* Reading measure: prose is capped near 72ch so lines do not run too wide to track. */
+  /* Reading measure: prose is capped near 68ch so lines do not run too wide to track. */
   .prose {
-    max-width: 72ch;
+    max-width: 68ch;
   }
 
-  /* One short uppercase label style, the only place wide tracking is allowed. */
   .eyebrow {
-    font-size: var(--text-meta);
+    font-size: 0.72rem;
     font-weight: 600;
-    letter-spacing: 0.02em;
-    color: var(--ink-muted);
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
   }
 
   .num {
     font-family: var(--font-mono);
     font-variant-numeric: tabular-nums;
+  }
+
+  /* Underline that wipes in from the left, shared with the landing page. */
+  .wipe {
+    background-image: linear-gradient(var(--accent), var(--accent));
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    background-size: 0% 1px;
+    transition:
+      color var(--duration) var(--ease),
+      background-size 200ms var(--ease);
+  }
+  .wipe:hover {
+    color: var(--accent-strong);
+    background-size: 100% 1px;
   }
 }

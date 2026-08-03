@@ -31,13 +31,13 @@ export function ContractSelect({
   }
 
   return (
-    <label className="flex items-center gap-2">
-      <span className="sr-only">Contract</span>
+    <label className="flex items-center gap-2.5">
+      <span className="text-[12px] text-ink-faint max-sm:sr-only">Contract</span>
       <select
         value={selectedId ?? ""}
         disabled={query.isPending}
         onChange={(e) => onSelect(e.target.value)}
-        className="min-h-9 max-w-[46ch] truncate rounded-sm border border-line-strong bg-ground px-2.5 text-body text-ink disabled:opacity-60"
+        className="min-h-9 min-w-[236px] max-w-[46ch] truncate rounded-[9px] border border-line-strong bg-panel-raised px-3 py-2 text-meta font-medium text-ink disabled:opacity-60"
       >
         <option value="" disabled>
           {query.isPending ? "Loading contracts..." : "Select a contract"}
