@@ -1,3 +1,4 @@
+import { resolve } from "node:path";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
@@ -13,6 +14,13 @@ export default defineConfig({
   ],
   build: {
     rollupOptions: {
+      // Two entries: the landing page is static HTML with its own inline motion script and
+      // pulls in no framework at all, so it stays out of the React bundle entirely. The
+      // reader is the React app.
+      input: {
+        main: resolve(__dirname, "index.html"),
+        app: resolve(__dirname, "app.html"),
+      },
       output: {
         manualChunks: {
           react: ["react", "react-dom", "react/jsx-runtime"],

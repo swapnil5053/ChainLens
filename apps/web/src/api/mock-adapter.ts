@@ -7,8 +7,9 @@
  *
  *   1. Latency, sampled around the measured profile in eval/results. The proportions are
  *      the real finding: query embedding dominates, search is a few milliseconds.
- *   2. The answer, which is assembled by quoting the top-ranked clauses verbatim rather
- *      than generated. `answerDetail` says so and the interface renders it.
+ *   2. The answer, which selects the sentences from the top-ranked clauses that bear on
+ *      the question rather than generating new text. `answerDetail` says so and the
+ *      interface renders it. It quotes; it cannot invent.
  *
  * Corpus-level Recall@6 and the other grid metrics are not fabricated at all: they are
  * read from the committed evaluation artifacts at fixture build time.
@@ -130,30 +131,122 @@ function sampleTiming(seed: string, retrieveWork: number): Timing {
   };
 }
 
-function summarise(citations: Citation[]): string {
-  if (citations.length === 0) return "";
-  // No summarising model is configured in this build, so the answer is drawn straight from
-  // the most relevant clauses rather than generated. Read them back as continuous prose,
-  // trimmed to whole sentences; the numbered chips below handle "where". No "the passage
-  // most responsive to..." scaffolding, no "page N also bears on this".
-  const clean = (text: string) => text.replace(/\s+/g, " ").trim();
-  const trim = (text: string) => {
-    if (text.length <= 360) return text;
-    const cut = text.slice(0, 360);
-    const stop = Math.max(cut.lastIndexOf(". "), cut.lastIndexOf("; "));
-    return (stop > 140 ? cut.slice(0, stop + 1) : `${cut}...`).trim();
-  };
-  const parts: string[] = [];
-  const seen = new Set<string>();
-  for (const citation of citations.slice(0, 3)) {
-    const text = trim(clean(citation.text));
-    const key = text.slice(0, 48).toLowerCase();
-    if (seen.has(key)) continue;
-    seen.add(key);
-    parts.push(text);
-    if (parts.join(" ").length > 620) break;
+/**
+ * Query-focused extractive summarisation, mirroring
+ * `apps/api/chainlens/generation/extractive.py` so the demo answers the way the backend
+ * does. See that module for the reasoning; the short version is that quoting whole
+ * retrieved chunks reads as a fragment salad, so sentences are selected instead.
+ */
+const STOPWORDS = new Set(
+  ("a an the and or but if then than that this these those of in on at to for from by with " +
+    "without under over into out up down is are was were be been being do does did doing have " +
+    "has had having it its as such any all each other some no not so nor only own same very " +
+    "can will just should now what which who whom when where why how shall may must more most " +
+    "per upon herein hereof hereto hereunder thereof therein thereto said").split(" "),
+);
+
+// Redaction notices, confidential-treatment stamps and page furniture. These score well on
+// keyword overlap but answer nothing, so they are dropped before scoring.
+const FURNITURE =
+  /certain\s+confidential\s+information|confidential\s+treatment|has\s+been\s+omitted|competitively\s+harmful|securities\s+and\s+exchange\s+commission|^\s*(page|exhibit|schedule|annex|appendix)\s+[\dixvA-Z]+\s*$|^\s*[-–—]?\s*\d{1,3}\s*[-–—]?\s*$/i;
+
+const MULTI_INITIAL = /(?:\b[A-Z]\.\s*){2,}$/;
+const WORD_ABBREV = /\b(?:No|Nos|Inc|Ltd|Corp|Co|plc|LLC|LLP|Art|Sec|etc|vs|approx)\.$/i;
+
+function tokens(text: string): string[] {
+  return (text.toLowerCase().match(/[a-z][a-z'-]{2,}/g) ?? []).filter((w) => !STOPWORDS.has(w));
+}
+
+function redactionRatio(text: string): number {
+  return text.length ? ((text.match(/\[\*+\]/g) ?? []).length * 5) / text.length : 0;
+}
+
+function isFurniture(text: string): boolean {
+  // No "mostly uppercase" rule: contracts capitalise liability clauses to make them
+  // conspicuous, and discarding those would drop the most important provisions.
+  return FURNITURE.test(text) || redactionRatio(text) > 0.35;
+}
+
+function splitSentences(text: string): string[] {
+  const flat = text.replace(/\s+/g, " ").trim();
+  if (!flat) return [];
+  const parts = flat.split(/(?<=[.;:!?])\s+(?=[A-Z("'“]|\d+(?:\.\d+)*\s+[A-Z])/).filter(Boolean);
+  const merged: string[] = [];
+  for (const part of parts) {
+    const previous = merged[merged.length - 1];
+    const joins =
+      previous !== undefined &&
+      (WORD_ABBREV.test(previous) ||
+        MULTI_INITIAL.test(previous) ||
+        (/\b[A-Z]\.$/.test(previous) && /^[A-Z]\./.test(part)));
+    if (joins) merged[merged.length - 1] = `${previous} ${part}`;
+    else merged.push(part);
   }
-  return parts.join(" ");
+  return merged.map((s) => s.replace(/\s+\d+(?:\.\d+)*\s+[A-Z][A-Za-z]*\.?\s*$/, "").trim() || s);
+}
+
+function summarise(query: string, citations: Citation[]): string {
+  interface Candidate {
+    text: string;
+    rank: number;
+    position: number;
+  }
+  const candidates: Candidate[] = [];
+  citations.forEach((citation, rank) => {
+    splitSentences(citation.text)
+      .slice(0, 14)
+      .forEach((text, position) => {
+        if (text.length < 45 || text.length > 700 || isFurniture(text)) return;
+        candidates.push({ text, rank, position });
+      });
+  });
+  if (candidates.length === 0) return "";
+
+  const queryTerms = new Set(tokens(query));
+  const df = new Map<string, number>();
+  for (const c of candidates) {
+    for (const w of new Set(tokens(c.text))) df.set(w, (df.get(w) ?? 0) + 1);
+  }
+  const total = candidates.length;
+
+  const score = (c: Candidate): number => {
+    const words = tokens(c.text);
+    if (words.length === 0) return 0;
+    const unique = new Set(words);
+    let overlap = 0;
+    for (const w of unique) {
+      if (queryTerms.has(w)) overlap += Math.log(1 + total / (1 + (df.get(w) ?? 0)));
+    }
+    let base = overlap / Math.sqrt(unique.size);
+    base *= 1 / (1 + 0.28 * c.rank);
+    if (/\d/.test(c.text)) base *= 1.16;
+    base *= 1 - Math.min(redactionRatio(c.text), 0.3);
+    return base;
+  };
+
+  const ranked = [...candidates].sort(
+    (a, b) => score(b) - score(a) || a.rank - b.rank || a.position - b.position,
+  );
+  const pool = score(ranked[0]!) > 0 ? ranked : [...candidates].sort((a, b) => a.rank - b.rank);
+
+  const chosen: Candidate[] = [];
+  const used: Set<string>[] = [];
+  let length = 0;
+  for (const c of pool) {
+    if (chosen.length >= 4 || length >= 720) break;
+    const words = new Set(tokens(c.text));
+    if (words.size === 0) continue;
+    const redundant = used.some((seen) => {
+      const shared = [...words].filter((w) => seen.has(w)).length;
+      return shared / Math.max(new Set([...words, ...seen]).size, 1) > 0.55;
+    });
+    if (redundant) continue;
+    chosen.push(c);
+    used.push(words);
+    length += c.text.length;
+  }
+  chosen.sort((a, b) => a.rank - b.rank || a.position - b.position);
+  return chosen.map((c) => c.text).join(" ").trim();
 }
 
 export function createMockAdapter(latencyMs = 260): ChainLensAdapter {
@@ -193,7 +286,7 @@ export function createMockAdapter(latencyMs = 260): ChainLensAdapter {
         AnalyseResponseSchema,
         {
           source: "mock",
-          answer: summarise(citations),
+          answer: summarise(query, citations),
           answerStatus: citations.length ? "ok" : "unavailable",
           answerDetail: citations.length
             ? "Answer taken directly from the contract. Use the sources below to jump to each clause."
