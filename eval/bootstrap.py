@@ -28,13 +28,23 @@ def ensure_database() -> str:
     commands, so each entry point brings the server up itself. In production the DSN
     comes from the environment and this function does nothing. See ADR-0001.
     """
+    # Load a .env at the repo root, if present, so the database URL and the Gemini key can
+    # live in a file rather than being exported by hand each session. Values already in the
+    # real environment win over the file.
+    try:
+        from dotenv import load_dotenv
+
+        load_dotenv(ROOT / ".env", override=False)
+    except ImportError:  # pragma: no cover - python-dotenv is a transitive dependency
+        pass
+
     if os.environ.get("CHAINLENS_LOCAL_PG") == "1":
         import pgserver
 
         LOCAL_PGDATA.mkdir(parents=True, exist_ok=True)
         server = pgserver.get_server(LOCAL_PGDATA, cleanup_mode=None)  # type: ignore[attr-defined]
         server.psql("CREATE EXTENSION IF NOT EXISTS vector;")
-        dsn = server.get_uri().replace("postgresql://", "postgresql+psycopg://")
+        dsn = str(server.get_uri()).replace("postgresql://", "postgresql+psycopg://")
         os.environ["CHAINLENS_DATABASE_URL"] = dsn
         return dsn
     return os.environ.get(

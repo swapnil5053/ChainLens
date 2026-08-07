@@ -312,21 +312,34 @@ def analyse(request: Request, body: AnalyseBody) -> dict[str, Any]:
             detail = f"{type(exc).__name__}: {exc}"
         generation_ms = (time.perf_counter() - started) * 1000
     elif chunks:
-        # No generation provider. Rather than return an empty record, quote the retrieved
-        # clauses verbatim and say plainly that nothing was generated. The citations are
-        # the useful part either way, and an extractive answer cannot hallucinate.
-        lead = chunks[0]
-        where = (
-            f"clause {lead.clause_id}" + (f" ({lead.clause_title})" if lead.clause_title else "")
-            if lead.clause_id
-            else f"page {lead.page}"
-        )
-        quote = " ".join(lead.text.split())[:420]
-        answer = f'The passage most responsive to "{body.query.strip()}" is {where} [1]: "{quote}"'
+        # No generation provider. Rather than an empty record, read the most relevant
+        # clauses back as continuous prose. The chips carry "where", so no "the passage
+        # most responsive to..." scaffolding and no "page N also bears on this". An
+        # extractive answer cannot hallucinate, which is why this is acceptable as a
+        # fallback rather than a stopgap that invents text.
+        def _trim(text: str) -> str:
+            flat = " ".join(text.split())
+            if len(flat) <= 360:
+                return flat
+            cut = flat[:360]
+            stop = max(cut.rfind(". "), cut.rfind("; "))
+            return (cut[: stop + 1] if stop > 140 else cut + "...").strip()
+
+        parts: list[str] = []
+        seen: set[str] = set()
+        for chunk in chunks[:3]:
+            text = _trim(chunk.text)
+            key = text[:48].lower()
+            if key in seen:
+                continue
+            seen.add(key)
+            parts.append(text)
+            if len(" ".join(parts)) > 620:
+                break
+        answer = " ".join(parts)
         status = "ok"
         detail = (
-            "Extractive answer: the retrieved clause is quoted verbatim and attributed. "
-            "No language model was called, because no generation provider is configured."
+            "Answer taken directly from the contract. Use the sources below to jump to each clause."
         )
     else:
         detail = "Retrieval returned nothing for this query in this contract."

@@ -1,26 +1,13 @@
 /**
- * The shell. A thin top bar with the name, three tabs, and the theme toggle. No stamp, no
- * live badge, no attribution strip. Comparison and Latency stay lazy so neither is in the
- * initial bundle behind Analyse.
+ * The shell. One screen: read a contract, ask about it. The retrieval-comparison and
+ * latency views were engineering demonstrations, not things a user of a logistics
+ * document tool needs, so they are not in the interface. The header is just the name and
+ * a theme toggle.
  */
-import { Suspense, lazy, useState } from "react";
+import { useState } from "react";
 import { getAdapter } from "./api";
-import { SkeletonText } from "./components/ui/Skeleton";
 import { AnalyseView } from "./features/analyse/AnalyseView";
-import { useAppState, type ViewId } from "./lib/url";
-
-const CompareView = lazy(() =>
-  import("./features/compare/CompareView").then((m) => ({ default: m.CompareView })),
-);
-const LatencyView = lazy(() =>
-  import("./features/latency/LatencyView").then((m) => ({ default: m.LatencyView })),
-);
-
-const TABS: { id: ViewId; label: string }[] = [
-  { id: "analyse", label: "Analyse" },
-  { id: "compare", label: "Compare" },
-  { id: "latency", label: "Latency" },
-];
+import { useAppState } from "./lib/url";
 
 function useTheme() {
   const [theme, setTheme] = useState<"light" | "dark">(
@@ -43,37 +30,17 @@ export function App() {
 
   return (
     <div className="flex h-dvh flex-col">
-      <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:left-3 focus:top-3 focus:z-10 focus:bg-ground focus:px-3 focus:py-2 focus:text-accent">
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-3 focus:top-3 focus:z-10 focus:bg-ground focus:px-3 focus:py-2 focus:text-accent"
+      >
         Skip to content
       </a>
 
-      <header className="flex items-center gap-6 border-b border-line px-6 py-3">
-        <div className="flex items-baseline gap-2">
-          <span className="text-lead font-semibold tracking-tight text-ink">ChainLens</span>
-          {live ? <span className="text-meta text-accent">live</span> : null}
-        </div>
-
-        <nav aria-label="Views" className="flex gap-1">
-          {TABS.map((tab) => {
-            const active = state.view === tab.id;
-            return (
-              <button
-                key={tab.id}
-                type="button"
-                onClick={() => update({ view: tab.id })}
-                aria-current={active ? "page" : undefined}
-                className={
-                  "min-h-9 rounded-sm px-3 text-body transition-colors duration-(--duration) " +
-                  (active ? "font-medium text-ink" : "text-ink-muted hover:text-ink")
-                }
-              >
-                {tab.label}
-                {active ? <span className="mt-1.5 block h-0.5 rounded-full bg-accent" /> : null}
-              </button>
-            );
-          })}
-        </nav>
-
+      <header className="flex items-center gap-3 border-b border-line px-6 py-3">
+        <span className="text-lead font-semibold tracking-tight text-ink">ChainLens</span>
+        <span className="text-meta text-ink-faint">contract reader</span>
+        {live ? <span className="text-meta text-accent">live</span> : null}
         <button
           type="button"
           onClick={toggle}
@@ -85,18 +52,12 @@ export function App() {
       </header>
 
       <main id="main" className="flex min-h-0 flex-1 flex-col overflow-hidden">
-        <Suspense fallback={<div className="px-6 py-8"><SkeletonText lines={5} /></div>}>
-          {state.view === "analyse" ? (
-            <AnalyseView
-              contractId={state.contractId}
-              query={state.query}
-              onContractChange={(id) => update({ contractId: id })}
-              onQueryChange={(v) => update({ query: v })}
-            />
-          ) : null}
-          {state.view === "compare" ? <CompareView contractId={state.contractId} query={state.query} /> : null}
-          {state.view === "latency" ? <LatencyView /> : null}
-        </Suspense>
+        <AnalyseView
+          contractId={state.contractId}
+          query={state.query}
+          onContractChange={(id) => update({ contractId: id })}
+          onQueryChange={(v) => update({ query: v })}
+        />
       </main>
     </div>
   );

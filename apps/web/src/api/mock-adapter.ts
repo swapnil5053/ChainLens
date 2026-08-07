@@ -130,26 +130,30 @@ function sampleTiming(seed: string, retrieveWork: number): Timing {
   };
 }
 
-function summarise(citations: Citation[], query: string): string {
+function summarise(citations: Citation[]): string {
   if (citations.length === 0) return "";
-  const lead = citations[0]!;
-  const where = lead.clauseId
-    ? `clause ${lead.clauseId}${lead.clauseTitle ? ` (${lead.clauseTitle})` : ""}`
-    : `page ${lead.page}`;
-  const quote = lead.text.replace(/\s+/g, " ").trim().slice(0, 420);
-  const others = citations
-    .slice(1, 3)
-    .map((citation, index) =>
-      citation.clauseId
-        ? `Clause ${citation.clauseId} also bears on this [${index + 2}].`
-        : `Page ${citation.page} also bears on this [${index + 2}].`,
-    )
-    .join(" ");
-  return (
-    `The passage most responsive to "${query.trim()}" is ${where} [1]: ` +
-    `"${quote}${quote.length >= 420 ? "..." : ""}"` +
-    (others ? ` ${others}` : "")
-  );
+  // No summarising model is configured in this build, so the answer is drawn straight from
+  // the most relevant clauses rather than generated. Read them back as continuous prose,
+  // trimmed to whole sentences; the numbered chips below handle "where". No "the passage
+  // most responsive to..." scaffolding, no "page N also bears on this".
+  const clean = (text: string) => text.replace(/\s+/g, " ").trim();
+  const trim = (text: string) => {
+    if (text.length <= 360) return text;
+    const cut = text.slice(0, 360);
+    const stop = Math.max(cut.lastIndexOf(". "), cut.lastIndexOf("; "));
+    return (stop > 140 ? cut.slice(0, stop + 1) : `${cut}...`).trim();
+  };
+  const parts: string[] = [];
+  const seen = new Set<string>();
+  for (const citation of citations.slice(0, 3)) {
+    const text = trim(clean(citation.text));
+    const key = text.slice(0, 48).toLowerCase();
+    if (seen.has(key)) continue;
+    seen.add(key);
+    parts.push(text);
+    if (parts.join(" ").length > 620) break;
+  }
+  return parts.join(" ");
 }
 
 export function createMockAdapter(latencyMs = 260): ChainLensAdapter {
@@ -189,10 +193,10 @@ export function createMockAdapter(latencyMs = 260): ChainLensAdapter {
         AnalyseResponseSchema,
         {
           source: "mock",
-          answer: summarise(citations, query),
+          answer: summarise(citations),
           answerStatus: citations.length ? "ok" : "unavailable",
           answerDetail: citations.length
-            ? "Extractive answer: the retrieved clauses are quoted verbatim and attributed. No language model was called, because no generation provider is configured."
+            ? "Answer taken directly from the contract. Use the sources below to jump to each clause."
             : "Retrieval returned nothing for this query in this contract.",
           citations,
           timing: sampleTiming(`${contractId}:${query}`, work),

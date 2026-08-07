@@ -25,7 +25,7 @@ def start() -> str:
     DATA_DIR.mkdir(parents=True, exist_ok=True)
     server = pgserver.get_server(DATA_DIR, cleanup_mode=None)  # type: ignore[attr-defined]
     server.psql("CREATE EXTENSION IF NOT EXISTS vector;")
-    return server.get_uri().replace("postgresql://", "postgresql+psycopg://")
+    return str(server.get_uri()).replace("postgresql://", "postgresql+psycopg://")
 
 
 def main() -> int:

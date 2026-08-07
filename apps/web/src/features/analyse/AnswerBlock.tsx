@@ -9,7 +9,6 @@ import type { AnalyseResponse, Citation } from "../../api/contracts";
 import { Delayed } from "../../components/ui/Delayed";
 import { SkeletonLine, SkeletonText } from "../../components/ui/Skeleton";
 import { EmptyState, ErrorRegion } from "../../components/ui/StateRegion";
-import { ms, percent } from "../../lib/format";
 import { CitationChip } from "./CitationChip";
 
 const EnterOnce = lazy(() => import("../../components/ui/EnterOnce"));
@@ -103,7 +102,6 @@ export function AnswerBlock({
       />
     );
   }
-  const total = result.timing.embedMs + result.timing.retrieveMs + result.timing.generateMs;
 
   const body = (
     <>
@@ -125,9 +123,6 @@ export function AnswerBlock({
           />
         ))}
       </div>
-      <p className="num mt-3 text-meta text-ink-faint">
-        {ms(total)} ms, {percent(result.timing.embedMs, total)}% of it embedding the query
-      </p>
     </>
   );
 

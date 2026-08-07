@@ -87,7 +87,7 @@ function Result({ data }: { data: CompareResponse }) {
           {delta === null ? "--" : `+${delta.toFixed(3)}`}
         </p>
         <p className="mt-1 max-w-[70ch] text-meta text-ink-muted">
-          Measured over {left?.evidence.questions ?? 0} lawyer-annotated questions, not the query
+          Measured over {left?.evidence.questions ?? 0} hand-checked questions, not the query
           above. {right?.config.label} scores {right?.evidence.recallAt6.toFixed(3)} against{" "}
           {left?.evidence.recallAt6.toFixed(3)} for {left?.config.label}.
           {data.reference
