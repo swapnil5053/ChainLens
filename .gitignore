@@ -176,3 +176,12 @@ cython_debug/
 #.idea/
 apps/web/tsconfig.tsbuildinfo
 apps/web/test/smoke.mjs
+
+# Design tool export: source files plus reference screen recordings (36 MB).
+# The built landing page lives in apps/web/index.html; this is the raw material.
+design-export/
+
+# Working notes from the interface iteration.
+LANDING_*.md
+COPY_DECK.md
+INTEGRATION.md
