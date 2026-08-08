@@ -32,7 +32,6 @@ Chunking fixed at `clause-aware`, retrieval scoped to one document.
 | RRF fusion (dense + lexical, k=60) | 0.582 | 0.677 | 0.756 | 0.601 | 81.1 |
 | RRF fusion + glossary query expansion | 0.586 | 0.690 | 0.770 | 0.624 | 81.2 |
 | RRF fusion + cross-encoder rerank | -- | -- | -- | -- | -- |
-
 Cells marked `--` were not measured:
 - cross-encoder weights could not be loaded (3 configurations)
 
