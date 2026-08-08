@@ -168,6 +168,10 @@ checkpoint, together with `chainlens-rebuild-v2.bundle` carrying the real branch
 Recovering the history on a normal machine is
 `git fetch chainlens-rebuild-v2.bundle rebuild/v2`.
 
+**Resolved.** This constraint no longer applies. The repository has since been pushed to
+its remote, so the branch history is recoverable from there; `chainlens-rebuild-v2.bundle`
+and `scripts/mirror.sh` have both been removed from the tree, along with the v1 files.
+
 **Consequence.** The connected folder also still contains the v1 files, because they
 cannot be deleted from that side. Checking out `rebuild/v2` on a machine with normal
 filesystem permissions removes them. This is recorded in `docs/HANDOFF.md`.

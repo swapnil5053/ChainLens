@@ -1,179 +1,175 @@
 # Running ChainLens
 
-Three ways to see it, in order of how much setup each needs. The first takes ten seconds.
+Two ways in. The first needs Node only and no backend at all; the second runs the real
+system, database included.
 
 ---
 
-## 0. Before anything: reconcile the folder
+## 1. The interface alone, no backend
 
-This repository was rebuilt in a sandbox that could create files in the connected folder
-but not delete them, so the old v1 tree is still sitting next to the new one and git's
-index is locked. One checkout clears both.
-
-```bash
-cd ChainLens
-git fetch chainlens-rebuild-v2.bundle rebuild/v2:rebuild/v2
-git checkout rebuild/v2
-git clean -fdx -e chainlens-rebuild-v2.bundle
-```
-
-If `git checkout` complains about a lock file, delete `.git/index.lock` first. That file is
-a leftover from the sandbox and is safe to remove.
-
-After this the tree should contain `apps/`, `eval/`, `docs/`, `infra/`, `scripts/` and no
-`app/`, `test_app.py` or `requirements.txt`.
-
----
-
-## 1. The evaluation screen, no install at all
-
-```
-open apps/web/prototype/evaluation.html
-```
-
-Double-click it. It is a single self-contained file with the token layer inlined, and it
-renders the real committed evaluation artifacts: the 18-cell ablation grid, the headline
-Recall@6 of 0.676, and the finding that query embedding is 95 percent of p50 latency. The
-theme toggle in the corner switches light and dark, which is the variable swap the token
-layer exists to make possible.
-
-Regenerate it after a new eval run with `python scripts/build_eval_prototype.py`.
-
----
-
-## 2. The three views, Node only, no backend
-
-This is the interface: Analyse, retrieval comparison, and latency. It runs entirely on the
-mock adapter, which serves the real 29-contract corpus and computes both retrieval
-configurations in your browser. No database, no API key, no Python.
+The demo adapter serves the real 29-contract corpus from static fixtures and runs
+retrieval in the browser over real chunk text at real character offsets. No database, no
+API key, no Python.
 
 ```bash
 cd apps/web
-npm install        # about 20 seconds, 98 packages
+npm install
 npm run dev        # then open the URL it prints, usually http://localhost:5173
 ```
 
+- The landing page is at `/`.
+- The reader is at `/app.html`.
+
 What to try, in order:
 
-1. **Pick a contract** from the Corpus list on the right. `Apollo-Endosurgery-Manufacturing-and-Supply-Agreement` is a good first one: 15 pages, plenty of clause structure.
-2. **Ask a question.** Click one of the three example questions, or type `What is the cap on liability?` and press Enter.
-3. **Click a citation chip.** This is the thing the whole design is built around: the contract pane scrolls to the clause and marks the exact character span, with a rule down the leading edge. Hover a chip first to see the softer preview mark.
-4. **Switch to Retrieval comparison.** Same question, two arms. The left is MMR, the strategy this project originally shipped; the right is clause-aware chunking with RRF fusion and glossary expansion. Rows marked `unique` were returned by only one arm. The `Recall@6 delta` at the top is a corpus measurement over 110 lawyer-annotated questions, not a property of the query you just typed, and the panel says so.
-5. **Switch to Latency.** The stacked bar is the finding: Postgres does both searches in about 5 ms while the query embedding takes about 100.
-6. **Toggle Dark** in the masthead. Every colour is a CSS variable swap; there is not one `dark:` class in the source.
+1. **Pick a contract** from the selector in the reader's header.
+   `Apollo-Endosurgery-Manufacturing-and-Supply-Agreement` is a good first one: fifteen
+   pages with clear clause structure.
+2. **Ask a question.** Click one of the five examples, or type
+   `What is the cap on liability?` and press Enter.
+3. **Hover a source chip.** Its clause lights up in the contract beside it. Click it and
+   the document scrolls to that clause and marks the exact character span. This is the
+   thing the whole design is built around.
+4. **Switch contracts.** The question and the previous answer clear, so you never read an
+   old finding against a new document.
 
-The footer always says `MOCK` and names the adapter. That is deliberate: a demo you cannot
-distinguish from live data is the kind that misleads.
+Uploading a PDF needs the backend, because parsing, clause detection and embedding all
+happen in Python. The demo says so rather than failing quietly.
 
-Verify it the way CI would:
+Verify it the way CI does:
 
 ```bash
-npm run verify     # typecheck, then the smoke test, then a production build
+npm run verify     # typecheck, smoke test, production build, design detector
 ```
 
 ---
 
-## 3. The whole thing, front and back, talking to each other
+## 2. The whole system
 
-Two shells. This is the one that shows the system rather than either half of it.
+Two terminals. The database runs in Docker; everything else is local.
 
-**Shell A, the API and its data:**
+### Once
 
-```bash
+```powershell
+docker run -d --name chainlens-db `
+  -e POSTGRES_USER=chainlens -e POSTGRES_PASSWORD=chainlens -e POSTGRES_DB=chainlens `
+  -p 5433:5432 pgvector/pgvector:pg16
+
+docker update --restart unless-stopped chainlens-db   # survives a Docker restart
+
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+pip install -e ".[dev]"
+
+Copy-Item .env.example .env
+```
+
+Then set `CHAINLENS_DATABASE_URL` in `.env` to match that container:
+
+```
+CHAINLENS_DATABASE_URL=postgresql+psycopg://chainlens:chainlens@localhost:5433/chainlens
+```
+
+Port 5433 rather than the default 5432, because a Postgres already listening on 5432
+belongs to something else and the two will collide.
+
+### Every time
+
+```powershell
+# terminal 1
 cd ChainLens
-pip install -e ".[dev,localpg]"
-
-export CHAINLENS_LOCAL_PG=1              # PowerShell: $env:CHAINLENS_LOCAL_PG = "1"
-python scripts/migrate.py                # PostgreSQL 16 with pgvector, in-process
-python -m eval.build_index --strategy clause-aware   # ~30s: fits the model, indexes 29 contracts
-python -m uvicorn chainlens.main:app --app-dir apps/api --port 8000
+.\.venv\Scripts\Activate.ps1        # prompt must show (.venv)
+python scripts\serve.py
 ```
 
-`build_index` rather than `seed`, because it indexes all 29 contracts instead of three and
-fits the embedding model the retrieval needs. Watch for `"embedding": "lsa-tfidf-svd-384"`
-in the startup line; if it says `null`, the index step did not finish.
-
-**Shell B, the interface pointed at it:**
-
-```bash
-cd ChainLens/apps/web
-npm install
-VITE_ADAPTER=http VITE_API_BASE=http://localhost:8000/web npm run dev
+```powershell
+# terminal 2
+cd ChainLens\apps\web
+npm run dev
 ```
 
-Or leave the environment alone and append `?adapter=http` to the URL. Either way the
-footer flips from `MOCK` to `LIVE` and names the API. That footer is the check: if it
-still says MOCK, the swap did not take.
+`scripts/serve.py` does everything in one process: it migrates to head, indexes the
+29-contract corpus if the database is empty, then serves the API. Running the database and
+the web server as separate processes is how they end up unable to find each other, which
+is the reason this script exists.
 
-What you should see, and what it means:
+Expected output on a first run:
 
-- **29 contracts** in the list, typed by kind: Supply, Distribution, Manufacturing,
-  Outsourcing, Reseller, Transportation, Strategic alliance.
-- **Open `Apollo Endosurgery Manufacturing and Supply Agreement`** (19 pages, 33 detected
-  clauses) and ask `What is the cap on liability?`. Six citations come back and the first
-  is clause 8, INDEMNIFICATION, LIMITATION OF LIABILITY AND INSURANCE. Ask
-  `How much notice is needed to stop it renewing?` and the first citation is clause 2,
-  TERM AND TERMINATION. Those clause numbers are read out of the contract, not guessed.
-- **Click a citation.** The pane scrolls and marks the exact character span. This is now
-  running against Postgres: the span came from the `chunks` table, not from a fixture.
-- **Latency** now shows numbers measured from your own requests. Expect roughly 75 ms
-  embedding against 7 ms retrieval, which is the finding the panel exists to show, observed
-  live rather than replayed.
-- **Retrieval comparison** runs both arms against Postgres. The per-query chunk lists are
-  computed now; the Recall@6 figures beside them, 0.476 and 0.690, are read from the
-  committed evaluation artifacts and are labelled as corpus aggregates.
+```
+database ready: postgresql+psycopg://...
+migrations applied
+indexing the 29-contract corpus (about 30 seconds, first run only)...
+corpus indexed
+serving on http://127.0.0.1:8000
+```
 
-If the browser console shows a CORS error, the API is not on port 8000 or the base URL is
-missing the `/web` suffix.
+The indexing step prints nothing while it runs. That pause is normal.
+
+### Without Docker
+
+```powershell
+$env:CHAINLENS_LOCAL_PG = "1"
+python scripts\serve.py
+```
+
+This starts an embedded PostgreSQL instead. It is convenient but fragile on Windows:
+antivirus real-time scanning interferes with the data directory and produces
+`Timeout starting server`, a sharing violation, or `0xC000013A`. If you see any of those,
+use the Docker path above.
 
 ---
 
-## 4. The backend on its own, Python and a local Postgres, no Docker
+## Answers
 
-```bash
-pip install -e ".[dev,localpg]"
-make migrate       # starts PostgreSQL 16 with pgvector in-process and applies Alembic
-make seed          # indexes three real supply-chain agreements
-make demo-local    # serves the API on http://localhost:8000
+With no generation provider configured, answers are built by
+`chainlens.generation.extractive`: it selects the sentences across the retrieved clauses
+that bear on the question, discards redaction notices and page furniture, and suppresses
+repetition. It quotes the contract and cannot invent text.
+
+To use Gemini instead, put a key in `.env`:
+
+```
+CHAINLENS_GOOGLE_API_KEY=AIza...
 ```
 
-Then, in another shell:
-
-```bash
-curl localhost:8000/health
-curl localhost:8000/readyz | python -m json.tool     # honest about what is degraded
-curl localhost:8000/documents | python -m json.tool
-
-DOC=$(curl -s localhost:8000/documents | python -c "import json,sys;print(json.load(sys.stdin)[0]['id'])")
-curl -s -X POST localhost:8000/documents/$DOC/extract | python -m json.tool | head -40
-curl -s localhost:8000/documents/$DOC/risk | python -m json.tool
-```
-
-`/readyz` will report `degraded` and explain why: no Redis, so ingestion runs inline; no
-generation provider, so answers are unavailable while retrieval and citations still work;
-no document scoping configured. That is the intended behaviour, not a fault.
-
-### Reproduce every number in the repository
-
-```bash
-make index eval    # builds the three chunking indexes, runs the 18-cell ablation
-make report        # rewrites every table in README.md and docs/RETRIEVAL.md
-make gate          # the CI regression check
-make eval-extraction
-make check         # lint, types, 40 tests, no-emoji, contrast, glossary parity
-```
-
-`make report` followed by `git diff` should show nothing. If it shows a change, the
-committed tables were stale, which is exactly what the CI step is there to catch.
+It must be an `AIza...` key from <https://aistudio.google.com/apikey>. Other Google
+credential formats are rejected at call time, and the answer then arrives as an error
+rather than falling back silently. `.env` is gitignored.
 
 ---
 
-## What will not work, and why
+## When it does not work
 
-| | |
-|---|---|
-| `docker compose up` | Authored but never executed: the build environment had no Docker daemon, no root and no package manager. It is the most likely thing here to be broken on first run. |
-| The arq worker | Written, never run. No Redis was installable, so ingestion happens inline in the request. |
-| GitHub Actions | The workflow has never executed. |
-| Real answers | No generation provider is configured. Retrieval and citations work; the answer text in the mock is extractive, quoting the retrieved clauses verbatim, and it says so under every answer. |
-| bge-small embeddings | huggingface.co is blocked from the build environment. The dense arm is a corpus-fitted LSA model instead. See ADR-0003; swapping it is one environment variable. |
+**`ModuleNotFoundError: No module named 'pgvector'`**
+The virtual environment is not active. The prompt should read `(.venv)`. If
+`Activate.ps1` is blocked, run
+`Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass` first.
+
+**`connection timeout expired` on port 5433**
+The database container is not running. `docker ps -a` will show it stopped; start it with
+`docker start chainlens-db`.
+
+**`password authentication failed for user chainlens`**
+Something else is answering on that port, usually a native Postgres on 5432. Check the
+port in `.env` matches the container's published port.
+
+**The migration appears to hang**
+A previous crashed run left a session holding a lock. `docker restart chainlens-db`
+clears it.
+
+**`Cannot find module '@rollup/rollup-...'` during `npm run build`**
+`node_modules` was installed on a different platform. Delete it and run `npm install`
+again on this machine.
+
+---
+
+## Verifying everything
+
+```bash
+make check                       # lint, types, tests, no-emoji, contrast, glossary parity
+python -m eval.run --force       # re-run the ablation grid
+python -m eval.gate              # the regression gate CI enforces
+python -m eval.report            # regenerate every table in the repository
+```
+
+`docs/HANDOFF.md` records what was verified, what was not, and the verbatim errors.

@@ -1,5 +1,14 @@
 # Taste pass
 
+> **Historical record.** This documents the first interface pass, when only a token layer
+> and a static evaluation prototype existed. Both artifacts it refers to
+> (`apps/web/app/tokens.css`, `apps/web/prototype/evaluation.html`) have since been
+> removed. The interface was redesigned twice after this: the live token layer is
+> `apps/web/src/styles/tokens.css`, and the shipped surfaces are the landing page at
+> `apps/web/index.html` and the reader under `apps/web/src/`. The reasoning below is kept
+> because the process it records — and the anti-patterns it names — still governs the
+> current design.
+
 The mandatory process, written down as it happened: brainstorm, plan, critique the plan,
 build, critique the build.
 

@@ -46,16 +46,13 @@ now mirrored to the connected folder after every checkpoint. See ADR-0008 and se
 
 ## 2. How to run it
 
-The connected folder contains the working tree plus `chainlens-rebuild-v2.bundle`, which
-carries the real branch history. It also still contains the v1 files (`app/`,
-`test_app.py`, `requirements.txt`, `environment.yml`), because the sandbox could not
-delete files there. Checking the branch out on a normal machine removes them:
+Current instructions live in [`RUNNING.md`](../RUNNING.md). The short version is a Postgres
+container plus `python scripts/serve.py` in one terminal and `npm run dev` in another.
 
-```bash
-cd <repo>
-git fetch chainlens-rebuild-v2.bundle rebuild/v2:rebuild/v2
-git checkout rebuild/v2      # this deletes the stale v1 files
-```
+*Historical note.* This section previously described recovering the branch history from
+`chainlens-rebuild-v2.bundle`, and deleting the v1 files the sandbox could not remove.
+Both are done: the history is on the remote, the v1 tree is gone, and the bundle has been
+removed from the repository along with the other rebuild-era artifacts.
 
 Then, the path that was actually verified:
 
@@ -68,9 +65,9 @@ python -m eval.report
 python -m eval.gate
 python -m pytest apps/api/tests -q      # 40 passed
 python -m ruff check . && python -m ruff format --check .
-python -m mypy                          # 58 files, clean
-python scripts/build_eval_prototype.py
-python -m http.server 8080 --directory apps/web/prototype   # then open evaluation.html
+python -m mypy                          # clean
+python -m pytest apps/api/tests -q      # 48 passed
+cd apps/web && npm run verify           # typecheck, smoke test, build, design detector
 ```
 
 The compose path, **authored but never executed**:
