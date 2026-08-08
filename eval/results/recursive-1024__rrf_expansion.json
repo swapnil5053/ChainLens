@@ -1,0 +1,4368 @@
+{
+  "run_id": "recursive-1024__rrf_expansion",
+  "created_at": "2026-08-02T08:16:56+00:00",
+  "git_sha": "b48878f962e766d888d877ecf0638d3518407259",
+  "git_dirty": true,
+  "dataset": {
+    "path": "eval/datasets/golden.jsonl",
+    "sha256": "4ac8d01460a836c4d0880ff3f583d8c2150f67a7729cd592a00962863cd46451",
+    "items": 110,
+    "documents": 29,
+    "categories": 20
+  },
+  "environment": {
+    "python": "3.10.12",
+    "platform": "Linux-6.8.0-124-generic-x86_64-with-glibc2.35",
+    "postgres": "16.2",
+    "embedding": {
+      "provider": "lsa-tfidf-svd-384",
+      "dim": 384,
+      "family": "tfidf+svd",
+      "fitted_on": "corpus",
+      "substitute_for": "BAAI/bge-small-en-v1.5",
+      "reason": "huggingface.co unreachable in build environment (ADR-0003)"
+    }
+  },
+  "config": {
+    "strategy": "rrf",
+    "k": 10,
+    "fetch_k": 30,
+    "rrf_k": 60,
+    "mmr_lambda": 0.5,
+    "expansion": true,
+    "index_name": "recursive-1024",
+    "chunk_strategy": "recursive-1024",
+    "config_hash": "135d9539d750"
+  },
+  "scope": "document",
+  "status": "ok",
+  "blocked_reason": null,
+  "skipped_qa_ids": [],
+  "metrics": {
+    "n_evaluated": 110,
+    "n_skipped": 0,
+    "recall@3": 0.5337,
+    "recall@6": 0.6593,
+    "recall@10": 0.7604,
+    "hit@3": 0.6545,
+    "hit@6": 0.7455,
+    "hit@10": 0.8091,
+    "mrr": 0.6174,
+    "ndcg@10": 0.6138,
+    "span_coverage@3": 0.599,
+    "span_coverage@6": 0.7042,
+    "span_coverage@10": 0.7828,
+    "latency_ms_p50": 82.38,
+    "latency_ms_p95": 86.63,
+    "embed_ms_p50": 77.39,
+    "search_ms_p50": 4.71,
+    "context_tokens_p50": 2561.0,
+    "generation_cost_usd": null
+  },
+  "per_query": [
+    {
+      "qa_id": "AURASYSTEMSINC-06-16-2010-EX-10-25-STRATEGIC-ALLIANCE-AGREEMENT__Exclusivity",
+      "category": "Exclusivity",
+      "relevant_total": 4,
+      "ranks_hit": [
+        1,
+        4,
+        7
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 0.25,
+        "6": 0.5,
+        "10": 0.75
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.6886,
+      "span_coverage": {
+        "3": 0.5273,
+        "6": 0.8394,
+        "10": 1.0
+      },
+      "latency_ms": 92.56,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": "Is the supply or distribution arrangement exclusive? exclusivity sole distributor exclusive right",
+        "embed_ms": 76.485,
+        "dense_ms": 2.424,
+        "lexical_ms": 2.32,
+        "fusion_ms": 0.165,
+        "rerank_ms": 0.0,
+        "total_ms": 81.394,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "AURASYSTEMSINC-06-16-2010-EX-10-25-STRATEGIC-ALLIANCE-AGREEMENT__Expiration Date",
+      "category": "Expiration Date",
+      "relevant_total": 1,
+      "ranks_hit": [
+        2
+      ],
+      "reciprocal_rank": 0.5,
+      "recall": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.6309,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 79.47,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 74.897,
+        "dense_ms": 2.452,
+        "lexical_ms": 1.825,
+        "fusion_ms": 0.1,
+        "rerank_ms": 0.0,
+        "total_ms": 79.274,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "AURASYSTEMSINC-06-16-2010-EX-10-25-STRATEGIC-ALLIANCE-AGREEMENT__Insurance",
+      "category": "Insurance",
+      "relevant_total": 3,
+      "ranks_hit": [
+        1,
+        3
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 0.6667,
+        "6": 0.6667,
+        "10": 0.6667
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.7039,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 81.49,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": "What insurance is the supplier required to carry? insurance required certificate of insurance coverage",
+        "embed_ms": 76.908,
+        "dense_ms": 2.426,
+        "lexical_ms": 1.866,
+        "fusion_ms": 0.089,
+        "rerank_ms": 0.0,
+        "total_ms": 81.289,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "AURASYSTEMSINC-06-16-2010-EX-10-25-STRATEGIC-ALLIANCE-AGREEMENT__Minimum Commitment",
+      "category": "Minimum Commitment",
+      "relevant_total": 4,
+      "ranks_hit": [
+        1,
+        2,
+        4
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 0.5,
+        "6": 0.75,
+        "10": 0.75
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.8048,
+      "span_coverage": {
+        "3": 0.721,
+        "6": 0.9732,
+        "10": 0.9732
+      },
+      "latency_ms": 81.7,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 77.356,
+        "dense_ms": 2.398,
+        "lexical_ms": 1.659,
+        "fusion_ms": 0.079,
+        "rerank_ms": 0.0,
+        "total_ms": 81.492,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "AURASYSTEMSINC-06-16-2010-EX-10-25-STRATEGIC-ALLIANCE-AGREEMENT__Post-Termination Services",
+      "category": "Post-Termination Services",
+      "relevant_total": 2,
+      "ranks_hit": [
+        1,
+        3
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.9197,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 82.29,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 76.932,
+        "dense_ms": 2.603,
+        "lexical_ms": 2.438,
+        "fusion_ms": 0.101,
+        "rerank_ms": 0.0,
+        "total_ms": 82.074,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "AgapeAtpCorp-20191202-10-KA-EX-10-1-11911128-EX-10-1-Supply-Agreement__Effective Date",
+      "category": "Effective Date",
+      "relevant_total": 1,
+      "ranks_hit": [
+        3
+      ],
+      "reciprocal_rank": 0.3333,
+      "recall": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.5,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 82.13,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 77.669,
+        "dense_ms": 2.39,
+        "lexical_ms": 1.705,
+        "fusion_ms": 0.126,
+        "rerank_ms": 0.0,
+        "total_ms": 81.89,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "AgapeAtpCorp-20191202-10-KA-EX-10-1-11911128-EX-10-1-Supply-Agreement__Expiration Date",
+      "category": "Expiration Date",
+      "relevant_total": 1,
+      "ranks_hit": [
+        2
+      ],
+      "reciprocal_rank": 0.5,
+      "recall": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.6309,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 82.54,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 77.935,
+        "dense_ms": 2.483,
+        "lexical_ms": 1.817,
+        "fusion_ms": 0.081,
+        "rerank_ms": 0.0,
+        "total_ms": 82.316,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "AgapeAtpCorp-20191202-10-KA-EX-10-1-11911128-EX-10-1-Supply-Agreement__Notice Period To Terminate Renewal",
+      "category": "Notice Period To Terminate Renewal",
+      "relevant_total": 1,
+      "ranks_hit": [
+        1
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 1.0,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 84.01,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": "How much notice must be given to stop the agreement renewing? automatic renewal renewal term evergreen",
+        "embed_ms": 78.358,
+        "dense_ms": 2.455,
+        "lexical_ms": 2.891,
+        "fusion_ms": 0.086,
+        "rerank_ms": 0.0,
+        "total_ms": 83.79,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "AgapeAtpCorp-20191202-10-KA-EX-10-1-11911128-EX-10-1-Supply-Agreement__Renewal Term",
+      "category": "Renewal Term",
+      "relevant_total": 1,
+      "ranks_hit": [
+        1
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 1.0,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 83.64,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": "Does this agreement renew automatically, and for how long is each renewal term? automatic renewal evergreen",
+        "embed_ms": 79.054,
+        "dense_ms": 2.141,
+        "lexical_ms": 2.094,
+        "fusion_ms": 0.086,
+        "rerank_ms": 0.0,
+        "total_ms": 83.374,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "Apollo-Endosurgery-Manufacturing-and-Supply-Agreement__Notice Period To Terminate Renewal",
+      "category": "Notice Period To Terminate Renewal",
+      "relevant_total": 1,
+      "ranks_hit": [
+        1
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 1.0,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 85.89,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": "How much notice must be given to stop the agreement renewing? automatic renewal renewal term evergreen",
+        "embed_ms": 80.201,
+        "dense_ms": 2.58,
+        "lexical_ms": 2.789,
+        "fusion_ms": 0.097,
+        "rerank_ms": 0.0,
+        "total_ms": 85.668,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "Apollo-Endosurgery-Manufacturing-and-Supply-Agreement__Renewal Term",
+      "category": "Renewal Term",
+      "relevant_total": 1,
+      "ranks_hit": [
+        1
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 1.0,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 86.22,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": "Does this agreement renew automatically, and for how long is each renewal term? automatic renewal evergreen",
+        "embed_ms": 80.231,
+        "dense_ms": 2.726,
+        "lexical_ms": 2.901,
+        "fusion_ms": 0.122,
+        "rerank_ms": 0.0,
+        "total_ms": 85.98,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "BELLRINGBRANDS-INC-02-07-2020-EX-10-18-MASTER-SUPPLY-AGREEMENT__Cap On Liability",
+      "category": "Cap On Liability",
+      "relevant_total": 3,
+      "ranks_hit": [
+        1,
+        4,
+        6
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 0.3333,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.8385,
+      "span_coverage": {
+        "3": 0.6623,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 84.11,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": "Is there a cap on liability, and what is the maximum amount either party can be held liable for? limitation of liability aggregate liability",
+        "embed_ms": 78.64,
+        "dense_ms": 2.421,
+        "lexical_ms": 2.686,
+        "fusion_ms": 0.099,
+        "rerank_ms": 0.0,
+        "total_ms": 83.846,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "BELLRINGBRANDS-INC-02-07-2020-EX-10-18-MASTER-SUPPLY-AGREEMENT__Effective Date",
+      "category": "Effective Date",
+      "relevant_total": 1,
+      "ranks_hit": [
+        8
+      ],
+      "reciprocal_rank": 0.125,
+      "recall": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.3155,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 1.0
+      },
+      "latency_ms": 81.05,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 76.292,
+        "dense_ms": 2.48,
+        "lexical_ms": 1.994,
+        "fusion_ms": 0.094,
+        "rerank_ms": 0.0,
+        "total_ms": 80.861,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "BELLRINGBRANDS-INC-02-07-2020-EX-10-18-MASTER-SUPPLY-AGREEMENT__Insurance",
+      "category": "Insurance",
+      "relevant_total": 3,
+      "ranks_hit": [
+        1,
+        2,
+        3
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 1.0,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 82.43,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": "What insurance is the supplier required to carry? insurance required certificate of insurance coverage",
+        "embed_ms": 77.537,
+        "dense_ms": 2.469,
+        "lexical_ms": 2.094,
+        "fusion_ms": 0.099,
+        "rerank_ms": 0.0,
+        "total_ms": 82.2,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "BELLRINGBRANDS-INC-02-07-2020-EX-10-18-MASTER-SUPPLY-AGREEMENT__Parties",
+      "category": "Parties",
+      "relevant_total": 1,
+      "ranks_hit": [],
+      "reciprocal_rank": 0.0,
+      "recall": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "ndcg_10": 0.0,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "latency_ms": 82.29,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 77.329,
+        "dense_ms": 2.587,
+        "lexical_ms": 2.068,
+        "fusion_ms": 0.108,
+        "rerank_ms": 0.0,
+        "total_ms": 82.092,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "BELLRINGBRANDS-INC-02-07-2020-EX-10-18-MASTER-SUPPLY-AGREEMENT__Uncapped Liability",
+      "category": "Uncapped Liability",
+      "relevant_total": 2,
+      "ranks_hit": [
+        2,
+        7
+      ],
+      "reciprocal_rank": 0.5,
+      "recall": {
+        "3": 0.5,
+        "6": 0.5,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.5912,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 86.64,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 82.238,
+        "dense_ms": 2.475,
+        "lexical_ms": 1.632,
+        "fusion_ms": 0.08,
+        "rerank_ms": 0.0,
+        "total_ms": 86.425,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "BIOFRONTERAAG-04-29-2019-EX-4-17-SUPPLY-AGREEMENT__Cap On Liability",
+      "category": "Cap On Liability",
+      "relevant_total": 3,
+      "ranks_hit": [
+        1,
+        10
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 0.3333,
+        "6": 0.3333,
+        "10": 0.6667
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.6049,
+      "span_coverage": {
+        "3": 0.611,
+        "6": 0.611,
+        "10": 0.611
+      },
+      "latency_ms": 86.12,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": "Is there a cap on liability, and what is the maximum amount either party can be held liable for? limitation of liability aggregate liability",
+        "embed_ms": 79.783,
+        "dense_ms": 2.553,
+        "lexical_ms": 3.366,
+        "fusion_ms": 0.101,
+        "rerank_ms": 0.0,
+        "total_ms": 85.803,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "BIOFRONTERAAG-04-29-2019-EX-4-17-SUPPLY-AGREEMENT__Exclusivity",
+      "category": "Exclusivity",
+      "relevant_total": 2,
+      "ranks_hit": [
+        1,
+        6
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 0.5,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.8316,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 84.86,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": "Is the supply or distribution arrangement exclusive? exclusivity sole distributor exclusive right",
+        "embed_ms": 79.284,
+        "dense_ms": 2.724,
+        "lexical_ms": 2.481,
+        "fusion_ms": 0.158,
+        "rerank_ms": 0.0,
+        "total_ms": 84.648,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "BIOFRONTERAAG-04-29-2019-EX-4-17-SUPPLY-AGREEMENT__Minimum Commitment",
+      "category": "Minimum Commitment",
+      "relevant_total": 1,
+      "ranks_hit": [
+        2
+      ],
+      "reciprocal_rank": 0.5,
+      "recall": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.6309,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 84.88,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 79.942,
+        "dense_ms": 2.635,
+        "lexical_ms": 1.965,
+        "fusion_ms": 0.088,
+        "rerank_ms": 0.0,
+        "total_ms": 84.629,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "BNLFINANCIALCORP-03-30-2007-EX-10-8-OUTSOURCING-AGREEMENT__Anti-Assignment",
+      "category": "Anti-Assignment",
+      "relevant_total": 2,
+      "ranks_hit": [
+        2,
+        3
+      ],
+      "reciprocal_rank": 0.5,
+      "recall": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.6934,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 84.04,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": "Can this agreement be assigned or transferred to another party? assignment anti-assignment",
+        "embed_ms": 78.692,
+        "dense_ms": 2.417,
+        "lexical_ms": 2.602,
+        "fusion_ms": 0.101,
+        "rerank_ms": 0.0,
+        "total_ms": 83.812,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "BNLFINANCIALCORP-03-30-2007-EX-10-8-OUTSOURCING-AGREEMENT__Cap On Liability",
+      "category": "Cap On Liability",
+      "relevant_total": 7,
+      "ranks_hit": [
+        1,
+        2,
+        4,
+        6,
+        7,
+        9
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 0.2857,
+        "6": 0.5714,
+        "10": 0.8571
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.839,
+      "span_coverage": {
+        "3": 0.4747,
+        "6": 0.8924,
+        "10": 0.9506
+      },
+      "latency_ms": 85.6,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": "Is there a cap on liability, and what is the maximum amount either party can be held liable for? limitation of liability aggregate liability",
+        "embed_ms": 79.941,
+        "dense_ms": 2.58,
+        "lexical_ms": 2.687,
+        "fusion_ms": 0.096,
+        "rerank_ms": 0.0,
+        "total_ms": 85.305,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "BNLFINANCIALCORP-03-30-2007-EX-10-8-OUTSOURCING-AGREEMENT__Governing Law",
+      "category": "Governing Law",
+      "relevant_total": 1,
+      "ranks_hit": [
+        1
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 1.0,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 82.87,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": "Which law governs this agreement? governing law applicable law choice of law",
+        "embed_ms": 77.891,
+        "dense_ms": 2.39,
+        "lexical_ms": 2.285,
+        "fusion_ms": 0.105,
+        "rerank_ms": 0.0,
+        "total_ms": 82.671,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "BNLFINANCIALCORP-03-30-2007-EX-10-8-OUTSOURCING-AGREEMENT__Insurance",
+      "category": "Insurance",
+      "relevant_total": 3,
+      "ranks_hit": [
+        1,
+        7,
+        10
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 0.3333,
+        "6": 0.3333,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.7614,
+      "span_coverage": {
+        "3": 0.6433,
+        "6": 0.6433,
+        "10": 1.0
+      },
+      "latency_ms": 85.16,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": "What insurance is the supplier required to carry? insurance required certificate of insurance coverage",
+        "embed_ms": 80.568,
+        "dense_ms": 2.625,
+        "lexical_ms": 1.696,
+        "fusion_ms": 0.08,
+        "rerank_ms": 0.0,
+        "total_ms": 84.969,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "BNLFINANCIALCORP-03-30-2007-EX-10-8-OUTSOURCING-AGREEMENT__Liquidated Damages",
+      "category": "Liquidated Damages",
+      "relevant_total": 1,
+      "ranks_hit": [],
+      "reciprocal_rank": 0.0,
+      "recall": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "ndcg_10": 0.0,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "latency_ms": 85.51,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": "What liquidated damages or penalties apply if a party fails to perform? service credit remedy",
+        "embed_ms": 80.211,
+        "dense_ms": 2.314,
+        "lexical_ms": 2.677,
+        "fusion_ms": 0.093,
+        "rerank_ms": 0.0,
+        "total_ms": 85.294,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "BNLFINANCIALCORP-03-30-2007-EX-10-8-OUTSOURCING-AGREEMENT__Price Restrictions",
+      "category": "Price Restrictions",
+      "relevant_total": 2,
+      "ranks_hit": [
+        3
+      ],
+      "reciprocal_rank": 0.3333,
+      "recall": {
+        "3": 0.5,
+        "6": 0.5,
+        "10": 0.5
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.3066,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 85.12,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 80.973,
+        "dense_ms": 2.596,
+        "lexical_ms": 1.274,
+        "fusion_ms": 0.078,
+        "rerank_ms": 0.0,
+        "total_ms": 84.92,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "BNLFINANCIALCORP-03-30-2007-EX-10-8-OUTSOURCING-AGREEMENT__Volume Restriction",
+      "category": "Volume Restriction",
+      "relevant_total": 1,
+      "ranks_hit": [],
+      "reciprocal_rank": 0.0,
+      "recall": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "ndcg_10": 0.0,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "latency_ms": 82.44,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 78.203,
+        "dense_ms": 2.411,
+        "lexical_ms": 1.483,
+        "fusion_ms": 0.127,
+        "rerank_ms": 0.0,
+        "total_ms": 82.224,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "CCAINDUSTRIESINC-04-14-2014-EX-10-1-OUTSOURCING-AGREEMENT__Liquidated Damages",
+      "category": "Liquidated Damages",
+      "relevant_total": 3,
+      "ranks_hit": [
+        2,
+        5
+      ],
+      "reciprocal_rank": 0.5,
+      "recall": {
+        "3": 0.3333,
+        "6": 0.6667,
+        "10": 0.6667
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.4776,
+      "span_coverage": {
+        "3": 0.5344,
+        "6": 0.5905,
+        "10": 0.5905
+      },
+      "latency_ms": 85.54,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": "What liquidated damages or penalties apply if a party fails to perform? service credit remedy",
+        "embed_ms": 80.158,
+        "dense_ms": 2.39,
+        "lexical_ms": 2.572,
+        "fusion_ms": 0.119,
+        "rerank_ms": 0.0,
+        "total_ms": 85.239,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "CCAINDUSTRIESINC-04-14-2014-EX-10-1-OUTSOURCING-AGREEMENT__Renewal Term",
+      "category": "Renewal Term",
+      "relevant_total": 1,
+      "ranks_hit": [
+        1
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 1.0,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 83.14,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": "Does this agreement renew automatically, and for how long is each renewal term? automatic renewal evergreen",
+        "embed_ms": 78.035,
+        "dense_ms": 2.461,
+        "lexical_ms": 2.208,
+        "fusion_ms": 0.107,
+        "rerank_ms": 0.0,
+        "total_ms": 82.811,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "CCAINDUSTRIESINC-04-14-2014-EX-10-1-OUTSOURCING-AGREEMENT__Revenue/Profit Sharing",
+      "category": "Revenue/Profit Sharing",
+      "relevant_total": 2,
+      "ranks_hit": [],
+      "reciprocal_rank": 0.0,
+      "recall": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "ndcg_10": 0.0,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "latency_ms": 83.46,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 78.879,
+        "dense_ms": 2.535,
+        "lexical_ms": 1.685,
+        "fusion_ms": 0.141,
+        "rerank_ms": 0.0,
+        "total_ms": 83.241,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "ELANDIAINTERNATIONALINC-04-25-2007-EX-10-21-Outsourcing-Agreement__Expiration Date",
+      "category": "Expiration Date",
+      "relevant_total": 1,
+      "ranks_hit": [
+        4
+      ],
+      "reciprocal_rank": 0.25,
+      "recall": {
+        "3": 0.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.4307,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 86.62,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 81.054,
+        "dense_ms": 2.822,
+        "lexical_ms": 2.424,
+        "fusion_ms": 0.103,
+        "rerank_ms": 0.0,
+        "total_ms": 86.404,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "ELANDIAINTERNATIONALINC-04-25-2007-EX-10-21-Outsourcing-Agreement__Liquidated Damages",
+      "category": "Liquidated Damages",
+      "relevant_total": 1,
+      "ranks_hit": [],
+      "reciprocal_rank": 0.0,
+      "recall": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "ndcg_10": 0.0,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "latency_ms": 89.15,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": "What liquidated damages or penalties apply if a party fails to perform? service credit remedy",
+        "embed_ms": 81.964,
+        "dense_ms": 2.86,
+        "lexical_ms": 3.992,
+        "fusion_ms": 0.103,
+        "rerank_ms": 0.0,
+        "total_ms": 88.919,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "ELANDIAINTERNATIONALINC-04-25-2007-EX-10-21-Outsourcing-Agreement__Price Restrictions",
+      "category": "Price Restrictions",
+      "relevant_total": 1,
+      "ranks_hit": [],
+      "reciprocal_rank": 0.0,
+      "recall": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "ndcg_10": 0.0,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "latency_ms": 80.06,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 74.799,
+        "dense_ms": 2.681,
+        "lexical_ms": 2.271,
+        "fusion_ms": 0.117,
+        "rerank_ms": 0.0,
+        "total_ms": 79.868,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "ELANDIAINTERNATIONALINC-04-25-2007-EX-10-21-Outsourcing-Agreement__Termination For Convenience",
+      "category": "Termination For Convenience",
+      "relevant_total": 1,
+      "ranks_hit": [
+        1
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 1.0,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 83.19,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": "Can either party terminate this agreement for convenience, and on what notice? notice period notice to terminate termination for convenience",
+        "embed_ms": 76.526,
+        "dense_ms": 2.893,
+        "lexical_ms": 3.426,
+        "fusion_ms": 0.098,
+        "rerank_ms": 0.0,
+        "total_ms": 82.943,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "ENERGOUSCORP-03-16-2017-EX-10-24-STRATEGIC-ALLIANCE-AGREEMENT__Audit Rights",
+      "category": "Audit Rights",
+      "relevant_total": 2,
+      "ranks_hit": [
+        1,
+        2
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 1.0,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 83.21,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": "What audit rights does the buyer have over the supplier's records? inspect records books and records",
+        "embed_ms": 77.338,
+        "dense_ms": 2.898,
+        "lexical_ms": 2.658,
+        "fusion_ms": 0.096,
+        "rerank_ms": 0.0,
+        "total_ms": 82.991,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "ENERGOUSCORP-03-16-2017-EX-10-24-STRATEGIC-ALLIANCE-AGREEMENT__Expiration Date",
+      "category": "Expiration Date",
+      "relevant_total": 1,
+      "ranks_hit": [
+        10
+      ],
+      "reciprocal_rank": 0.1,
+      "recall": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.2891,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 1.0
+      },
+      "latency_ms": 86.84,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 81.833,
+        "dense_ms": 2.706,
+        "lexical_ms": 2.006,
+        "fusion_ms": 0.108,
+        "rerank_ms": 0.0,
+        "total_ms": 86.654,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "ENERGYXXILTD-05-08-2015-EX-10-13-Transportation-AGREEMENT__Effective Date",
+      "category": "Effective Date",
+      "relevant_total": 1,
+      "ranks_hit": [
+        6
+      ],
+      "reciprocal_rank": 0.1667,
+      "recall": {
+        "3": 0.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.3562,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 82.42,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 77.385,
+        "dense_ms": 2.583,
+        "lexical_ms": 2.175,
+        "fusion_ms": 0.091,
+        "rerank_ms": 0.0,
+        "total_ms": 82.235,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "ENERGYXXILTD-05-08-2015-EX-10-13-Transportation-AGREEMENT__Governing Law",
+      "category": "Governing Law",
+      "relevant_total": 2,
+      "ranks_hit": [
+        1,
+        2
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 1.0,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 82.54,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": "Which law governs this agreement? governing law applicable law choice of law",
+        "embed_ms": 77.455,
+        "dense_ms": 2.538,
+        "lexical_ms": 2.252,
+        "fusion_ms": 0.101,
+        "rerank_ms": 0.0,
+        "total_ms": 82.346,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "ENERGYXXILTD-05-08-2015-EX-10-13-Transportation-AGREEMENT__Minimum Commitment",
+      "category": "Minimum Commitment",
+      "relevant_total": 1,
+      "ranks_hit": [
+        2
+      ],
+      "reciprocal_rank": 0.5,
+      "recall": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.6309,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 84.32,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 79.57,
+        "dense_ms": 2.63,
+        "lexical_ms": 1.809,
+        "fusion_ms": 0.095,
+        "rerank_ms": 0.0,
+        "total_ms": 84.105,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "ENERGYXXILTD-05-08-2015-EX-10-13-Transportation-AGREEMENT__Volume Restriction",
+      "category": "Volume Restriction",
+      "relevant_total": 7,
+      "ranks_hit": [],
+      "reciprocal_rank": 0.0,
+      "recall": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "ndcg_10": 0.0,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "latency_ms": 81.63,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 76.995,
+        "dense_ms": 2.554,
+        "lexical_ms": 1.754,
+        "fusion_ms": 0.086,
+        "rerank_ms": 0.0,
+        "total_ms": 81.39,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "EUROPEANMICROHOLDINGSINC-03-06-1998-EX-10-6-DISTRIBUTOR-AGREEMENT__Anti-Assignment",
+      "category": "Anti-Assignment",
+      "relevant_total": 4,
+      "ranks_hit": [
+        1,
+        2,
+        5,
+        7
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 0.5,
+        "6": 0.75,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.9178,
+      "span_coverage": {
+        "3": 0.9808,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 85.84,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": "Can this agreement be assigned or transferred to another party? assignment anti-assignment",
+        "embed_ms": 80.095,
+        "dense_ms": 2.783,
+        "lexical_ms": 2.635,
+        "fusion_ms": 0.099,
+        "rerank_ms": 0.0,
+        "total_ms": 85.613,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "EUROPEANMICROHOLDINGSINC-03-06-1998-EX-10-6-DISTRIBUTOR-AGREEMENT__Liquidated Damages",
+      "category": "Liquidated Damages",
+      "relevant_total": 2,
+      "ranks_hit": [
+        1,
+        3
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.9197,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 83.56,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": "What liquidated damages or penalties apply if a party fails to perform? service credit remedy",
+        "embed_ms": 77.931,
+        "dense_ms": 2.569,
+        "lexical_ms": 2.737,
+        "fusion_ms": 0.098,
+        "rerank_ms": 0.0,
+        "total_ms": 83.335,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "EUROPEANMICROHOLDINGSINC-03-06-1998-EX-10-6-DISTRIBUTOR-AGREEMENT__Uncapped Liability",
+      "category": "Uncapped Liability",
+      "relevant_total": 2,
+      "ranks_hit": [
+        1,
+        3
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.9197,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 83.74,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 79.3,
+        "dense_ms": 2.636,
+        "lexical_ms": 1.521,
+        "fusion_ms": 0.071,
+        "rerank_ms": 0.0,
+        "total_ms": 83.528,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "FTENETWORKS-INC-02-18-2016-EX-99-4-STRATEGIC-ALLIANCE-AGREEMENT__Liquidated Damages",
+      "category": "Liquidated Damages",
+      "relevant_total": 1,
+      "ranks_hit": [
+        4
+      ],
+      "reciprocal_rank": 0.25,
+      "recall": {
+        "3": 0.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.4307,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 84.62,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": "What liquidated damages or penalties apply if a party fails to perform? service credit remedy",
+        "embed_ms": 79.117,
+        "dense_ms": 2.398,
+        "lexical_ms": 2.796,
+        "fusion_ms": 0.099,
+        "rerank_ms": 0.0,
+        "total_ms": 84.411,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "FTENETWORKS-INC-02-18-2016-EX-99-4-STRATEGIC-ALLIANCE-AGREEMENT__Termination For Convenience",
+      "category": "Termination For Convenience",
+      "relevant_total": 2,
+      "ranks_hit": [
+        1,
+        2
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 1.0,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 85.93,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": "Can either party terminate this agreement for convenience, and on what notice? notice period notice to terminate termination for convenience",
+        "embed_ms": 80.583,
+        "dense_ms": 2.591,
+        "lexical_ms": 2.414,
+        "fusion_ms": 0.116,
+        "rerank_ms": 0.0,
+        "total_ms": 85.704,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "GentechHoldingsInc-20190808-1-A-EX1A-6-MAT-CTRCT-11776814-EX1A-6-MAT-CTRCT-Distr__Price Restrictions",
+      "category": "Price Restrictions",
+      "relevant_total": 3,
+      "ranks_hit": [
+        1,
+        2,
+        3
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 1.0,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 83.89,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 79.744,
+        "dense_ms": 2.476,
+        "lexical_ms": 1.402,
+        "fusion_ms": 0.072,
+        "rerank_ms": 0.0,
+        "total_ms": 83.694,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "GentechHoldingsInc-20190808-1-A-EX1A-6-MAT-CTRCT-11776814-EX1A-6-MAT-CTRCT-Distr__Warranty Duration",
+      "category": "Warranty Duration",
+      "relevant_total": 1,
+      "ranks_hit": [
+        6
+      ],
+      "reciprocal_rank": 0.1667,
+      "recall": {
+        "3": 0.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.3562,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 83.36,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": "How long does the warranty last? warranty period warranty duration defect liability",
+        "embed_ms": 79.008,
+        "dense_ms": 2.416,
+        "lexical_ms": 1.673,
+        "fusion_ms": 0.08,
+        "rerank_ms": 0.0,
+        "total_ms": 83.178,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "ICORECONNECTINC-10-13-2010-EX-7-1-Strategic-Alliance-Agreement__Notice Period To Terminate Renewal",
+      "category": "Notice Period To Terminate Renewal",
+      "relevant_total": 2,
+      "ranks_hit": [
+        1,
+        2
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 1.0,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 85.54,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": "How much notice must be given to stop the agreement renewing? automatic renewal renewal term evergreen",
+        "embed_ms": 80.524,
+        "dense_ms": 2.431,
+        "lexical_ms": 2.28,
+        "fusion_ms": 0.087,
+        "rerank_ms": 0.0,
+        "total_ms": 85.322,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "ICORECONNECTINC-10-13-2010-EX-7-1-Strategic-Alliance-Agreement__Revenue/Profit Sharing",
+      "category": "Revenue/Profit Sharing",
+      "relevant_total": 5,
+      "ranks_hit": [
+        5
+      ],
+      "reciprocal_rank": 0.2,
+      "recall": {
+        "3": 0.0,
+        "6": 0.2,
+        "10": 0.2
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.1312,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.1262,
+        "10": 0.1262
+      },
+      "latency_ms": 82.53,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 77.798,
+        "dense_ms": 2.463,
+        "lexical_ms": 1.947,
+        "fusion_ms": 0.088,
+        "rerank_ms": 0.0,
+        "total_ms": 82.296,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "ICORECONNECTINC-10-13-2010-EX-7-1-Strategic-Alliance-Agreement__Termination For Convenience",
+      "category": "Termination For Convenience",
+      "relevant_total": 1,
+      "ranks_hit": [
+        1
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 1.0,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 82.27,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": "Can either party terminate this agreement for convenience, and on what notice? notice period notice to terminate termination for convenience",
+        "embed_ms": 76.905,
+        "dense_ms": 2.723,
+        "lexical_ms": 2.273,
+        "fusion_ms": 0.131,
+        "rerank_ms": 0.0,
+        "total_ms": 82.032,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "InmodeLtd-20190729-F-1A-EX-10-9-11743243-EX-10-9-Manufacturing-Agreement__Insurance",
+      "category": "Insurance",
+      "relevant_total": 1,
+      "ranks_hit": [
+        1
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 1.0,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 82.34,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": "What insurance is the supplier required to carry? insurance required certificate of insurance coverage",
+        "embed_ms": 77.909,
+        "dense_ms": 2.466,
+        "lexical_ms": 1.68,
+        "fusion_ms": 0.083,
+        "rerank_ms": 0.0,
+        "total_ms": 82.138,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "InmodeLtd-20190729-F-1A-EX-10-9-11743243-EX-10-9-Manufacturing-Agreement__Minimum Commitment",
+      "category": "Minimum Commitment",
+      "relevant_total": 2,
+      "ranks_hit": [
+        1,
+        4
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 0.5,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.8772,
+      "span_coverage": {
+        "3": 0.6044,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 79.55,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 74.742,
+        "dense_ms": 2.51,
+        "lexical_ms": 1.944,
+        "fusion_ms": 0.078,
+        "rerank_ms": 0.0,
+        "total_ms": 79.274,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "InmodeLtd-20190729-F-1A-EX-10-9-11743243-EX-10-9-Manufacturing-Agreement__Notice Period To Terminate Renewal",
+      "category": "Notice Period To Terminate Renewal",
+      "relevant_total": 2,
+      "ranks_hit": [
+        1,
+        2
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 1.0,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 82.0,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": "How much notice must be given to stop the agreement renewing? automatic renewal renewal term evergreen",
+        "embed_ms": 76.634,
+        "dense_ms": 2.381,
+        "lexical_ms": 2.613,
+        "fusion_ms": 0.098,
+        "rerank_ms": 0.0,
+        "total_ms": 81.726,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "InmodeLtd-20190729-F-1A-EX-10-9-11743243-EX-10-9-Manufacturing-Agreement__Parties",
+      "category": "Parties",
+      "relevant_total": 1,
+      "ranks_hit": [],
+      "reciprocal_rank": 0.0,
+      "recall": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "ndcg_10": 0.0,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "latency_ms": 80.96,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 76.231,
+        "dense_ms": 2.479,
+        "lexical_ms": 1.873,
+        "fusion_ms": 0.115,
+        "rerank_ms": 0.0,
+        "total_ms": 80.697,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "InmodeLtd-20190729-F-1A-EX-10-9-11743243-EX-10-9-Manufacturing-Agreement__Post-Termination Services",
+      "category": "Post-Termination Services",
+      "relevant_total": 1,
+      "ranks_hit": [],
+      "reciprocal_rank": 0.0,
+      "recall": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "ndcg_10": 0.0,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "latency_ms": 80.98,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 76.289,
+        "dense_ms": 2.434,
+        "lexical_ms": 1.95,
+        "fusion_ms": 0.1,
+        "rerank_ms": 0.0,
+        "total_ms": 80.773,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "InmodeLtd-20190729-F-1A-EX-10-9-11743243-EX-10-9-Manufacturing-Agreement__Termination For Convenience",
+      "category": "Termination For Convenience",
+      "relevant_total": 1,
+      "ranks_hit": [
+        1
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 1.0,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 82.26,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": "Can either party terminate this agreement for convenience, and on what notice? notice period notice to terminate termination for convenience",
+        "embed_ms": 76.914,
+        "dense_ms": 2.372,
+        "lexical_ms": 2.597,
+        "fusion_ms": 0.094,
+        "rerank_ms": 0.0,
+        "total_ms": 81.977,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "IpassInc-20181203-8-K-EX-99-1-11445874-EX-99-1-Reseller-Agreement__Exclusivity",
+      "category": "Exclusivity",
+      "relevant_total": 2,
+      "ranks_hit": [
+        2
+      ],
+      "reciprocal_rank": 0.5,
+      "recall": {
+        "3": 0.5,
+        "6": 0.5,
+        "10": 0.5
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.3869,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 80.3,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": "Is the supply or distribution arrangement exclusive? exclusivity sole distributor exclusive right",
+        "embed_ms": 74.986,
+        "dense_ms": 2.571,
+        "lexical_ms": 2.188,
+        "fusion_ms": 0.153,
+        "rerank_ms": 0.0,
+        "total_ms": 79.898,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "IpassInc-20181203-8-K-EX-99-1-11445874-EX-99-1-Reseller-Agreement__Uncapped Liability",
+      "category": "Uncapped Liability",
+      "relevant_total": 1,
+      "ranks_hit": [
+        4
+      ],
+      "reciprocal_rank": 0.25,
+      "recall": {
+        "3": 0.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.4307,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 81.26,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 76.295,
+        "dense_ms": 2.925,
+        "lexical_ms": 1.695,
+        "fusion_ms": 0.077,
+        "rerank_ms": 0.0,
+        "total_ms": 80.991,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "IpassInc-20181203-8-K-EX-99-1-11445874-EX-99-1-Reseller-Agreement__Volume Restriction",
+      "category": "Volume Restriction",
+      "relevant_total": 1,
+      "ranks_hit": [
+        8
+      ],
+      "reciprocal_rank": 0.125,
+      "recall": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.3155,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 1.0
+      },
+      "latency_ms": 86.77,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 81.771,
+        "dense_ms": 2.593,
+        "lexical_ms": 2.065,
+        "fusion_ms": 0.091,
+        "rerank_ms": 0.0,
+        "total_ms": 86.52,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "KALLOINC-11-03-2011-EX-10-1-STRATEGIC-ALLIANCE-AGREEMENT__Cap On Liability",
+      "category": "Cap On Liability",
+      "relevant_total": 1,
+      "ranks_hit": [
+        1
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 1.0,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 83.67,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": "Is there a cap on liability, and what is the maximum amount either party can be held liable for? limitation of liability aggregate liability",
+        "embed_ms": 77.739,
+        "dense_ms": 2.686,
+        "lexical_ms": 2.87,
+        "fusion_ms": 0.101,
+        "rerank_ms": 0.0,
+        "total_ms": 83.396,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "KALLOINC-11-03-2011-EX-10-1-STRATEGIC-ALLIANCE-AGREEMENT__Exclusivity",
+      "category": "Exclusivity",
+      "relevant_total": 1,
+      "ranks_hit": [
+        4
+      ],
+      "reciprocal_rank": 0.25,
+      "recall": {
+        "3": 0.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.4307,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 81.25,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": "Is the supply or distribution arrangement exclusive? exclusivity sole distributor exclusive right",
+        "embed_ms": 75.841,
+        "dense_ms": 2.627,
+        "lexical_ms": 2.463,
+        "fusion_ms": 0.101,
+        "rerank_ms": 0.0,
+        "total_ms": 81.032,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "KALLOINC-11-03-2011-EX-10-1-STRATEGIC-ALLIANCE-AGREEMENT__Governing Law",
+      "category": "Governing Law",
+      "relevant_total": 1,
+      "ranks_hit": [
+        2
+      ],
+      "reciprocal_rank": 0.5,
+      "recall": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.6309,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 81.09,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": "Which law governs this agreement? governing law applicable law choice of law",
+        "embed_ms": 75.81,
+        "dense_ms": 2.611,
+        "lexical_ms": 2.375,
+        "fusion_ms": 0.099,
+        "rerank_ms": 0.0,
+        "total_ms": 80.895,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "KALLOINC-11-03-2011-EX-10-1-STRATEGIC-ALLIANCE-AGREEMENT__Insurance",
+      "category": "Insurance",
+      "relevant_total": 1,
+      "ranks_hit": [
+        1
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 1.0,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 81.65,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": "What insurance is the supplier required to carry? insurance required certificate of insurance coverage",
+        "embed_ms": 76.39,
+        "dense_ms": 2.546,
+        "lexical_ms": 2.374,
+        "fusion_ms": 0.11,
+        "rerank_ms": 0.0,
+        "total_ms": 81.421,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "LIMEENERGYCO-09-09-1999-EX-10-DISTRIBUTOR-AGREEMENT__Post-Termination Services",
+      "category": "Post-Termination Services",
+      "relevant_total": 3,
+      "ranks_hit": [
+        1
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 0.3333,
+        "6": 0.3333,
+        "10": 0.3333
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.4693,
+      "span_coverage": {
+        "3": 0.35,
+        "6": 0.35,
+        "10": 0.35
+      },
+      "latency_ms": 82.44,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 77.689,
+        "dense_ms": 2.37,
+        "lexical_ms": 2.066,
+        "fusion_ms": 0.102,
+        "rerank_ms": 0.0,
+        "total_ms": 82.226,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "LIMEENERGYCO-09-09-1999-EX-10-DISTRIBUTOR-AGREEMENT__Price Restrictions",
+      "category": "Price Restrictions",
+      "relevant_total": 3,
+      "ranks_hit": [
+        1,
+        3,
+        4
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 0.6667,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.906,
+      "span_coverage": {
+        "3": 0.8776,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 80.38,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 76.253,
+        "dense_ms": 2.34,
+        "lexical_ms": 1.52,
+        "fusion_ms": 0.081,
+        "rerank_ms": 0.0,
+        "total_ms": 80.195,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "MEDIWOUNDLTD-01-15-2014-EX-10-6-SUPPLY-AGREEMENT__Anti-Assignment",
+      "category": "Anti-Assignment",
+      "relevant_total": 1,
+      "ranks_hit": [
+        1
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 1.0,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 81.83,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": "Can this agreement be assigned or transferred to another party? assignment anti-assignment",
+        "embed_ms": 76.46,
+        "dense_ms": 2.569,
+        "lexical_ms": 2.497,
+        "fusion_ms": 0.094,
+        "rerank_ms": 0.0,
+        "total_ms": 81.621,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "MEDIWOUNDLTD-01-15-2014-EX-10-6-SUPPLY-AGREEMENT__Governing Law",
+      "category": "Governing Law",
+      "relevant_total": 1,
+      "ranks_hit": [
+        1
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 1.0,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 80.37,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": "Which law governs this agreement? governing law applicable law choice of law",
+        "embed_ms": 75.339,
+        "dense_ms": 2.512,
+        "lexical_ms": 2.234,
+        "fusion_ms": 0.092,
+        "rerank_ms": 0.0,
+        "total_ms": 80.177,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "MEDIWOUNDLTD-01-15-2014-EX-10-6-SUPPLY-AGREEMENT__Volume Restriction",
+      "category": "Volume Restriction",
+      "relevant_total": 2,
+      "ranks_hit": [
+        1,
+        3
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.9197,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 79.79,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 75.22,
+        "dense_ms": 2.468,
+        "lexical_ms": 1.727,
+        "fusion_ms": 0.084,
+        "rerank_ms": 0.0,
+        "total_ms": 79.499,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "MEDIWOUNDLTD-01-15-2014-EX-10-6-SUPPLY-AGREEMENT__Warranty Duration",
+      "category": "Warranty Duration",
+      "relevant_total": 1,
+      "ranks_hit": [],
+      "reciprocal_rank": 0.0,
+      "recall": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "ndcg_10": 0.0,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "latency_ms": 80.26,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": "How long does the warranty last? warranty period warranty duration defect liability",
+        "embed_ms": 75.617,
+        "dense_ms": 2.531,
+        "lexical_ms": 1.746,
+        "fusion_ms": 0.131,
+        "rerank_ms": 0.0,
+        "total_ms": 80.024,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "NEOMEDIATECHNOLOGIESINC-12-15-2005-EX-16-1-DISTRIBUTOR-AGREEMENT__Cap On Liability",
+      "category": "Cap On Liability",
+      "relevant_total": 4,
+      "ranks_hit": [
+        5,
+        7,
+        10
+      ],
+      "reciprocal_rank": 0.2,
+      "recall": {
+        "3": 0.0,
+        "6": 0.25,
+        "10": 0.75
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.394,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.3816,
+        "10": 0.9134
+      },
+      "latency_ms": 81.81,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": "Is there a cap on liability, and what is the maximum amount either party can be held liable for? limitation of liability aggregate liability",
+        "embed_ms": 76.65,
+        "dense_ms": 2.491,
+        "lexical_ms": 2.26,
+        "fusion_ms": 0.101,
+        "rerank_ms": 0.0,
+        "total_ms": 81.503,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "NEOMEDIATECHNOLOGIESINC-12-15-2005-EX-16-1-DISTRIBUTOR-AGREEMENT__Exclusivity",
+      "category": "Exclusivity",
+      "relevant_total": 1,
+      "ranks_hit": [
+        9
+      ],
+      "reciprocal_rank": 0.1111,
+      "recall": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.301,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 1.0
+      },
+      "latency_ms": 83.34,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": "Is the supply or distribution arrangement exclusive? exclusivity sole distributor exclusive right",
+        "embed_ms": 78.397,
+        "dense_ms": 2.436,
+        "lexical_ms": 2.197,
+        "fusion_ms": 0.094,
+        "rerank_ms": 0.0,
+        "total_ms": 83.124,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "NEOMEDIATECHNOLOGIESINC-12-15-2005-EX-16-1-DISTRIBUTOR-AGREEMENT__Minimum Commitment",
+      "category": "Minimum Commitment",
+      "relevant_total": 1,
+      "ranks_hit": [],
+      "reciprocal_rank": 0.0,
+      "recall": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "ndcg_10": 0.0,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "latency_ms": 80.28,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 75.765,
+        "dense_ms": 2.514,
+        "lexical_ms": 1.653,
+        "fusion_ms": 0.079,
+        "rerank_ms": 0.0,
+        "total_ms": 80.011,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "NEOMEDIATECHNOLOGIESINC-12-15-2005-EX-16-1-DISTRIBUTOR-AGREEMENT__Parties",
+      "category": "Parties",
+      "relevant_total": 1,
+      "ranks_hit": [],
+      "reciprocal_rank": 0.0,
+      "recall": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "ndcg_10": 0.0,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "latency_ms": 81.61,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 76.999,
+        "dense_ms": 2.421,
+        "lexical_ms": 1.854,
+        "fusion_ms": 0.09,
+        "rerank_ms": 0.0,
+        "total_ms": 81.364,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "NEONSYSTEMSINC-03-01-1999-EX-10-5-DISTRIBUTOR-AGREEMENT-New__Anti-Assignment",
+      "category": "Anti-Assignment",
+      "relevant_total": 2,
+      "ranks_hit": [
+        1,
+        5
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 0.5,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.8503,
+      "span_coverage": {
+        "3": 0.4371,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 81.48,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": "Can this agreement be assigned or transferred to another party? assignment anti-assignment",
+        "embed_ms": 75.703,
+        "dense_ms": 2.88,
+        "lexical_ms": 2.599,
+        "fusion_ms": 0.101,
+        "rerank_ms": 0.0,
+        "total_ms": 81.283,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "NEONSYSTEMSINC-03-01-1999-EX-10-5-DISTRIBUTOR-AGREEMENT-New__Audit Rights",
+      "category": "Audit Rights",
+      "relevant_total": 2,
+      "ranks_hit": [
+        1,
+        4
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 0.5,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.8772,
+      "span_coverage": {
+        "3": 0.5601,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 81.5,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": "What audit rights does the buyer have over the supplier's records? inspect records books and records",
+        "embed_ms": 76.513,
+        "dense_ms": 2.441,
+        "lexical_ms": 2.226,
+        "fusion_ms": 0.102,
+        "rerank_ms": 0.0,
+        "total_ms": 81.282,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "NEONSYSTEMSINC-03-01-1999-EX-10-5-DISTRIBUTOR-AGREEMENT-New__Revenue/Profit Sharing",
+      "category": "Revenue/Profit Sharing",
+      "relevant_total": 2,
+      "ranks_hit": [],
+      "reciprocal_rank": 0.0,
+      "recall": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "ndcg_10": 0.0,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "latency_ms": 80.77,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 76.076,
+        "dense_ms": 2.522,
+        "lexical_ms": 1.842,
+        "fusion_ms": 0.104,
+        "rerank_ms": 0.0,
+        "total_ms": 80.545,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "OASYSMOBILE-INC-07-05-2001-EX-10-17-OUTSOURCING-AGREEMENT__Parties",
+      "category": "Parties",
+      "relevant_total": 4,
+      "ranks_hit": [],
+      "reciprocal_rank": 0.0,
+      "recall": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "ndcg_10": 0.0,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "latency_ms": 79.73,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 75.164,
+        "dense_ms": 2.466,
+        "lexical_ms": 1.817,
+        "fusion_ms": 0.1,
+        "rerank_ms": 0.0,
+        "total_ms": 79.547,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "SEASPINEHOLDINGSCORP-10-10-2018-EX-10-1-SUPPLY-AGREEMENT__Effective Date",
+      "category": "Effective Date",
+      "relevant_total": 1,
+      "ranks_hit": [],
+      "reciprocal_rank": 0.0,
+      "recall": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "ndcg_10": 0.0,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "latency_ms": 81.74,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 76.566,
+        "dense_ms": 2.73,
+        "lexical_ms": 2.151,
+        "fusion_ms": 0.107,
+        "rerank_ms": 0.0,
+        "total_ms": 81.554,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "SEASPINEHOLDINGSCORP-10-10-2018-EX-10-1-SUPPLY-AGREEMENT__Exclusivity",
+      "category": "Exclusivity",
+      "relevant_total": 2,
+      "ranks_hit": [
+        1,
+        9
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 0.5,
+        "6": 0.5,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.7977,
+      "span_coverage": {
+        "3": 0.6348,
+        "6": 0.6348,
+        "10": 1.0
+      },
+      "latency_ms": 82.76,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": "Is the supply or distribution arrangement exclusive? exclusivity sole distributor exclusive right",
+        "embed_ms": 76.834,
+        "dense_ms": 2.625,
+        "lexical_ms": 2.992,
+        "fusion_ms": 0.102,
+        "rerank_ms": 0.0,
+        "total_ms": 82.552,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "SEASPINEHOLDINGSCORP-10-10-2018-EX-10-1-SUPPLY-AGREEMENT__Expiration Date",
+      "category": "Expiration Date",
+      "relevant_total": 1,
+      "ranks_hit": [
+        5
+      ],
+      "reciprocal_rank": 0.2,
+      "recall": {
+        "3": 0.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.3869,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 81.06,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 76.405,
+        "dense_ms": 2.486,
+        "lexical_ms": 1.892,
+        "fusion_ms": 0.1,
+        "rerank_ms": 0.0,
+        "total_ms": 80.883,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "SEASPINEHOLDINGSCORP-10-10-2018-EX-10-1-SUPPLY-AGREEMENT__Revenue/Profit Sharing",
+      "category": "Revenue/Profit Sharing",
+      "relevant_total": 3,
+      "ranks_hit": [],
+      "reciprocal_rank": 0.0,
+      "recall": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "ndcg_10": 0.0,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "latency_ms": 82.0,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 77.034,
+        "dense_ms": 2.609,
+        "lexical_ms": 2.035,
+        "fusion_ms": 0.108,
+        "rerank_ms": 0.0,
+        "total_ms": 81.785,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "ScansourceInc-20190822-10-K-EX-10-38-11793958-EX-10-38-Distributor-Agreement1__Audit Rights",
+      "category": "Audit Rights",
+      "relevant_total": 1,
+      "ranks_hit": [
+        1
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 1.0,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 80.37,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": "What audit rights does the buyer have over the supplier's records? inspect records books and records",
+        "embed_ms": 75.138,
+        "dense_ms": 2.608,
+        "lexical_ms": 2.3,
+        "fusion_ms": 0.106,
+        "rerank_ms": 0.0,
+        "total_ms": 80.153,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "ScansourceInc-20190822-10-K-EX-10-38-11793958-EX-10-38-Distributor-Agreement1__Effective Date",
+      "category": "Effective Date",
+      "relevant_total": 2,
+      "ranks_hit": [
+        8
+      ],
+      "reciprocal_rank": 0.125,
+      "recall": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.5
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.1934,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.7576
+      },
+      "latency_ms": 80.21,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 75.083,
+        "dense_ms": 2.685,
+        "lexical_ms": 2.156,
+        "fusion_ms": 0.099,
+        "rerank_ms": 0.0,
+        "total_ms": 80.024,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "ScansourceInc-20190822-10-K-EX-10-38-11793958-EX-10-38-Distributor-Agreement1__Renewal Term",
+      "category": "Renewal Term",
+      "relevant_total": 1,
+      "ranks_hit": [
+        1
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 1.0,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 84.28,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": "Does this agreement renew automatically, and for how long is each renewal term? automatic renewal evergreen",
+        "embed_ms": 78.09,
+        "dense_ms": 2.763,
+        "lexical_ms": 3.069,
+        "fusion_ms": 0.105,
+        "rerank_ms": 0.0,
+        "total_ms": 84.027,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "ScansourceInc-20190822-10-K-EX-10-38-11793958-EX-10-38-Distributor-Agreement1__Uncapped Liability",
+      "category": "Uncapped Liability",
+      "relevant_total": 3,
+      "ranks_hit": [
+        1,
+        4,
+        8
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 0.3333,
+        "6": 0.6667,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.8194,
+      "span_coverage": {
+        "3": 0.6047,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 81.89,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 77.398,
+        "dense_ms": 2.619,
+        "lexical_ms": 1.583,
+        "fusion_ms": 0.077,
+        "rerank_ms": 0.0,
+        "total_ms": 81.676,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "TodosMedicalLtd-20190328-20-F-EX-4-10-11587157-EX-4-10-Marketing-Agreement-Resel__Anti-Assignment",
+      "category": "Anti-Assignment",
+      "relevant_total": 1,
+      "ranks_hit": [
+        1
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 1.0,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 81.79,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": "Can this agreement be assigned or transferred to another party? assignment anti-assignment",
+        "embed_ms": 76.756,
+        "dense_ms": 2.409,
+        "lexical_ms": 2.293,
+        "fusion_ms": 0.095,
+        "rerank_ms": 0.0,
+        "total_ms": 81.552,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "TodosMedicalLtd-20190328-20-F-EX-4-10-11587157-EX-4-10-Marketing-Agreement-Resel__Audit Rights",
+      "category": "Audit Rights",
+      "relevant_total": 2,
+      "ranks_hit": [
+        1,
+        4
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 0.5,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.8772,
+      "span_coverage": {
+        "3": 0.8346,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 80.23,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": "What audit rights does the buyer have over the supplier's records? inspect records books and records",
+        "embed_ms": 75.572,
+        "dense_ms": 2.471,
+        "lexical_ms": 1.887,
+        "fusion_ms": 0.087,
+        "rerank_ms": 0.0,
+        "total_ms": 80.017,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "TodosMedicalLtd-20190328-20-F-EX-4-10-11587157-EX-4-10-Marketing-Agreement-Resel__Cap On Liability",
+      "category": "Cap On Liability",
+      "relevant_total": 3,
+      "ranks_hit": [
+        1,
+        2,
+        5
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 0.6667,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.9469,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 81.43,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": "Is there a cap on liability, and what is the maximum amount either party can be held liable for? limitation of liability aggregate liability",
+        "embed_ms": 76.487,
+        "dense_ms": 2.477,
+        "lexical_ms": 2.105,
+        "fusion_ms": 0.099,
+        "rerank_ms": 0.0,
+        "total_ms": 81.168,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "TodosMedicalLtd-20190328-20-F-EX-4-10-11587157-EX-4-10-Marketing-Agreement-Resel__Minimum Commitment",
+      "category": "Minimum Commitment",
+      "relevant_total": 2,
+      "ranks_hit": [],
+      "reciprocal_rank": 0.0,
+      "recall": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "ndcg_10": 0.0,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "latency_ms": 81.73,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 77.675,
+        "dense_ms": 2.342,
+        "lexical_ms": 1.436,
+        "fusion_ms": 0.071,
+        "rerank_ms": 0.0,
+        "total_ms": 81.524,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "TodosMedicalLtd-20190328-20-F-EX-4-10-11587157-EX-4-10-Marketing-Agreement-Resel__Notice Period To Terminate Renewal",
+      "category": "Notice Period To Terminate Renewal",
+      "relevant_total": 1,
+      "ranks_hit": [
+        1
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 1.0,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 79.68,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": "How much notice must be given to stop the agreement renewing? automatic renewal renewal term evergreen",
+        "embed_ms": 74.527,
+        "dense_ms": 2.469,
+        "lexical_ms": 2.357,
+        "fusion_ms": 0.106,
+        "rerank_ms": 0.0,
+        "total_ms": 79.46,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "TodosMedicalLtd-20190328-20-F-EX-4-10-11587157-EX-4-10-Marketing-Agreement-Resel__Post-Termination Services",
+      "category": "Post-Termination Services",
+      "relevant_total": 1,
+      "ranks_hit": [],
+      "reciprocal_rank": 0.0,
+      "recall": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "ndcg_10": 0.0,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "latency_ms": 79.65,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 74.98,
+        "dense_ms": 2.444,
+        "lexical_ms": 1.823,
+        "fusion_ms": 0.095,
+        "rerank_ms": 0.0,
+        "total_ms": 79.342,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "TodosMedicalLtd-20190328-20-F-EX-4-10-11587157-EX-4-10-Marketing-Agreement-Resel__Renewal Term",
+      "category": "Renewal Term",
+      "relevant_total": 1,
+      "ranks_hit": [
+        1
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 1.0,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 80.56,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": "Does this agreement renew automatically, and for how long is each renewal term? automatic renewal evergreen",
+        "embed_ms": 75.482,
+        "dense_ms": 2.472,
+        "lexical_ms": 2.226,
+        "fusion_ms": 0.095,
+        "rerank_ms": 0.0,
+        "total_ms": 80.276,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "TodosMedicalLtd-20190328-20-F-EX-4-10-11587157-EX-4-10-Marketing-Agreement-Resel__Warranty Duration",
+      "category": "Warranty Duration",
+      "relevant_total": 1,
+      "ranks_hit": [
+        1
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 1.0,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 84.41,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": "How long does the warranty last? warranty period warranty duration defect liability",
+        "embed_ms": 80.023,
+        "dense_ms": 2.597,
+        "lexical_ms": 1.535,
+        "fusion_ms": 0.078,
+        "rerank_ms": 0.0,
+        "total_ms": 84.233,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "VAPOTHERM-INC-Manufacturing-and-Supply-Agreement__Audit Rights",
+      "category": "Audit Rights",
+      "relevant_total": 1,
+      "ranks_hit": [
+        1
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 1.0,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 82.58,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": "What audit rights does the buyer have over the supplier's records? inspect records books and records",
+        "embed_ms": 77.405,
+        "dense_ms": 2.541,
+        "lexical_ms": 2.326,
+        "fusion_ms": 0.099,
+        "rerank_ms": 0.0,
+        "total_ms": 82.371,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "VAPOTHERM-INC-Manufacturing-and-Supply-Agreement__Insurance",
+      "category": "Insurance",
+      "relevant_total": 3,
+      "ranks_hit": [
+        1,
+        2,
+        3
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 1.0,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 81.36,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": "What insurance is the supplier required to carry? insurance required certificate of insurance coverage",
+        "embed_ms": 76.322,
+        "dense_ms": 2.657,
+        "lexical_ms": 2.067,
+        "fusion_ms": 0.096,
+        "rerank_ms": 0.0,
+        "total_ms": 81.143,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "VAPOTHERM-INC-Manufacturing-and-Supply-Agreement__Parties",
+      "category": "Parties",
+      "relevant_total": 4,
+      "ranks_hit": [],
+      "reciprocal_rank": 0.0,
+      "recall": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "ndcg_10": 0.0,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "latency_ms": 80.76,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 75.586,
+        "dense_ms": 2.653,
+        "lexical_ms": 2.217,
+        "fusion_ms": 0.103,
+        "rerank_ms": 0.0,
+        "total_ms": 80.559,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "VAPOTHERM-INC-Manufacturing-and-Supply-Agreement__Uncapped Liability",
+      "category": "Uncapped Liability",
+      "relevant_total": 1,
+      "ranks_hit": [
+        1
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 1.0,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 81.12,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 76.644,
+        "dense_ms": 2.656,
+        "lexical_ms": 1.516,
+        "fusion_ms": 0.075,
+        "rerank_ms": 0.0,
+        "total_ms": 80.892,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "VIRTUALSCOPICS-INC-11-12-2010-EX-10-1-STRATEGIC-ALLIANCE-AGREEMENT__Anti-Assignment",
+      "category": "Anti-Assignment",
+      "relevant_total": 3,
+      "ranks_hit": [
+        1,
+        3,
+        6
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 0.6667,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.8711,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 80.68,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": "Can this agreement be assigned or transferred to another party? assignment anti-assignment",
+        "embed_ms": 75.219,
+        "dense_ms": 2.436,
+        "lexical_ms": 2.729,
+        "fusion_ms": 0.09,
+        "rerank_ms": 0.0,
+        "total_ms": 80.473,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "VIRTUALSCOPICS-INC-11-12-2010-EX-10-1-STRATEGIC-ALLIANCE-AGREEMENT__Audit Rights",
+      "category": "Audit Rights",
+      "relevant_total": 1,
+      "ranks_hit": [
+        1
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 1.0,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 80.79,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": "What audit rights does the buyer have over the supplier's records? inspect records books and records",
+        "embed_ms": 75.874,
+        "dense_ms": 2.566,
+        "lexical_ms": 2.041,
+        "fusion_ms": 0.094,
+        "rerank_ms": 0.0,
+        "total_ms": 80.576,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "VIRTUALSCOPICS-INC-11-12-2010-EX-10-1-STRATEGIC-ALLIANCE-AGREEMENT__Notice Period To Terminate Renewal",
+      "category": "Notice Period To Terminate Renewal",
+      "relevant_total": 1,
+      "ranks_hit": [
+        1
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 1.0,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 81.83,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": "How much notice must be given to stop the agreement renewing? automatic renewal renewal term evergreen",
+        "embed_ms": 76.126,
+        "dense_ms": 2.414,
+        "lexical_ms": 2.975,
+        "fusion_ms": 0.094,
+        "rerank_ms": 0.0,
+        "total_ms": 81.609,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "WORLDWIDESTRATEGIESINC-11-02-2005-EX-10-RESELLER-AGREEMENT__Governing Law",
+      "category": "Governing Law",
+      "relevant_total": 2,
+      "ranks_hit": [
+        1,
+        9
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 0.5,
+        "6": 0.5,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.7977,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 81.44,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": "Which law governs this agreement? governing law applicable law choice of law",
+        "embed_ms": 75.557,
+        "dense_ms": 2.713,
+        "lexical_ms": 2.882,
+        "fusion_ms": 0.103,
+        "rerank_ms": 0.0,
+        "total_ms": 81.255,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "WORLDWIDESTRATEGIESINC-11-02-2005-EX-10-RESELLER-AGREEMENT__Termination For Convenience",
+      "category": "Termination For Convenience",
+      "relevant_total": 1,
+      "ranks_hit": [
+        1
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 1.0,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 84.38,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": "Can either party terminate this agreement for convenience, and on what notice? notice period notice to terminate termination for convenience",
+        "embed_ms": 77.691,
+        "dense_ms": 2.837,
+        "lexical_ms": 3.486,
+        "fusion_ms": 0.128,
+        "rerank_ms": 0.0,
+        "total_ms": 84.142,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "WORLDWIDESTRATEGIESINC-11-02-2005-EX-10-RESELLER-AGREEMENT__Volume Restriction",
+      "category": "Volume Restriction",
+      "relevant_total": 1,
+      "ranks_hit": [],
+      "reciprocal_rank": 0.0,
+      "recall": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "ndcg_10": 0.0,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "latency_ms": 83.61,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 78.979,
+        "dense_ms": 2.735,
+        "lexical_ms": 1.603,
+        "fusion_ms": 0.082,
+        "rerank_ms": 0.0,
+        "total_ms": 83.398,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "WORLDWIDESTRATEGIESINC-11-02-2005-EX-10-RESELLER-AGREEMENT__Warranty Duration",
+      "category": "Warranty Duration",
+      "relevant_total": 2,
+      "ranks_hit": [
+        1,
+        3
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.9197,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 82.57,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": "How long does the warranty last? warranty period warranty duration defect liability",
+        "embed_ms": 77.527,
+        "dense_ms": 2.648,
+        "lexical_ms": 2.115,
+        "fusion_ms": 0.087,
+        "rerank_ms": 0.0,
+        "total_ms": 82.377,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "Zounds-Hearing-Inc-MANUFACTURING-DESIGN-MARKETING-AGREEMENT__Effective Date",
+      "category": "Effective Date",
+      "relevant_total": 1,
+      "ranks_hit": [
+        8
+      ],
+      "reciprocal_rank": 0.125,
+      "recall": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.3155,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 1.0
+      },
+      "latency_ms": 82.03,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 77.143,
+        "dense_ms": 2.508,
+        "lexical_ms": 2.088,
+        "fusion_ms": 0.109,
+        "rerank_ms": 0.0,
+        "total_ms": 81.848,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "Zounds-Hearing-Inc-MANUFACTURING-DESIGN-MARKETING-AGREEMENT__Expiration Date",
+      "category": "Expiration Date",
+      "relevant_total": 2,
+      "ranks_hit": [
+        6,
+        7
+      ],
+      "reciprocal_rank": 0.1667,
+      "recall": {
+        "3": 0.0,
+        "6": 0.5,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.4228,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.5896,
+        "10": 1.0
+      },
+      "latency_ms": 82.11,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 77.627,
+        "dense_ms": 2.535,
+        "lexical_ms": 1.669,
+        "fusion_ms": 0.096,
+        "rerank_ms": 0.0,
+        "total_ms": 81.926,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "Zounds-Hearing-Inc-MANUFACTURING-DESIGN-MARKETING-AGREEMENT__Governing Law",
+      "category": "Governing Law",
+      "relevant_total": 2,
+      "ranks_hit": [
+        1,
+        2
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 1.0,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 85.73,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": "Which law governs this agreement? governing law applicable law choice of law",
+        "embed_ms": 80.67,
+        "dense_ms": 2.435,
+        "lexical_ms": 2.33,
+        "fusion_ms": 0.111,
+        "rerank_ms": 0.0,
+        "total_ms": 85.546,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "Zounds-Hearing-Inc-MANUFACTURING-DESIGN-MARKETING-AGREEMENT__Liquidated Damages",
+      "category": "Liquidated Damages",
+      "relevant_total": 1,
+      "ranks_hit": [
+        2
+      ],
+      "reciprocal_rank": 0.5,
+      "recall": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.6309,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 88.37,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": "What liquidated damages or penalties apply if a party fails to perform? service credit remedy",
+        "embed_ms": 82.734,
+        "dense_ms": 2.478,
+        "lexical_ms": 2.725,
+        "fusion_ms": 0.143,
+        "rerank_ms": 0.0,
+        "total_ms": 88.08,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "Zounds-Hearing-Inc-MANUFACTURING-DESIGN-MARKETING-AGREEMENT__Post-Termination Services",
+      "category": "Post-Termination Services",
+      "relevant_total": 2,
+      "ranks_hit": [
+        3
+      ],
+      "reciprocal_rank": 0.3333,
+      "recall": {
+        "3": 0.5,
+        "6": 0.5,
+        "10": 0.5
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.3066,
+      "span_coverage": {
+        "3": 0.8333,
+        "6": 0.8333,
+        "10": 0.8333
+      },
+      "latency_ms": 86.51,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 81.351,
+        "dense_ms": 2.571,
+        "lexical_ms": 2.266,
+        "fusion_ms": 0.109,
+        "rerank_ms": 0.0,
+        "total_ms": 86.297,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "Zounds-Hearing-Inc-MANUFACTURING-DESIGN-MARKETING-AGREEMENT__Revenue/Profit Sharing",
+      "category": "Revenue/Profit Sharing",
+      "relevant_total": 2,
+      "ranks_hit": [],
+      "reciprocal_rank": 0.0,
+      "recall": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "ndcg_10": 0.0,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "latency_ms": 85.96,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 80.92,
+        "dense_ms": 2.621,
+        "lexical_ms": 2.106,
+        "fusion_ms": 0.102,
+        "rerank_ms": 0.0,
+        "total_ms": 85.749,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "Zounds-Hearing-Inc-MANUFACTURING-DESIGN-MARKETING-AGREEMENT__Warranty Duration",
+      "category": "Warranty Duration",
+      "relevant_total": 1,
+      "ranks_hit": [
+        10
+      ],
+      "reciprocal_rank": 0.1,
+      "recall": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.2891,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 1.0
+      },
+      "latency_ms": 85.51,
+      "trace": {
+        "strategy": "rrf",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": "How long does the warranty last? warranty period warranty duration defect liability",
+        "embed_ms": 80.845,
+        "dense_ms": 2.544,
+        "lexical_ms": 1.853,
+        "fusion_ms": 0.086,
+        "rerank_ms": 0.0,
+        "total_ms": 85.328,
+        "reranker_available": false
+      }
+    }
+  ]
+}

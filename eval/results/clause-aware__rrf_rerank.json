@@ -1,0 +1,42 @@
+{
+  "run_id": "clause-aware__rrf_rerank",
+  "created_at": "2026-08-02T08:15:31+00:00",
+  "git_sha": "b48878f962e766d888d877ecf0638d3518407259",
+  "git_dirty": true,
+  "dataset": {
+    "path": "eval/datasets/golden.jsonl",
+    "sha256": "4ac8d01460a836c4d0880ff3f583d8c2150f67a7729cd592a00962863cd46451",
+    "items": 110,
+    "documents": 29,
+    "categories": 20
+  },
+  "environment": {
+    "python": "3.10.12",
+    "platform": "Linux-6.8.0-124-generic-x86_64-with-glibc2.35",
+    "postgres": "16.2",
+    "embedding": {
+      "provider": "lsa-tfidf-svd-384",
+      "dim": 384,
+      "family": "tfidf+svd",
+      "fitted_on": "corpus",
+      "substitute_for": "BAAI/bge-small-en-v1.5",
+      "reason": "huggingface.co unreachable in build environment (ADR-0003)"
+    }
+  },
+  "config": {
+    "strategy": "rrf_rerank",
+    "k": 10,
+    "fetch_k": 30,
+    "rrf_k": 60,
+    "mmr_lambda": 0.5,
+    "expansion": false,
+    "index_name": "clause-aware",
+    "chunk_strategy": "clause-aware",
+    "config_hash": "d9946188ded2"
+  },
+  "scope": "document",
+  "status": "blocked",
+  "blocked_reason": "cross-encoder weights could not be loaded: ModuleNotFoundError: No module named 'sentence_transformers'",
+  "metrics": {},
+  "per_query": []
+}

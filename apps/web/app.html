@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ChainLens — reader</title>
+    <meta name="description" content="Clause-level contract analysis with character-exact citations." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <script>
+      // Last-resort visibility: if anything throws before or during mount, show it in the
+      // page instead of a blank screen. A white page tells you nothing; this tells you the
+      // file and the message. Removed automatically once React paints successfully.
+      (function () {
+        function paint(msg) {
+          var root = document.getElementById("root");
+          if (!root || root.getAttribute("data-mounted") === "1") return;
+          root.innerHTML =
+            '<div style="font:14px Manrope,ui-sans-serif,system-ui,sans-serif;max-width:70ch;margin:10vh auto;padding:0 24px;color:#EAF0EC">' +
+            '<p style="font-weight:600;margin:0 0 8px">The interface hit an error before it could render.</p>' +
+            '<pre style="white-space:pre-wrap;background:#0C1410;padding:12px;border-radius:6px;overflow:auto">' +
+            String(msg).replace(/[<>&]/g, function (c) { return { "<": "&lt;", ">": "&gt;", "&": "&amp;" }[c]; }) +
+            "</pre>" +
+            '<p style="color:#8A9C92">Copy this text and send it back, and it can be fixed. ' +
+            "Backend not running, or on the wrong port, is a common cause.</p></div>";
+        }
+        window.addEventListener("error", function (e) {
+          paint((e.error && e.error.stack) || e.message || "Unknown script error");
+        });
+        window.addEventListener("unhandledrejection", function (e) {
+          paint((e.reason && (e.reason.stack || e.reason.message)) || "Unhandled promise rejection");
+        });
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

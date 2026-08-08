@@ -1,0 +1,4313 @@
+{
+  "run_id": "recursive-512__mmr",
+  "created_at": "2026-08-02T08:15:49+00:00",
+  "git_sha": "b48878f962e766d888d877ecf0638d3518407259",
+  "git_dirty": true,
+  "dataset": {
+    "path": "eval/datasets/golden.jsonl",
+    "sha256": "4ac8d01460a836c4d0880ff3f583d8c2150f67a7729cd592a00962863cd46451",
+    "items": 110,
+    "documents": 29,
+    "categories": 20
+  },
+  "environment": {
+    "python": "3.10.12",
+    "platform": "Linux-6.8.0-124-generic-x86_64-with-glibc2.35",
+    "postgres": "16.2",
+    "embedding": {
+      "provider": "lsa-tfidf-svd-384",
+      "dim": 384,
+      "family": "tfidf+svd",
+      "fitted_on": "corpus",
+      "substitute_for": "BAAI/bge-small-en-v1.5",
+      "reason": "huggingface.co unreachable in build environment (ADR-0003)"
+    }
+  },
+  "config": {
+    "strategy": "mmr",
+    "k": 10,
+    "fetch_k": 30,
+    "rrf_k": 60,
+    "mmr_lambda": 0.5,
+    "expansion": false,
+    "index_name": "recursive-512",
+    "chunk_strategy": "recursive-512",
+    "config_hash": "c142b925c12b"
+  },
+  "scope": "document",
+  "status": "ok",
+  "blocked_reason": null,
+  "skipped_qa_ids": [],
+  "metrics": {
+    "n_evaluated": 110,
+    "n_skipped": 0,
+    "recall@3": 0.2318,
+    "recall@6": 0.279,
+    "recall@10": 0.3564,
+    "hit@3": 0.5545,
+    "hit@6": 0.6273,
+    "hit@10": 0.7364,
+    "mrr": 0.5195,
+    "ndcg@10": 0.3272,
+    "span_coverage@3": 0.3868,
+    "span_coverage@6": 0.4488,
+    "span_coverage@10": 0.5303,
+    "latency_ms_p50": 86.29,
+    "latency_ms_p95": 100.52,
+    "embed_ms_p50": 80.37,
+    "search_ms_p50": 5.17,
+    "context_tokens_p50": 1281.5,
+    "generation_cost_usd": null
+  },
+  "per_query": [
+    {
+      "qa_id": "AURASYSTEMSINC-06-16-2010-EX-10-25-STRATEGIC-ALLIANCE-AGREEMENT__Exclusivity",
+      "category": "Exclusivity",
+      "relevant_total": 6,
+      "ranks_hit": [
+        1
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 0.1667,
+        "6": 0.1667,
+        "10": 0.1667
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.3026,
+      "span_coverage": {
+        "3": 0.256,
+        "6": 0.256,
+        "10": 0.256
+      },
+      "latency_ms": 75.28,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 68.78,
+        "dense_ms": 5.649,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.804,
+        "rerank_ms": 0.0,
+        "total_ms": 75.233,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "AURASYSTEMSINC-06-16-2010-EX-10-25-STRATEGIC-ALLIANCE-AGREEMENT__Expiration Date",
+      "category": "Expiration Date",
+      "relevant_total": 2,
+      "ranks_hit": [],
+      "reciprocal_rank": 0.0,
+      "recall": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "ndcg_10": 0.0,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "latency_ms": 83.01,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 77.622,
+        "dense_ms": 4.798,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.543,
+        "rerank_ms": 0.0,
+        "total_ms": 82.963,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "AURASYSTEMSINC-06-16-2010-EX-10-25-STRATEGIC-ALLIANCE-AGREEMENT__Insurance",
+      "category": "Insurance",
+      "relevant_total": 3,
+      "ranks_hit": [
+        1,
+        10
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 0.3333,
+        "6": 0.3333,
+        "10": 0.6667
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.6049,
+      "span_coverage": {
+        "3": 0.4877,
+        "6": 0.4877,
+        "10": 0.7349
+      },
+      "latency_ms": 82.33,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 76.714,
+        "dense_ms": 5.096,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.473,
+        "rerank_ms": 0.0,
+        "total_ms": 82.283,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "AURASYSTEMSINC-06-16-2010-EX-10-25-STRATEGIC-ALLIANCE-AGREEMENT__Minimum Commitment",
+      "category": "Minimum Commitment",
+      "relevant_total": 9,
+      "ranks_hit": [
+        1,
+        6,
+        8
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 0.1111,
+        "6": 0.2222,
+        "10": 0.3333
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.3929,
+      "span_coverage": {
+        "3": 0.3143,
+        "6": 0.4626,
+        "10": 0.6306
+      },
+      "latency_ms": 84.39,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 78.917,
+        "dense_ms": 4.815,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.6,
+        "rerank_ms": 0.0,
+        "total_ms": 84.331,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "AURASYSTEMSINC-06-16-2010-EX-10-25-STRATEGIC-ALLIANCE-AGREEMENT__Post-Termination Services",
+      "category": "Post-Termination Services",
+      "relevant_total": 3,
+      "ranks_hit": [
+        2,
+        10
+      ],
+      "reciprocal_rank": 0.5,
+      "recall": {
+        "3": 0.3333,
+        "6": 0.3333,
+        "10": 0.6667
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.4317,
+      "span_coverage": {
+        "3": 0.1626,
+        "6": 0.1626,
+        "10": 0.6502
+      },
+      "latency_ms": 75.84,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 70.292,
+        "dense_ms": 5.006,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.497,
+        "rerank_ms": 0.0,
+        "total_ms": 75.794,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "AgapeAtpCorp-20191202-10-KA-EX-10-1-11911128-EX-10-1-Supply-Agreement__Effective Date",
+      "category": "Effective Date",
+      "relevant_total": 2,
+      "ranks_hit": [
+        2
+      ],
+      "reciprocal_rank": 0.5,
+      "recall": {
+        "3": 0.5,
+        "6": 0.5,
+        "10": 0.5
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.3869,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 79.71,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 74.062,
+        "dense_ms": 5.061,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.54,
+        "rerank_ms": 0.0,
+        "total_ms": 79.663,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "AgapeAtpCorp-20191202-10-KA-EX-10-1-11911128-EX-10-1-Supply-Agreement__Expiration Date",
+      "category": "Expiration Date",
+      "relevant_total": 2,
+      "ranks_hit": [
+        1
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 0.5,
+        "6": 0.5,
+        "10": 0.5
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.6131,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 86.28,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 80.975,
+        "dense_ms": 4.703,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.527,
+        "rerank_ms": 0.0,
+        "total_ms": 86.205,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "AgapeAtpCorp-20191202-10-KA-EX-10-1-11911128-EX-10-1-Supply-Agreement__Notice Period To Terminate Renewal",
+      "category": "Notice Period To Terminate Renewal",
+      "relevant_total": 2,
+      "ranks_hit": [
+        2,
+        9
+      ],
+      "reciprocal_rank": 0.5,
+      "recall": {
+        "3": 0.5,
+        "6": 0.5,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.5714,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 83.3,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 77.565,
+        "dense_ms": 5.074,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.604,
+        "rerank_ms": 0.0,
+        "total_ms": 83.243,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "AgapeAtpCorp-20191202-10-KA-EX-10-1-11911128-EX-10-1-Supply-Agreement__Renewal Term",
+      "category": "Renewal Term",
+      "relevant_total": 2,
+      "ranks_hit": [
+        1,
+        2
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 1.0,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 80.55,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 75.225,
+        "dense_ms": 4.662,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.611,
+        "rerank_ms": 0.0,
+        "total_ms": 80.497,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "Apollo-Endosurgery-Manufacturing-and-Supply-Agreement__Notice Period To Terminate Renewal",
+      "category": "Notice Period To Terminate Renewal",
+      "relevant_total": 3,
+      "ranks_hit": [
+        3
+      ],
+      "reciprocal_rank": 0.3333,
+      "recall": {
+        "3": 0.3333,
+        "6": 0.3333,
+        "10": 0.3333
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.2346,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 81.02,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 75.391,
+        "dense_ms": 5.076,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.505,
+        "rerank_ms": 0.0,
+        "total_ms": 80.972,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "Apollo-Endosurgery-Manufacturing-and-Supply-Agreement__Renewal Term",
+      "category": "Renewal Term",
+      "relevant_total": 3,
+      "ranks_hit": [
+        1
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 0.3333,
+        "6": 0.3333,
+        "10": 0.3333
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.4693,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 88.89,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 82.934,
+        "dense_ms": 5.402,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.508,
+        "rerank_ms": 0.0,
+        "total_ms": 88.845,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "BELLRINGBRANDS-INC-02-07-2020-EX-10-18-MASTER-SUPPLY-AGREEMENT__Cap On Liability",
+      "category": "Cap On Liability",
+      "relevant_total": 4,
+      "ranks_hit": [
+        4
+      ],
+      "reciprocal_rank": 0.25,
+      "recall": {
+        "3": 0.0,
+        "6": 0.25,
+        "10": 0.25
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.1681,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.259,
+        "10": 0.259
+      },
+      "latency_ms": 89.57,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 84.2,
+        "dense_ms": 4.834,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.493,
+        "rerank_ms": 0.0,
+        "total_ms": 89.526,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "BELLRINGBRANDS-INC-02-07-2020-EX-10-18-MASTER-SUPPLY-AGREEMENT__Effective Date",
+      "category": "Effective Date",
+      "relevant_total": 1,
+      "ranks_hit": [
+        4
+      ],
+      "reciprocal_rank": 0.25,
+      "recall": {
+        "3": 0.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.4307,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 88.64,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 82.731,
+        "dense_ms": 5.263,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.596,
+        "rerank_ms": 0.0,
+        "total_ms": 88.589,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "BELLRINGBRANDS-INC-02-07-2020-EX-10-18-MASTER-SUPPLY-AGREEMENT__Insurance",
+      "category": "Insurance",
+      "relevant_total": 7,
+      "ranks_hit": [
+        1,
+        4,
+        5
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 0.1429,
+        "6": 0.4286,
+        "10": 0.4286
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.4996,
+      "span_coverage": {
+        "3": 0.2189,
+        "6": 0.5402,
+        "10": 0.5402
+      },
+      "latency_ms": 84.15,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 78.457,
+        "dense_ms": 4.997,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.647,
+        "rerank_ms": 0.0,
+        "total_ms": 84.101,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "BELLRINGBRANDS-INC-02-07-2020-EX-10-18-MASTER-SUPPLY-AGREEMENT__Parties",
+      "category": "Parties",
+      "relevant_total": 2,
+      "ranks_hit": [],
+      "reciprocal_rank": 0.0,
+      "recall": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "ndcg_10": 0.0,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "latency_ms": 80.45,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 75.108,
+        "dense_ms": 4.763,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.537,
+        "rerank_ms": 0.0,
+        "total_ms": 80.408,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "BELLRINGBRANDS-INC-02-07-2020-EX-10-18-MASTER-SUPPLY-AGREEMENT__Uncapped Liability",
+      "category": "Uncapped Liability",
+      "relevant_total": 2,
+      "ranks_hit": [
+        4
+      ],
+      "reciprocal_rank": 0.25,
+      "recall": {
+        "3": 0.0,
+        "6": 0.5,
+        "10": 0.5
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.2641,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.9059,
+        "10": 0.9059
+      },
+      "latency_ms": 83.58,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 78.018,
+        "dense_ms": 5.0,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.519,
+        "rerank_ms": 0.0,
+        "total_ms": 83.537,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "BIOFRONTERAAG-04-29-2019-EX-4-17-SUPPLY-AGREEMENT__Cap On Liability",
+      "category": "Cap On Liability",
+      "relevant_total": 5,
+      "ranks_hit": [
+        1
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 0.2,
+        "6": 0.2,
+        "10": 0.2
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.3392,
+      "span_coverage": {
+        "3": 0.534,
+        "6": 0.534,
+        "10": 0.534
+      },
+      "latency_ms": 80.1,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 74.537,
+        "dense_ms": 4.976,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.537,
+        "rerank_ms": 0.0,
+        "total_ms": 80.05,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "BIOFRONTERAAG-04-29-2019-EX-4-17-SUPPLY-AGREEMENT__Exclusivity",
+      "category": "Exclusivity",
+      "relevant_total": 3,
+      "ranks_hit": [
+        1
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 0.3333,
+        "6": 0.3333,
+        "10": 0.3333
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.4693,
+      "span_coverage": {
+        "3": 0.7047,
+        "6": 0.7047,
+        "10": 0.7047
+      },
+      "latency_ms": 79.1,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 73.29,
+        "dense_ms": 5.254,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.508,
+        "rerank_ms": 0.0,
+        "total_ms": 79.052,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "BIOFRONTERAAG-04-29-2019-EX-4-17-SUPPLY-AGREEMENT__Minimum Commitment",
+      "category": "Minimum Commitment",
+      "relevant_total": 2,
+      "ranks_hit": [
+        1
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 0.5,
+        "6": 0.5,
+        "10": 0.5
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.6131,
+      "span_coverage": {
+        "3": 0.7987,
+        "6": 0.7987,
+        "10": 0.7987
+      },
+      "latency_ms": 82.61,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 75.954,
+        "dense_ms": 6.042,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.562,
+        "rerank_ms": 0.0,
+        "total_ms": 82.558,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "BNLFINANCIALCORP-03-30-2007-EX-10-8-OUTSOURCING-AGREEMENT__Anti-Assignment",
+      "category": "Anti-Assignment",
+      "relevant_total": 2,
+      "ranks_hit": [
+        1
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 0.5,
+        "6": 0.5,
+        "10": 0.5
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.6131,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 83.58,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 77.273,
+        "dense_ms": 5.676,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.584,
+        "rerank_ms": 0.0,
+        "total_ms": 83.533,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "BNLFINANCIALCORP-03-30-2007-EX-10-8-OUTSOURCING-AGREEMENT__Cap On Liability",
+      "category": "Cap On Liability",
+      "relevant_total": 11,
+      "ranks_hit": [
+        2,
+        4,
+        10
+      ],
+      "reciprocal_rank": 0.5,
+      "recall": {
+        "3": 0.0909,
+        "6": 0.1818,
+        "10": 0.2727
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.2973,
+      "span_coverage": {
+        "3": 0.163,
+        "6": 0.2455,
+        "10": 0.3424
+      },
+      "latency_ms": 83.23,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 76.346,
+        "dense_ms": 6.16,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.675,
+        "rerank_ms": 0.0,
+        "total_ms": 83.181,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "BNLFINANCIALCORP-03-30-2007-EX-10-8-OUTSOURCING-AGREEMENT__Governing Law",
+      "category": "Governing Law",
+      "relevant_total": 2,
+      "ranks_hit": [
+        9
+      ],
+      "reciprocal_rank": 0.1111,
+      "recall": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.5
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.1846,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.4962
+      },
+      "latency_ms": 78.32,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 72.94,
+        "dense_ms": 4.798,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.532,
+        "rerank_ms": 0.0,
+        "total_ms": 78.269,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "BNLFINANCIALCORP-03-30-2007-EX-10-8-OUTSOURCING-AGREEMENT__Insurance",
+      "category": "Insurance",
+      "relevant_total": 5,
+      "ranks_hit": [],
+      "reciprocal_rank": 0.0,
+      "recall": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "ndcg_10": 0.0,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "latency_ms": 75.09,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 69.712,
+        "dense_ms": 4.854,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.472,
+        "rerank_ms": 0.0,
+        "total_ms": 75.038,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "BNLFINANCIALCORP-03-30-2007-EX-10-8-OUTSOURCING-AGREEMENT__Liquidated Damages",
+      "category": "Liquidated Damages",
+      "relevant_total": 3,
+      "ranks_hit": [],
+      "reciprocal_rank": 0.0,
+      "recall": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "ndcg_10": 0.0,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "latency_ms": 86.2,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 80.277,
+        "dense_ms": 5.291,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.573,
+        "rerank_ms": 0.0,
+        "total_ms": 86.14,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "BNLFINANCIALCORP-03-30-2007-EX-10-8-OUTSOURCING-AGREEMENT__Price Restrictions",
+      "category": "Price Restrictions",
+      "relevant_total": 3,
+      "ranks_hit": [
+        5
+      ],
+      "reciprocal_rank": 0.2,
+      "recall": {
+        "3": 0.0,
+        "6": 0.3333,
+        "10": 0.3333
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.1815,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 83.31,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 77.288,
+        "dense_ms": 5.385,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.583,
+        "rerank_ms": 0.0,
+        "total_ms": 83.256,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "BNLFINANCIALCORP-03-30-2007-EX-10-8-OUTSOURCING-AGREEMENT__Volume Restriction",
+      "category": "Volume Restriction",
+      "relevant_total": 2,
+      "ranks_hit": [],
+      "reciprocal_rank": 0.0,
+      "recall": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "ndcg_10": 0.0,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "latency_ms": 81.69,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 76.247,
+        "dense_ms": 4.838,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.555,
+        "rerank_ms": 0.0,
+        "total_ms": 81.641,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "CCAINDUSTRIESINC-04-14-2014-EX-10-1-OUTSOURCING-AGREEMENT__Liquidated Damages",
+      "category": "Liquidated Damages",
+      "relevant_total": 5,
+      "ranks_hit": [],
+      "reciprocal_rank": 0.0,
+      "recall": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "ndcg_10": 0.0,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "latency_ms": 78.64,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 73.321,
+        "dense_ms": 4.753,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.518,
+        "rerank_ms": 0.0,
+        "total_ms": 78.591,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "CCAINDUSTRIESINC-04-14-2014-EX-10-1-OUTSOURCING-AGREEMENT__Renewal Term",
+      "category": "Renewal Term",
+      "relevant_total": 2,
+      "ranks_hit": [
+        1
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 0.5,
+        "6": 0.5,
+        "10": 0.5
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.6131,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 78.56,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 73.073,
+        "dense_ms": 4.913,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.522,
+        "rerank_ms": 0.0,
+        "total_ms": 78.508,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "CCAINDUSTRIESINC-04-14-2014-EX-10-1-OUTSOURCING-AGREEMENT__Revenue/Profit Sharing",
+      "category": "Revenue/Profit Sharing",
+      "relevant_total": 2,
+      "ranks_hit": [],
+      "reciprocal_rank": 0.0,
+      "recall": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "ndcg_10": 0.0,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "latency_ms": 79.87,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 74.877,
+        "dense_ms": 4.462,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.488,
+        "rerank_ms": 0.0,
+        "total_ms": 79.827,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "ELANDIAINTERNATIONALINC-04-25-2007-EX-10-21-Outsourcing-Agreement__Expiration Date",
+      "category": "Expiration Date",
+      "relevant_total": 2,
+      "ranks_hit": [
+        1
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 0.5,
+        "6": 0.5,
+        "10": 0.5
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.6131,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 79.2,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 72.014,
+        "dense_ms": 6.377,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.738,
+        "rerank_ms": 0.0,
+        "total_ms": 79.129,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "ELANDIAINTERNATIONALINC-04-25-2007-EX-10-21-Outsourcing-Agreement__Liquidated Damages",
+      "category": "Liquidated Damages",
+      "relevant_total": 2,
+      "ranks_hit": [],
+      "reciprocal_rank": 0.0,
+      "recall": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "ndcg_10": 0.0,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "latency_ms": 89.4,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 82.748,
+        "dense_ms": 5.935,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.662,
+        "rerank_ms": 0.0,
+        "total_ms": 89.345,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "ELANDIAINTERNATIONALINC-04-25-2007-EX-10-21-Outsourcing-Agreement__Price Restrictions",
+      "category": "Price Restrictions",
+      "relevant_total": 2,
+      "ranks_hit": [],
+      "reciprocal_rank": 0.0,
+      "recall": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "ndcg_10": 0.0,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "latency_ms": 101.39,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 94.665,
+        "dense_ms": 6.138,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.534,
+        "rerank_ms": 0.0,
+        "total_ms": 101.337,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "ELANDIAINTERNATIONALINC-04-25-2007-EX-10-21-Outsourcing-Agreement__Termination For Convenience",
+      "category": "Termination For Convenience",
+      "relevant_total": 2,
+      "ranks_hit": [
+        1
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 0.5,
+        "6": 0.5,
+        "10": 0.5
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.6131,
+      "span_coverage": {
+        "3": 0.8379,
+        "6": 0.8379,
+        "10": 0.8379
+      },
+      "latency_ms": 108.02,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 101.103,
+        "dense_ms": 6.241,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.603,
+        "rerank_ms": 0.0,
+        "total_ms": 107.947,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "ENERGOUSCORP-03-16-2017-EX-10-24-STRATEGIC-ALLIANCE-AGREEMENT__Audit Rights",
+      "category": "Audit Rights",
+      "relevant_total": 3,
+      "ranks_hit": [
+        1
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 0.3333,
+        "6": 0.3333,
+        "10": 0.3333
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.4693,
+      "span_coverage": {
+        "3": 0.4388,
+        "6": 0.4388,
+        "10": 0.4388
+      },
+      "latency_ms": 99.73,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 93.27,
+        "dense_ms": 5.876,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.524,
+        "rerank_ms": 0.0,
+        "total_ms": 99.67,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "ENERGOUSCORP-03-16-2017-EX-10-24-STRATEGIC-ALLIANCE-AGREEMENT__Expiration Date",
+      "category": "Expiration Date",
+      "relevant_total": 2,
+      "ranks_hit": [
+        9
+      ],
+      "reciprocal_rank": 0.1111,
+      "recall": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.5
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.1846,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.5348
+      },
+      "latency_ms": 101.08,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 95.049,
+        "dense_ms": 5.435,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.546,
+        "rerank_ms": 0.0,
+        "total_ms": 101.029,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "ENERGYXXILTD-05-08-2015-EX-10-13-Transportation-AGREEMENT__Effective Date",
+      "category": "Effective Date",
+      "relevant_total": 1,
+      "ranks_hit": [],
+      "reciprocal_rank": 0.0,
+      "recall": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "ndcg_10": 0.0,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "latency_ms": 93.33,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 87.499,
+        "dense_ms": 5.278,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.506,
+        "rerank_ms": 0.0,
+        "total_ms": 93.283,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "ENERGYXXILTD-05-08-2015-EX-10-13-Transportation-AGREEMENT__Governing Law",
+      "category": "Governing Law",
+      "relevant_total": 2,
+      "ranks_hit": [
+        1
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 0.5,
+        "6": 0.5,
+        "10": 0.5
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.6131,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 83.55,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 77.77,
+        "dense_ms": 5.167,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.565,
+        "rerank_ms": 0.0,
+        "total_ms": 83.503,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "ENERGYXXILTD-05-08-2015-EX-10-13-Transportation-AGREEMENT__Minimum Commitment",
+      "category": "Minimum Commitment",
+      "relevant_total": 3,
+      "ranks_hit": [],
+      "reciprocal_rank": 0.0,
+      "recall": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "ndcg_10": 0.0,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "latency_ms": 82.87,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 77.138,
+        "dense_ms": 5.105,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.584,
+        "rerank_ms": 0.0,
+        "total_ms": 82.828,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "ENERGYXXILTD-05-08-2015-EX-10-13-Transportation-AGREEMENT__Volume Restriction",
+      "category": "Volume Restriction",
+      "relevant_total": 10,
+      "ranks_hit": [
+        8
+      ],
+      "reciprocal_rank": 0.125,
+      "recall": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.1
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.0694,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0778
+      },
+      "latency_ms": 82.48,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 76.899,
+        "dense_ms": 5.034,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.501,
+        "rerank_ms": 0.0,
+        "total_ms": 82.434,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "EUROPEANMICROHOLDINGSINC-03-06-1998-EX-10-6-DISTRIBUTOR-AGREEMENT__Anti-Assignment",
+      "category": "Anti-Assignment",
+      "relevant_total": 6,
+      "ranks_hit": [
+        1,
+        5
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 0.1667,
+        "6": 0.3333,
+        "10": 0.3333
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.4197,
+      "span_coverage": {
+        "3": 0.2837,
+        "6": 0.3654,
+        "10": 0.3654
+      },
+      "latency_ms": 84.0,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 77.587,
+        "dense_ms": 5.821,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.537,
+        "rerank_ms": 0.0,
+        "total_ms": 83.945,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "EUROPEANMICROHOLDINGSINC-03-06-1998-EX-10-6-DISTRIBUTOR-AGREEMENT__Liquidated Damages",
+      "category": "Liquidated Damages",
+      "relevant_total": 2,
+      "ranks_hit": [
+        1
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 0.5,
+        "6": 0.5,
+        "10": 0.5
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.6131,
+      "span_coverage": {
+        "3": 0.4983,
+        "6": 0.4983,
+        "10": 0.4983
+      },
+      "latency_ms": 97.15,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 91.28,
+        "dense_ms": 5.2,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.623,
+        "rerank_ms": 0.0,
+        "total_ms": 97.103,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "EUROPEANMICROHOLDINGSINC-03-06-1998-EX-10-6-DISTRIBUTOR-AGREEMENT__Uncapped Liability",
+      "category": "Uncapped Liability",
+      "relevant_total": 2,
+      "ranks_hit": [
+        1
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 0.5,
+        "6": 0.5,
+        "10": 0.5
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.6131,
+      "span_coverage": {
+        "3": 0.7512,
+        "6": 0.7512,
+        "10": 0.7512
+      },
+      "latency_ms": 89.73,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 83.992,
+        "dense_ms": 5.13,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.52,
+        "rerank_ms": 0.0,
+        "total_ms": 89.642,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "FTENETWORKS-INC-02-18-2016-EX-99-4-STRATEGIC-ALLIANCE-AGREEMENT__Liquidated Damages",
+      "category": "Liquidated Damages",
+      "relevant_total": 2,
+      "ranks_hit": [
+        1
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 0.5,
+        "6": 0.5,
+        "10": 0.5
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.6131,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 82.03,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 76.736,
+        "dense_ms": 4.753,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.496,
+        "rerank_ms": 0.0,
+        "total_ms": 81.985,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "FTENETWORKS-INC-02-18-2016-EX-99-4-STRATEGIC-ALLIANCE-AGREEMENT__Termination For Convenience",
+      "category": "Termination For Convenience",
+      "relevant_total": 2,
+      "ranks_hit": [
+        1
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 0.5,
+        "6": 0.5,
+        "10": 0.5
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.6131,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 82.9,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 77.485,
+        "dense_ms": 4.874,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.494,
+        "rerank_ms": 0.0,
+        "total_ms": 82.853,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "GentechHoldingsInc-20190808-1-A-EX1A-6-MAT-CTRCT-11776814-EX1A-6-MAT-CTRCT-Distr__Price Restrictions",
+      "category": "Price Restrictions",
+      "relevant_total": 4,
+      "ranks_hit": [
+        1
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 0.25,
+        "6": 0.25,
+        "10": 0.25
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.3904,
+      "span_coverage": {
+        "3": 0.3937,
+        "6": 0.3937,
+        "10": 0.3937
+      },
+      "latency_ms": 85.29,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 80.069,
+        "dense_ms": 4.635,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.541,
+        "rerank_ms": 0.0,
+        "total_ms": 85.245,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "GentechHoldingsInc-20190808-1-A-EX1A-6-MAT-CTRCT-11776814-EX1A-6-MAT-CTRCT-Distr__Warranty Duration",
+      "category": "Warranty Duration",
+      "relevant_total": 2,
+      "ranks_hit": [
+        9
+      ],
+      "reciprocal_rank": 0.1111,
+      "recall": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.5
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.1846,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.3105
+      },
+      "latency_ms": 83.49,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 77.783,
+        "dense_ms": 4.721,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.935,
+        "rerank_ms": 0.0,
+        "total_ms": 83.438,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "ICORECONNECTINC-10-13-2010-EX-7-1-Strategic-Alliance-Agreement__Notice Period To Terminate Renewal",
+      "category": "Notice Period To Terminate Renewal",
+      "relevant_total": 3,
+      "ranks_hit": [
+        2
+      ],
+      "reciprocal_rank": 0.5,
+      "recall": {
+        "3": 0.3333,
+        "6": 0.3333,
+        "10": 0.3333
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.2961,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 84.34,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 78.444,
+        "dense_ms": 4.947,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.902,
+        "rerank_ms": 0.0,
+        "total_ms": 84.294,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "ICORECONNECTINC-10-13-2010-EX-7-1-Strategic-Alliance-Agreement__Revenue/Profit Sharing",
+      "category": "Revenue/Profit Sharing",
+      "relevant_total": 8,
+      "ranks_hit": [
+        5,
+        10
+      ],
+      "reciprocal_rank": 0.2,
+      "recall": {
+        "3": 0.0,
+        "6": 0.125,
+        "10": 0.25
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.171,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.2027,
+        "10": 0.2926
+      },
+      "latency_ms": 99.93,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 93.96,
+        "dense_ms": 4.728,
+        "lexical_ms": 0.0,
+        "fusion_ms": 1.187,
+        "rerank_ms": 0.0,
+        "total_ms": 99.875,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "ICORECONNECTINC-10-13-2010-EX-7-1-Strategic-Alliance-Agreement__Termination For Convenience",
+      "category": "Termination For Convenience",
+      "relevant_total": 2,
+      "ranks_hit": [
+        1
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 0.5,
+        "6": 0.5,
+        "10": 0.5
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.6131,
+      "span_coverage": {
+        "3": 0.8957,
+        "6": 0.8957,
+        "10": 0.8957
+      },
+      "latency_ms": 90.49,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 84.837,
+        "dense_ms": 4.978,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.563,
+        "rerank_ms": 0.0,
+        "total_ms": 90.379,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "InmodeLtd-20190729-F-1A-EX-10-9-11743243-EX-10-9-Manufacturing-Agreement__Insurance",
+      "category": "Insurance",
+      "relevant_total": 2,
+      "ranks_hit": [
+        3
+      ],
+      "reciprocal_rank": 0.3333,
+      "recall": {
+        "3": 0.5,
+        "6": 0.5,
+        "10": 0.5
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.3066,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 84.87,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 79.133,
+        "dense_ms": 5.091,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.599,
+        "rerank_ms": 0.0,
+        "total_ms": 84.822,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "InmodeLtd-20190729-F-1A-EX-10-9-11743243-EX-10-9-Manufacturing-Agreement__Minimum Commitment",
+      "category": "Minimum Commitment",
+      "relevant_total": 2,
+      "ranks_hit": [
+        2
+      ],
+      "reciprocal_rank": 0.5,
+      "recall": {
+        "3": 0.5,
+        "6": 0.5,
+        "10": 0.5
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.3869,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 98.4,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 92.057,
+        "dense_ms": 5.66,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.631,
+        "rerank_ms": 0.0,
+        "total_ms": 98.348,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "InmodeLtd-20190729-F-1A-EX-10-9-11743243-EX-10-9-Manufacturing-Agreement__Notice Period To Terminate Renewal",
+      "category": "Notice Period To Terminate Renewal",
+      "relevant_total": 2,
+      "ranks_hit": [
+        6
+      ],
+      "reciprocal_rank": 0.1667,
+      "recall": {
+        "3": 0.0,
+        "6": 0.5,
+        "10": 0.5
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.2184,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.9136,
+        "10": 0.9136
+      },
+      "latency_ms": 88.91,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 82.987,
+        "dense_ms": 5.288,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.588,
+        "rerank_ms": 0.0,
+        "total_ms": 88.863,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "InmodeLtd-20190729-F-1A-EX-10-9-11743243-EX-10-9-Manufacturing-Agreement__Parties",
+      "category": "Parties",
+      "relevant_total": 2,
+      "ranks_hit": [],
+      "reciprocal_rank": 0.0,
+      "recall": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "ndcg_10": 0.0,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "latency_ms": 84.65,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 78.904,
+        "dense_ms": 5.092,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.593,
+        "rerank_ms": 0.0,
+        "total_ms": 84.589,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "InmodeLtd-20190729-F-1A-EX-10-9-11743243-EX-10-9-Manufacturing-Agreement__Post-Termination Services",
+      "category": "Post-Termination Services",
+      "relevant_total": 2,
+      "ranks_hit": [],
+      "reciprocal_rank": 0.0,
+      "recall": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "ndcg_10": 0.0,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "latency_ms": 95.38,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 89.437,
+        "dense_ms": 5.244,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.633,
+        "rerank_ms": 0.0,
+        "total_ms": 95.314,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "InmodeLtd-20190729-F-1A-EX-10-9-11743243-EX-10-9-Manufacturing-Agreement__Termination For Convenience",
+      "category": "Termination For Convenience",
+      "relevant_total": 2,
+      "ranks_hit": [
+        1
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 0.5,
+        "6": 0.5,
+        "10": 0.5
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.6131,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 93.57,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 87.814,
+        "dense_ms": 5.154,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.552,
+        "rerank_ms": 0.0,
+        "total_ms": 93.521,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "IpassInc-20181203-8-K-EX-99-1-11445874-EX-99-1-Reseller-Agreement__Exclusivity",
+      "category": "Exclusivity",
+      "relevant_total": 2,
+      "ranks_hit": [],
+      "reciprocal_rank": 0.0,
+      "recall": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "ndcg_10": 0.0,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "latency_ms": 98.21,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 92.479,
+        "dense_ms": 5.114,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.562,
+        "rerank_ms": 0.0,
+        "total_ms": 98.154,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "IpassInc-20181203-8-K-EX-99-1-11445874-EX-99-1-Reseller-Agreement__Uncapped Liability",
+      "category": "Uncapped Liability",
+      "relevant_total": 2,
+      "ranks_hit": [
+        7
+      ],
+      "reciprocal_rank": 0.1429,
+      "recall": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.5
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.2044,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.2587
+      },
+      "latency_ms": 89.56,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 83.399,
+        "dense_ms": 5.527,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.583,
+        "rerank_ms": 0.0,
+        "total_ms": 89.51,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "IpassInc-20181203-8-K-EX-99-1-11445874-EX-99-1-Reseller-Agreement__Volume Restriction",
+      "category": "Volume Restriction",
+      "relevant_total": 3,
+      "ranks_hit": [],
+      "reciprocal_rank": 0.0,
+      "recall": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "ndcg_10": 0.0,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "latency_ms": 89.1,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 83.297,
+        "dense_ms": 5.261,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.501,
+        "rerank_ms": 0.0,
+        "total_ms": 89.059,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "KALLOINC-11-03-2011-EX-10-1-STRATEGIC-ALLIANCE-AGREEMENT__Cap On Liability",
+      "category": "Cap On Liability",
+      "relevant_total": 3,
+      "ranks_hit": [
+        1
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 0.3333,
+        "6": 0.3333,
+        "10": 0.3333
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.4693,
+      "span_coverage": {
+        "3": 0.0505,
+        "6": 0.0505,
+        "10": 0.0505
+      },
+      "latency_ms": 93.13,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 86.923,
+        "dense_ms": 5.534,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.554,
+        "rerank_ms": 0.0,
+        "total_ms": 93.011,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "KALLOINC-11-03-2011-EX-10-1-STRATEGIC-ALLIANCE-AGREEMENT__Exclusivity",
+      "category": "Exclusivity",
+      "relevant_total": 2,
+      "ranks_hit": [
+        8
+      ],
+      "reciprocal_rank": 0.125,
+      "recall": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.5
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.1934,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.5459
+      },
+      "latency_ms": 91.21,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 84.826,
+        "dense_ms": 5.726,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.607,
+        "rerank_ms": 0.0,
+        "total_ms": 91.16,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "KALLOINC-11-03-2011-EX-10-1-STRATEGIC-ALLIANCE-AGREEMENT__Governing Law",
+      "category": "Governing Law",
+      "relevant_total": 2,
+      "ranks_hit": [
+        1
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 0.5,
+        "6": 0.5,
+        "10": 0.5
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.6131,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 97.61,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 90.822,
+        "dense_ms": 6.171,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.566,
+        "rerank_ms": 0.0,
+        "total_ms": 97.558,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "KALLOINC-11-03-2011-EX-10-1-STRATEGIC-ALLIANCE-AGREEMENT__Insurance",
+      "category": "Insurance",
+      "relevant_total": 3,
+      "ranks_hit": [
+        1
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 0.3333,
+        "6": 0.3333,
+        "10": 0.3333
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.4693,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 95.87,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 90.112,
+        "dense_ms": 5.171,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.527,
+        "rerank_ms": 0.0,
+        "total_ms": 95.809,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "LIMEENERGYCO-09-09-1999-EX-10-DISTRIBUTOR-AGREEMENT__Post-Termination Services",
+      "category": "Post-Termination Services",
+      "relevant_total": 6,
+      "ranks_hit": [
+        9
+      ],
+      "reciprocal_rank": 0.1111,
+      "recall": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.1667
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.0911,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.1774
+      },
+      "latency_ms": 94.26,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 88.627,
+        "dense_ms": 5.079,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.505,
+        "rerank_ms": 0.0,
+        "total_ms": 94.211,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "LIMEENERGYCO-09-09-1999-EX-10-DISTRIBUTOR-AGREEMENT__Price Restrictions",
+      "category": "Price Restrictions",
+      "relevant_total": 6,
+      "ranks_hit": [
+        1
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 0.1667,
+        "6": 0.1667,
+        "10": 0.1667
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.3026,
+      "span_coverage": {
+        "3": 0.2823,
+        "6": 0.2823,
+        "10": 0.2823
+      },
+      "latency_ms": 82.82,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 77.277,
+        "dense_ms": 4.979,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.516,
+        "rerank_ms": 0.0,
+        "total_ms": 82.772,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "MEDIWOUNDLTD-01-15-2014-EX-10-6-SUPPLY-AGREEMENT__Anti-Assignment",
+      "category": "Anti-Assignment",
+      "relevant_total": 2,
+      "ranks_hit": [
+        1
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 0.5,
+        "6": 0.5,
+        "10": 0.5
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.6131,
+      "span_coverage": {
+        "3": 0.5351,
+        "6": 0.5351,
+        "10": 0.5351
+      },
+      "latency_ms": 84.85,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 79.063,
+        "dense_ms": 5.221,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.522,
+        "rerank_ms": 0.0,
+        "total_ms": 84.807,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "MEDIWOUNDLTD-01-15-2014-EX-10-6-SUPPLY-AGREEMENT__Governing Law",
+      "category": "Governing Law",
+      "relevant_total": 2,
+      "ranks_hit": [
+        2
+      ],
+      "reciprocal_rank": 0.5,
+      "recall": {
+        "3": 0.5,
+        "6": 0.5,
+        "10": 0.5
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.3869,
+      "span_coverage": {
+        "3": 0.8113,
+        "6": 0.8113,
+        "10": 0.8113
+      },
+      "latency_ms": 91.83,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 86.057,
+        "dense_ms": 5.115,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.602,
+        "rerank_ms": 0.0,
+        "total_ms": 91.774,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "MEDIWOUNDLTD-01-15-2014-EX-10-6-SUPPLY-AGREEMENT__Volume Restriction",
+      "category": "Volume Restriction",
+      "relevant_total": 2,
+      "ranks_hit": [
+        3
+      ],
+      "reciprocal_rank": 0.3333,
+      "recall": {
+        "3": 0.5,
+        "6": 0.5,
+        "10": 0.5
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.3066,
+      "span_coverage": {
+        "3": 0.4667,
+        "6": 0.4667,
+        "10": 0.4667
+      },
+      "latency_ms": 97.19,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 91.593,
+        "dense_ms": 5.04,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.511,
+        "rerank_ms": 0.0,
+        "total_ms": 97.144,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "MEDIWOUNDLTD-01-15-2014-EX-10-6-SUPPLY-AGREEMENT__Warranty Duration",
+      "category": "Warranty Duration",
+      "relevant_total": 3,
+      "ranks_hit": [],
+      "reciprocal_rank": 0.0,
+      "recall": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "ndcg_10": 0.0,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "latency_ms": 101.01,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 95.054,
+        "dense_ms": 5.27,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.633,
+        "rerank_ms": 0.0,
+        "total_ms": 100.958,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "NEOMEDIATECHNOLOGIESINC-12-15-2005-EX-16-1-DISTRIBUTOR-AGREEMENT__Cap On Liability",
+      "category": "Cap On Liability",
+      "relevant_total": 6,
+      "ranks_hit": [
+        2
+      ],
+      "reciprocal_rank": 0.5,
+      "recall": {
+        "3": 0.1667,
+        "6": 0.1667,
+        "10": 0.1667
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.1909,
+      "span_coverage": {
+        "3": 0.2812,
+        "6": 0.2812,
+        "10": 0.2812
+      },
+      "latency_ms": 98.81,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 92.854,
+        "dense_ms": 5.281,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.628,
+        "rerank_ms": 0.0,
+        "total_ms": 98.764,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "NEOMEDIATECHNOLOGIESINC-12-15-2005-EX-16-1-DISTRIBUTOR-AGREEMENT__Exclusivity",
+      "category": "Exclusivity",
+      "relevant_total": 2,
+      "ranks_hit": [],
+      "reciprocal_rank": 0.0,
+      "recall": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "ndcg_10": 0.0,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "latency_ms": 92.16,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 86.206,
+        "dense_ms": 5.201,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.688,
+        "rerank_ms": 0.0,
+        "total_ms": 92.095,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "NEOMEDIATECHNOLOGIESINC-12-15-2005-EX-16-1-DISTRIBUTOR-AGREEMENT__Minimum Commitment",
+      "category": "Minimum Commitment",
+      "relevant_total": 1,
+      "ranks_hit": [],
+      "reciprocal_rank": 0.0,
+      "recall": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "ndcg_10": 0.0,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "latency_ms": 89.73,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 84.383,
+        "dense_ms": 4.695,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.604,
+        "rerank_ms": 0.0,
+        "total_ms": 89.682,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "NEOMEDIATECHNOLOGIESINC-12-15-2005-EX-16-1-DISTRIBUTOR-AGREEMENT__Parties",
+      "category": "Parties",
+      "relevant_total": 3,
+      "ranks_hit": [],
+      "reciprocal_rank": 0.0,
+      "recall": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "ndcg_10": 0.0,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "latency_ms": 81.59,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 75.821,
+        "dense_ms": 5.179,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.529,
+        "rerank_ms": 0.0,
+        "total_ms": 81.529,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "NEONSYSTEMSINC-03-01-1999-EX-10-5-DISTRIBUTOR-AGREEMENT-New__Anti-Assignment",
+      "category": "Anti-Assignment",
+      "relevant_total": 2,
+      "ranks_hit": [
+        1
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 0.5,
+        "6": 0.5,
+        "10": 0.5
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.6131,
+      "span_coverage": {
+        "3": 0.5371,
+        "6": 0.5371,
+        "10": 0.5371
+      },
+      "latency_ms": 83.05,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 77.471,
+        "dense_ms": 4.991,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.543,
+        "rerank_ms": 0.0,
+        "total_ms": 83.006,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "NEONSYSTEMSINC-03-01-1999-EX-10-5-DISTRIBUTOR-AGREEMENT-New__Audit Rights",
+      "category": "Audit Rights",
+      "relevant_total": 4,
+      "ranks_hit": [
+        1,
+        9
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 0.25,
+        "6": 0.25,
+        "10": 0.5
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.5079,
+      "span_coverage": {
+        "3": 0.4499,
+        "6": 0.4499,
+        "10": 0.7507
+      },
+      "latency_ms": 89.12,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 82.896,
+        "dense_ms": 5.663,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.509,
+        "rerank_ms": 0.0,
+        "total_ms": 89.067,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "NEONSYSTEMSINC-03-01-1999-EX-10-5-DISTRIBUTOR-AGREEMENT-New__Revenue/Profit Sharing",
+      "category": "Revenue/Profit Sharing",
+      "relevant_total": 4,
+      "ranks_hit": [],
+      "reciprocal_rank": 0.0,
+      "recall": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "ndcg_10": 0.0,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "latency_ms": 97.37,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 91.476,
+        "dense_ms": 5.245,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.597,
+        "rerank_ms": 0.0,
+        "total_ms": 97.317,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "OASYSMOBILE-INC-07-05-2001-EX-10-17-OUTSOURCING-AGREEMENT__Parties",
+      "category": "Parties",
+      "relevant_total": 5,
+      "ranks_hit": [],
+      "reciprocal_rank": 0.0,
+      "recall": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "ndcg_10": 0.0,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "latency_ms": 99.35,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 92.889,
+        "dense_ms": 5.774,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.625,
+        "rerank_ms": 0.0,
+        "total_ms": 99.288,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "SEASPINEHOLDINGSCORP-10-10-2018-EX-10-1-SUPPLY-AGREEMENT__Effective Date",
+      "category": "Effective Date",
+      "relevant_total": 1,
+      "ranks_hit": [
+        7
+      ],
+      "reciprocal_rank": 0.1429,
+      "recall": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.3333,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 1.0
+      },
+      "latency_ms": 102.55,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 95.836,
+        "dense_ms": 5.597,
+        "lexical_ms": 0.0,
+        "fusion_ms": 1.065,
+        "rerank_ms": 0.0,
+        "total_ms": 102.498,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "SEASPINEHOLDINGSCORP-10-10-2018-EX-10-1-SUPPLY-AGREEMENT__Exclusivity",
+      "category": "Exclusivity",
+      "relevant_total": 3,
+      "ranks_hit": [
+        1,
+        10
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 0.3333,
+        "6": 0.3333,
+        "10": 0.6667
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.6049,
+      "span_coverage": {
+        "3": 0.1537,
+        "6": 0.1537,
+        "10": 1.0
+      },
+      "latency_ms": 103.44,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 96.523,
+        "dense_ms": 6.296,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.564,
+        "rerank_ms": 0.0,
+        "total_ms": 103.382,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "SEASPINEHOLDINGSCORP-10-10-2018-EX-10-1-SUPPLY-AGREEMENT__Expiration Date",
+      "category": "Expiration Date",
+      "relevant_total": 2,
+      "ranks_hit": [],
+      "reciprocal_rank": 0.0,
+      "recall": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "ndcg_10": 0.0,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "latency_ms": 94.53,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 88.367,
+        "dense_ms": 5.587,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.529,
+        "rerank_ms": 0.0,
+        "total_ms": 94.484,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "SEASPINEHOLDINGSCORP-10-10-2018-EX-10-1-SUPPLY-AGREEMENT__Revenue/Profit Sharing",
+      "category": "Revenue/Profit Sharing",
+      "relevant_total": 4,
+      "ranks_hit": [],
+      "reciprocal_rank": 0.0,
+      "recall": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "ndcg_10": 0.0,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "latency_ms": 95.27,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 89.491,
+        "dense_ms": 5.123,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.595,
+        "rerank_ms": 0.0,
+        "total_ms": 95.209,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "ScansourceInc-20190822-10-K-EX-10-38-11793958-EX-10-38-Distributor-Agreement1__Audit Rights",
+      "category": "Audit Rights",
+      "relevant_total": 2,
+      "ranks_hit": [
+        1
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 0.5,
+        "6": 0.5,
+        "10": 0.5
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.6131,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 99.34,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 92.932,
+        "dense_ms": 5.776,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.579,
+        "rerank_ms": 0.0,
+        "total_ms": 99.287,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "ScansourceInc-20190822-10-K-EX-10-38-11793958-EX-10-38-Distributor-Agreement1__Effective Date",
+      "category": "Effective Date",
+      "relevant_total": 3,
+      "ranks_hit": [
+        4
+      ],
+      "reciprocal_rank": 0.25,
+      "recall": {
+        "3": 0.0,
+        "6": 0.3333,
+        "10": 0.3333
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.2021,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.7576,
+        "10": 0.7576
+      },
+      "latency_ms": 97.03,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 90.875,
+        "dense_ms": 5.537,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.574,
+        "rerank_ms": 0.0,
+        "total_ms": 96.985,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "ScansourceInc-20190822-10-K-EX-10-38-11793958-EX-10-38-Distributor-Agreement1__Renewal Term",
+      "category": "Renewal Term",
+      "relevant_total": 2,
+      "ranks_hit": [
+        7
+      ],
+      "reciprocal_rank": 0.1429,
+      "recall": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.5
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.2044,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.4282
+      },
+      "latency_ms": 86.3,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 80.217,
+        "dense_ms": 5.419,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.62,
+        "rerank_ms": 0.0,
+        "total_ms": 86.256,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "ScansourceInc-20190822-10-K-EX-10-38-11793958-EX-10-38-Distributor-Agreement1__Uncapped Liability",
+      "category": "Uncapped Liability",
+      "relevant_total": 6,
+      "ranks_hit": [
+        1,
+        9
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 0.1667,
+        "6": 0.1667,
+        "10": 0.3333
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.3937,
+      "span_coverage": {
+        "3": 0.2208,
+        "6": 0.2208,
+        "10": 0.2315
+      },
+      "latency_ms": 83.86,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 78.012,
+        "dense_ms": 5.276,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.52,
+        "rerank_ms": 0.0,
+        "total_ms": 83.808,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "TodosMedicalLtd-20190328-20-F-EX-4-10-11587157-EX-4-10-Marketing-Agreement-Resel__Anti-Assignment",
+      "category": "Anti-Assignment",
+      "relevant_total": 2,
+      "ranks_hit": [
+        1
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 0.5,
+        "6": 0.5,
+        "10": 0.5
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.6131,
+      "span_coverage": {
+        "3": 0.7474,
+        "6": 0.7474,
+        "10": 0.7474
+      },
+      "latency_ms": 84.67,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 79.53,
+        "dense_ms": 4.544,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.55,
+        "rerank_ms": 0.0,
+        "total_ms": 84.623,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "TodosMedicalLtd-20190328-20-F-EX-4-10-11587157-EX-4-10-Marketing-Agreement-Resel__Audit Rights",
+      "category": "Audit Rights",
+      "relevant_total": 3,
+      "ranks_hit": [
+        1
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 0.3333,
+        "6": 0.3333,
+        "10": 0.3333
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.4693,
+      "span_coverage": {
+        "3": 0.5245,
+        "6": 0.5245,
+        "10": 0.5245
+      },
+      "latency_ms": 88.31,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 83.069,
+        "dense_ms": 4.677,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.513,
+        "rerank_ms": 0.0,
+        "total_ms": 88.258,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "TodosMedicalLtd-20190328-20-F-EX-4-10-11587157-EX-4-10-Marketing-Agreement-Resel__Cap On Liability",
+      "category": "Cap On Liability",
+      "relevant_total": 3,
+      "ranks_hit": [
+        1,
+        2
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 0.6667,
+        "6": 0.6667,
+        "10": 0.6667
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.7654,
+      "span_coverage": {
+        "3": 0.7573,
+        "6": 0.7573,
+        "10": 0.7573
+      },
+      "latency_ms": 94.43,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 88.804,
+        "dense_ms": 4.969,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.604,
+        "rerank_ms": 0.0,
+        "total_ms": 94.377,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "TodosMedicalLtd-20190328-20-F-EX-4-10-11587157-EX-4-10-Marketing-Agreement-Resel__Minimum Commitment",
+      "category": "Minimum Commitment",
+      "relevant_total": 3,
+      "ranks_hit": [],
+      "reciprocal_rank": 0.0,
+      "recall": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "ndcg_10": 0.0,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "latency_ms": 91.05,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 85.276,
+        "dense_ms": 5.208,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.518,
+        "rerank_ms": 0.0,
+        "total_ms": 91.003,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "TodosMedicalLtd-20190328-20-F-EX-4-10-11587157-EX-4-10-Marketing-Agreement-Resel__Notice Period To Terminate Renewal",
+      "category": "Notice Period To Terminate Renewal",
+      "relevant_total": 1,
+      "ranks_hit": [
+        1
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 1.0,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 84.34,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 78.487,
+        "dense_ms": 5.238,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.563,
+        "rerank_ms": 0.0,
+        "total_ms": 84.288,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "TodosMedicalLtd-20190328-20-F-EX-4-10-11587157-EX-4-10-Marketing-Agreement-Resel__Post-Termination Services",
+      "category": "Post-Termination Services",
+      "relevant_total": 2,
+      "ranks_hit": [
+        7
+      ],
+      "reciprocal_rank": 0.1429,
+      "recall": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.5
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.2044,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 1.0
+      },
+      "latency_ms": 97.36,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 90.127,
+        "dense_ms": 6.381,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.794,
+        "rerank_ms": 0.0,
+        "total_ms": 97.301,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "TodosMedicalLtd-20190328-20-F-EX-4-10-11587157-EX-4-10-Marketing-Agreement-Resel__Renewal Term",
+      "category": "Renewal Term",
+      "relevant_total": 2,
+      "ranks_hit": [
+        1,
+        5
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 0.5,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.8503,
+      "span_coverage": {
+        "3": 0.8578,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 92.74,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 87.042,
+        "dense_ms": 4.959,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.685,
+        "rerank_ms": 0.0,
+        "total_ms": 92.686,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "TodosMedicalLtd-20190328-20-F-EX-4-10-11587157-EX-4-10-Marketing-Agreement-Resel__Warranty Duration",
+      "category": "Warranty Duration",
+      "relevant_total": 2,
+      "ranks_hit": [
+        2
+      ],
+      "reciprocal_rank": 0.5,
+      "recall": {
+        "3": 0.5,
+        "6": 0.5,
+        "10": 0.5
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.3869,
+      "span_coverage": {
+        "3": 0.9662,
+        "6": 0.9662,
+        "10": 0.9662
+      },
+      "latency_ms": 86.02,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 80.195,
+        "dense_ms": 5.202,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.559,
+        "rerank_ms": 0.0,
+        "total_ms": 85.956,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "VAPOTHERM-INC-Manufacturing-and-Supply-Agreement__Audit Rights",
+      "category": "Audit Rights",
+      "relevant_total": 3,
+      "ranks_hit": [
+        1
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 0.3333,
+        "6": 0.3333,
+        "10": 0.3333
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.4693,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 83.96,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 78.126,
+        "dense_ms": 5.224,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.56,
+        "rerank_ms": 0.0,
+        "total_ms": 83.91,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "VAPOTHERM-INC-Manufacturing-and-Supply-Agreement__Insurance",
+      "category": "Insurance",
+      "relevant_total": 5,
+      "ranks_hit": [
+        1
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 0.2,
+        "6": 0.2,
+        "10": 0.2
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.3392,
+      "span_coverage": {
+        "3": 0.2791,
+        "6": 0.2791,
+        "10": 0.2791
+      },
+      "latency_ms": 91.05,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 84.886,
+        "dense_ms": 5.559,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.552,
+        "rerank_ms": 0.0,
+        "total_ms": 90.997,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "VAPOTHERM-INC-Manufacturing-and-Supply-Agreement__Parties",
+      "category": "Parties",
+      "relevant_total": 4,
+      "ranks_hit": [],
+      "reciprocal_rank": 0.0,
+      "recall": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "ndcg_10": 0.0,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "latency_ms": 88.98,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 83.162,
+        "dense_ms": 5.25,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.515,
+        "rerank_ms": 0.0,
+        "total_ms": 88.927,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "VAPOTHERM-INC-Manufacturing-and-Supply-Agreement__Uncapped Liability",
+      "category": "Uncapped Liability",
+      "relevant_total": 2,
+      "ranks_hit": [
+        1
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 0.5,
+        "6": 0.5,
+        "10": 0.5
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.6131,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 85.48,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 79.74,
+        "dense_ms": 5.08,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.616,
+        "rerank_ms": 0.0,
+        "total_ms": 85.436,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "VIRTUALSCOPICS-INC-11-12-2010-EX-10-1-STRATEGIC-ALLIANCE-AGREEMENT__Anti-Assignment",
+      "category": "Anti-Assignment",
+      "relevant_total": 4,
+      "ranks_hit": [
+        1
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 0.25,
+        "6": 0.25,
+        "10": 0.25
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.3904,
+      "span_coverage": {
+        "3": 0.6036,
+        "6": 0.6036,
+        "10": 0.6036
+      },
+      "latency_ms": 86.3,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 80.455,
+        "dense_ms": 5.194,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.592,
+        "rerank_ms": 0.0,
+        "total_ms": 86.24,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "VIRTUALSCOPICS-INC-11-12-2010-EX-10-1-STRATEGIC-ALLIANCE-AGREEMENT__Audit Rights",
+      "category": "Audit Rights",
+      "relevant_total": 2,
+      "ranks_hit": [
+        1
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 0.5,
+        "6": 0.5,
+        "10": 0.5
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.6131,
+      "span_coverage": {
+        "3": 0.8818,
+        "6": 0.8818,
+        "10": 0.8818
+      },
+      "latency_ms": 85.63,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 79.908,
+        "dense_ms": 5.104,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.571,
+        "rerank_ms": 0.0,
+        "total_ms": 85.583,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "VIRTUALSCOPICS-INC-11-12-2010-EX-10-1-STRATEGIC-ALLIANCE-AGREEMENT__Notice Period To Terminate Renewal",
+      "category": "Notice Period To Terminate Renewal",
+      "relevant_total": 2,
+      "ranks_hit": [
+        1
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 0.5,
+        "6": 0.5,
+        "10": 0.5
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.6131,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 86.66,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 80.902,
+        "dense_ms": 5.144,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.57,
+        "rerank_ms": 0.0,
+        "total_ms": 86.616,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "WORLDWIDESTRATEGIESINC-11-02-2005-EX-10-RESELLER-AGREEMENT__Governing Law",
+      "category": "Governing Law",
+      "relevant_total": 2,
+      "ranks_hit": [
+        1
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 0.5,
+        "6": 0.5,
+        "10": 0.5
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.6131,
+      "span_coverage": {
+        "3": 0.2882,
+        "6": 0.2882,
+        "10": 0.2882
+      },
+      "latency_ms": 87.47,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 81.344,
+        "dense_ms": 5.522,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.556,
+        "rerank_ms": 0.0,
+        "total_ms": 87.422,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "WORLDWIDESTRATEGIESINC-11-02-2005-EX-10-RESELLER-AGREEMENT__Termination For Convenience",
+      "category": "Termination For Convenience",
+      "relevant_total": 2,
+      "ranks_hit": [
+        8
+      ],
+      "reciprocal_rank": 0.125,
+      "recall": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.5
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.1934,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.8919
+      },
+      "latency_ms": 88.74,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 82.34,
+        "dense_ms": 5.799,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.557,
+        "rerank_ms": 0.0,
+        "total_ms": 88.697,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "WORLDWIDESTRATEGIESINC-11-02-2005-EX-10-RESELLER-AGREEMENT__Volume Restriction",
+      "category": "Volume Restriction",
+      "relevant_total": 2,
+      "ranks_hit": [],
+      "reciprocal_rank": 0.0,
+      "recall": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "ndcg_10": 0.0,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "latency_ms": 88.94,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 82.844,
+        "dense_ms": 5.476,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.574,
+        "rerank_ms": 0.0,
+        "total_ms": 88.894,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "WORLDWIDESTRATEGIESINC-11-02-2005-EX-10-RESELLER-AGREEMENT__Warranty Duration",
+      "category": "Warranty Duration",
+      "relevant_total": 2,
+      "ranks_hit": [
+        1
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 0.5,
+        "6": 0.5,
+        "10": 0.5
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.6131,
+      "span_coverage": {
+        "3": 0.4371,
+        "6": 0.4371,
+        "10": 0.4371
+      },
+      "latency_ms": 85.93,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 79.831,
+        "dense_ms": 5.446,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.588,
+        "rerank_ms": 0.0,
+        "total_ms": 85.864,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "Zounds-Hearing-Inc-MANUFACTURING-DESIGN-MARKETING-AGREEMENT__Effective Date",
+      "category": "Effective Date",
+      "relevant_total": 1,
+      "ranks_hit": [
+        10
+      ],
+      "reciprocal_rank": 0.1,
+      "recall": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.2891,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 1.0
+      },
+      "latency_ms": 83.84,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 78.006,
+        "dense_ms": 5.169,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.601,
+        "rerank_ms": 0.0,
+        "total_ms": 83.776,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "Zounds-Hearing-Inc-MANUFACTURING-DESIGN-MARKETING-AGREEMENT__Expiration Date",
+      "category": "Expiration Date",
+      "relevant_total": 1,
+      "ranks_hit": [
+        4
+      ],
+      "reciprocal_rank": 0.25,
+      "recall": {
+        "3": 0.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.4307,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 83.25,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 77.813,
+        "dense_ms": 4.879,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.504,
+        "rerank_ms": 0.0,
+        "total_ms": 83.197,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "Zounds-Hearing-Inc-MANUFACTURING-DESIGN-MARKETING-AGREEMENT__Governing Law",
+      "category": "Governing Law",
+      "relevant_total": 2,
+      "ranks_hit": [
+        1
+      ],
+      "reciprocal_rank": 1.0,
+      "recall": {
+        "3": 0.5,
+        "6": 0.5,
+        "10": 0.5
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.6131,
+      "span_coverage": {
+        "3": 0.6818,
+        "6": 0.6818,
+        "10": 0.6818
+      },
+      "latency_ms": 92.25,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 86.33,
+        "dense_ms": 5.287,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.585,
+        "rerank_ms": 0.0,
+        "total_ms": 92.202,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "Zounds-Hearing-Inc-MANUFACTURING-DESIGN-MARKETING-AGREEMENT__Liquidated Damages",
+      "category": "Liquidated Damages",
+      "relevant_total": 2,
+      "ranks_hit": [
+        3
+      ],
+      "reciprocal_rank": 0.3333,
+      "recall": {
+        "3": 0.5,
+        "6": 0.5,
+        "10": 0.5
+      },
+      "hit": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "ndcg_10": 0.3066,
+      "span_coverage": {
+        "3": 1.0,
+        "6": 1.0,
+        "10": 1.0
+      },
+      "latency_ms": 86.39,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 80.879,
+        "dense_ms": 4.904,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.564,
+        "rerank_ms": 0.0,
+        "total_ms": 86.347,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "Zounds-Hearing-Inc-MANUFACTURING-DESIGN-MARKETING-AGREEMENT__Post-Termination Services",
+      "category": "Post-Termination Services",
+      "relevant_total": 2,
+      "ranks_hit": [],
+      "reciprocal_rank": 0.0,
+      "recall": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "ndcg_10": 0.0,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "latency_ms": 82.21,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 76.551,
+        "dense_ms": 5.064,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.554,
+        "rerank_ms": 0.0,
+        "total_ms": 82.169,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "Zounds-Hearing-Inc-MANUFACTURING-DESIGN-MARKETING-AGREEMENT__Revenue/Profit Sharing",
+      "category": "Revenue/Profit Sharing",
+      "relevant_total": 3,
+      "ranks_hit": [],
+      "reciprocal_rank": 0.0,
+      "recall": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "ndcg_10": 0.0,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "latency_ms": 83.36,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 77.444,
+        "dense_ms": 5.313,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.553,
+        "rerank_ms": 0.0,
+        "total_ms": 83.309,
+        "reranker_available": false
+      }
+    },
+    {
+      "qa_id": "Zounds-Hearing-Inc-MANUFACTURING-DESIGN-MARKETING-AGREEMENT__Warranty Duration",
+      "category": "Warranty Duration",
+      "relevant_total": 2,
+      "ranks_hit": [],
+      "reciprocal_rank": 0.0,
+      "recall": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "hit": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "ndcg_10": 0.0,
+      "span_coverage": {
+        "3": 0.0,
+        "6": 0.0,
+        "10": 0.0
+      },
+      "latency_ms": 83.69,
+      "trace": {
+        "strategy": "mmr",
+        "k": 10,
+        "fetch_k": 30,
+        "expanded_query": null,
+        "embed_ms": 78.202,
+        "dense_ms": 4.872,
+        "lexical_ms": 0.0,
+        "fusion_ms": 0.569,
+        "rerank_ms": 0.0,
+        "total_ms": 83.644,
+        "reranker_available": false
+      }
+    }
+  ]
+}

@@ -1,0 +1,566 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ChainLens — every answer, cited</title>
+<meta name="description" content="A retrieval system for freight, supply and distribution contracts. Answers are quoted from the agreement and marked to the exact clause.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  html { scroll-behavior: smooth; }
+  /* An explicit inherited colour: without it anything that does not set its own colour
+     falls back to black, which is invisible on this ground. */
+  body { margin:0; background:#050706; color:#EAF0EC; font-family:'Manrope',system-ui,sans-serif; -webkit-font-smoothing:antialiased; }
+  a { color:#6FBE8F; text-decoration:none; }
+  :focus-visible { outline:2px solid #6FBE8F; outline-offset:3px; border-radius:4px; }
+
+  @keyframes clReveal { from { opacity:0; transform:translateY(22px) } to { opacity:1; transform:translateY(0) } }
+  @keyframes clBreathe { 0%,100%{opacity:.7;transform:scale(1)} 50%{opacity:1;transform:scale(1.035)} }
+  @keyframes clDrift { 0%{transform:translate3d(0,0,0);opacity:0} 16%{opacity:1} 84%{opacity:.7} 100%{transform:translate3d(24px,-420px,0);opacity:0} }
+  @keyframes clFloat { 0%{transform:translate3d(0,0,0)} 50%{transform:translate3d(16px,-40px,0)} 100%{transform:translate3d(0,0,0)} }
+
+  /* Hover states. The design tool expressed these as style-hover attributes; as real CSS
+     they cost nothing at runtime and survive without its runtime. */
+  .cl-pill { display:inline-flex; align-items:center; gap:11px; background:#FFFFFF; color:#0B1A12;
+    font-weight:600; letter-spacing:-.01em; border-radius:999px;
+    transition:background-color 180ms ease-out, transform 180ms ease-out; }
+  .cl-pill:hover { background:#E8EFEA; color:#0B1A12; transform:translateY(-1px); }
+  .cl-pill:active { transform:translateY(0); }
+
+  .cl-wordmark { transition:color 400ms ease, opacity 220ms ease; }
+  .cl-wordmark:hover { opacity:.62; }
+
+  .cl-step { border:1px solid transparent; border-radius:14px;
+    transition:border-color 180ms ease-out, background-color 180ms ease-out, transform 180ms ease-out; }
+  .cl-step:hover { border-color:#3C6B32; background:rgba(16,26,18,.6); transform:translateY(-2px); }
+
+  .cl-term { display:flex; gap:9px; font-size:13px; line-height:1.45; color:#3A4E42; padding:1px 0;
+    transition:color 160ms ease-out, gap 160ms ease-out; cursor:default; }
+  .cl-term:hover { color:#0B2716; gap:12px; }
+
+  .cl-dark-pill { align-self:flex-start; margin-top:6px; display:inline-flex; align-items:center; gap:9px;
+    padding:12px 22px; border-radius:999px; background:#12492F; color:#EAF7EF; font-size:14px; font-weight:500;
+    transition:background-color 180ms ease-out, transform 180ms ease-out, box-shadow 180ms ease-out; }
+  .cl-dark-pill:hover { background:#0C3421; color:#EAF7EF; transform:translateY(-1px); box-shadow:0 6px 20px rgba(10,20,15,.22); }
+  .cl-dark-pill:active { transform:translateY(0); box-shadow:none; }
+
+  /* Underline that wipes in from the left. */
+  .cl-link { font-size:11.5px; letter-spacing:.12em; text-transform:uppercase; font-weight:600; color:#8A9C92;
+    background-image:linear-gradient(#F4F8F5,#F4F8F5); background-repeat:no-repeat; background-position:0 100%;
+    background-size:0% 1px; padding-bottom:3px;
+    transition:color 180ms ease-out, background-size 200ms ease-out; }
+  .cl-link:hover { color:#F4F8F5; background-size:100% 1px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior:auto; }
+    *, *::before, *::after { animation:none !important; transition-duration:.01ms !important; }
+  }
+</style>
+</head>
+<body>
+
+<div style="position:relative;width:100%;overflow-x:clip;background:#050706;font-family:'Manrope',system-ui,sans-serif">
+
+  <div style="position:fixed;inset:0;z-index:0;pointer-events:none">
+    <div id="cl-arcs" style="position:absolute;inset:0;opacity:1;transition:opacity 500ms ease;will-change:transform">
+      <svg viewBox="0 0 1440 900" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%">
+        <defs>
+          <linearGradient id="clFade" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#66BC8C" stop-opacity="0"></stop>
+            <stop offset="22%" stop-color="#66BC8C" stop-opacity=".4"></stop>
+            <stop offset="44%" stop-color="#A8D9BF" stop-opacity=".85"></stop>
+            <stop offset="50%" stop-color="#E2F1E8" stop-opacity="1"></stop>
+            <stop offset="56%" stop-color="#A8D9BF" stop-opacity=".85"></stop>
+            <stop offset="78%" stop-color="#66BC8C" stop-opacity=".4"></stop>
+            <stop offset="100%" stop-color="#66BC8C" stop-opacity="0"></stop>
+          </linearGradient>
+          <radialGradient id="clPool" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#66BC8C" stop-opacity=".14"></stop>
+            <stop offset="100%" stop-color="#66BC8C" stop-opacity="0"></stop>
+          </radialGradient>
+          <filter id="clBlurXL" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="46"></feGaussianBlur></filter>
+          <filter id="clBlurM" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="9"></feGaussianBlur></filter>
+          <filter id="clBlurS" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="2.4"></feGaussianBlur></filter>
+        </defs>
+        <g style="animation:clBreathe 12s ease-in-out infinite;transform-origin:720px 780px">
+          <ellipse cx="720" cy="820" rx="640" ry="170" fill="url(#clPool)" filter="url(#clBlurXL)"></ellipse>
+          <g fill="none" stroke="url(#clFade)">
+            <path d="M -220 320 Q 720 1010 1660 320" stroke-width="72" opacity=".07" filter="url(#clBlurXL)"></path>
+            <path d="M -220 320 Q 720 1010 1660 320" stroke-width="14" opacity=".2" filter="url(#clBlurM)"></path>
+            <path d="M -220 320 Q 720 1010 1660 320" stroke-width="1.6" opacity=".5" filter="url(#clBlurS)"></path>
+            <path d="M -240 540 Q 720 1180 1680 540" stroke-width="40" opacity=".05" filter="url(#clBlurXL)"></path>
+            <path d="M -240 540 Q 720 1180 1680 540" stroke-width="1.3" opacity=".26" filter="url(#clBlurS)"></path>
+            <path d="M -260 150 Q 720 900 1700 150" stroke-width="1" opacity=".14" filter="url(#clBlurS)"></path>
+          </g>
+        </g>
+      </svg>
+    </div>
+  </div>
+
+  <header id="cl-header" style="position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:22px clamp(20px,4vw,56px)">
+    <a id="cl-wordmark" class="cl-wordmark" href="/" style="font-size:17px;font-weight:800;letter-spacing:.02em;color:#EAF0EC">CHAIN<span style="font-weight:300;opacity:.72">LENS</span></a>
+    <a id="cl-headcta" class="cl-pill" href="/app.html" style="font-size:14px;padding:6px 20px 6px 6px">
+      <span style="display:grid;place-items:center;width:28px;height:28px;border-radius:6px;background:#6FBE8F">
+        <svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="#0B1A12" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3.5 10.5 8 6 12.5"></path></svg>
+      </span>
+      Open the reader
+    </a>
+  </header>
+
+  <section id="cl-hero" style="position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;padding:96px clamp(20px,5vw,64px) 72px;text-align:center">
+    <svg viewBox="0 0 1200 300" style="width:min(1120px,100%);height:auto;margin-bottom:-8px" aria-hidden="true">
+      <defs>
+        <linearGradient id="clTile" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#16211B"></stop>
+          <stop offset="100%" stop-color="#0A100D"></stop>
+        </linearGradient>
+        <linearGradient id="clNodeG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#1B2620"></stop>
+          <stop offset="100%" stop-color="#0C1310"></stop>
+        </linearGradient>
+        <filter id="clGlow" x="-70%" y="-70%" width="240%" height="240%"><feGaussianBlur stdDeviation="4"></feGaussianBlur></filter>
+        <filter id="clTileGlow" x="-70%" y="-70%" width="240%" height="240%"><feGaussianBlur stdDeviation="24"></feGaussianBlur></filter>
+      </defs>
+
+      <g fill="none" stroke="#243128" stroke-width="1" stroke-linejoin="round">
+        <path d="M522 110 H400 L372 84 H190"></path>
+        <path d="M522 190 H300 L262 218 H108"></path>
+        <path d="M678 130 H860 L892 114 H1066"></path>
+        <path d="M678 200 H820 L852 236 H952"></path>
+      </g>
+      <g data-trace-glow="1" fill="none" stroke="#5BCF3F" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" filter="url(#clGlow)" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1" opacity=".5">
+        <path data-traceg="0" d="M522 110 H400 L372 84 H190"></path>
+        <path data-traceg="1" d="M522 190 H300 L262 218 H108"></path>
+        <path data-traceg="2" d="M678 130 H860 L892 114 H1066"></path>
+        <path data-traceg="3" d="M678 200 H820 L852 236 H952"></path>
+      </g>
+      <g data-trace-group="1" fill="none" stroke="#5BCF3F" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1">
+        <path data-trace="0" d="M522 110 H400 L372 84 H190"></path>
+        <path data-trace="1" d="M522 190 H300 L262 218 H108"></path>
+        <path data-trace="2" d="M678 130 H860 L892 114 H1066"></path>
+        <path data-trace="3" d="M678 200 H820 L852 236 H952"></path>
+      </g>
+
+      <defs>
+        <symbol id="clDoc" viewBox="0 0 48 48">
+          <rect x="1" y="1" width="46" height="46" rx="9" fill="url(#clNodeG)"></rect>
+          <rect x="1.5" y="1.5" width="45" height="45" rx="8.5" fill="none" stroke="#2C3B33" stroke-width="1"></rect>
+          <path d="M17 12.5h9.2l5.2 5.2v17.4a1.5 1.5 0 0 1-1.5 1.5H17a1.5 1.5 0 0 1-1.5-1.5V14a1.5 1.5 0 0 1 1.5-1.5z" fill="#0B120F" stroke="#4E6659" stroke-width="1.1" stroke-linejoin="round"></path>
+          <path d="M26.2 12.5v4.2a1.1 1.1 0 0 0 1.1 1.1h4.2" fill="none" stroke="#4E6659" stroke-width="1.1" stroke-linejoin="round"></path>
+          <g stroke="#6B8074" stroke-width="1.3" stroke-linecap="round" opacity=".7">
+            <path d="M19.5 23.5h8"></path>
+            <path d="M19.5 27.5h9"></path>
+            <path d="M19.5 31.5h5.5"></path>
+          </g>
+        </symbol>
+      </defs>
+      <g>
+        <use data-node="0" href="#clDoc" x="168" y="62" width="44" height="44"></use>
+        <use data-node="1" href="#clDoc" x="86" y="196" width="44" height="44"></use>
+        <use data-node="2" href="#clDoc" x="1044" y="92" width="44" height="44"></use>
+        <use data-node="3" href="#clDoc" x="930" y="214" width="44" height="44"></use>
+      </g>
+
+      <ellipse cx="600" cy="150" rx="86" ry="70" fill="#66BC8C" opacity=".13" filter="url(#clTileGlow)"></ellipse>
+      <rect x="522" y="66" width="156" height="168" rx="20" fill="url(#clTile)" stroke="#31463B" stroke-width="1.2"></rect>
+      <rect x="536" y="80" width="128" height="140" rx="12" fill="none" stroke="#233229" stroke-width="1"></rect>
+      <g fill="#22332A">
+        <rect x="548" y="92" width="16" height="12" rx="3"></rect>
+        <rect x="570" y="92" width="16" height="12" rx="3"></rect>
+        <rect x="614" y="92" width="16" height="12" rx="3"></rect>
+        <rect x="636" y="92" width="16" height="12" rx="3"></rect>
+        <rect x="548" y="196" width="16" height="12" rx="3"></rect>
+        <rect x="570" y="196" width="16" height="12" rx="3"></rect>
+        <rect x="614" y="196" width="16" height="12" rx="3"></rect>
+        <rect x="636" y="196" width="16" height="12" rx="3"></rect>
+      </g>
+      <g>
+        <rect x="576" y="120" width="48" height="60" rx="4" fill="#0C1611" stroke="#33493D" stroke-width="1.2"></rect>
+        <g stroke-linecap="round" stroke-width="2.4" stroke="#9FA0A3">
+          <path data-line="132" opacity=".16" d="M586 132 H614"></path>
+          <path data-line="142" opacity=".16" d="M586 142 H608"></path>
+          <path data-line="152" opacity=".16" d="M586 152 H614"></path>
+          <path data-line="162" opacity=".16" d="M586 162 H604"></path>
+        </g>
+        <g id="cl-scan">
+          <rect x="576" y="114" width="48" height="12" fill="#66BC8C" opacity=".10"></rect>
+          <rect x="576" y="125" width="48" height="1.2" fill="#A8C6B5" opacity=".8"></rect>
+        </g>
+      </g>
+      <text x="600" y="206" text-anchor="middle" font-family="Manrope,sans-serif" font-size="15" font-weight="800" letter-spacing="1.6" fill="#B9CCC1">CHAIN<tspan font-weight="300" opacity=".7">LENS</tspan></text>
+    </svg>
+
+    <h1 id="cl-headline" data-reveal="0" style="margin:0;max-width:13ch;font-size:clamp(48px,7.6vw,112px);line-height:.94;letter-spacing:-.04em;font-weight:500;color:#F4F8F5;text-wrap:balance">Every answer, cited.</h1>
+    <p data-reveal="1" style="margin:0;max-width:46ch;font-size:clamp(15px,1.35vw,18px);line-height:1.6;color:#9CB0A4;font-weight:400">Ask a question of any logistics agreement. ChainLens answers from the contract itself and marks the clause it drew on, so every answer can be checked against the source.</p>
+
+    <a href="/app.html" data-reveal="2" class="cl-pill" style="font-size:15px;padding:7px 24px 7px 7px">
+      <span style="display:grid;place-items:center;width:32px;height:32px;border-radius:7px;background:#6FBE8F">
+        <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="#0B1A12" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3.5 10.5 8 6 12.5"></path></svg>
+      </span>
+      Open the reader
+    </a>
+
+    <p data-reveal="3" style="margin:6px 0 0;max-width:52ch;font-size:13px;line-height:1.65;color:#7A8C81;font-weight:400">A retrieval system for freight, supply and distribution contracts — built to be verified, not trusted.</p>
+  </section>
+
+  <section id="cl-how" style="position:relative;z-index:1;padding:clamp(80px,11vh,140px) clamp(20px,5vw,64px) clamp(100px,14vh,170px)">
+    <div style="max-width:1040px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:clamp(46px,6vh,72px)">
+      <h2 data-reveal="0" style="margin:0;font-size:clamp(32px,4.6vw,58px);line-height:1.05;letter-spacing:-.035em;font-weight:500;color:#F4F8F5;text-align:center">Grounded in the <span style="color:#8FD870">source</span></h2>
+      <p data-reveal="1" style="margin:-24px 0 0;max-width:52ch;font-size:14px;line-height:1.7;color:#8A9C92;text-align:center">Retrieval runs across the entire agreement, not the first passage that happens to match.</p>
+      <div style="position:relative;width:100%;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:clamp(24px,4vw,40px);align-items:start">
+        <div style="position:absolute;top:33px;left:17%;right:17%;height:1px;background:rgba(201,222,212,.14)"></div>
+        <div style="position:absolute;top:28px;left:33%;width:11px;height:11px;border:1px solid rgba(201,222,212,.3);transform:rotate(45deg)"></div>
+        <div style="position:absolute;top:28px;left:66%;width:11px;height:11px;border:1px solid rgba(201,222,212,.3);transform:rotate(45deg)"></div>
+        <div data-reveal="2" class="cl-step" style="position:relative;display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;padding:14px 14px 24px">
+          <div style="display:grid;place-items:center;width:66px;height:66px;border-radius:8px;border:1px solid #26382E;background:linear-gradient(180deg,#16211B,#0A100D)">
+            <svg viewBox="0 0 24 24" width="25" height="25" fill="none" stroke="#5BCF3F" stroke-width="1.4" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"></circle><path d="M15.8 15.8 21 21"></path></svg>
+          </div>
+          <h3 style="margin:0;font-size:15px;font-weight:500;letter-spacing:-.01em;color:#E4EDE7">Ask in plain language</h3>
+          <p style="margin:0;max-width:22ch;font-size:13px;line-height:1.6;color:#8A9C92">No legal phrasing required</p>
+        </div>
+        <div data-reveal="2" class="cl-step" style="position:relative;display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;padding:14px 14px 24px">
+          <div style="display:grid;place-items:center;width:66px;height:66px;border-radius:8px;border:1px solid #26382E;background:linear-gradient(180deg,#16211B,#0A100D)">
+            <svg viewBox="0 0 24 24" width="25" height="25" fill="none" stroke="#5BCF3F" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h8l4 4v14H6z"></path><path d="M9 12h6M9 16h4"></path></svg>
+          </div>
+          <h3 style="margin:0;font-size:15px;font-weight:500;letter-spacing:-.01em;color:#E4EDE7">It reads the whole agreement</h3>
+          <p style="margin:0;max-width:24ch;font-size:13px;line-height:1.6;color:#8A9C92">Every clause is searched, not just the closest match</p>
+        </div>
+        <div data-reveal="3" class="cl-step" style="position:relative;display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;padding:14px 14px 24px">
+          <div style="display:grid;place-items:center;width:66px;height:66px;border-radius:8px;border:1px solid #26382E;background:linear-gradient(180deg,#16211B,#0A100D)">
+            <svg viewBox="0 0 24 24" width="25" height="25" fill="none" stroke="#5BCF3F" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 4h-3a1.5 1.5 0 0 0-1.5 1.5v13A1.5 1.5 0 0 0 5.5 20h3M15.5 4h3a1.5 1.5 0 0 1 1.5 1.5v13a1.5 1.5 0 0 1-1.5 1.5h-3"></path><path d="M8.5 10h7M8.5 14h4.5"></path></svg>
+          </div>
+          <h3 style="margin:0;font-size:15px;font-weight:500;letter-spacing:-.01em;color:#E4EDE7">You receive the answer and its clause</h3>
+          <p style="margin:0;max-width:23ch;font-size:13px;line-height:1.6;color:#8A9C92">Quoted from the contract, located to the character</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="cl-white" style="position:relative;z-index:2;background:#FBFDFB;border-radius:clamp(28px,4vw,44px) clamp(28px,4vw,44px) 0 0">
+    <div id="cl-orbs" style="position:absolute;inset:0;overflow:hidden;pointer-events:none;border-radius:inherit"></div>
+
+    <section id="cl-problem" style="position:relative;z-index:1;padding:clamp(80px,12vh,140px) clamp(20px,4vw,48px)">
+      <div style="max-width:1200px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:18px">
+        <span data-reveal="0" data-late="1" style="padding:6px 16px;border-radius:999px;border:1px solid #C2DBCC;background:#FFFFFF;color:#12492F;font-size:12px;font-weight:500">The problem</span>
+        <h2 data-reveal="1" data-late="1" style="margin:0;max-width:17ch;text-align:center;font-size:clamp(34px,5.2vw,60px);line-height:1.1;letter-spacing:-.035em;font-weight:600;color:#12492F">Long agreements,<br><span style="color:#1E7A45">slow answers</span></h2>
+        <p data-reveal="2" data-late="1" style="margin:0;max-width:56ch;text-align:center;font-size:15px;line-height:1.65;color:#4C5C53">A freight or supply agreement runs to dozens of dense pages, and the clause that governs your question is rarely where you expect it. Reading by hand is slow; an assistant that cannot show you its source is merely a confident guess.</p>
+
+        <div data-reveal="3" data-late="1" style="width:100%;margin-top:24px;border-radius:20px;overflow:hidden;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr))">
+          <div style="position:relative;overflow:hidden;background:#04120A;min-height:360px;display:flex;align-items:flex-end;padding:clamp(28px,4vw,44px)">
+            <div style="position:absolute;left:-38%;top:-16%;width:88%;height:132%;border-radius:50%;background:radial-gradient(circle at 62% 50%, rgba(6,20,13,0) 52%, rgba(140,240,184,.9) 63%, rgba(37,140,92,.5) 71%, rgba(6,20,13,0) 86%);filter:blur(4px)"></div>
+            <div style="position:absolute;right:-38%;top:-16%;width:88%;height:132%;border-radius:50%;background:radial-gradient(circle at 38% 50%, rgba(6,20,13,0) 52%, rgba(140,240,184,.9) 63%, rgba(37,140,92,.5) 71%, rgba(6,20,13,0) 86%);filter:blur(4px)"></div>
+            <div style="position:absolute;left:-30%;top:-10%;width:80%;height:120%;border-radius:50%;background:radial-gradient(circle at 62% 50%, rgba(20,90,58,.5), rgba(6,20,13,0) 72%);filter:blur(20px)"></div>
+            <div style="position:absolute;right:-30%;top:-10%;width:80%;height:120%;border-radius:50%;background:radial-gradient(circle at 38% 50%, rgba(20,90,58,.5), rgba(6,20,13,0) 72%);filter:blur(20px)"></div>
+            <div id="cl-orbs-panel" style="position:absolute;inset:0;overflow:hidden"></div>
+            <span style="position:relative;font-size:clamp(26px,3vw,38px);font-weight:500;letter-spacing:-.02em;color:#F4F8F5;border-bottom:1px solid rgba(244,248,245,.55);padding-bottom:9px">Buried terms</span>
+          </div>
+          <div style="background:#DFF3E6;padding:clamp(28px,4vw,52px);display:flex;flex-direction:column;gap:20px">
+            <h3 style="margin:0;font-size:clamp(21px,2.2vw,27px);font-weight:600;letter-spacing:-.02em;color:#12492F">What gets buried</h3>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px 26px">
+              <span class="cl-term"><span style="color:#1E7A45;font-weight:700">›</span>Liability caps</span>
+              <span class="cl-term"><span style="color:#1E7A45;font-weight:700">›</span>Indemnity and risk</span>
+              <span class="cl-term"><span style="color:#1E7A45;font-weight:700">›</span>Renewal and notice windows</span>
+              <span class="cl-term"><span style="color:#1E7A45;font-weight:700">›</span>Termination triggers</span>
+              <span class="cl-term"><span style="color:#1E7A45;font-weight:700">›</span>Insurance requirements</span>
+              <span class="cl-term"><span style="color:#1E7A45;font-weight:700">›</span>Governing law</span>
+              <span class="cl-term"><span style="color:#1E7A45;font-weight:700">›</span>Payment and penalty terms</span>
+              <span class="cl-term"><span style="color:#1E7A45;font-weight:700">›</span>Confidentiality</span>
+              <span class="cl-term"><span style="color:#1E7A45;font-weight:700">›</span>Who covers lost or damaged goods</span>
+              <span class="cl-term"><span style="color:#1E7A45;font-weight:700">›</span>Force majeure</span>
+            </div>
+            <a href="#cl-helps" class="cl-dark-pill">See how it helps <span style="font-size:11.5px">▾</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="cl-helps" style="position:relative;z-index:1;height:260vh;padding:0 clamp(14px,2.4vw,30px)">
+      <div style="position:sticky;top:0;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:clamp(14px,2.2vh,26px);padding:clamp(76px,10vh,104px) 0 clamp(20px,3vh,34px)">
+        <span data-reveal="0" data-late="1" style="padding:6px 16px;border-radius:999px;border:1px solid #C2DBCC;background:#FFFFFF;color:#12492F;font-size:12px;font-weight:500">Solutions</span>
+        <h2 data-reveal="1" data-late="1" style="margin:0;max-width:16ch;text-align:center;font-size:clamp(28px,4vw,50px);line-height:1.1;letter-spacing:-.035em;font-weight:600;color:#12492F">One reader for the<br><span style="color:#1E7A45">whole contract</span></h2>
+        <div style="position:relative;width:100%;flex:1;min-height:0;overflow:hidden;border-radius:28px 28px 0 0">
+          <div id="cl-panel" style="position:absolute;inset:0;background:#0F3324;border-radius:28px 28px 0 0;padding:clamp(30px,5vh,64px) clamp(26px,4vw,72px);display:flex;align-items:center;will-change:transform">
+            <div style="width:100%;max-width:1180px;margin:0 auto;display:grid;grid-template-columns:minmax(0,40fr) minmax(0,60fr);gap:clamp(24px,4vw,64px);align-items:center">
+              <h3 style="margin:0;font-size:clamp(40px,5.6vw,86px);line-height:.92;letter-spacing:-.04em;font-weight:500;color:#6FBE8F">Grounded</h3>
+              <div style="position:relative;display:flex;flex-direction:column;gap:clamp(22px,4vh,44px);padding-left:30px">
+                <div style="position:absolute;left:-30px;top:10px;bottom:10px;width:1px;background:rgba(223,243,230,.16)"></div>
+                <div id="cl-dot" style="position:absolute;left:-43px;top:0;width:26px;height:26px;border-radius:50%;background:#5BCF3F;box-shadow:0 0 10px rgba(91,207,63,.9),0 0 30px rgba(91,207,63,.5),0 0 58px rgba(91,207,63,.28);will-change:transform"></div>
+                <div data-row="0" style="position:relative">
+                  <div data-bar="0" style="position:absolute;left:-14px;top:0;bottom:0;width:3px;border-radius:3px;background:transparent;transition:background-color 320ms ease"></div>
+                  <h4 style="margin:0 0 6px;font-size:clamp(19px,2vw,26px);font-weight:500;letter-spacing:-.02em;color:rgba(157,214,181,.5);transition:color 320ms ease" data-row-title="0">Exact-clause citations</h4>
+                  <p style="margin:0;font-size:14px;line-height:1.55;color:rgba(223,243,230,.62);transition:color 320ms ease" data-row-body="0">Every answer marks the passage it was drawn from, to the character</p>
+                </div>
+                <div data-row="1" style="position:relative">
+                  <div data-bar="1" style="position:absolute;left:-14px;top:0;bottom:0;width:3px;border-radius:3px;background:transparent;transition:background-color 320ms ease"></div>
+                  <h4 style="margin:0 0 6px;font-size:clamp(19px,2vw,26px);font-weight:500;letter-spacing:-.02em;color:rgba(157,214,181,.5);transition:color 320ms ease" data-row-title="1">Hybrid retrieval</h4>
+                  <p style="margin:0;font-size:14px;line-height:1.55;color:rgba(223,243,230,.62);transition:color 320ms ease" data-row-body="1">Dense and lexical search, fused, across the full text</p>
+                </div>
+                <div data-row="2" style="position:relative">
+                  <div data-bar="2" style="position:absolute;left:-14px;top:0;bottom:0;width:3px;border-radius:3px;background:transparent;transition:background-color 320ms ease"></div>
+                  <h4 style="margin:0 0 6px;font-size:clamp(19px,2vw,26px);font-weight:500;letter-spacing:-.02em;color:rgba(157,214,181,.5);transition:color 320ms ease" data-row-title="2">Your own agreements</h4>
+                  <p style="margin:0;font-size:14px;line-height:1.55;color:rgba(223,243,230,.62);transition:color 320ms ease" data-row-body="2">Upload a PDF and put questions to it immediately</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+
+  <section id="cl-close" style="position:relative;z-index:3;min-height:100vh;display:flex;flex-direction:column;background:#050706;border-radius:clamp(28px,4vw,44px) clamp(28px,4vw,44px) 0 0;overflow:hidden">
+    <div style="position:relative;flex:1;min-height:0;overflow:hidden;display:flex;flex-direction:column;align-items:center;padding:clamp(120px,18vh,200px) clamp(20px,5vw,56px) 0;text-align:center">
+      <svg viewBox="0 0 1440 900" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1">
+        <g style="animation:clBreathe 12s ease-in-out infinite;transform-origin:720px 780px">
+          <g fill="none" stroke="url(#clFade)">
+            <path d="M -220 320 Q 720 1010 1660 320" stroke-width="26" opacity=".08" filter="url(#clBlurM)"></path>
+            <path d="M -220 320 Q 720 1010 1660 320" stroke-width="2" opacity=".55" filter="url(#clBlurS)"></path>
+            <path d="M -240 540 Q 720 1180 1680 540" stroke-width="1.4" opacity=".3" filter="url(#clBlurS)"></path>
+          </g>
+        </g>
+      </svg>
+      <span id="cl-ghost" style="position:absolute;left:50%;bottom:0;transform:translate(-50%,32%);font-size:clamp(110px,19vw,290px);font-weight:800;letter-spacing:-.02em;line-height:1;color:rgba(234,240,236,.035);white-space:nowrap;pointer-events:none;z-index:0;transition:opacity 700ms ease">ChainLens</span>
+      <div style="position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:30px">
+        <h2 data-reveal="0" data-late="1" style="margin:0;font-size:clamp(38px,6vw,82px);line-height:1;letter-spacing:-.04em;font-weight:500;color:#F4F8F5">Nothing to take on trust.</h2>
+        <a href="/app.html" data-reveal="1" data-late="1" class="cl-pill" style="font-size:15px;padding:7px 24px 7px 7px">
+          <span style="display:grid;place-items:center;width:32px;height:32px;border-radius:7px;background:#6FBE8F">
+            <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="#0B1A12" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3.5 10.5 8 6 12.5"></path></svg>
+          </span>
+          Open the reader
+        </a>
+      </div>
+    </div>
+    <footer style="position:relative;z-index:2;flex:0 0 auto;box-sizing:border-box;width:100%;background:#050706;padding:0 clamp(20px,5vw,56px)">
+      <div style="max-width:1160px;margin:0 auto;display:flex;flex-direction:column;gap:clamp(20px,3vh,32px);padding:clamp(30px,5vh,50px) 0 clamp(24px,4vh,36px);border-top:1px solid #141E19">
+        <div style="display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:24px">
+          <p style="margin:0;font-size:12px;line-height:1.5;color:#7A8A81">Built on the CUAD contract corpus.</p>
+          <nav style="display:flex;flex-wrap:wrap;gap:26px">
+            <a class="cl-link" href="https://github.com/swapnil5053/ChainLens" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a class="cl-link" target="_blank" rel="noopener noreferrer" href="https://github.com/swapnil5053/ChainLens/blob/HEAD/docs/RETRIEVAL.md">How it is measured</a>
+          </nav>
+        </div>
+        <span style="font-size:12px;color:#7A8A81">© 2026 ChainLens</span>
+      </div>
+    </footer>
+  </section>
+</div>
+
+<script>
+(function () {
+  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var t0 = performance.now();
+  var LIME = '#5BCF3F', ACCENT = '#6FBE8F';
+  var clamp = function (v, a, b) { return Math.min(b, Math.max(a, v)); };
+  var $ = function (id) { return document.getElementById(id); };
+  var all = function (sel) { return [].slice.call(document.querySelectorAll(sel)); };
+
+  // Floating bokeh over the light slabs, in three parallax layers.
+  (function buildOrbs() {
+    var total = reduced ? 0 : 34;
+    var host = $('cl-orbs');
+    if (host && total) {
+      [{ speed: .05, size: [9, 18], blur: 1.4, share: .38 },
+       { speed: .12, size: [18, 32], blur: 3.5, share: .36 },
+       { speed: .22, size: [30, 48], blur: 8, share: .26 }].forEach(function (L) {
+        var wrap = document.createElement('div');
+        wrap.style.cssText = 'position:absolute;inset:0;will-change:transform';
+        wrap.dataset.speed = String(L.speed);
+        var n = Math.max(1, Math.round(total * L.share));
+        for (var i = 0; i < n; i++) {
+          var s = L.size[0] + Math.random() * (L.size[1] - L.size[0]);
+          var green = Math.random() > .35;
+          var tint = green ? '67,226,126' : '160,180,170';
+          var d = document.createElement('div');
+          d.style.cssText = 'position:absolute;border-radius:50%;pointer-events:none;left:' +
+            (Math.random() * 100).toFixed(2) + '%;top:' + (45 + Math.random() * 75).toFixed(2) + '%;width:' +
+            s.toFixed(1) + 'px;height:' + s.toFixed(1) + 'px;opacity:0;background:radial-gradient(circle at 36% 32%, rgba(' +
+            tint + ',' + (green ? .62 : .4) + '), rgba(' + tint + ',' + (green ? .28 : .17) + ') 55%, rgba(' + tint +
+            ',0) 74%);filter:blur(' + L.blur + 'px);animation:clDrift ' + (11 + Math.random() * 9).toFixed(1) +
+            's linear ' + (-Math.random() * 18).toFixed(1) + 's infinite;';
+          wrap.appendChild(d);
+        }
+        host.appendChild(wrap);
+      });
+    }
+    // Buried-terms panel: a few defined out-of-focus lights, not smudges.
+    var panel = $('cl-orbs-panel');
+    if (panel && !reduced) {
+      [{ x: 8, y: 12, s: 96, blur: 5, white: true },
+       { x: 62, y: 6, s: 58, blur: 2, white: false },
+       { x: 34, y: 46, s: 132, blur: 12, white: false },
+       { x: 76, y: 58, s: 74, blur: 3, white: true },
+       { x: 16, y: 66, s: 46, blur: 1, white: false }].forEach(function (o, i) {
+        var tint = o.white ? '235,255,244' : '67,226,126';
+        var d = document.createElement('div');
+        d.style.cssText = 'position:absolute;border-radius:50%;pointer-events:none;left:' + o.x + '%;top:' + o.y +
+          '%;width:' + o.s + 'px;height:' + o.s + 'px;background:radial-gradient(circle at 42% 38%, rgba(' + tint +
+          ',.7), rgba(' + tint + ',.34) 62%, rgba(' + tint + ',.14) 82%, rgba(' + tint + ',0) 100%);filter:blur(' +
+          o.blur + 'px);animation:clFloat ' + (14 + i * 2.6).toFixed(1) + 's ease-in-out ' + (-i * 3.4).toFixed(1) +
+          's infinite;';
+        panel.appendChild(d);
+      });
+    }
+  })();
+
+  // Content on a slab only reveals once that slab's background is behind it. The visible
+  // state is written directly and the animation is purely additive, so a stalled clock can
+  // never leave content clipped.
+  var pumpReveal = null;
+  (function bindReveal() {
+    if (reduced) return;
+    var show = function (el) {
+      el.dataset.revealed = '1';
+      el.style.clipPath = 'none';
+      el.style.transform = 'none';
+      el.style.opacity = '1';
+    };
+    var play = function (el) {
+      show(el);
+      el.style.animation = 'clReveal 760ms cubic-bezier(.2,.75,.2,1) ' + (60 + Number(el.dataset.reveal || 0) * 95) + 'ms';
+    };
+    var gate = function (el) { return el.dataset.late === '1' ? innerHeight * .62 : innerHeight * .88; };
+    var sectionTop = function (el) {
+      var s = el.closest('section, #cl-white');
+      return (s || el).getBoundingClientRect().top;
+    };
+    var hero = $('cl-hero');
+    all('[data-reveal]').forEach(function (el) {
+      var first = hero && hero.contains(el);
+      if (!first && sectionTop(el) > gate(el)) {
+        el.style.clipPath = 'inset(100% 0 0 0)';
+        el.style.transform = 'translateY(22px)';
+      } else play(el);
+    });
+    pumpReveal = function () {
+      all('[data-reveal]').forEach(function (el) {
+        if (el.dataset.revealed !== '1' && sectionTop(el) < gate(el)) play(el);
+      });
+    };
+    // Catch-all: nothing stays clipped, whatever the scroll situation.
+    setTimeout(function () {
+      all('[data-reveal]').forEach(function (el) { if (el.dataset.revealed !== '1') show(el); });
+    }, 2000);
+  })();
+
+  // The scan line sweeping the document inside the chip.
+  (function bindGlyph() {
+    var scan = $('cl-scan');
+    var lines = all('[data-line]');
+    if (!scan) return;
+    if (reduced) { lines.forEach(function (l) { l.setAttribute('opacity', '.5'); }); return; }
+    var hero = $('cl-hero');
+    var tick = function (t) {
+      requestAnimationFrame(tick);
+      if (hero.getBoundingClientRect().bottom < 0) return;
+      var p = .5 - .5 * Math.cos(t / 1900);
+      var y = 126 + p * 46;
+      scan.setAttribute('transform', 'translate(0,' + (p * 46).toFixed(1) + ')');
+      lines.forEach(function (l) {
+        var hit = Math.max(0, 1 - Math.abs(Number(l.dataset.line) - y) / 8);
+        l.setAttribute('opacity', (.14 + hit * .86).toFixed(3));
+      });
+    };
+    requestAnimationFrame(tick);
+  })();
+
+  (function bindScroll() {
+    var heroEl = $('cl-hero');
+    var heroTop0 = heroEl ? heroEl.getBoundingClientRect().top : 0;
+
+    var setRow = function (titles, bodies, bars, i, on) {
+      titles[i].style.color = on ? '#F2FFF7' : 'rgba(157,214,181,.5)';
+      bodies[i].style.color = on ? 'rgba(238,252,244,.92)' : 'rgba(223,243,230,.62)';
+      bars[i].style.background = on ? ACCENT : 'transparent';
+    };
+
+    var frame = function () {
+      if (pumpReveal) pumpReveal();
+      var vh = innerHeight;
+      var y = heroEl ? Math.max(0, -(heroEl.getBoundingClientRect().top - heroTop0)) : 0;
+
+      var arcs = $('cl-arcs'), wordmark = $('cl-wordmark'), orbs = $('cl-orbs');
+      var dot = $('cl-dot'), panel = $('cl-panel'), ghost = $('cl-ghost');
+      var helps = $('cl-helps'), close = $('cl-close'), white = $('cl-white');
+      var headCta = $('cl-headcta');
+      if (!arcs || !orbs || !white || !close || !helps || !panel || !dot || !ghost) return;
+
+      var layers = [].slice.call(orbs.children);
+      var traces = all('[data-trace]'), nodes = all('[data-node]'), glows = all('[data-traceg]');
+      var titles = all('[data-row-title]'), bodies = all('[data-row-body]'), bars = all('[data-bar]');
+      var rows = all('[data-row]');
+
+      // Slabs own their own background and slide over one another; nothing cross-fades.
+      var whiteTop = white.getBoundingClientRect().top;
+      var closeTop = close.getBoundingClientRect().top;
+      // The wordmark inverts only while a light slab is actually behind the header: the
+      // white section owns the light scene from its top edge until the closing slab covers it.
+      var onWhite = whiteTop <= 1 && closeTop > 1;
+      arcs.style.opacity = whiteTop > vh * .02 ? '1' : '0';
+      wordmark.style.color = onWhite ? '#12492F' : '#EAF0EC';
+
+      if (!reduced) {
+        arcs.style.transform = 'translate3d(0,' + (y * .05).toFixed(1) + 'px,0) scale(' + (1 + clamp(y / 4200, 0, .12)).toFixed(4) + ')';
+        layers.forEach(function (l) { l.style.transform = 'translate3d(0,' + (-y * Number(l.dataset.speed)).toFixed(1) + 'px,0)'; });
+      }
+
+      // Only two or three trace segments carry the bright lime at once: a travelling window.
+      var intro = clamp((performance.now() - t0 - 250) / 1400, 0, 1) * .5;
+      var hp = reduced ? 1 : Math.max(intro, clamp(y / (vh * .85), 0, 1));
+      traces.forEach(function (p, i) {
+        var t = clamp(hp * 1.6 - i * .16, 0, 1);
+        var w = Math.max(0, 1 - Math.abs(hp * 1.35 - i * .26 - .18) / .4);
+        p.setAttribute('stroke-dashoffset', String(1 - t));
+        p.setAttribute('opacity', (.12 + w * .62).toFixed(3));
+        if (glows[i]) {
+          glows[i].setAttribute('stroke-dashoffset', String(1 - t));
+          glows[i].setAttribute('opacity', (w * .28).toFixed(3));
+        }
+        var n = nodes[i];
+        if (n) {
+          var lit = w > .5;
+          n.style.filter = lit ? 'drop-shadow(0 0 9px rgba(91,207,63,.45))' : 'none';
+          n.style.opacity = lit ? '1' : '.55';
+        }
+      });
+
+      // The green slab rises under the pinned heading. Position only, never a colour fade.
+      var hTop = helps.getBoundingClientRect().top + y, hSpan = helps.offsetHeight - vh;
+      var pp = reduced ? 1 : clamp((y - hTop) / Math.max(hSpan, 1), 0, 1);
+      var rise = clamp(pp / .22, 0, 1);
+      panel.style.transform = 'translateY(' + ((1 - rise) * 100).toFixed(1) + '%)';
+      var track = clamp((pp - .26) / .58, 0, 1);
+      var trackH = dot.parentElement.offsetHeight - 26;
+      dot.style.transform = 'translate3d(0,' + (track * trackH).toFixed(1) + 'px,0)';
+      dot.style.opacity = String(rise);
+      rows.forEach(function (r, i) {
+        setRow(titles, bodies, bars, i, track * trackH + 13 >= r.offsetTop + r.offsetHeight * .5 - 12);
+      });
+
+      ghost.style.opacity = String(clamp((vh - closeTop) / (vh * .55), 0, 1));
+
+      // Only one call to action visible at a time: the header pill steps back for the closing one.
+      if (headCta) {
+        if (!headCta.dataset.tx) {
+          headCta.dataset.tx = '1';
+          headCta.style.transition = 'opacity 260ms ease-out, transform 260ms ease-out, background-color 180ms ease-out';
+        }
+        var hide = closeTop < vh * .55;
+        headCta.style.opacity = hide ? '0' : '1';
+        headCta.style.transform = hide ? 'translateY(-6px)' : 'translateY(0)';
+        headCta.style.pointerEvents = hide ? 'none' : 'auto';
+      }
+    };
+
+    var loop = function () {
+      try { frame(); } catch (e) { console.error(e); }
+      requestAnimationFrame(loop);
+    };
+    requestAnimationFrame(loop);
+  })();
+})();
+</script>
+</body>
+</html>

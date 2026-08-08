@@ -1,0 +1,86 @@
+[project]
+name = "chainlens"
+version = "2.0.0"
+description = "Clause-level contract analysis for supply chain and logistics documents"
+requires-python = ">=3.12"
+dependencies = [
+  # Pinned rather than ranged: a looser bound sends pip into an unbounded backtrack,
+  # because a newer FastAPI pulls a Starlette range that sse-starlette rejects. This exact
+  # pair resolves in seconds (starlette 0.41.3). Re-check the resolve time before loosening.
+  "fastapi==0.115.6",
+  "uvicorn[standard]>=0.30",
+  "sqlalchemy>=2.0",
+  "alembic>=1.13",
+  "psycopg[binary]>=3.2",
+  "pgvector>=0.3",
+  "pydantic>=2.8",
+  "pydantic-settings>=2.4",
+  "pypdf>=4.3",
+  "numpy>=1.26",
+  "scikit-learn>=1.5",
+  "arq>=0.26",
+  "redis>=5.0",
+  "httpx>=0.27",
+  "pyyaml>=6.0",
+  "sse-starlette==2.1.3",
+  "python-multipart>=0.0.9",
+  "tenacity>=9.0",
+  "structlog>=24.4",
+]
+
+[project.optional-dependencies]
+# Not installable in the environment this was rebuilt in: the model hub is blocked by
+# the egress proxy. Declared so the intended default provider is one pip install away.
+encoders = ["sentence-transformers>=3.0"]
+dev = ["pytest>=8.3", "pytest-asyncio>=0.24", "ruff>=0.6", "mypy>=1.11", "types-PyYAML"]
+# Runs a real PostgreSQL 16 with pgvector without Docker.
+localpg = ["pgserver>=0.1.4"]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["apps/api"]
+include = ["chainlens*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+src = ["apps/api", "eval", "scripts"]
+extend-exclude = ["apps/api/alembic/versions", "apps/web", "var"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "C4", "RUF", "PTH", "ARG"]
+ignore = [
+  "B008",
+  "RUF012",
+  # datetime.UTC is 3.11+. The project targets 3.12, but the reference environment
+  # for the committed eval runs was 3.10, so timezone.utc is used deliberately.
+  "UP017",
+  # PEP 695 type parameters are 3.12 syntax. The project targets 3.12, but the reference
+  # environment that produced the committed eval results is 3.10, so TypeVar is used
+  # deliberately and the whole tree stays parseable there.
+  "UP047",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"eval/*" = ["E402"]
+"scripts/*" = ["E402"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+mypy_path = "apps/api"
+files = ["apps/api/chainlens", "eval", "scripts"]
+exclude = "(apps/api/alembic|apps/web|var)"
+warn_unused_ignores = false
+
+[[tool.mypy.overrides]]
+module = ["pgserver.*", "sklearn.*", "sentence_transformers.*", "pgvector.*", "arq.*", "yaml.*"]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["apps/api/tests"]
+pythonpath = ["apps/api", "."]
+filterwarnings = ["ignore::DeprecationWarning"]

@@ -1,0 +1,855 @@
+{
+  "run_id": "extraction__cuad",
+  "created_at": "2026-08-02T08:17:23+00:00",
+  "git_sha": "b48878f962e766d888d877ecf0638d3518407259",
+  "git_dirty": true,
+  "extractor": "deterministic-v1",
+  "dataset": {
+    "labels_path": "eval/datasets/extraction_labels.jsonl",
+    "sha256": "84fb325656548cf7542b74132a672e52ab9efe5dff1c0bb5d3db25d526ebd243",
+    "labels": 137,
+    "documents": 29,
+    "source": "cuad-v1-human-annotated"
+  },
+  "environment": {
+    "python": "3.10.12",
+    "platform": "Linux-6.8.0-124-generic-x86_64-with-glibc2.35"
+  },
+  "scoring": {
+    "match": "span overlap between the emitted field span and a human-annotated span",
+    "false_positive": "wrong span, or a field emitted where annotators recorded no clause"
+  },
+  "status": "ok",
+  "metrics": {
+    "micro": {
+      "tp": 70,
+      "fp": 27,
+      "fn": 49,
+      "precision": 0.7216,
+      "recall": 0.5882,
+      "f1": 0.6481
+    },
+    "macro_precision": 0.6442,
+    "macro_recall": 0.5304,
+    "per_field": {
+      "auto_renew": {
+        "tp": 11,
+        "fp": 1,
+        "fn": 12,
+        "precision": 0.9167,
+        "recall": 0.4783,
+        "f1": 0.6286
+      },
+      "governing_law": {
+        "tp": 20,
+        "fp": 0,
+        "fn": 9,
+        "precision": 1.0,
+        "recall": 0.6897,
+        "f1": 0.8163
+      },
+      "insurance_required": {
+        "tp": 13,
+        "fp": 0,
+        "fn": 6,
+        "precision": 1.0,
+        "recall": 0.6842,
+        "f1": 0.8125
+      },
+      "liability_cap": {
+        "tp": 16,
+        "fp": 10,
+        "fn": 1,
+        "precision": 0.6154,
+        "recall": 0.9412,
+        "f1": 0.7442
+      },
+      "penalty_per_day": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 6,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "termination_notice_days": {
+        "tp": 5,
+        "fp": 14,
+        "fn": 3,
+        "precision": 0.2632,
+        "recall": 0.625,
+        "f1": 0.3704
+      },
+      "warranty_period_months": {
+        "tp": 5,
+        "fp": 2,
+        "fn": 12,
+        "precision": 0.7143,
+        "recall": 0.2941,
+        "f1": 0.4167
+      }
+    },
+    "fields_labelled": [
+      "auto_renew",
+      "governing_law",
+      "insurance_required",
+      "liability_cap",
+      "penalty_per_day",
+      "termination_notice_days",
+      "warranty_period_months"
+    ],
+    "fields_unlabelled": [
+      "incoterm",
+      "delivery_sla_hours",
+      "penalty_cap",
+      "jurisdiction",
+      "payment_terms_days",
+      "force_majeure_events"
+    ],
+    "known_mismatches": {
+      "penalty_per_day": "The CUAD category 'Liquidated Damages' annotates termination fees and cancellation charges generally, while this field is specifically a per-day rate. Most annotated clauses in this corpus contain no per-day figure at all, so a recall of zero here is mostly a mapping mismatch rather than an extraction failure.",
+      "liability_cap": "Eight of the 29 corpus documents redact commercial figures as [***], so a numeric cap is unavailable in the source for those. The extractor emits the qualitative limitation instead, which the risk rule liability-cap-language-only then flags.",
+      "warranty_period_months": "'Warranty Duration' annotations frequently mark a warranty clause that states no duration, for example one that incorporates a standard warranty by reference. Those are unrecoverable as a number by any extractor."
+    },
+    "emitted_per_field": {
+      "incoterm": 3,
+      "delivery_sla_hours": 8,
+      "penalty_per_day": 0,
+      "penalty_cap": 0,
+      "liability_cap": 26,
+      "termination_notice_days": 19,
+      "auto_renew": 12,
+      "force_majeure_events": 18,
+      "governing_law": 20,
+      "jurisdiction": 9,
+      "payment_terms_days": 2,
+      "warranty_period_months": 7,
+      "insurance_required": 13
+    },
+    "mean_elapsed_ms": 38.56
+  },
+  "risk": {
+    "rules_evaluated": 10,
+    "flags_by_rule": {
+      "liability-cap-language-only": 25,
+      "no-insurance-obligation": 16,
+      "force-majeure-no-epidemic": 13,
+      "missing-force-majeure": 11,
+      "jurisdiction-mismatch": 6,
+      "uncapped-liability": 3,
+      "auto-renew-notice-unknown": 3,
+      "auto-renew-short-notice": 2
+    }
+  },
+  "per_document": [
+    {
+      "document": "AURASYSTEMSINC-06-16-2010-EX-10-25-STRATEGIC-ALLIANCE-AGREEMENT",
+      "fields_extracted": [
+        "auto_renew",
+        "force_majeure_events",
+        "liability_cap",
+        "termination_notice_days",
+        "warranty_period_months"
+      ],
+      "outcomes": {
+        "auto_renew": "tp",
+        "governing_law": "fn",
+        "insurance_required": "fn",
+        "liability_cap": "tp",
+        "penalty_per_day": "tn",
+        "termination_notice_days": "fp-wrong-span",
+        "warranty_period_months": "fp-wrong-span"
+      },
+      "risk_flags": [
+        "auto-renew-short-notice",
+        "liability-cap-language-only",
+        "no-insurance-obligation",
+        "force-majeure-no-epidemic"
+      ],
+      "elapsed_ms": 38.75
+    },
+    {
+      "document": "AgapeAtpCorp-20191202-10-KA-EX-10-1-11911128-EX-10-1-Supply-Agreement",
+      "fields_extracted": [
+        "auto_renew",
+        "force_majeure_events",
+        "governing_law",
+        "insurance_required",
+        "termination_notice_days",
+        "warranty_period_months"
+      ],
+      "outcomes": {
+        "auto_renew": "tp",
+        "governing_law": "tp",
+        "insurance_required": "tp",
+        "liability_cap": "tn",
+        "penalty_per_day": "tn",
+        "termination_notice_days": "tp",
+        "warranty_period_months": "tp"
+      },
+      "risk_flags": [
+        "uncapped-liability",
+        "force-majeure-no-epidemic"
+      ],
+      "elapsed_ms": 14.47
+    },
+    {
+      "document": "Apollo-Endosurgery-Manufacturing-and-Supply-Agreement",
+      "fields_extracted": [
+        "force_majeure_events",
+        "governing_law",
+        "insurance_required",
+        "liability_cap",
+        "payment_terms_days",
+        "termination_notice_days"
+      ],
+      "outcomes": {
+        "auto_renew": "fn",
+        "governing_law": "tp",
+        "insurance_required": "tp",
+        "liability_cap": "tp",
+        "penalty_per_day": "tn",
+        "termination_notice_days": "tp",
+        "warranty_period_months": "fn"
+      },
+      "risk_flags": [
+        "liability-cap-language-only",
+        "force-majeure-no-epidemic"
+      ],
+      "elapsed_ms": 36.08
+    },
+    {
+      "document": "BELLRINGBRANDS-INC-02-07-2020-EX-10-18-MASTER-SUPPLY-AGREEMENT",
+      "fields_extracted": [
+        "auto_renew",
+        "force_majeure_events",
+        "governing_law",
+        "insurance_required",
+        "liability_cap",
+        "termination_notice_days"
+      ],
+      "outcomes": {
+        "auto_renew": "tp",
+        "governing_law": "tp",
+        "insurance_required": "tp",
+        "liability_cap": "fp-wrong-span",
+        "penalty_per_day": "tn",
+        "termination_notice_days": "fp-wrong-span",
+        "warranty_period_months": "tn"
+      },
+      "risk_flags": [
+        "auto-renew-short-notice",
+        "liability-cap-language-only"
+      ],
+      "elapsed_ms": 26.3
+    },
+    {
+      "document": "BIOFRONTERAAG-04-29-2019-EX-4-17-SUPPLY-AGREEMENT",
+      "fields_extracted": [
+        "force_majeure_events",
+        "governing_law",
+        "jurisdiction",
+        "liability_cap",
+        "warranty_period_months"
+      ],
+      "outcomes": {
+        "auto_renew": "tn",
+        "governing_law": "tp",
+        "insurance_required": "fn",
+        "liability_cap": "tp",
+        "penalty_per_day": "tn",
+        "termination_notice_days": "tn",
+        "warranty_period_months": "fp-no-annotation"
+      },
+      "risk_flags": [
+        "jurisdiction-mismatch",
+        "liability-cap-language-only",
+        "no-insurance-obligation",
+        "force-majeure-no-epidemic"
+      ],
+      "elapsed_ms": 42.95
+    },
+    {
+      "document": "BNLFINANCIALCORP-03-30-2007-EX-10-8-OUTSOURCING-AGREEMENT",
+      "fields_extracted": [
+        "force_majeure_events",
+        "governing_law",
+        "insurance_required",
+        "jurisdiction",
+        "liability_cap",
+        "termination_notice_days"
+      ],
+      "outcomes": {
+        "auto_renew": "fn",
+        "governing_law": "tp",
+        "insurance_required": "tp",
+        "liability_cap": "fp-wrong-span",
+        "penalty_per_day": "fn",
+        "termination_notice_days": "fp-wrong-span",
+        "warranty_period_months": "tn"
+      },
+      "risk_flags": [
+        "jurisdiction-mismatch",
+        "force-majeure-no-epidemic"
+      ],
+      "elapsed_ms": 28.34
+    },
+    {
+      "document": "CCAINDUSTRIESINC-04-14-2014-EX-10-1-OUTSOURCING-AGREEMENT",
+      "fields_extracted": [
+        "auto_renew",
+        "force_majeure_events",
+        "insurance_required",
+        "liability_cap",
+        "termination_notice_days"
+      ],
+      "outcomes": {
+        "auto_renew": "tp",
+        "governing_law": "fn",
+        "insurance_required": "tp",
+        "liability_cap": "fp-no-annotation",
+        "penalty_per_day": "fn",
+        "termination_notice_days": "fp-wrong-span",
+        "warranty_period_months": "tn"
+      },
+      "risk_flags": [
+        "liability-cap-language-only",
+        "force-majeure-no-epidemic"
+      ],
+      "elapsed_ms": 24.19
+    },
+    {
+      "document": "ELANDIAINTERNATIONALINC-04-25-2007-EX-10-21-Outsourcing-Agreement",
+      "fields_extracted": [
+        "governing_law",
+        "jurisdiction",
+        "termination_notice_days"
+      ],
+      "outcomes": {
+        "auto_renew": "fn",
+        "governing_law": "tp",
+        "insurance_required": "fn",
+        "liability_cap": "tn",
+        "penalty_per_day": "fn",
+        "termination_notice_days": "fp-no-annotation",
+        "warranty_period_months": "tn"
+      },
+      "risk_flags": [
+        "uncapped-liability",
+        "jurisdiction-mismatch",
+        "missing-force-majeure",
+        "no-insurance-obligation"
+      ],
+      "elapsed_ms": 63.75
+    },
+    {
+      "document": "ENERGOUSCORP-03-16-2017-EX-10-24-STRATEGIC-ALLIANCE-AGREEMENT",
+      "fields_extracted": [
+        "auto_renew",
+        "force_majeure_events",
+        "governing_law",
+        "insurance_required",
+        "liability_cap",
+        "termination_notice_days"
+      ],
+      "outcomes": {
+        "auto_renew": "tp",
+        "governing_law": "tp",
+        "insurance_required": "tp",
+        "liability_cap": "tp",
+        "penalty_per_day": "tn",
+        "termination_notice_days": "fp-wrong-span",
+        "warranty_period_months": "fn"
+      },
+      "risk_flags": [
+        "liability-cap-language-only"
+      ],
+      "elapsed_ms": 55.22
+    },
+    {
+      "document": "ENERGYXXILTD-05-08-2015-EX-10-13-Transportation-AGREEMENT",
+      "fields_extracted": [
+        "delivery_sla_hours",
+        "force_majeure_events",
+        "governing_law",
+        "liability_cap",
+        "termination_notice_days"
+      ],
+      "outcomes": {
+        "auto_renew": "fn",
+        "governing_law": "tp",
+        "insurance_required": "tn",
+        "liability_cap": "fp-wrong-span",
+        "penalty_per_day": "tn",
+        "termination_notice_days": "tp",
+        "warranty_period_months": "tn"
+      },
+      "risk_flags": [
+        "liability-cap-language-only",
+        "no-insurance-obligation",
+        "force-majeure-no-epidemic"
+      ],
+      "elapsed_ms": 42.99
+    },
+    {
+      "document": "EUROPEANMICROHOLDINGSINC-03-06-1998-EX-10-6-DISTRIBUTOR-AGREEMENT",
+      "fields_extracted": [
+        "auto_renew",
+        "governing_law",
+        "jurisdiction",
+        "liability_cap"
+      ],
+      "outcomes": {
+        "auto_renew": "tp",
+        "governing_law": "tp",
+        "insurance_required": "tn",
+        "liability_cap": "fp-wrong-span",
+        "penalty_per_day": "fn",
+        "termination_notice_days": "fn",
+        "warranty_period_months": "fn"
+      },
+      "risk_flags": [
+        "auto-renew-notice-unknown",
+        "jurisdiction-mismatch",
+        "liability-cap-language-only",
+        "missing-force-majeure",
+        "no-insurance-obligation"
+      ],
+      "elapsed_ms": 39.28
+    },
+    {
+      "document": "FTENETWORKS-INC-02-18-2016-EX-99-4-STRATEGIC-ALLIANCE-AGREEMENT",
+      "fields_extracted": [
+        "governing_law",
+        "insurance_required",
+        "liability_cap",
+        "payment_terms_days",
+        "termination_notice_days",
+        "warranty_period_months"
+      ],
+      "outcomes": {
+        "auto_renew": "fn",
+        "governing_law": "tp",
+        "insurance_required": "tp",
+        "liability_cap": "fp-no-annotation",
+        "penalty_per_day": "fn",
+        "termination_notice_days": "tp",
+        "warranty_period_months": "tp"
+      },
+      "risk_flags": [
+        "liability-cap-language-only",
+        "missing-force-majeure"
+      ],
+      "elapsed_ms": 25.62
+    },
+    {
+      "document": "GentechHoldingsInc-20190808-1-A-EX1A-6-MAT-CTRCT-11776814-EX1A-6-MAT-CTRCT-Distr",
+      "fields_extracted": [
+        "force_majeure_events",
+        "governing_law",
+        "liability_cap",
+        "warranty_period_months"
+      ],
+      "outcomes": {
+        "auto_renew": "fn",
+        "governing_law": "tp",
+        "insurance_required": "tn",
+        "liability_cap": "tp",
+        "penalty_per_day": "tn",
+        "termination_notice_days": "tn",
+        "warranty_period_months": "tp"
+      },
+      "risk_flags": [
+        "liability-cap-language-only",
+        "no-insurance-obligation",
+        "force-majeure-no-epidemic"
+      ],
+      "elapsed_ms": 20.37
+    },
+    {
+      "document": "ICORECONNECTINC-10-13-2010-EX-7-1-Strategic-Alliance-Agreement",
+      "fields_extracted": [
+        "delivery_sla_hours",
+        "liability_cap"
+      ],
+      "outcomes": {
+        "auto_renew": "fn",
+        "governing_law": "fn",
+        "insurance_required": "tn",
+        "liability_cap": "fp-wrong-span",
+        "penalty_per_day": "tn",
+        "termination_notice_days": "fn",
+        "warranty_period_months": "tn"
+      },
+      "risk_flags": [
+        "liability-cap-language-only",
+        "missing-force-majeure",
+        "no-insurance-obligation"
+      ],
+      "elapsed_ms": 19.11
+    },
+    {
+      "document": "InmodeLtd-20190729-F-1A-EX-10-9-11743243-EX-10-9-Manufacturing-Agreement",
+      "fields_extracted": [
+        "auto_renew",
+        "delivery_sla_hours",
+        "governing_law",
+        "jurisdiction",
+        "liability_cap",
+        "termination_notice_days"
+      ],
+      "outcomes": {
+        "auto_renew": "tp",
+        "governing_law": "tp",
+        "insurance_required": "fn",
+        "liability_cap": "tp",
+        "penalty_per_day": "tn",
+        "termination_notice_days": "fp-wrong-span",
+        "warranty_period_months": "fn"
+      },
+      "risk_flags": [
+        "jurisdiction-mismatch",
+        "liability-cap-language-only",
+        "missing-force-majeure",
+        "no-insurance-obligation"
+      ],
+      "elapsed_ms": 29.54
+    },
+    {
+      "document": "IpassInc-20181203-8-K-EX-99-1-11445874-EX-99-1-Reseller-Agreement",
+      "fields_extracted": [
+        "auto_renew",
+        "force_majeure_events",
+        "jurisdiction",
+        "liability_cap",
+        "termination_notice_days"
+      ],
+      "outcomes": {
+        "auto_renew": "tp",
+        "governing_law": "fn",
+        "insurance_required": "tn",
+        "liability_cap": "tp",
+        "penalty_per_day": "tn",
+        "termination_notice_days": "fp-wrong-span",
+        "warranty_period_months": "tn"
+      },
+      "risk_flags": [
+        "liability-cap-language-only",
+        "no-insurance-obligation"
+      ],
+      "elapsed_ms": 55.56
+    },
+    {
+      "document": "KALLOINC-11-03-2011-EX-10-1-STRATEGIC-ALLIANCE-AGREEMENT",
+      "fields_extracted": [
+        "delivery_sla_hours",
+        "governing_law",
+        "insurance_required",
+        "jurisdiction",
+        "liability_cap",
+        "termination_notice_days"
+      ],
+      "outcomes": {
+        "auto_renew": "tn",
+        "governing_law": "tp",
+        "insurance_required": "tp",
+        "liability_cap": "tp",
+        "penalty_per_day": "tn",
+        "termination_notice_days": "fp-no-annotation",
+        "warranty_period_months": "fn"
+      },
+      "risk_flags": [
+        "liability-cap-language-only",
+        "missing-force-majeure"
+      ],
+      "elapsed_ms": 56.62
+    },
+    {
+      "document": "LIMEENERGYCO-09-09-1999-EX-10-DISTRIBUTOR-AGREEMENT",
+      "fields_extracted": [
+        "delivery_sla_hours",
+        "incoterm",
+        "insurance_required",
+        "liability_cap"
+      ],
+      "outcomes": {
+        "auto_renew": "fn",
+        "governing_law": "fn",
+        "insurance_required": "tp",
+        "liability_cap": "fp-no-annotation",
+        "penalty_per_day": "tn",
+        "termination_notice_days": "tn",
+        "warranty_period_months": "fn"
+      },
+      "risk_flags": [
+        "liability-cap-language-only",
+        "missing-force-majeure"
+      ],
+      "elapsed_ms": 38.47
+    },
+    {
+      "document": "MEDIWOUNDLTD-01-15-2014-EX-10-6-SUPPLY-AGREEMENT",
+      "fields_extracted": [
+        "delivery_sla_hours",
+        "insurance_required",
+        "jurisdiction",
+        "liability_cap"
+      ],
+      "outcomes": {
+        "auto_renew": "tn",
+        "governing_law": "fn",
+        "insurance_required": "tp",
+        "liability_cap": "tp",
+        "penalty_per_day": "tn",
+        "termination_notice_days": "tn",
+        "warranty_period_months": "fn"
+      },
+      "risk_flags": [
+        "liability-cap-language-only",
+        "missing-force-majeure"
+      ],
+      "elapsed_ms": 37.13
+    },
+    {
+      "document": "NEOMEDIATECHNOLOGIESINC-12-15-2005-EX-16-1-DISTRIBUTOR-AGREEMENT",
+      "fields_extracted": [
+        "delivery_sla_hours",
+        "force_majeure_events",
+        "governing_law",
+        "liability_cap"
+      ],
+      "outcomes": {
+        "auto_renew": "fn",
+        "governing_law": "tp",
+        "insurance_required": "tn",
+        "liability_cap": "tp",
+        "penalty_per_day": "tn",
+        "termination_notice_days": "tn",
+        "warranty_period_months": "fn"
+      },
+      "risk_flags": [
+        "liability-cap-language-only",
+        "no-insurance-obligation",
+        "force-majeure-no-epidemic"
+      ],
+      "elapsed_ms": 25.2
+    },
+    {
+      "document": "NEONSYSTEMSINC-03-01-1999-EX-10-5-DISTRIBUTOR-AGREEMENT-New",
+      "fields_extracted": [
+        "governing_law",
+        "liability_cap",
+        "termination_notice_days"
+      ],
+      "outcomes": {
+        "auto_renew": "fn",
+        "governing_law": "tp",
+        "insurance_required": "tn",
+        "liability_cap": "tp",
+        "penalty_per_day": "tn",
+        "termination_notice_days": "fp-wrong-span",
+        "warranty_period_months": "fn"
+      },
+      "risk_flags": [
+        "liability-cap-language-only",
+        "missing-force-majeure",
+        "no-insurance-obligation"
+      ],
+      "elapsed_ms": 43.26
+    },
+    {
+      "document": "OASYSMOBILE-INC-07-05-2001-EX-10-17-OUTSOURCING-AGREEMENT",
+      "fields_extracted": [
+        "auto_renew",
+        "governing_law",
+        "liability_cap",
+        "warranty_period_months"
+      ],
+      "outcomes": {
+        "auto_renew": "fp-no-annotation",
+        "governing_law": "tp",
+        "insurance_required": "tn",
+        "liability_cap": "tp",
+        "penalty_per_day": "tn",
+        "termination_notice_days": "tn",
+        "warranty_period_months": "tp"
+      },
+      "risk_flags": [
+        "auto-renew-notice-unknown",
+        "liability-cap-language-only",
+        "missing-force-majeure",
+        "no-insurance-obligation"
+      ],
+      "elapsed_ms": 43.27
+    },
+    {
+      "document": "SEASPINEHOLDINGSCORP-10-10-2018-EX-10-1-SUPPLY-AGREEMENT",
+      "fields_extracted": [
+        "force_majeure_events",
+        "liability_cap",
+        "termination_notice_days"
+      ],
+      "outcomes": {
+        "auto_renew": "tn",
+        "governing_law": "fn",
+        "insurance_required": "tn",
+        "liability_cap": "tp",
+        "penalty_per_day": "tn",
+        "termination_notice_days": "fp-no-annotation",
+        "warranty_period_months": "tn"
+      },
+      "risk_flags": [
+        "liability-cap-language-only",
+        "no-insurance-obligation"
+      ],
+      "elapsed_ms": 48.17
+    },
+    {
+      "document": "ScansourceInc-20190822-10-K-EX-10-38-11793958-EX-10-38-Distributor-Agreement1",
+      "fields_extracted": [
+        "force_majeure_events",
+        "insurance_required",
+        "liability_cap"
+      ],
+      "outcomes": {
+        "auto_renew": "fn",
+        "governing_law": "fn",
+        "insurance_required": "tp",
+        "liability_cap": "fp-wrong-span",
+        "penalty_per_day": "tn",
+        "termination_notice_days": "tn",
+        "warranty_period_months": "fn"
+      },
+      "risk_flags": [
+        "liability-cap-language-only"
+      ],
+      "elapsed_ms": 63.78
+    },
+    {
+      "document": "TodosMedicalLtd-20190328-20-F-EX-4-10-11587157-EX-4-10-Marketing-Agreement-Resel",
+      "fields_extracted": [
+        "auto_renew",
+        "delivery_sla_hours",
+        "governing_law",
+        "incoterm",
+        "insurance_required",
+        "liability_cap",
+        "termination_notice_days",
+        "warranty_period_months"
+      ],
+      "outcomes": {
+        "auto_renew": "tp",
+        "governing_law": "tp",
+        "insurance_required": "tp",
+        "liability_cap": "tp",
+        "penalty_per_day": "tn",
+        "termination_notice_days": "fp-wrong-span",
+        "warranty_period_months": "tp"
+      },
+      "risk_flags": [
+        "liability-cap-language-only",
+        "missing-force-majeure"
+      ],
+      "elapsed_ms": 23.12
+    },
+    {
+      "document": "VAPOTHERM-INC-Manufacturing-and-Supply-Agreement",
+      "fields_extracted": [
+        "auto_renew",
+        "force_majeure_events",
+        "governing_law",
+        "incoterm"
+      ],
+      "outcomes": {
+        "auto_renew": "tp",
+        "governing_law": "tp",
+        "insurance_required": "fn",
+        "liability_cap": "fn",
+        "penalty_per_day": "tn",
+        "termination_notice_days": "fn",
+        "warranty_period_months": "tn"
+      },
+      "risk_flags": [
+        "uncapped-liability",
+        "auto-renew-notice-unknown",
+        "no-insurance-obligation",
+        "force-majeure-no-epidemic"
+      ],
+      "elapsed_ms": 51.52
+    },
+    {
+      "document": "VIRTUALSCOPICS-INC-11-12-2010-EX-10-1-STRATEGIC-ALLIANCE-AGREEMENT",
+      "fields_extracted": [
+        "force_majeure_events",
+        "liability_cap",
+        "termination_notice_days"
+      ],
+      "outcomes": {
+        "auto_renew": "fn",
+        "governing_law": "fn",
+        "insurance_required": "fn",
+        "liability_cap": "tp",
+        "penalty_per_day": "tn",
+        "termination_notice_days": "fp-wrong-span",
+        "warranty_period_months": "tn"
+      },
+      "risk_flags": [
+        "liability-cap-language-only",
+        "no-insurance-obligation",
+        "force-majeure-no-epidemic"
+      ],
+      "elapsed_ms": 30.79
+    },
+    {
+      "document": "WORLDWIDESTRATEGIESINC-11-02-2005-EX-10-RESELLER-AGREEMENT",
+      "fields_extracted": [
+        "force_majeure_events",
+        "governing_law",
+        "insurance_required",
+        "liability_cap",
+        "termination_notice_days"
+      ],
+      "outcomes": {
+        "auto_renew": "tn",
+        "governing_law": "tp",
+        "insurance_required": "tp",
+        "liability_cap": "tp",
+        "penalty_per_day": "tn",
+        "termination_notice_days": "fp-no-annotation",
+        "warranty_period_months": "fn"
+      },
+      "risk_flags": [
+        "liability-cap-language-only",
+        "force-majeure-no-epidemic"
+      ],
+      "elapsed_ms": 61.95
+    },
+    {
+      "document": "Zounds-Hearing-Inc-MANUFACTURING-DESIGN-MARKETING-AGREEMENT",
+      "fields_extracted": [
+        "auto_renew",
+        "force_majeure_events",
+        "governing_law",
+        "jurisdiction",
+        "liability_cap",
+        "termination_notice_days"
+      ],
+      "outcomes": {
+        "auto_renew": "tp",
+        "governing_law": "tp",
+        "insurance_required": "tn",
+        "liability_cap": "fp-wrong-span",
+        "penalty_per_day": "fn",
+        "termination_notice_days": "tp",
+        "warranty_period_months": "fn"
+      },
+      "risk_flags": [
+        "jurisdiction-mismatch",
+        "liability-cap-language-only",
+        "no-insurance-obligation",
+        "force-majeure-no-epidemic"
+      ],
+      "elapsed_ms": 32.36
+    }
+  ]
+}

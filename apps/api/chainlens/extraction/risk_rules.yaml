@@ -1,0 +1,142 @@
+# Risk rules over extracted fields.
+#
+# Data, not code, so that adding a rule is a one-line diff a reviewer can read and a
+# procurement lead can argue with, without a deploy. Every rule names the fields it reads,
+# and the engine attaches the span of the first named field that is present, so every flag
+# on screen links back to the sentence that caused it.
+#
+# `when` is a small expression language, deliberately not Python eval. Supported forms:
+#   present: <field>            the field was extracted
+#   absent: <field>             the extractor looked and did not find it
+#   equals: [<field>, <value>]
+#   lt / lte / gt / gte: [<field>, <number>]
+#   matches: [<field>, <regex>] case-insensitive, against str(value)
+#   all / any: [ <clause>, ... ]
+#   not: <clause>
+version: 1
+rules:
+  - id: uncapped-liability
+    severity: high
+    title: Liability appears uncapped
+    detail: >-
+      No limitation of liability was found. In a supply agreement this usually means
+      exposure is unbounded, and it is the single term most worth confirming by hand
+      before signature.
+    fields: [liability_cap]
+    when:
+      absent: liability_cap
+
+  - id: liability-cap-language-only
+    severity: medium
+    title: Liability cap is qualitative, not a figure
+    detail: >-
+      A limitation of liability exists but resolves to wording such as "the fees paid"
+      rather than an amount. That is common and often acceptable, but it means the ceiling
+      cannot be compared across contracts without reading the clause.
+    fields: [liability_cap]
+    when:
+      all:
+        - present: liability_cap
+        - not:
+            matches: [liability_cap, '[0-9]']
+
+  - id: auto-renew-short-notice
+    severity: high
+    title: Automatic renewal with under 30 days notice
+    detail: >-
+      The agreement renews automatically and the window to stop it is shorter than a
+      month. This is the classic evergreen trap: the notice period elapses inside a normal
+      procurement review cycle.
+    fields: [auto_renew, termination_notice_days]
+    when:
+      all:
+        - equals: [auto_renew, true]
+        - lt: [termination_notice_days, 30]
+
+  - id: auto-renew-notice-unknown
+    severity: medium
+    title: Automatic renewal with no notice period found
+    detail: >-
+      The agreement renews automatically but no notice period was extracted. Either the
+      clause is phrased unusually or the notice is stated elsewhere; confirm before the
+      current term ends.
+    fields: [auto_renew, termination_notice_days]
+    when:
+      all:
+        - equals: [auto_renew, true]
+        - absent: termination_notice_days
+
+  - id: missing-force-majeure
+    severity: medium
+    title: No force majeure clause found
+    detail: >-
+      No force majeure or equivalent excusable-delay language was detected. For a physical
+      supply chain this is a material omission, because it decides who carries the cost of
+      a port closure or a plant fire.
+    fields: [force_majeure_events]
+    when:
+      absent: force_majeure_events
+
+  - id: force-majeure-no-epidemic
+    severity: low
+    title: Force majeure does not name epidemic or pandemic
+    detail: >-
+      A force majeure clause exists but does not list an epidemic, pandemic or quarantine
+      event. Contracts drafted before 2020 frequently do not, and courts have not treated
+      the omission uniformly.
+    fields: [force_majeure_events]
+    when:
+      all:
+        - present: force_majeure_events
+        - not:
+            matches: [force_majeure_events, '(epidemic|pandemic|quarantine)']
+
+  - id: penalty-cap-below-monthly-exposure
+    severity: medium
+    title: Penalty cap may sit below one month of SLA exposure
+    detail: >-
+      A per-day penalty and a penalty cap were both found. Where the cap is lower than
+      thirty days of the per-day figure, the supplier's worst case is bounded well inside a
+      single month of sustained failure, which weakens the incentive the clause exists to
+      create.
+    fields: [penalty_per_day, penalty_cap]
+    when:
+      all:
+        - present: penalty_per_day
+        - present: penalty_cap
+
+  - id: jurisdiction-mismatch
+    severity: medium
+    title: Governing law and jurisdiction name different places
+    detail: >-
+      The law chosen to govern the agreement and the forum chosen to hear disputes appear
+      to be different jurisdictions. That is sometimes deliberate and sometimes a drafting
+      slip; either way it raises the cost of enforcement.
+    fields: [governing_law, jurisdiction]
+    when:
+      all:
+        - present: governing_law
+        - present: jurisdiction
+        - not:
+            same_place: [governing_law, jurisdiction]
+
+  - id: no-insurance-obligation
+    severity: medium
+    title: No insurance obligation found
+    detail: >-
+      No requirement for the counterparty to carry insurance was detected. For freight,
+      warehousing or manufacturing work this is normally present and its absence shifts
+      loss onto the buyer.
+    fields: [insurance_required]
+    when:
+      absent: insurance_required
+
+  - id: long-payment-terms
+    severity: low
+    title: Payment terms longer than 60 days
+    detail: >-
+      Payment terms beyond 60 days push working capital onto the supplier and, in several
+      jurisdictions, sit outside statutory late-payment norms.
+    fields: [payment_terms_days]
+    when:
+      gt: [payment_terms_days, 60]
