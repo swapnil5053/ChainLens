@@ -181,7 +181,10 @@ apps/web/test/smoke.mjs
 # The built landing page lives in apps/web/index.html; this is the raw material.
 design-export/
 
-# Working notes from the interface iteration.
+# Working notes and handover scratch. Not part of the project.
 LANDING_*.md
 COPY_DECK.md
 INTEGRATION.md
+PUSH.md
+CLEANUP.md
+FINAL.md

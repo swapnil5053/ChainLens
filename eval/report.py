@@ -54,7 +54,15 @@ def _cell(result: dict[str, Any] | None, key: str, digits: int = 3) -> str:
     return BLOCKED_CELL if value is None else f"{value:.{digits}f}"
 
 
-def footnotes(results: dict[str, dict[str, Any]]) -> str:
+def footnotes(results: dict[str, dict[str, Any]], *, verbose: bool = False) -> str:
+    """Explain the dashes.
+
+    A blocked reason is stored with its exception attached, which is the right thing to
+    keep in the artifact and the wrong thing to print in a README: a raw
+    `ModuleNotFoundError` in a results table reads as a build log, not a result. The
+    headline table takes the cause without the traceback; `verbose` keeps the full string
+    for docs/RETRIEVAL.md, where the detail belongs.
+    """
     reasons: dict[str, list[str]] = {}
     for run_id, result in sorted(results.items()):
         if result.get("status") != "ok":
@@ -63,7 +71,9 @@ def footnotes(results: dict[str, dict[str, Any]]) -> str:
         return ""
     lines = ["", "Cells marked `--` were not measured:"]
     for reason, runs in reasons.items():
-        lines.append(f"- {reason} ({len(runs)} configurations: `{'`, `'.join(runs)}`)")
+        text = reason if verbose else reason.split(":", 1)[0].strip()
+        detail = f": `{'`, `'.join(runs)}`" if verbose else ""
+        lines.append(f"- {text} ({len(runs)} configurations{detail})")
     return "\n".join(lines)
 
 
@@ -72,24 +82,24 @@ def _row(label: str, result: dict[str, Any] | None, keys: list[tuple[str, int]])
 
 
 def headline_table(results: dict[str, dict[str, Any]], chunking: str) -> str:
+    """The five columns worth reading. The rest of the grid lives in docs/RETRIEVAL.md.
+
+    This table is the first thing anyone sees, and ten columns of near-identical decimals
+    is noise: nDCG tracks recall, hit@6 tracks recall@6, and p95 tracks p50. Five columns
+    say the same thing and can actually be read.
+    """
     keys = [
         ("recall@3", 3),
         ("recall@6", 3),
         ("recall@10", 3),
         ("mrr", 3),
-        ("ndcg@10", 3),
-        ("hit@6", 3),
-        ("span_coverage@6", 3),
         ("latency_ms_p50", 1),
-        ("latency_ms_p95", 1),
     ]
     lines = [
-        f"Chunking fixed at `{chunking}`. Retrieval is scoped to the document the "
-        "question is asked about.",
+        f"Chunking fixed at `{chunking}`, retrieval scoped to one document.",
         "",
-        "| retrieval | Recall@3 | Recall@6 | Recall@10 | MRR | nDCG@10 | hit@6 | "
-        "answer chars shown @6 | p50 ms | p95 ms |",
-        "|---|---|---|---|---|---|---|---|---|---|",
+        "| retrieval | Recall@3 | Recall@6 | Recall@10 | MRR | p50 ms |",
+        "|---|---|---|---|---|---|",
     ]
     lines += [_row(RETRIEVAL_LABELS[key], results.get(f"{chunking}__{key}"), keys) for key in ORDER]
     return "\n".join(lines) + footnotes(results)
@@ -124,7 +134,7 @@ def full_table(results: dict[str, dict[str, Any]]) -> str:
                 )
                 + " |"
             )
-    return "\n".join(lines) + footnotes(results)
+    return "\n".join(lines) + footnotes(results, verbose=True)
 
 
 def latency_table(results: dict[str, dict[str, Any]], chunking: str) -> str:
@@ -162,8 +172,8 @@ def provenance(results: dict[str, dict[str, Any]]) -> str:
         f"{sample['environment']['postgres']}.\n\n"
         "The embedding provider is not `bge-small-en-v1.5`: the model hub was unreachable "
         "in the environment these numbers were produced in, so a corpus-fitted LSA model "
-        "was used instead. See ADR-0003. Absolute values are a floor for the architecture, "
-        "not a claim about a modern encoder."
+        "was used instead. Absolute values are a floor for the architecture, not a claim "
+        "about a modern encoder."
     )
 
 
