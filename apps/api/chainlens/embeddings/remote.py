@@ -107,8 +107,7 @@ class SentenceTransformerEmbeddings(EmbeddingProvider):
         except Exception as exc:  # pragma: no cover - environment dependent
             raise EmbeddingError(
                 f"could not load {model}: {exc}. In the build environment for this "
-                "repository every huggingface.co host was blocked by the egress proxy; "
-                "see ADR-0003."
+                "repository every huggingface.co host was blocked by the egress proxy."
             ) from exc
         self._dim = int(self._model.get_sentence_embedding_dimension())
 

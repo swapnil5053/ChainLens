@@ -1,8 +1,8 @@
 """Start a local PostgreSQL 16 with pgvector, without Docker.
 
-The production path is `infra/docker-compose.yml`. This exists because the environment
-this repository was rebuilt in had no Docker daemon and no root, and the evaluation
-harness still had to run against real Postgres rather than a substitute. See ADR-0001.
+A pgvector container is the normal path, see RUNNING.md. This exists for environments
+with no Docker daemon and no root, where the evaluation harness still has to run against
+real Postgres rather than a substitute.
 
     eval "$(python scripts/local_postgres.py --export)"
 """

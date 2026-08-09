@@ -1,8 +1,7 @@
 # Convenience targets.
 #
-# `demo` is the documented production path and has never been executed in the environment
-# this was built in: there was no Docker daemon. `demo-local` is the path that was actually
-# run, and it needs no Docker at all.
+# `demo` brings up the full compose stack. `demo-local` needs no Docker at all and runs
+# an embedded PostgreSQL instead. The normal path is neither: see RUNNING.md.
 
 .PHONY: up down demo demo-local migrate index eval eval-extraction report gate seed test lint types check web web-verify
 

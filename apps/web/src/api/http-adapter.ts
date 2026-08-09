@@ -1,11 +1,9 @@
 /**
  * The live adapter.
  *
- * Unexercised: at the time of writing the API is authored but the compose stack has never
- * been executed, and that is recorded in docs/HANDOFF.md rather than glossed over. It is
- * written to the same contract the mock satisfies and validated by the same schemas, so a
- * shape mismatch surfaces as a ContractViolationError naming the endpoint and the field
- * rather than as a blank screen.
+ * Written to the same contract the mock satisfies and validated by the same zod schemas,
+ * so a shape mismatch surfaces as a ContractViolationError naming the endpoint and the
+ * field rather than as a blank screen.
  */
 import type { ChainLensAdapter } from "./adapter";
 import {

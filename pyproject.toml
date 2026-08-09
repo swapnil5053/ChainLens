@@ -31,10 +31,9 @@ dependencies = [
 [project.optional-dependencies]
 # Not installable in the environment this was rebuilt in: the model hub is blocked by
 # the egress proxy. Declared so the intended default provider is one pip install away.
-# See ADR-0003.
 encoders = ["sentence-transformers>=3.0"]
 dev = ["pytest>=8.3", "pytest-asyncio>=0.24", "ruff>=0.6", "mypy>=1.11", "types-PyYAML"]
-# Runs a real PostgreSQL 16 with pgvector without Docker. See ADR-0001.
+# Runs a real PostgreSQL 16 with pgvector without Docker.
 localpg = ["pgserver>=0.1.4"]
 
 [build-system]

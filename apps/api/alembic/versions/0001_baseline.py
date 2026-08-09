@@ -98,7 +98,7 @@ def upgrade() -> None:
     )
     op.create_index("ix_embeddings_chunk_id", "embeddings", ["chunk_id"])
     # HNSW rather than IVFFlat: no training step, no list count to tune, and the corpus
-    # is small enough that build time does not matter. See ADR-0002.
+    # is small enough that build time does not matter.
     op.execute(
         "CREATE INDEX ix_embeddings_vector_hnsw ON embeddings "
         "USING hnsw (vector vector_cosine_ops) WITH (m = 16, ef_construction = 64)"

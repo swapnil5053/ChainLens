@@ -1,9 +1,8 @@
 # The documented production path.
 #
-# Authored but not executed in the environment this repository was rebuilt in: that
-# sandbox had no Docker daemon, no root and no package manager. See ADR-0001 and the
-# status table in docs/HANDOFF.md. Everything the API needs from Postgres is exercised
-# against a real PostgreSQL 16 with pgvector, started by scripts/local_postgres.py.
+# This compose stack is authored but not the path the project is normally run on. See
+# RUNNING.md: a single pgvector container plus scripts/serve.py is the supported route,
+# and it is the one that gets exercised.
 
 name: chainlens
 

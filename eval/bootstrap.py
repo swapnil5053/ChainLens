@@ -24,9 +24,9 @@ def ensure_database() -> str:
     """Return a usable DSN, starting a local server if configured to.
 
     ``CHAINLENS_LOCAL_PG=1`` starts an embedded PostgreSQL 16 in this process. The
-    sandbox this was developed in does not keep background processes alive between
-    commands, so each entry point brings the server up itself. In production the DSN
-    comes from the environment and this function does nothing. See ADR-0001.
+    embedded server does not survive between commands, so each entry point brings it up
+    itself. In production the DSN
+    comes from the environment and this function does nothing.
     """
     # Load a .env at the repo root, if present, so the database URL and the Gemini key can
     # live in a file rather than being exported by hand each session. Values already in the

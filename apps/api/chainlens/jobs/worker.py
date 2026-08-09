@@ -6,8 +6,10 @@ machine is the same either way, because both paths call
 ``chainlens.ingest.pipeline.index_parsed_document`` and both write progress to the same
 ``jobs`` row.
 
-Not exercised end to end in the environment this was written in: no Redis server was
-installable. See docs/HANDOFF.md.
+Not exercised end to end: no Redis server was available when this was written, and the
+default deployment ingests inline on upload rather than queueing. The module is kept
+because the ingest path is already a pure function of its inputs, so moving it behind a
+queue is a wiring change rather than a rewrite.
 """
 
 from __future__ import annotations

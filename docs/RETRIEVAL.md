@@ -120,7 +120,7 @@ Without it, MMR would still be in the pipeline and the README would still be des
 it as an improvement.
 
 **Blocked, not negative.** The cross-encoder rerank row is not a negative result. It was
-never measured, because the weights could not be downloaded. See ADR-0004. The code path
+never measured, because the weights could not be downloaded. The code path
 exists and degrades to fusion-only, and the trace records that no rerank happened.
 
 ## Latency

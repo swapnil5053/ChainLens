@@ -172,4 +172,3 @@ python -m eval.gate              # the regression gate CI enforces
 python -m eval.report            # regenerate every table in the repository
 ```
 
-`docs/HANDOFF.md` records what was verified, what was not, and the verbatim errors.

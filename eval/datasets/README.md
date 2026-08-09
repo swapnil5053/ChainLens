@@ -88,4 +88,4 @@ build it is 0 of 382 candidate annotations considered.
    clause detection: 417 of 1,509 clause-aware chunks carry a detected clause id. Cleanly
    typeset contracts detect far better, so the clause-aware numbers here are conservative.
 4. **No generation-side labels.** The set scores retrieval. Groundedness and answer
-   correctness need a judge model, which was unavailable; see ADR-0005.
+   correctness need a judge model, which was unavailable.

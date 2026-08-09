@@ -1,7 +1,7 @@
 """Latent semantic indexing embeddings: fitted on the corpus, no network required.
 
 A substitute for ``BAAI/bge-small-en-v1.5``, which could not be downloaded in the
-environment this was built in. See ADR-0003. It is a real dense model -- TF-IDF over
+environment this was built in. It is a real dense model -- TF-IDF over
 word and character n-grams, reduced by truncated SVD and L2 normalised, so cosine
 similarity is meaningful -- but it is not a modern sentence encoder and no result
 produced with it should be read as one.
@@ -123,5 +123,5 @@ class LsaEmbeddings(EmbeddingProvider):
             "family": "tfidf+svd",
             "fitted_on": "corpus",
             "substitute_for": "BAAI/bge-small-en-v1.5",
-            "reason": "huggingface.co unreachable in build environment (ADR-0003)",
+            "reason": "huggingface.co unreachable in build environment",
         }
